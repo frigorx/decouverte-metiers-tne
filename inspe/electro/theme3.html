@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Thème 3 - Travaux en hauteur et organisation chantier - Électricien">
+    <meta name="author" content="F. Henninot - inerWeb">
+    <title>Thème 3 — Travaux en hauteur et chantier — Électricien</title>
+
+    <style>@font-face{font-family:"OpenDyslexic";font-style:normal;font-weight:400;font-display:swap;src:url(../assets/OpenDyslexic-Regular.otf) format("opentype")}@font-face{font-family:"OpenDyslexic";font-style:normal;font-weight:700;font-display:swap;src:url(../assets/OpenDyslexic-Bold.otf) format("opentype")}</style>
+
+    <style>
+        :root{
+            --navy:#0f2d52;--navy-mid:#1a4a6e;
+            --orange:#e8914a;--orange-hover:#d47a35;--orange-warm:#fdf6ef;--orange-glow:rgba(232,145,74,.35);
+            --turquoise:#2aafaf;--turquoise-light:#eef8f7;
+            --mint:#d4f0e8;--mint-deep:#b8e6d8;
+            --bg:#faf7f2;--bg-end:#f0ebe3;
+            --card:#ffffff;--text:#2c3e50;--text-strong:#0f2d52;--muted:#5a7080;
+            --line:#ece4da;
+            --ok:#27ae60;--bad:#e74c3c;
+            --radius:22px;--radius-sm:14px;--radius-pill:999px;
+            --shadow:0 4px 16px rgba(15,45,82,.07),0 1px 3px rgba(232,145,74,.05);
+            --shadow-orange:0 4px 18px rgba(232,145,74,.35);
+            --font:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font);
+            background: linear-gradient(180deg, var(--bg), var(--bg-end));
+            background-attachment: fixed;
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        body.dys { font-family: 'OpenDyslexic', system-ui, sans-serif; }
+        body.f-lg { font-size: 18px; }
+        body.f-xl { font-size: 20px; }
+
+        .page-hint { display: none; font-weight: 700; color: var(--orange); }
+        body.guided .page-hint { display: inline; }
+
+        /* ========== TOPBAR ========== */
+        .topbar{
+            position:sticky;top:0;z-index:10;
+            display:flex;align-items:center;justify-content:space-between;
+            padding:14px 20px;
+            background:linear-gradient(135deg,var(--navy),var(--navy-mid),var(--turquoise));
+            border-bottom:4px solid var(--orange);
+            border-radius:0 0 0 40px;
+            box-shadow:0 4px 20px rgba(15,45,82,.15);
+            flex-wrap:wrap;gap:10px;
+        }
+        .brand{display:flex;gap:10px;align-items:center}
+        .brand__mark{
+            width:44px;height:44px;border-radius:var(--radius-sm);
+            display:grid;place-items:center;
+            background:rgba(255,255,255,.95);font-size:20px;
+            box-shadow:0 3px 10px rgba(0,0,0,.1);
+        }
+        .brand__title{font-weight:900;font-size:14px;color:#fff;letter-spacing:.5px}
+        .brand__sub{font-size:12px;color:rgba(255,255,255,.8)}
+        .a11y{display:flex;gap:6px;align-items:center}
+        .a11y-btn{
+            background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.25);
+            padding:5px 12px;border-radius:var(--radius-pill);cursor:pointer;
+            font-size:.8em;font-family:inherit;transition:all .2s;
+        }
+        .a11y-btn:hover,.a11y-btn.on{background:var(--orange);border-color:var(--orange)}
+
+        /* ========== CONTAINER ========== */
+        .container { max-width: 960px; margin: 0 auto; padding: 0 20px 40px; }
+
+        /* ========== HEADER ========== */
+        .theme-header {
+            background: linear-gradient(135deg, var(--turquoise), var(--navy));
+            color: #fff; border-radius: var(--radius); padding: 36px 30px;
+            margin: 24px 0 28px; text-align: center; position: relative; overflow: hidden;
+        }
+
+        .theme-header h1 { font-size: 2.2em; position: relative; z-index: 1; margin-bottom: 8px; }
+        .theme-header p { font-size: 1.1em; opacity: .92; position: relative; z-index: 1; }
+
+        /* ========== SECTION ========== */
+        .section {
+            background: var(--card); border-radius: var(--radius);
+            padding: 28px; margin-bottom: 24px; box-shadow: var(--shadow);
+        }
+        .section-title {
+            font-size: 1.5em; font-weight: 700; margin-bottom: 18px;
+            padding-bottom: 12px; border-bottom: 2px solid var(--line);
+            display: flex; align-items: center; gap: 12px;
+        }
+
+        /* ========== OBJECTIFS ========== */
+        .objectifs-list { list-style: none; padding: 0; }
+        .objectifs-list li {
+            padding: 10px 14px; margin-bottom: 8px;
+            background: var(--orange-warm); border-radius: var(--radius-sm);
+            border-left: 4px solid var(--orange);
+        }
+
+        /* ========== HEIGHT CARDS ========== */
+        .risk-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+            gap: 18px; margin-top: 16px;
+        }
+        .risk-card {
+            background: var(--card); border-radius: var(--radius-sm);
+            padding: 22px; box-shadow: var(--shadow); border-top: 4px solid var(--orange);
+            transition: transform .2s;
+        }
+        .risk-card:hover { transform: translateY(-3px); }
+        .risk-card .icon { font-size: 2.2em; margin-bottom: 10px; text-align: center; }
+        .risk-card h3 { text-align: center; color: var(--navy); margin-bottom: 8px; font-size: 1.05em; }
+        .risk-card p { font-size: .92em; color: #555; text-align: center; }
+
+        /* ========== CO-ACTIVITY BOX ========== */
+        .coactivity {
+            background: var(--mint); border-radius: var(--radius-sm);
+            padding: 22px; margin-top: 18px; border-left: 5px solid var(--turquoise);
+        }
+        .coactivity h4 { color: var(--navy); margin-bottom: 10px; font-size: 1.1em; }
+        .coactivity ul { list-style: disc; padding-left: 22px; }
+        .coactivity li { margin-bottom: 6px; font-size: .95em; }
+
+        /* ========== DOC REF ========== */
+        .doc-ref {
+            background: var(--mint); border-radius: var(--radius-sm);
+            padding: 14px 18px; margin-bottom: 16px; font-size: .93em;
+            border-left: 4px solid var(--turquoise);
+        }
+
+        /* ========== QCM ========== */
+        .activity {
+            background: var(--card); border-radius: var(--radius);
+            padding: 28px; margin-bottom: 24px; box-shadow: var(--shadow);
+        }
+        .activity-title {
+            font-size: 1.2em; font-weight: 700; color: var(--navy);
+            margin-bottom: 14px; display: flex; align-items: center; gap: 10px;
+        }
+        .qcm-question { font-weight: 600; margin-bottom: 16px; }
+        .qcm-options { display: grid; gap: 10px; }
+        .qcm-option {
+            padding: 14px 18px; border: 2px solid var(--line);
+            border-radius: var(--radius-sm); cursor: pointer;
+            transition: all .2s; background: var(--card);
+        }
+        .qcm-option:hover { border-color: var(--navy); transform: translateX(4px); }
+        .qcm-option.correct { border-color: var(--ok); background: #d4edda; }
+        .qcm-option.incorrect { border-color: var(--bad); background: #f8d7da; }
+        .qcm-option.disabled { pointer-events: none; opacity: .7; }
+        .qcm-feedback {
+            margin-top: 12px; padding: 12px 16px; border-radius: var(--radius-sm);
+            font-weight: 600; display: none;
+        }
+        .qcm-feedback.show { display: block; }
+        .qcm-feedback.success { background: #d4edda; color: #155724; }
+        .qcm-feedback.error { background: #f8d7da; color: #721c24; }
+
+        /* ========== SCORE ========== */
+        .score-display {
+            background: linear-gradient(135deg, var(--orange-warm), #fff);
+            border: 2px solid var(--orange); border-radius: var(--radius);
+            padding: 28px; text-align: center; margin: 28px 0; display: none;
+        }
+        .score-display.show { display: block; }
+        .score-number { font-size: 3em; font-weight: 700; color: var(--navy); }
+        .score-msg { font-size: 1.1em; margin-top: 8px; font-weight: 600; }
+
+        /* ========== BILAN ========== */
+        .bilan {
+            background: var(--card); border-radius: var(--radius);
+            padding: 32px; margin: 28px 0; box-shadow: var(--shadow);
+            border: 3px solid var(--navy); display: none;
+        }
+        .bilan.show { display: block; }
+        .bilan h2 { text-align: center; color: var(--navy); margin-bottom: 24px; font-size: 1.6em; }
+        .bilan-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+        .bilan-card {
+            background: var(--bg); border-radius: var(--radius-sm);
+            padding: 20px; text-align: center; border: 2px solid var(--line);
+        }
+        .bilan-card h4 { color: var(--navy); font-size: .9em; margin-bottom: 8px; }
+        .bilan-card .bilan-score { font-size: 2.2em; font-weight: 700; }
+        .bilan-card .bilan-score.good { color: var(--ok); }
+        .bilan-card .bilan-score.bad { color: var(--bad); }
+        .bilan-card .bilan-score.na { color: #999; }
+        .bilan-total {
+            text-align: center; font-size: 1.3em; font-weight: 700;
+            padding: 16px; background: var(--navy); color: #fff;
+            border-radius: var(--radius-sm);
+        }
+        .bilan-actions { display: flex; justify-content: center; gap: 12px; margin-top: 20px; flex-wrap: wrap; }
+        .bilan-btn {
+            padding: 12px 28px; border: none; border-radius: 999px;
+            font-weight: 600; cursor: pointer; font-size: .95em;
+            transition: all .2s;
+        }
+        .bilan-btn.print { background: var(--navy); color: #fff; }
+        .bilan-btn.print:hover { background: var(--navy-mid); }
+
+        /* ========== NAV BOTTOM ========== */
+        .theme-nav {
+            display: flex; justify-content: space-between; align-items: center;
+            flex-wrap: wrap; gap: 12px; margin-top: 32px;
+        }
+        .nav-pill {
+            padding: 12px 24px; border: none; border-radius: 999px;
+            font-weight: 600; cursor: pointer; font-size: .95em;
+            text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+            transition: all .2s;
+        }
+        .nav-pill.primary { background: var(--navy); color: #fff; }
+        .nav-pill.primary:hover { background: var(--navy-mid); }
+        .nav-pill.success { background: var(--ok); color: #fff; }
+        .nav-pill.success:hover { background: #219150; }
+        .nav-pill.orange { background: var(--orange); color: #fff; }
+        .nav-pill.orange:hover { background: var(--orange-hover); }
+
+        /* ========== FOOTER ========== */
+        .footer{padding:16px;text-align:center;font-size:.72em;color:var(--muted);border-top:1px solid var(--line);margin-top:30px}
+
+        /* ========== PRINT ========== */
+        @media print {
+            .topbar, .theme-nav, .bilan-actions, .footer { display: none !important; }
+            body { background: #fff; font-size: 12pt; }
+            .container { max-width: 100%; padding: 0; }
+            .bilan { display: block !important; border: 2px solid #000; page-break-inside: avoid; }
+            .section, .activity { box-shadow: none; border: 1px solid #ccc; }
+        }
+
+        @media (max-width: 640px) {
+            .topbar { flex-direction: column; text-align: center; }
+            .theme-header h1 { font-size: 1.6em; }
+            .risk-grid { grid-template-columns: 1fr; }
+            .bilan-grid { grid-template-columns: 1fr; }
+            .theme-nav { flex-direction: column; align-items: stretch; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <!-- TOPBAR -->
+    <header class="topbar">
+        <div class="brand">
+            <div class="brand__mark"><svg viewBox="0 0 24 24" style="width:24px;height:24px" fill="none" stroke="var(--navy)" stroke-width="2"><path d="M9 2v6l-2 4v4h10v-4l-2-4V2"/><path d="M7 16v4h10v-4" stroke="#e8914a"/><circle cx="12" cy="10" r="1.5" fill="#e8914a"/></svg></div>
+            <div>
+                <div class="brand__title">LPP Jacques Raynaud · Campus Équatio</div>
+                <div class="brand__sub">2nde TNE — Thème 3/3 — Électricien</div>
+            </div>
+        </div>
+        <div class="a11y">
+            <a href="../index.html" class="a11y-btn" style="text-decoration:none"><svg viewBox="0 0 24 24" style="width:14px;height:14px;vertical-align:middle" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l9-9 9 9"/><path d="M5 10v10h14V10"/></svg></a>
+            <button class="a11y-btn" onclick="togDys()" id="bDys">Dys</button>
+            <button class="a11y-btn" onclick="setF('normal')">A</button>
+            <button class="a11y-btn" onclick="setF('f-lg')">A+</button>
+            <button class="a11y-btn" onclick="setF('f-xl')">A++</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- HEADER -->
+        <div class="theme-header">
+            <h1>Travaux en hauteur et chantier</h1>
+            <p>Sécuriser son environnement de travail</p>
+        </div>
+
+        <!-- OBJECTIFS -->
+        <div class="section">
+            <div class="section-title">Objectifs — Compétence C3</div>
+            <ul class="objectifs-list">
+                <li>Sécuriser un poste de travail en hauteur (échelle, échafaudage, harnais)</li>
+                <li>Organiser la co-activité entre corps de métiers sur chantier</li>
+                <li>Connaître la signalisation et le balisage de chantier</li>
+            </ul>
+        </div>
+
+        <!-- HEIGHT WORK CARDS -->
+        <div class="section">
+            <div class="section-title">Travaux en hauteur</div>
+
+            <div class="risk-grid">
+                <div class="risk-card">
+                    <div class="icon">—</div>
+                    <h3>Échelles et escabeaux</h3>
+                    <p>Règle des 3 appuis, angle 75°, jamais de travail prolongé en hauteur</p>
+                </div>
+                <div class="risk-card">
+                    <div class="icon">—</div>
+                    <h3>Échafaudages</h3>
+                    <p>Montage uniquement par personnel formé, contrôle quotidien obligatoire</p>
+                </div>
+                <div class="risk-card">
+                    <div class="icon">—</div>
+                    <h3>Harnais antichute</h3>
+                    <p>Formation obligatoire, point d'ancrage vérifié avant utilisation</p>
+                </div>
+                <div class="risk-card">
+                    <div class="icon">—</div>
+                    <h3>Balisage</h3>
+                    <p>Signalisation de la zone dangereuse, périmètre de sécurité délimité</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CO-ACTIVITY -->
+        <div class="section">
+            <div class="section-title">Co-activité sur chantier</div>
+            <div class="coactivity">
+                <h4>Règles de coordination</h4>
+                <ul>
+                    <li><strong>Plan de prévention :</strong> document obligatoire listant les risques et mesures pour chaque entreprise intervenante</li>
+                    <li><strong>Coordination entre corps de métiers :</strong> réunion de chantier, planning partagé, communication des zones d'intervention</li>
+                    <li><strong>Permis de feu :</strong> autorisation écrite obligatoire avant tout travail par point chaud (soudure, meulage) à proximité de matériaux inflammables</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ACTIVITÉS QCM -->
+        <div class="section">
+            <div class="section-title">Activités — Évaluation des connaissances</div>
+
+            <!-- Q1 -->
+            <div class="activity" id="act-q1">
+                <div class="activity-title">Question 1 / 3</div>
+                <div class="doc-ref">Consulte le document INRS « Mon métier électricien » ED 6276 <span class="page-hint"> — Page 8</span></div>
+                <div class="qcm-question">Selon l'INRS, quelle est la règle pour utiliser une échelle en sécurité ?</div>
+                <div class="qcm-options" id="opts-q1">
+                    <div class="qcm-option" onclick="answer('q1',this,0)">A. Monter à deux pour plus de stabilité</div>
+                    <div class="qcm-option" onclick="answer('q1',this,1)">B. Maintenir 3 points d'appui et respecter un angle de 75°</div>
+                    <div class="qcm-option" onclick="answer('q1',this,2)">C. Toujours travailler face à l'échelle les pieds joints</div>
+                    <div class="qcm-option" onclick="answer('q1',this,3)">D. Attacher l'échelle au mur avec du ruban</div>
+                </div>
+                <div class="qcm-feedback" id="fb-q1"></div>
+            </div>
+
+            <!-- Q2 -->
+            <div class="activity" id="act-q2">
+                <div class="activity-title">Question 2 / 3</div>
+                <div class="doc-ref">Consulte le document INRS « Mon métier électricien » ED 6276 <span class="page-hint"> — Page 8</span></div>
+                <div class="qcm-question">Qui est autorisé à monter un échafaudage sur chantier ?</div>
+                <div class="qcm-options" id="opts-q2">
+                    <div class="qcm-option" onclick="answer('q2',this,0)">A. Tout ouvrier volontaire</div>
+                    <div class="qcm-option" onclick="answer('q2',this,1)">B. Uniquement du personnel ayant reçu une formation spécifique</div>
+                    <div class="qcm-option" onclick="answer('q2',this,2)">C. Le chef de chantier seul</div>
+                    <div class="qcm-option" onclick="answer('q2',this,3)">D. N'importe qui avec un casque</div>
+                </div>
+                <div class="qcm-feedback" id="fb-q2"></div>
+            </div>
+
+            <!-- Q3 -->
+            <div class="activity" id="act-q3">
+                <div class="activity-title">Question 3 / 3</div>
+                <div class="doc-ref">Consulte le document INRS « Mon métier électricien » ED 6276 <span class="page-hint"> — Page 9</span></div>
+                <div class="qcm-question">Avant d'utiliser un harnais antichute, il faut obligatoirement :</div>
+                <div class="qcm-options" id="opts-q3">
+                    <div class="qcm-option" onclick="answer('q3',this,0)">A. Demander l'autorisation du client</div>
+                    <div class="qcm-option" onclick="answer('q3',this,1)">B. Avoir été formé à son utilisation et vérifier le point d'ancrage</div>
+                    <div class="qcm-option" onclick="answer('q3',this,2)">C. Porter des chaussures légères</div>
+                    <div class="qcm-option" onclick="answer('q3',this,3)">D. Travailler à deux</div>
+                </div>
+                <div class="qcm-feedback" id="fb-q3"></div>
+            </div>
+        </div>
+
+        <!-- SCORE -->
+        <div class="score-display" id="scoreBox">
+            <div class="score-number" id="scoreNum">0 / 10</div>
+            <div class="score-msg" id="scoreMsg"></div>
+        </div>
+
+        <!-- BILAN DE PARCOURS -->
+        <div class="bilan" id="bilanBox">
+            <h2>Bilan de parcours — Électricien</h2>
+            <div class="bilan-grid">
+                <div class="bilan-card">
+                    <h4>Thème 1 — Risques électriques</h4>
+                    <div class="bilan-score" id="bilan-t1">—</div>
+                </div>
+                <div class="bilan-card">
+                    <h4>Thème 2 — EPI et consignation</h4>
+                    <div class="bilan-score" id="bilan-t2">—</div>
+                </div>
+                <div class="bilan-card">
+                    <h4>Thème 3 — Hauteur et chantier</h4>
+                    <div class="bilan-score" id="bilan-t3">—</div>
+                </div>
+            </div>
+            <div class="bilan-total" id="bilan-total">Moyenne générale : —</div>
+            <div class="bilan-actions">
+                <button class="bilan-btn print" onclick="window.print()">Imprimer le bilan</button>
+            </div>
+        </div>
+
+        <!-- NAV -->
+        <div class="theme-nav">
+            <a href="theme2.html" class="nav-pill primary">&larr; Th&egrave;me 2</a>
+            <button class="nav-pill orange" id="btnBilan" style="display:none;" onclick="showBilan()">Bilan de parcours</button>
+            <a href="../index.html" class="nav-pill primary">Retour au portail</a>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">inerWeb · F. Henninot · LPP Jacques Raynaud · Campus Équatio</div>
+
+    <script>
+        /* ========== GUIDED MODE ========== */
+        let guidedMode = localStorage.getItem('guidedMode') === 'true';
+
+        /* ========== STATE ========== */
+        const STORAGE_KEY = 'inerweb_electro_data';
+        const correctAnswers = { q1: 1, q2: 1, q3: 1 };
+        const TOTAL_QUESTIONS = 3;
+        const MAX_POINTS = TOTAL_QUESTIONS * 2;
+        const NOTE_SUR = 10;
+        var attempts = {};
+        var points = {};
+        var answered = 0;
+        var currentPct = 0;
+
+        function loadData() {
+            try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch(e) { return {}; }
+        }
+        function saveData(d) { localStorage.setItem(STORAGE_KEY, JSON.stringify(d)); }
+
+        /* ========== QCM AVEC PENALITE ========== */
+        function answer(qid, el, idx) {
+            if (points[qid] !== undefined) return;
+            if (!attempts[qid]) attempts[qid] = 0;
+            attempts[qid]++;
+
+            var fb = document.getElementById('fb-' + qid);
+            var correct = (idx === correctAnswers[qid]);
+
+            if (correct) {
+                var pts = 0;
+                if (attempts[qid] === 1) pts = 2;
+                else if (attempts[qid] === 2) pts = 1;
+                else pts = 0;
+
+                points[qid] = pts;
+                answered++;
+
+                var opts = document.querySelectorAll('#opts-' + qid + ' .qcm-option');
+                opts.forEach(function(o) { o.classList.add('disabled'); });
+                el.classList.add('correct');
+
+                fb.textContent = 'Bonne reponse ! (+' + pts + ' pt' + (pts > 1 ? 's' : '') + ')';
+                fb.className = 'qcm-feedback show success';
+
+                updateScore();
+            } else {
+                el.classList.add('incorrect');
+                el.classList.add('disabled');
+
+                var essai = attempts[qid];
+                var reste = '';
+                if (essai === 1) reste = 'Mauvaise reponse. Encore 1 pt possible au prochain essai.';
+                else if (essai === 2) reste = 'Mauvaise reponse. Plus de point possible, mais trouve la bonne reponse !';
+                else reste = 'Mauvaise reponse. Essaie encore.';
+
+                fb.textContent = reste;
+                fb.className = 'qcm-feedback show error';
+            }
+        }
+
+        function updateScore() {
+            if (answered < TOTAL_QUESTIONS) return;
+
+            var totalPts = 0;
+            for (var q in points) totalPts += points[q];
+
+            var note = Math.round((totalPts / MAX_POINTS) * NOTE_SUR * 10) / 10;
+            currentPct = Math.round((totalPts / MAX_POINTS) * 100);
+
+            var box = document.getElementById('scoreBox');
+            box.classList.add('show');
+            document.getElementById('scoreNum').textContent = note + ' / ' + NOTE_SUR + '  (' + currentPct + ' %)';
+
+            var msg = document.getElementById('scoreMsg');
+            if (note >= 7) {
+                msg.textContent = 'Bravo ! Parcours termine. Consulte ton bilan ci-dessous.';
+                msg.style.color = 'var(--ok)';
+                document.getElementById('btnBilan').style.display = 'inline-flex';
+            } else {
+                msg.textContent = 'Score insuffisant. Relis le document INRS et reessaie.';
+                msg.style.color = 'var(--bad)';
+            }
+
+            /* Save */
+            var data = loadData();
+            data.theme3 = { score: currentPct, note: note, points: points, attempts: attempts, date: new Date().toISOString() };
+            saveData(data);
+        }
+
+        /* ========== BILAN ========== */
+        function showBilan() {
+            var data = loadData();
+            var bilanBox = document.getElementById('bilanBox');
+
+            var t1 = data.theme1 ? data.theme1.score : null;
+            var t2 = data.theme2 ? data.theme2.score : null;
+            var t3 = data.theme3 ? data.theme3.score : null;
+
+            setBilanScore('bilan-t1', t1);
+            setBilanScore('bilan-t2', t2);
+            setBilanScore('bilan-t3', t3);
+
+            var scores = [t1, t2, t3].filter(function(s) { return s !== null; });
+            if (scores.length > 0) {
+                var sum = 0; for (var i = 0; i < scores.length; i++) sum += scores[i];
+                var avg = Math.round(sum / scores.length);
+                document.getElementById('bilan-total').textContent = 'Moyenne generale : ' + avg + ' %';
+            } else {
+                document.getElementById('bilan-total').textContent = 'Aucun theme complete';
+            }
+
+            bilanBox.classList.add('show');
+            bilanBox.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function setBilanScore(id, score) {
+            var el = document.getElementById(id);
+            if (score === null) {
+                el.textContent = '\u2014';
+                el.className = 'bilan-score na';
+            } else {
+                el.textContent = score + ' %';
+                el.className = 'bilan-score ' + (score >= 70 ? 'good' : 'bad');
+            }
+        }
+
+        /* ========== ACCESSIBILITY ========== */
+        function togDys(){
+            document.body.classList.toggle('dys');
+            document.getElementById('bDys').classList.toggle('on');
+            localStorage.setItem('a11y-dys',document.body.classList.contains('dys'));
+        }
+        function setF(c){
+            document.body.classList.remove('f-lg','f-xl');
+            if(c!=='normal')document.body.classList.add(c);
+            localStorage.setItem('a11y-size',c);
+        }
+
+        /* ========== INIT ========== */
+        document.addEventListener('DOMContentLoaded', function() {
+            if (guidedMode) document.body.classList.add('guided');
+            if(localStorage.getItem('a11y-dys')==='true'){document.body.classList.add('dys');document.getElementById('bDys').classList.add('on');}
+            var s=localStorage.getItem('a11y-size');if(s&&s!=='normal')document.body.classList.add(s);
+        });
+    </script>
+</body>
+</html>

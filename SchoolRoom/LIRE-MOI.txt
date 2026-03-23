@@ -1,0 +1,52 @@
+============================================================
+  SchoolRoom Light + inerWeb INSPE TNE
+  PRET POUR L'INSPECTION - Aucune installation
+============================================================
+
+DEMARRAGE :
+-----------
+1. Double-cliquer sur SchoolRoom.exe
+2. Le navigateur s'ouvre sur le Dashboard professeur
+3. Ne pas fermer la fenetre noire (c'est le serveur)
+
+PAGES DISPONIBLES :
+-------------------
+- Dashboard professeur : http://localhost:5000
+  (QR codes, suivi eleves, partage de fichiers)
+
+- Contenu pedagogique : http://localhost:5000/inspe/
+  (Sensibilisation aux risques pro - 2nde TNE)
+
+- Page eleve : http://localhost:5000/evaluation
+  (Soumission de photos de travaux)
+
+- Vue Classe : http://localhost:5000/vue-classe
+  (Suivi en temps reel des eleves connectes)
+
+POUR LES ELEVES :
+-----------------
+Les eleves scannent le QR code affiche sur le Dashboard
+ou tapent l'adresse indiquee (ex: http://192.168.x.x:5000)
+Ils doivent etre sur le meme reseau WiFi que le PC prof.
+
+CONTENU INSPE :
+--------------
+Le dossier inspe/ contient le portail pedagogique complet :
+- Quiz d'orientation filiere
+- Tronc commun (accueil securite, risque electrique, hauteur)
+- Froid & Climatisation (3 themes)
+- Plomberie-Chauffage (3 themes)
+- Electro (3 themes)
+- CIEL Cybersecurite (3 themes)
+- Dossiers pedagogiques par filiere
+
+PARE-FEU :
+----------
+Au 1er lancement, Windows demande d'autoriser l'acces reseau.
+Cliquer "Autoriser" pour que les eleves puissent se connecter.
+
+ARRET :
+-------
+Fermer la fenetre noire ou Ctrl+C
+
+============================================================

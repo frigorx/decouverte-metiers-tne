@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SchoolRoom — Guide Enseignant</title>
+<style>
+:root{--navy:#0f2d52;--orange:#e8914a;--turquoise:#2aafaf;--ok:#27ae60;--bg:#faf7f2}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:#333;line-height:1.7;font-size:15px}
+
+.header{background:linear-gradient(135deg,var(--navy),#1a4a6e,var(--turquoise));color:white;padding:40px 20px;text-align:center;border-bottom:5px solid var(--orange)}
+.header h1{font-size:2em;font-weight:900;margin-bottom:6px}
+.header p{opacity:.85;font-size:1.1em}
+
+.wrap{max-width:800px;margin:0 auto;padding:30px 20px 60px}
+
+.step{background:white;border-radius:16px;padding:24px;margin-bottom:20px;box-shadow:0 2px 12px rgba(0,0,0,.06);border-left:5px solid var(--navy);position:relative}
+.step.important{border-left-color:var(--orange)}
+.step-num{position:absolute;top:-12px;left:-12px;width:36px;height:36px;border-radius:50%;background:var(--navy);color:white;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.1em}
+.step.important .step-num{background:var(--orange)}
+.step h2{font-size:1.2em;color:var(--navy);margin-bottom:8px;padding-left:30px}
+.step p,.step li{color:#555;font-size:.95em}
+.step ul{margin:8px 0 0 20px}
+.step li{margin-bottom:6px}
+
+.screenshot{background:#f3f4f6;border:2px solid #e5e7eb;border-radius:12px;padding:16px;margin:12px 0;font-family:'Courier New',monospace;font-size:13px;color:var(--navy);line-height:1.5}
+.screenshot .label{font-size:11px;color:var(--orange);font-weight:700;text-transform:uppercase;margin-bottom:6px}
+
+.tip{background:#fff8f0;border-left:4px solid var(--orange);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0;font-size:.9em}
+.tip strong{color:var(--orange)}
+
+.warning{background:#fef2f2;border-left:4px solid #dc2626;border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0;font-size:.9em}
+.warning strong{color:#dc2626}
+
+.section-title{font-size:1.4em;font-weight:800;color:var(--navy);margin:35px 0 15px;padding-bottom:8px;border-bottom:3px solid var(--orange);display:inline-block}
+
+.faq{background:white;border-radius:12px;padding:18px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.faq summary{font-weight:700;color:var(--navy);cursor:pointer;font-size:1em}
+.faq summary:hover{color:var(--orange)}
+.faq p{margin-top:8px;color:#555;font-size:.9em}
+
+.footer{text-align:center;padding:20px;color:#999;font-size:.8em;border-top:2px solid #eee;margin-top:40px}
+.footer strong{color:var(--orange)}
+
+@media print{
+  body{background:white}
+  .step{box-shadow:none;page-break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>SchoolRoom — Guide Enseignant</h1>
+  <p>Mode d'emploi pas a pas pour utiliser SchoolRoom en classe</p>
+</div>
+
+<div class="wrap">
+
+<!-- ========== AVANT LA SEANCE ========== -->
+<div class="section-title">Avant la seance</div>
+
+<div class="step">
+  <div class="step-num">1</div>
+  <h2>Preparer le dossier</h2>
+  <p>Copiez le dossier complet (SchoolRoom.exe + dossier inspe/) sur le PC que vous utiliserez en classe. Cle USB ou disque dur, peu importe.</p>
+  <div class="tip"><strong>Important :</strong> Le dossier <code>inspe/</code> doit etre A COTE de SchoolRoom.exe, pas a l'interieur d'un sous-dossier.</div>
+  <div class="screenshot">
+    <div class="label">Structure attendue</div>
+    Mon-Dossier/<br>
+    ├── SchoolRoom.exe<br>
+    └── inspe/<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;├── index.html<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;├── commun/<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;├── froid/<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;└── docs/
+  </div>
+</div>
+
+<div class="step important">
+  <div class="step-num">2</div>
+  <h2>Tester le pare-feu (une seule fois)</h2>
+  <p>Au tout premier lancement, Windows demande :</p>
+  <div class="screenshot">
+    <div class="label">Fenetre Windows</div>
+    "Voulez-vous autoriser SchoolRoom a communiquer sur le reseau ?"<br>
+    → Cliquez <strong>AUTORISER</strong> (les deux cases : prive ET public)
+  </div>
+  <p>Si vous avez clique "Bloquer" par erreur : Parametres Windows → Pare-feu → Autoriser une application → SchoolRoom.</p>
+  <div class="warning"><strong>Sans cette autorisation, les telephones des eleves ne pourront pas se connecter.</strong></div>
+</div>
+
+<div class="step">
+  <div class="step-num">3</div>
+  <h2>Reseau WiFi</h2>
+  <p>Le PC et les telephones doivent etre sur le <strong>meme reseau WiFi</strong>. Deux cas :</p>
+  <ul>
+    <li><strong>Le PC est en cable + WiFi de la salle :</strong> les eleves se connectent au WiFi de la salle. Ca marche si le reseau ne bloque pas les connexions entre appareils.</li>
+    <li><strong>Le PC a un dongle WiFi :</strong> activez le "Point d'acces sans fil mobile" dans les parametres Windows. Les eleves se connectent au hotspot du PC. C'est la methode la plus fiable.</li>
+  </ul>
+  <div class="tip"><strong>Astuce :</strong> Testez AVANT la seance avec votre propre telephone. Si ca marche avec votre telephone, ca marchera avec ceux des eleves.</div>
+</div>
+
+<!-- ========== PENDANT LA SEANCE ========== -->
+<div class="section-title">Pendant la seance</div>
+
+<div class="step">
+  <div class="step-num">4</div>
+  <h2>Lancer SchoolRoom</h2>
+  <p>Double-cliquez sur <strong>SchoolRoom.exe</strong>. Une fenetre noire apparait :</p>
+  <div class="screenshot">
+    <div class="label">Ce que vous voyez</div>
+    ========================================<br>
+    SCHOOLROOM LIGHT - DEMARRAGE<br>
+    ========================================<br>
+    [OK] Dossiers initialises<br>
+    [OK] Adresse IP locale : 192.168.0.45<br>
+    [OK] Systeme operationnel<br>
+    <br>
+    Pour arreter : Ctrl+C
+  </div>
+  <p>Le navigateur s'ouvre automatiquement sur le <strong>Dashboard</strong>.</p>
+  <div class="warning"><strong>Ne fermez JAMAIS la fenetre noire pendant la seance.</strong> C'est le serveur. Si vous la fermez, tout s'arrete.</div>
+</div>
+
+<div class="step important">
+  <div class="step-num">5</div>
+  <h2>Creer la session</h2>
+  <p>Sur le Dashboard, dans la section <strong>"Session"</strong> :</p>
+  <ul>
+    <li>Tapez le nom de votre session (ex: <code>2nde TNE - Risques Pro</code>)</li>
+    <li>Cliquez <strong>Valider</strong></li>
+  </ul>
+  <p>Ce nom apparaitra sur les telephones des eleves quand ils se connecteront.</p>
+  <div class="tip"><strong>Le nom est libre :</strong> une classe, un groupe, une formation, un intitule de TP... ce que vous voulez.</div>
+</div>
+
+<div class="step">
+  <div class="step-num">6</div>
+  <h2>Afficher le QR code</h2>
+  <p>Sur le Dashboard, section <strong>"QR Codes"</strong> :</p>
+  <ul>
+    <li>Le <strong>QR code orange "Portail"</strong> est celui que les eleves scannent</li>
+    <li>Cliquez <strong>"Afficher en grand"</strong> pour le projeter au tableau</li>
+    <li>Ou cliquez <strong>"Telecharger PNG"</strong> pour l'imprimer a l'avance</li>
+  </ul>
+  <div class="tip"><strong>Projetez le QR code au videoprojecteur.</strong> Les eleves le scannent avec l'appareil photo de leur telephone, ca ouvre directement la page.</div>
+</div>
+
+<div class="step">
+  <div class="step-num">7</div>
+  <h2>Les eleves se connectent</h2>
+  <p>Cote eleve, c'est simple :</p>
+  <ul>
+    <li>L'eleve scanne le QR code avec son telephone</li>
+    <li>Il arrive sur la page <strong>"Bienvenue"</strong></li>
+    <li>Il tape son <strong>prenom</strong></li>
+    <li>Il clique <strong>"C'est parti"</strong></li>
+    <li>Il arrive sur le portail des modules</li>
+  </ul>
+  <p>A partir de la, l'eleve est autonome. Il fait les modules dans l'ordre.</p>
+</div>
+
+<div class="step">
+  <div class="step-num">8</div>
+  <h2>Suivre les eleves en temps reel</h2>
+  <p>Sur le Dashboard, cliquez <strong>"Vue Classe"</strong> :</p>
+  <ul>
+    <li><strong>Vert</strong> = l'eleve est actif sur l'application</li>
+    <li><strong>Orange</strong> = l'eleve est en arriere-plan (il a change d'appli)</li>
+    <li><strong>Rouge</strong> = l'eleve est hors-ligne (telephone eteint ou deconnecte)</li>
+  </ul>
+  <p>La Vue Classe se rafraichit automatiquement toutes les 5 secondes.</p>
+  <div class="tip"><strong>Un eleve passe en orange ?</strong> Il est probablement sur Instagram. Un petit rappel a l'ordre suffit.</div>
+</div>
+
+<div class="step">
+  <div class="step-num">9</div>
+  <h2>Voir les scores</h2>
+  <p>Sur le Dashboard, cliquez <strong>"Rapport de seance"</strong> :</p>
+  <ul>
+    <li>Vous voyez chaque eleve avec ses <strong>scores par module</strong></li>
+    <li>Les scores sont envoyes automatiquement quand l'eleve termine un module</li>
+    <li>Vert = 7/10 ou plus (acquis), orange = 5-6/10, rouge = moins de 5/10</li>
+    <li>Cliquez <strong>"Exporter CSV"</strong> pour sauvegarder dans un tableur</li>
+  </ul>
+  <div class="tip"><strong>Le CSV s'ouvre dans Excel.</strong> Vous avez un tableau avec tous les eleves, tous les scores, pret a archiver.</div>
+</div>
+
+<!-- ========== FIN DE SEANCE ========== -->
+<div class="section-title">Fin de seance</div>
+
+<div class="step">
+  <div class="step-num">10</div>
+  <h2>Sauvegarder et fermer</h2>
+  <ul>
+    <li>Cliquez <strong>"Rapport de seance"</strong> → <strong>"Exporter CSV"</strong> pour garder une trace</li>
+    <li>Fermez la fenetre noire ou appuyez <strong>Ctrl+C</strong></li>
+    <li>Le serveur s'arrete, les eleves sont deconnectes</li>
+  </ul>
+  <div class="warning"><strong>Les scores sont perdus quand vous fermez SchoolRoom.</strong> Pensez a exporter le CSV AVANT de fermer.</div>
+</div>
+
+<!-- ========== PLAN B ========== -->
+<div class="section-title">Plan B — Si ca ne marche pas</div>
+
+<div class="step">
+  <div class="step-num">!</div>
+  <h2>Le WiFi ne marche pas</h2>
+  <p>Ouvrez directement le fichier <code>inspe/index.html</code> depuis une cle USB sur chaque PC eleve. Les modules fonctionnent sans reseau, sans SchoolRoom. Vous perdez le suivi en temps reel, mais les eleves peuvent travailler.</p>
+</div>
+
+<div class="step">
+  <div class="step-num">!</div>
+  <h2>Un telephone ne se connecte pas</h2>
+  <ul>
+    <li>Verifier que le telephone est sur le <strong>meme WiFi</strong> que le PC</li>
+    <li>Si le telephone affiche "Pas d'acces internet", cliquer <strong>"Rester connecte"</strong></li>
+    <li>Si ca persiste, l'eleve travaille avec le voisin ou sur papier</li>
+  </ul>
+</div>
+
+<div class="step">
+  <div class="step-num">!</div>
+  <h2>SchoolRoom ne demarre pas</h2>
+  <ul>
+    <li>Verifiez que le dossier <code>inspe/</code> est a cote de l'exe</li>
+    <li>Ouvrez <code>http://localhost:5000/diagnostic</code> dans le navigateur</li>
+    <li>Suivez les instructions affichees</li>
+  </ul>
+</div>
+
+<!-- ========== FAQ ========== -->
+<div class="section-title">Questions frequentes</div>
+
+<details class="faq">
+  <summary>Combien d'eleves peuvent se connecter en meme temps ?</summary>
+  <p>SchoolRoom gere facilement 30 eleves simultanement. Au-dela, ca depend de la puissance du PC et du WiFi.</p>
+</details>
+
+<details class="faq">
+  <summary>Les eleves ont-ils besoin d'installer une application ?</summary>
+  <p>Non. Tout fonctionne dans le navigateur du telephone (Chrome, Safari). Rien a installer.</p>
+</details>
+
+<details class="faq">
+  <summary>Est-ce que ca marche sans internet ?</summary>
+  <p>Oui. SchoolRoom fonctionne en local, sans internet. Il faut juste un reseau WiFi entre le PC et les telephones (pas besoin que ce WiFi ait acces a internet).</p>
+</details>
+
+<details class="faq">
+  <summary>Les donnees des eleves sont-elles envoyees quelque part ?</summary>
+  <p>Non. Tout reste sur le PC du professeur. Aucune donnee ne sort du reseau local. Dispositif en logique de minimisation des donnees, sans serveur externe tiers.</p>
+</details>
+
+<details class="faq">
+  <summary>Comment recuperer les scores apres la seance ?</summary>
+  <p>Cliquez "Rapport de seance" puis "Exporter CSV" AVANT de fermer SchoolRoom. Le fichier CSV s'ouvre dans Excel.</p>
+</details>
+
+<details class="faq">
+  <summary>Un eleve peut-il tricher en cliquant au hasard ?</summary>
+  <p>Le systeme de score penalise les erreurs : premier essai correct = 2 points, deuxieme = 1 point, troisieme et plus = 0 point. Un eleve qui clique au hasard finit a 2/10.</p>
+</details>
+
+<details class="faq">
+  <summary>Le bouton "Dys" ne fonctionne pas</summary>
+  <p>Verifiez que le dossier <code>assets/</code> contient les fichiers <code>OpenDyslexic-Regular.otf</code> et <code>OpenDyslexic-Bold.otf</code>. Ce sont les polices pour la dyslexie.</p>
+</details>
+
+</div>
+
+<div class="footer">
+  <strong>inerWeb</strong> — SchoolRoom Guide Enseignant<br>
+  F. Henninot — LPP Jacques Raynaud — Campus Equatio
+</div>
+
+</body>
+</html>

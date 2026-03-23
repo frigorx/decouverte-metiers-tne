@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<title>Mon bilan de séance — inerWeb Decouverte metiers — 2nde TNE</title>
+<style>
+:root {
+  --navy: #0f2d52;
+  --orange: #e8914a;
+  --turquoise: #2aafaf;
+  --ok: #27ae60;
+  --line: #ccc;
+  --muted: #666;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: Calibri, 'Segoe UI', sans-serif;
+  font-size: 12pt;
+  background: #eee;
+  padding: 12px;
+}
+.page {
+  background: white;
+  width: 190mm;
+  margin: 0 auto 16px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+.fiche {
+  border: 2.5px solid var(--navy);
+  border-radius: 8px;
+  padding: 10px 12px;
+  page-break-inside: avoid;
+}
+
+/* BANDEAU */
+.bandeau {
+  display: flex;
+  align-items: stretch;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+.bandeau-left {
+  background: var(--navy);
+  color: white;
+  padding: 8px 12px;
+  min-width: 130px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.bandeau-left .titre { font-size: 11pt; font-weight: 900; line-height: 1.2; }
+.bandeau-left .sous { font-size: 8pt; opacity: 0.8; margin-top: 2px; }
+.bandeau-mid {
+  flex: 1;
+  background: #f0f4f8;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.bandeau-right {
+  background: var(--orange);
+  color: white;
+  padding: 8px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 90px;
+}
+.bandeau-right .code-label { font-size: 8pt; opacity: 0.9; font-weight: 700; }
+.bandeau-right .code-value {
+  font-size: 18pt; font-weight: 900; letter-spacing: 3px;
+  border-bottom: 2px solid rgba(255,255,255,0.5);
+  min-width: 60px; text-align: center;
+}
+.field-inline { display: flex; align-items: center; gap: 4px; font-size: 9pt; }
+.field-label { color: var(--muted); font-weight: 700; white-space: nowrap; }
+.field-line { border-bottom: 1.5px solid var(--navy); min-width: 60px; flex: 1; height: 14px; }
+
+/* CONSIGNE */
+.consigne {
+  background: #fff8f0;
+  border-left: 4px solid var(--orange);
+  border-radius: 0 5px 5px 0;
+  padding: 6px 10px;
+  font-size: 9pt;
+  color: #444;
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+.consigne strong { color: var(--orange); }
+
+/* FILIÈRE */
+.filiere-band {
+  background: #eef8f7;
+  border: 1.5px solid var(--turquoise);
+  border-radius: 5px;
+  padding: 6px 10px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.filiere-label { color: var(--turquoise); font-weight: 900; font-size: 9.5pt; white-space: nowrap; }
+.filiere-choix { display: flex; gap: 6px; flex-wrap: wrap; }
+.filiere-chip {
+  border: 1.5px solid var(--navy);
+  border-radius: 999px;
+  padding: 2px 10px;
+  font-size: 8.5pt;
+  font-weight: 700;
+  color: var(--navy);
+  display: flex; align-items: center; gap: 6px;
+}
+.dot {
+  width: 13px; height: 13px;
+  border: 2px solid var(--navy);
+  border-radius: 50%;
+  display: inline-block; flex-shrink: 0;
+}
+
+/* TABLEAU */
+.section-label {
+  font-size: 8.5pt; font-weight: 900; color: var(--navy);
+  text-transform: uppercase; letter-spacing: 0.5px;
+  border-left: 3px solid var(--orange); padding-left: 6px;
+  margin-bottom: 4px;
+}
+table { width: 100%; border-collapse: collapse; font-size: 9.5pt; margin-bottom: 6px; }
+th {
+  background: var(--navy); color: white;
+  padding: 4px 6px; text-align: left; font-size: 8.5pt;
+}
+th.center { text-align: center; }
+td { padding: 5px 6px; border-bottom: 1px solid #eee; vertical-align: middle; }
+tr:nth-child(even) td { background: #fafafa; }
+.mod-name { font-weight: 700; color: var(--navy); }
+.mod-desc { font-size: 8pt; color: var(--muted); }
+.dur { color: var(--muted); font-size: 8.5pt; text-align: center; }
+
+/* ÉTAPE — remplace les statuts */
+.etape {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  font-weight: 900;
+  font-size: 10pt;
+  color: white;
+  background: var(--navy);
+}
+.etape.commun { background: var(--ok); }
+.etape.metier { background: var(--turquoise); }
+
+.check-big {
+  width: 20px; height: 20px;
+  border: 2.5px solid var(--navy);
+  border-radius: 4px;
+  display: inline-block; margin: auto;
+}
+.score-write {
+  border: none; border-bottom: 2px solid var(--navy);
+  width: 28px; text-align: center;
+  font-size: 12pt; font-weight: 900; color: var(--navy);
+  display: inline-block;
+}
+.sur { font-size: 9pt; color: var(--muted); }
+
+/* LIGNE TRANSITION */
+.trans-row td {
+  background: var(--navy) !important;
+  color: white;
+  font-size: 8pt;
+  font-weight: 700;
+  padding: 4px 6px;
+  letter-spacing: 0.3px;
+}
+
+/* BAS */
+.bottom { display: flex; gap: 8px; margin-top: 6px; }
+.bloc { border: 1.5px solid var(--line); border-radius: 5px; padding: 6px 8px; }
+.bloc-title { font-size: 8pt; font-weight: 900; color: var(--navy); margin-bottom: 4px; border-bottom: 1px solid var(--line); padding-bottom: 2px; }
+.inrs-row { display: flex; flex-direction: column; gap: 5px; padding-top: 3px; font-size: 8.5pt; }
+.inrs-item { display: flex; align-items: center; gap: 6px; }
+.inrs-check { width: 16px; height: 16px; border: 2px solid var(--navy); border-radius: 3px; flex-shrink: 0; }
+.total-box { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; text-align: center; min-width: 95px; }
+.total-num { font-size: 8.5pt; color: var(--muted); font-weight: 700; }
+.total-val { border: 3px solid var(--navy); border-radius: 8px; padding: 3px 0; font-size: 20pt; font-weight: 900; color: var(--navy); width: 80px; text-align: center; }
+.niveaux { display: flex; gap: 4px; }
+.niv { border: 2px solid var(--line); border-radius: 3px; padding: 2px 5px; font-size: 7.5pt; font-weight: 900; }
+.niv.na { border-color:#e74c3c; color:#e74c3c; }
+.niv.ec { border-color:var(--orange); color:var(--orange); }
+.niv.ac { border-color:var(--ok); color:var(--ok); }
+.niv.pa { border-color:var(--navy); color:var(--navy); }
+.obs-lines { display: flex; flex-direction: column; gap: 9px; padding-top: 4px; }
+.obs-line { border-bottom: 1px solid var(--line); }
+
+/* FOOTER */
+.foot { display: flex; justify-content: space-between; font-size: 7.5pt; color: #aaa; margin-top: 5px; padding-top: 4px; border-top: 1px solid #eee; }
+.foot strong { color: var(--orange); }
+.sep-page { border: none; border-top: 2px dashed #bbb; margin: 4px 0; }
+
+@media print {
+  body { background: white; padding: 0; }
+  .page { box-shadow: none; margin: 0; width: 100%; }
+  .fiche { page-break-inside: avoid; }
+  .no-print { display: none; }
+}
+.btn-print {
+  display: block; margin: 12px auto; padding: 10px 30px;
+  background: var(--navy); color: white; border: none;
+  border-radius: 999px; font-size: 13pt; font-weight: 700;
+  cursor: pointer; font-family: inherit;
+}
+</style>
+</head>
+<body>
+
+<button class="btn-print no-print" onclick="window.print()">🖨️ Imprimer — 2 fiches par page A4</button>
+
+<div class="page">
+
+<!-- ══════ FICHE 1 ══════ -->
+<div class="fiche">
+
+  <div class="bandeau">
+    <div class="bandeau-left">
+      <div class="titre">Mon bilan de séance</div>
+      <div class="sous">Decouverte des metiers par le risque<br>2nde TNE · 2025–2026</div>
+    </div>
+    <div class="bandeau-mid">
+      <div class="field-inline">
+        <span class="field-label">Date :</span>
+        <span class="field-line"></span>
+      </div>
+      <div class="field-inline">
+        <span class="field-label">Durée :</span>
+        <span class="field-line" style="min-width:40px"></span>
+      </div>
+    </div>
+    <div class="bandeau-right">
+      <div class="code-label">TON CODE</div>
+      <div class="code-value">TNE-</div>
+    </div>
+  </div>
+
+  <div class="consigne">
+    <strong>Comment remplir cette fiche :</strong>
+    tu coches chaque module dès que tu l'as terminé · tu notes ton score affiché à l'écran ·
+    tu utilises le document papier INRS pour répondre aux questions · tu avances jusqu'à la sonnerie.
+  </div>
+
+  <div class="filiere-band">
+    <span class="filiere-label">🎯 Ma filière choisie au quiz :</span>
+    <div class="filiere-choix">
+      <div class="filiere-chip"><span class="dot"></span>❄️ Froid &amp; Clim</div>
+      <div class="filiere-chip"><span class="dot"></span>🔧 Plombier</div>
+      <div class="filiere-chip"><span class="dot"></span>⚡ Électricien</div>
+      <div class="filiere-chip"><span class="dot"></span>🔒 CIEL Cyber</div>
+    </div>
+  </div>
+
+  <div class="section-label">Ma progression aujourd'hui</div>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width:5%"></th>
+        <th style="width:40%">Module</th>
+        <th style="width:13%" class="center">Durée</th>
+        <th style="width:10%" class="center">✓ Fait</th>
+        <th style="width:32%" class="center">Mon score (depuis l'écran)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="text-align:center"><span class="etape commun">1</span></td>
+        <td><div class="mod-name">Quiz d'orientation filière</div><div class="mod-desc">5 questions → je découvre ma filière</div></td>
+        <td class="dur">~15 min</td>
+        <td style="text-align:center"><span class="check-big"></span></td>
+        <td style="text-align:center;color:var(--muted);font-size:8.5pt">Pas de score — je coche simplement</td>
+      </tr>
+      <tr>
+        <td style="text-align:center"><span class="etape commun">2</span></td>
+        <td><div class="mod-name">Accueil sécurité en entreprise</div><div class="mod-desc">Mes droits, mon tuteur, le DUER</div></td>
+        <td class="dur">~20 min</td>
+        <td style="text-align:center"><span class="check-big"></span></td>
+        <td style="text-align:center"><span class="score-write">&nbsp;&nbsp;&nbsp;</span><span class="sur"> / 10</span></td>
+      </tr>
+      <tr>
+        <td style="text-align:center"><span class="etape commun">3</span></td>
+        <td><div class="mod-name">Risque électrique commun</div><div class="mod-desc">Dangers, VAT, bonnes pratiques</div></td>
+        <td class="dur">~20 min</td>
+        <td style="text-align:center"><span class="check-big"></span></td>
+        <td style="text-align:center"><span class="score-write">&nbsp;&nbsp;&nbsp;</span><span class="sur"> / 10</span></td>
+      </tr>
+      <tr class="trans-row">
+        <td colspan="5">→ Je continue avec mon parcours métier — filière cochée ci-dessus</td>
+      </tr>
+      <tr>
+        <td style="text-align:center"><span class="etape metier">4</span></td>
+        <td><div class="mod-name">Thème 1 — Les risques de mon métier</div><div class="mod-desc">Identifier les dangers, choisir mes EPI</div></td>
+        <td class="dur">~20 min</td>
+        <td style="text-align:center"><span class="check-big"></span></td>
+        <td style="text-align:center"><span class="score-write">&nbsp;&nbsp;&nbsp;</span><span class="sur"> / 10</span></td>
+      </tr>
+      <tr>
+        <td style="text-align:center"><span class="etape metier">5</span></td>
+        <td><div class="mod-name">Thème 2 — Mes droits &amp; obligations</div><div class="mod-desc">Travaux interdits, accueil entreprise</div></td>
+        <td class="dur">~20 min</td>
+        <td style="text-align:center"><span class="check-big"></span></td>
+        <td style="text-align:center"><span class="score-write">&nbsp;&nbsp;&nbsp;</span><span class="sur"> / 10</span></td>
+      </tr>
+      <tr>
+        <td style="text-align:center"><span class="etape metier">6</span></td>
+        <td><div class="mod-name">Thème 3 — Cas pratiques</div><div class="mod-desc">Situations réelles — je lis, je cherche, je décide</div></td>
+        <td class="dur">~20 min</td>
+        <td style="text-align:center"><span class="check-big"></span></td>
+        <td style="text-align:center"><span class="score-write">&nbsp;&nbsp;&nbsp;</span><span class="sur"> / 10</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="bottom">
+    <div class="bloc" style="flex:1.1">
+      <div class="bloc-title">📄 J'ai utilisé le document INRS papier pour répondre</div>
+      <div class="inrs-row">
+        <div class="inrs-item"><span class="inrs-check"></span>Oui — j'ai cherché les réponses tout seul</div>
+        <div class="inrs-item"><span class="inrs-check"></span>Oui — avec l'aide du professeur</div>
+        <div class="inrs-item"><span class="inrs-check"></span>Non — je n'ai pas ouvert le document</div>
+      </div>
+    </div>
+    <div class="bloc total-box">
+      <div class="total-num">Étapes complétées</div>
+      <div class="total-val">&nbsp;/ 6</div>
+      <div class="niveaux">
+        <div class="niv na">NA</div>
+        <div class="niv ec">EC</div>
+        <div class="niv ac">Ac</div>
+        <div class="niv pa">PA</div>
+      </div>
+    </div>
+    <div class="bloc" style="flex:1.4">
+      <div class="bloc-title">✏️ Observation du professeur</div>
+      <div class="obs-lines">
+        <div class="obs-line"></div>
+        <div class="obs-line"></div>
+        <div class="obs-line"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span>Lycée Professionnel Privé Jacques Raynaud · Campus Équatio</span>
+    <span><strong>inerWeb</strong> Decouverte metiers · Séquence S0</span>
+    <span>À remettre à l'enseignant en fin de séance</span>
+  </div>
+
+</div><!-- fiche 1 -->
+
+<hr class="sep-page">
+
+<!-- ══════ FICHE 2 (identique) ══════ -->
+<div class="fiche">
+
+  <div class="bandeau">
+    <div class="bandeau-left">
+      <div class="titre">Mon bilan de séance</div>
+      <div class="sous">Decouverte des metiers par le risque<br>2nde TNE · 2025–2026</div>
+    </div>
+    <div class="bandeau-mid">
+      <div class="field-inline">
+        <span class="field-label">Date :</span>
+        <span class="field-line"></span>
+      </div>
+      <div class="field-inline">
+        <span class="field-label">Durée :</span>
+        <span class="field-line" style="min-width:40px"></span>
+      </div>
+    </div>
+    <div class="bandeau-right">
+      <div class="code-label">TON CODE</div>
+      <div class="code-value">TNE-</div>
+    </div>
+  </div>
+
+  <div class="consigne">
+    <strong>Comment remplir cette fiche :</strong>
+    tu coches chaque module dès que tu l'as terminé · tu notes ton score affiché à l'écran ·
+    tu utilises le document papier INRS pour répondre aux questions · tu avances jusqu'à la sonnerie.
+  </div>
+
+  <div class="filiere-band">
+    <span class="filiere-label">🎯 Ma filière choisie au quiz :</span>
+    <div class="filiere-choix">
+      <div class="filiere-chip"><span class="dot"></span>❄️ Froid &amp; Clim</div>
+      <div class="filiere-chip"><span class="dot"></span>🔧 Plombier</div>
+      <div class="filiere-chip"><span class="dot"></span>⚡ Électricien</div>
+      <div class="filiere-chip"><span class="dot"></span>🔒 CIEL Cyber</div>
+    </div>
+  </div>
+
+  <div class="section-label">Ma progression aujourd'hui</div>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width:5%"></th>
+        <th style="width:40%">Module</th>
+        <th style="width:13%" class="center">Durée</th>
+        <th style="width:10%" class="center">✓ Fait</th>
+        <th style="width:32%" class="center">Mon score (depuis l'écran)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="text-align:center"><span class="etape commun">1</span></td>
+        <td><div class="mod-name">Quiz d'orientation filière</div><div class="mod-desc">5 questions → je découvre ma filière</div></td>
+        <td class="dur">~15 min</td>
+        <td style="text-align:center"><span class="check-big"></span></td>
+        <td style="text-align:center;color:var(--muted);font-size:8.5pt">Pas de score — je coche simplement</td>
+      </tr>
+      <tr>
+        <td style="text-align:center"><span class="etape commun">2</span></td>
+        <td><div class="mod-name">Accueil sécurité en entreprise</div><div class="mod-desc">Mes droits, mon tuteur, le DUER</div></td>
+        <td class="dur">~20 min</td>
+        <td style="text-align:center"><span class="check-big"></span></td>
+        <td style="text-align:center"><span class="score-write">&nbsp;&nbsp;&nbsp;</span><span class="sur"> / 10</span></td>
+      </tr>
+      <tr>
+        <td style="text-align:center"><span class="etape commun">3</span></td>
+        <td><div class="mod-name">Risque électrique commun</div><div class="mod-desc">Dangers, VAT, bonnes pratiques</div></td>
+        <td class="dur">~20 min</td>
+        <td style="text-align:center"><span class="check-big"></span></td>
+        <td style="text-align:center"><span class="score-write">&nbsp;&nbsp;&nbsp;</span><span class="sur"> / 10</span></td>
+      </tr>
+      <tr class="trans-row">
+        <td colspan="5">→ Je continue avec mon parcours métier — filière cochée ci-dessus</td>
+      </tr>
+      <tr>
+        <td style="text-align:center"><span class="etape metier">4</span></td>
+        <td><div class="mod-name">Thème 1 — Les risques de mon métier</div><div class="mod-desc">Identifier les dangers, choisir mes EPI</div></td>
+        <td class="dur">~20 min</td>
+        <td style="text-align:center"><span class="check-big"></span></td>
+        <td style="text-align:center"><span class="score-write">&nbsp;&nbsp;&nbsp;</span><span class="sur"> / 10</span></td>
+      </tr>
+      <tr>
+        <td style="text-align:center"><span class="etape metier">5</span></td>
+        <td><div class="mod-name">Thème 2 — Mes droits &amp; obligations</div><div class="mod-desc">Travaux interdits, accueil entreprise</div></td>
+        <td class="dur">~20 min</td>
+        <td style="text-align:center"><span class="check-big"></span></td>
+        <td style="text-align:center"><span class="score-write">&nbsp;&nbsp;&nbsp;</span><span class="sur"> / 10</span></td>
+      </tr>
+      <tr>
+        <td style="text-align:center"><span class="etape metier">6</span></td>
+        <td><div class="mod-name">Thème 3 — Cas pratiques</div><div class="mod-desc">Situations réelles — je lis, je cherche, je décide</div></td>
+        <td class="dur">~20 min</td>
+        <td style="text-align:center"><span class="check-big"></span></td>
+        <td style="text-align:center"><span class="score-write">&nbsp;&nbsp;&nbsp;</span><span class="sur"> / 10</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="bottom">
+    <div class="bloc" style="flex:1.1">
+      <div class="bloc-title">📄 J'ai utilisé le document INRS papier pour répondre</div>
+      <div class="inrs-row">
+        <div class="inrs-item"><span class="inrs-check"></span>Oui — j'ai cherché les réponses tout seul</div>
+        <div class="inrs-item"><span class="inrs-check"></span>Oui — avec l'aide du professeur</div>
+        <div class="inrs-item"><span class="inrs-check"></span>Non — je n'ai pas ouvert le document</div>
+      </div>
+    </div>
+    <div class="bloc total-box">
+      <div class="total-num">Étapes complétées</div>
+      <div class="total-val">&nbsp;/ 6</div>
+      <div class="niveaux">
+        <div class="niv na">NA</div>
+        <div class="niv ec">EC</div>
+        <div class="niv ac">Ac</div>
+        <div class="niv pa">PA</div>
+      </div>
+    </div>
+    <div class="bloc" style="flex:1.4">
+      <div class="bloc-title">✏️ Observation du professeur</div>
+      <div class="obs-lines">
+        <div class="obs-line"></div>
+        <div class="obs-line"></div>
+        <div class="obs-line"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span>Lycée Professionnel Privé Jacques Raynaud · Campus Équatio</span>
+    <span><strong>inerWeb</strong> Decouverte metiers · Séquence S0</span>
+    <span>À remettre à l'enseignant en fin de séance</span>
+  </div>
+
+</div><!-- fiche 2 -->
+
+</div><!-- page -->
+</body>
+</html>

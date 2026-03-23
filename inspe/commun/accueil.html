@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sécurité de base — Module commun</title>
+<style>@font-face{font-family:"OpenDyslexic";font-style:normal;font-weight:400;font-display:swap;src:url(../assets/OpenDyslexic-Regular.otf) format("opentype")}@font-face{font-family:"OpenDyslexic";font-style:normal;font-weight:700;font-display:swap;src:url(../assets/OpenDyslexic-Bold.otf) format("opentype")}</style>
+<style>
+:root{
+  --navy:#0f2d52;--navy-mid:#1a4a6e;
+  --orange:#e8914a;--orange-hover:#d47a35;--orange-warm:#fdf6ef;--orange-glow:rgba(232,145,74,.35);
+  --turquoise:#2aafaf;--turquoise-light:#eef8f7;
+  --bg:#faf7f2;--bg-end:#f0ebe3;
+  --card:#ffffff;--text:#2c3e50;--text-strong:#0f2d52;--muted:#5a7080;
+  --line:#ece4da;
+  --ok:#27ae60;--bad:#e74c3c;
+  --radius:22px;--radius-sm:14px;--radius-pill:999px;
+  --shadow:0 4px 16px rgba(15,45,82,.07),0 1px 3px rgba(232,145,74,.05);
+  --shadow-orange:0 4px 18px rgba(232,145,74,.35);
+  --font:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:var(--font);
+  background:linear-gradient(180deg,var(--bg),var(--bg-end));
+  background-attachment:fixed;
+  color:var(--text);line-height:1.65;font-size:16px;
+}
+body.dys{font-family:'OpenDyslexic',system-ui,sans-serif}
+body.f-lg{font-size:18px}
+body.f-xl{font-size:20px}
+
+/* Mode guidé */
+.page-hint{display:none;font-size:.85em;color:var(--turquoise);font-style:italic;margin-bottom:8px}
+body.guided .page-hint{display:inline}
+
+.topbar{
+  position:sticky;top:0;z-index:10;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 20px;
+  background:linear-gradient(135deg,var(--navy),var(--navy-mid),var(--turquoise));
+  border-bottom:4px solid var(--orange);
+  border-radius:0 0 0 40px;
+  box-shadow:0 4px 20px rgba(15,45,82,.15);
+  flex-wrap:wrap;gap:10px;
+}
+.brand{display:flex;gap:10px;align-items:center}
+.brand__mark{
+  width:44px;height:44px;border-radius:var(--radius-sm);
+  display:grid;place-items:center;
+  background:rgba(255,255,255,.95);font-size:20px;
+  box-shadow:0 3px 10px rgba(0,0,0,.1);
+}
+.brand__title{font-weight:900;font-size:14px;color:#fff;letter-spacing:.5px}
+.brand__sub{font-size:12px;color:rgba(255,255,255,.8)}
+.a11y{display:flex;gap:6px;align-items:center}
+.a11y-btn{
+  background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.25);
+  padding:5px 12px;border-radius:var(--radius-pill);cursor:pointer;
+  font-size:.8em;font-family:inherit;transition:all .2s;text-decoration:none;
+}
+.a11y-btn:hover,.a11y-btn.on{background:var(--orange);border-color:var(--orange)}
+
+.container{max-width:700px;margin:0 auto;padding:20px 16px 60px}
+
+/* Header thématique */
+.theme-header{
+  background:linear-gradient(135deg,var(--turquoise),#1d9e9e,var(--navy-mid));
+  color:white;border-radius:var(--radius);padding:32px 24px;
+  margin-bottom:20px;text-align:center;position:relative;overflow:hidden;
+}
+.theme-header *{position:relative;z-index:1}
+.theme-header h1{font-size:1.8em;font-weight:700;margin-bottom:6px}
+.theme-header p{font-size:1em;opacity:.9}
+
+/* Encart intro */
+.intro-box{
+  background:var(--turquoise-light);border-left:4px solid var(--turquoise);
+  border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+  padding:16px 18px;margin-bottom:24px;font-size:.92em;color:var(--navy);line-height:1.6;
+}
+.intro-box strong{color:var(--text-strong)}
+.intro-box .note{
+  display:block;margin-top:8px;padding-top:8px;border-top:1px dashed rgba(42,175,175,.3);
+  font-size:.88em;color:var(--muted);
+}
+
+/* Section titre */
+.section-title{
+  font-size:1.15em;font-weight:800;color:var(--navy);
+  margin:28px 0 14px;padding-left:14px;
+  border-left:4px solid var(--orange);line-height:1.3;
+}
+
+/* Cartes réflexes */
+.reflex-cards{display:grid;gap:14px;margin-bottom:28px}
+.reflex-card{
+  background:var(--card);border:1px solid var(--line);
+  border-radius:var(--radius);padding:18px 16px;
+  box-shadow:var(--shadow);position:relative;overflow:hidden;
+}
+.reflex-card::before{
+  content:'';position:absolute;top:0;left:0;width:5px;height:100%;
+  background:var(--orange);border-radius:999px 0 0 999px;
+}
+.reflex-card-head{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.reflex-icon{
+  width:48px;height:48px;border-radius:var(--radius-sm);flex-shrink:0;
+  display:grid;place-items:center;font-size:1.5em;
+  background:var(--orange-warm);
+}
+.reflex-card-head h3{font-size:1em;font-weight:700;color:var(--text-strong)}
+.reflex-rule{
+  font-size:.92em;color:var(--text);margin-bottom:8px;line-height:1.55;
+  padding-left:8px;border-left:3px solid var(--turquoise-light);
+}
+.reflex-example{
+  background:var(--turquoise-light);border-radius:var(--radius-sm);
+  padding:10px 14px;font-size:.88em;color:var(--navy-mid);
+  margin-bottom:8px;line-height:1.5;
+}
+.reflex-example::before{content:'Exemple : ';font-weight:700;color:var(--turquoise)}
+.reflex-avoid{
+  font-size:.85em;color:var(--muted);padding-left:8px;
+  border-left:3px solid var(--line);
+}
+.reflex-avoid strong{color:var(--bad)}
+
+.svg-ico{width:36px;height:36px;flex-shrink:0}
+.svg-ico svg{width:100%;height:100%;display:block}
+
+/* Section urgence */
+.urgence-section{
+  background:linear-gradient(135deg,#fff5f5,#fff0f0);
+  border:2px solid var(--bad);border-radius:var(--radius);
+  padding:20px 18px;margin-bottom:28px;
+}
+.urgence-section h2{
+  font-size:1.1em;color:var(--bad);margin-bottom:14px;text-align:center;
+}
+.urgence-steps{display:grid;gap:12px}
+.urgence-step{
+  display:flex;align-items:flex-start;gap:12px;
+  background:var(--card);border-radius:var(--radius-sm);padding:14px;
+  border:1px solid rgba(231,76,60,.15);
+}
+.urgence-num{
+  width:36px;height:36px;border-radius:50%;flex-shrink:0;
+  display:grid;place-items:center;font-weight:900;font-size:.9em;color:#fff;
+}
+.urgence-num.u1{background:#e74c3c}
+.urgence-num.u2{background:#e67e22}
+.urgence-num.u3{background:#27ae60}
+.urgence-num.u4{background:#2c3e50}
+.urgence-step h4{font-size:.95em;color:var(--text-strong);margin-bottom:2px}
+.urgence-step p{font-size:.87em;color:var(--muted);line-height:1.5}
+.urgence-tel{
+  display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:12px;
+}
+.urgence-tel span{
+  background:var(--bad);color:#fff;padding:6px 16px;border-radius:var(--radius-pill);
+  font-weight:700;font-size:.9em;
+}
+
+/* Questions */
+.activity{
+  background:var(--card);border:1px solid var(--line);border-left:5px solid var(--orange);
+  border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-bottom:18px;
+}
+.activity-num{font-size:.85em;color:var(--turquoise);font-weight:700;margin-bottom:6px}
+.qcm-question{font-size:1em;font-weight:600;color:var(--navy);margin-bottom:14px;line-height:1.5}
+.qcm-options{display:grid;gap:8px}
+.qcm-option{
+  padding:12px 16px;border:2px solid var(--line);border-radius:var(--radius-sm);
+  cursor:pointer;transition:all .2s;background:var(--card);
+  font-family:inherit;font-size:.95em;text-align:left;color:var(--text);width:100%;
+}
+.qcm-option:hover:not(.correct):not(.incorrect){border-color:var(--orange);background:var(--orange-warm)}
+.qcm-option.correct{border-color:var(--ok);background:#d4edda;color:#155724;cursor:default}
+.qcm-option.incorrect{border-color:var(--bad);background:#f8d7da;color:#721c24;cursor:default}
+.qcm-option:disabled{cursor:default}
+.qcm-feedback{
+  margin-top:10px;padding:10px 14px;border-radius:var(--radius-sm);
+  font-weight:600;font-size:.9em;display:none;line-height:1.5;
+}
+.qcm-feedback.show-ok{display:block;background:#d4edda;color:#155724;border:1px solid #c3e6cb}
+.qcm-feedback.show-ko{display:block;background:#f8d7da;color:#721c24;border:1px solid #f5c6cb}
+
+/* Score */
+.score-section{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:24px;text-align:center;margin-bottom:20px;display:none;
+}
+.score-text{font-size:1.2em;font-weight:700;color:var(--navy)}
+.score-bar-wrap{background:var(--line);border-radius:999px;height:24px;margin:14px 0;overflow:hidden}
+.score-bar{
+  height:100%;border-radius:999px;transition:width .6s ease;
+  background:linear-gradient(90deg,var(--turquoise),var(--ok));
+  display:flex;align-items:center;justify-content:center;
+  color:white;font-weight:700;font-size:.8em;min-width:0;
+}
+.score-bar.fail{background:linear-gradient(90deg,var(--orange),var(--bad))}
+.score-msg{margin-top:8px;font-weight:600}
+.score-msg.pass{color:var(--ok)}
+.score-msg.no-pass{color:var(--bad)}
+
+/* Navigation */
+.bottom-nav{
+  display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:20px;
+}
+.bottom-nav a{
+  padding:12px 22px;border:none;border-radius:var(--radius-pill);
+  font-family:inherit;font-size:.95em;font-weight:600;cursor:pointer;
+  transition:all .2s;text-decoration:none;display:inline-flex;
+  align-items:center;gap:8px;color:white;
+}
+.btn-prev{background:var(--navy)}
+.btn-prev:hover{background:#143052}
+.btn-next{background:var(--turquoise)}
+.btn-next:hover{background:#1d9e9e}
+
+.footer{padding:16px;text-align:center;font-size:.72em;color:var(--muted);border-top:1px solid var(--line);margin-top:30px}
+
+@media(max-width:600px){
+  .theme-header h1{font-size:1.4em}
+  .theme-header{padding:24px 18px}
+  .activity{padding:16px}
+  .topbar{flex-direction:column;text-align:center}
+  .bottom-nav{flex-direction:column;align-items:stretch;text-align:center}
+  .bottom-nav a{justify-content:center}
+  .reflex-card{padding:14px 12px}
+  .reflex-icon{width:40px;height:40px;font-size:1.3em}
+  .urgence-step{flex-direction:column;align-items:center;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <div class="brand__mark"><svg viewBox="0 0 24 24" style="width:24px;height:24px" fill="none" stroke="var(--navy)" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5"/></svg></div>
+    <div>
+      <div class="brand__title">LPP Jacques Raynaud · Campus Équatio</div>
+      <div class="brand__sub">2nde TNE — Sécurité de base</div>
+    </div>
+  </div>
+  <div class="a11y">
+    <a href="../index.html" class="a11y-btn"><svg viewBox="0 0 24 24" style="width:14px;height:14px;vertical-align:middle" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l9-9 9 9"/><path d="M5 10v10h14V10"/></svg></a>
+    <button class="a11y-btn" onclick="togDys()" id="bDys">Dys</button>
+    <button class="a11y-btn" onclick="setF('normal')">A</button>
+    <button class="a11y-btn" onclick="setF('f-lg')">A+</button>
+    <button class="a11y-btn" onclick="setF('f-xl')">A++</button>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- 1. HEADER THÉMATIQUE -->
+  <div class="theme-header">
+    <h1>Sécurité de base</h1>
+    <p>Les réflexes essentiels avant d'aller en atelier ou en entreprise</p>
+  </div>
+
+  <!-- 2. INTRODUCTION CONTEXTE -->
+  <div class="intro-box">
+    <strong>Pourquoi ce module ?</strong> Que tu ailles en stage, en entreprise ou en atelier au lycée, il y a des réflexes qui sauvent. Ce module vérifie que tu les connais avant de commencer.
+    <span class="note">Les règles de sécurité sont les mêmes pour les stagiaires, les apprentis et les salariés. Personne n'est au-dessus de la prévention.</span>
+  </div>
+
+  <span class="page-hint">Lis attentivement chaque réflexe ci-dessous. Ils te serviront pour répondre aux questions ensuite.</span>
+
+  <!-- 3. LES 5 RÉFLEXES QUI SAUVENT -->
+  <h2 class="section-title">Les 5 réflexes qui sauvent</h2>
+
+  <div class="reflex-cards">
+
+    <!-- Réflexe 1 -->
+    <div class="reflex-card">
+      <div class="reflex-card-head">
+        <div class="reflex-icon svg-ico"><svg viewBox="0 0 24 24" fill="none" stroke="var(--turquoise)" stroke-width="2"><circle cx="10" cy="10" r="7"/><path d="M15 15l5 5"/><path d="M8 10l2 2 3-3" stroke="var(--ok)" stroke-width="2.5"/></svg></div>
+        <h3>Vérifier avant d'utiliser</h3>
+      </div>
+      <div class="reflex-rule">Tout outil, toute machine, tout EPI doit être vérifié avant usage. Un contrôle visuel rapide peut éviter un accident grave.</div>
+      <div class="reflex-example">Avant de brancher une perceuse, je vérifie le câble, la prise et le mandrin. Si tout est en ordre, je peux travailler.</div>
+      <div class="reflex-avoid"><strong>Ce que ça évite :</strong> accident causé par du matériel défectueux.</div>
+    </div>
+
+    <!-- Réflexe 2 -->
+    <div class="reflex-card">
+      <div class="reflex-card-head">
+        <div class="reflex-icon svg-ico"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="var(--bad)" stroke-width="2.5"/><path d="M7 12h10" stroke="var(--bad)" stroke-width="4"/></svg></div>
+        <h3>Matériel douteux = STOP</h3>
+      </div>
+      <div class="reflex-rule">Un câble abîmé, une fissure, une pièce manquante — on ne touche pas, on signale immédiatement.</div>
+      <div class="reflex-example">Un flexible qui fuit, un carter fendu, un garde-corps manquant — je m'arrête et je préviens mon tuteur ou le responsable.</div>
+      <div class="reflex-avoid"><strong>Ce que ça évite :</strong> utilisation d'un équipement dangereux.</div>
+    </div>
+
+    <!-- Réflexe 3 -->
+    <div class="reflex-card">
+      <div class="reflex-card-head">
+        <div class="reflex-icon svg-ico"><svg viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><path d="M12 2L1 21h22L12 2z" fill="var(--orange-warm)"/><path d="M12 17h.01M12 10v4" stroke="var(--orange)" stroke-width="2.5"/></svg></div>
+        <h3>Alerter immédiatement</h3>
+      </div>
+      <div class="reflex-rule">Danger, accident, doute — on prévient le tuteur ou le responsable tout de suite. Pas « à la fin de la journée », pas « après la pause ».</div>
+      <div class="reflex-example">Je sens une odeur bizarre, je vois un collègue blessé, j'entends un bruit anormal — j'alerte immédiatement.</div>
+      <div class="reflex-avoid"><strong>Numéros d'urgence :</strong> 15 (SAMU) · 18 (Pompiers) · 112 (Urgence européenne).</div>
+    </div>
+
+    <!-- Réflexe 4 -->
+    <div class="reflex-card">
+      <div class="reflex-card-head">
+        <div class="reflex-icon svg-ico"><svg viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.5"><path d="M6 10v9h4v-7l1-1V9l-2-2-3 3z"/><path d="M18 10v9h-4v-7l-1-1V9l2-2 3 3z"/></svg></div>
+        <h3>Les EPI ne sont pas optionnels</h3>
+      </div>
+      <div class="reflex-rule">Chaussures de sécurité, lunettes, gants, casque anti-bruit — chaque poste a ses EPI obligatoires. On les porte, toujours.</div>
+      <div class="reflex-example">En atelier froid : chaussures de sécurité + gants + lunettes. Toujours. Sans exception.</div>
+      <div class="reflex-avoid"><strong>Ce que ça évite :</strong> blessures aux yeux, aux mains, aux pieds.</div>
+    </div>
+
+    <!-- Réflexe 5 -->
+    <div class="reflex-card">
+      <div class="reflex-card-head">
+        <div class="reflex-icon svg-ico"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="7" r="3" stroke="var(--navy)" stroke-width="2"/><path d="M6 21c0-4 3-4 6-4s6 0 6 4" stroke="var(--navy)" stroke-width="2"/><circle cx="18" cy="14" r="2" stroke="var(--bad)" stroke-width="1.5"/></svg></div>
+        <h3>Jamais seul sans consigne</h3>
+      </div>
+      <div class="reflex-rule">On ne fait pas une opération à risque sans l'accord explicite du responsable. Si le tuteur est absent, on attend.</div>
+      <div class="reflex-example">Mon tuteur est parti 5 minutes. Je ne touche pas à la machine en cours, j'attends son retour.</div>
+      <div class="reflex-avoid"><strong>Ce que ça évite :</strong> accident sans témoin, intervention non maîtrisée.</div>
+    </div>
+
+  </div>
+
+  <!-- 4. EN CAS D'URGENCE -->
+  <div class="urgence-section">
+    <h2>🚨 En cas d'urgence</h2>
+
+    <div class="urgence-steps">
+      <div class="urgence-step">
+        <div class="urgence-num u1">1</div>
+        <div>
+          <h4>Protéger</h4>
+          <p>Sécuriser la zone pour éviter un sur-accident. Si possible, couper l'énergie (électricité, gaz). Ne pas se mettre en danger soi-même.</p>
+        </div>
+      </div>
+      <div class="urgence-step">
+        <div class="urgence-num u2">2</div>
+        <div>
+          <h4>Alerter</h4>
+          <p>Appeler les secours : 15 (SAMU), 18 (Pompiers) ou 112. Donner le lieu précis, la nature de l'accident et le nombre de victimes.</p>
+        </div>
+      </div>
+      <div class="urgence-step">
+        <div class="urgence-num u3">3</div>
+        <div>
+          <h4>Secourir</h4>
+          <p>Uniquement les gestes qu'on maîtrise. Mettre en PLS si la victime est inconsciente mais respire. Ne pas déplacer un blessé sauf danger immédiat.</p>
+        </div>
+      </div>
+      <div class="urgence-step">
+        <div class="urgence-num u4">4</div>
+        <div>
+          <h4>Ne pas faire</h4>
+          <p>Ne jamais toucher un électrisé avant d'avoir coupé le courant. Ne pas déplacer un blessé du dos ou de la nuque. Ne pas donner à boire à une victime inconsciente.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="urgence-tel">
+      <span>15 — SAMU</span>
+      <span>18 — Pompiers</span>
+      <span>112 — Urgence EU</span>
+    </div>
+  </div>
+
+  <!-- 5. ACTIVITÉS -->
+  <h2 class="section-title">Vérifie tes réflexes</h2>
+  <span class="page-hint">Réponds aux 6 questions ci-dessous. Tu as le droit à 2 essais par question. Ton score s'affichera à la fin.</span>
+
+  <!-- Q1 -->
+  <div class="activity" id="act-q1">
+    <div class="activity-num">Question 1 / 6</div>
+    <div class="qcm-question">Premier jour en stage — tu arrives à l'atelier. Que fais-tu en premier ?</div>
+    <div class="qcm-options">
+      <button class="qcm-option" onclick="check('q1',this,false)">Je commence à ranger pour montrer ma motivation</button>
+      <button class="qcm-option" onclick="check('q1',this,true)">J'attends les consignes de mon tuteur et je repère les sorties de secours et l'extincteur</button>
+      <button class="qcm-option" onclick="check('q1',this,false)">Je regarde ce que font les autres et je fais pareil</button>
+      <button class="qcm-option" onclick="check('q1',this,false)">Je mets mes EPI et je me lance sur la première tâche visible</button>
+    </div>
+    <div class="qcm-feedback" id="fb-q1"></div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="activity" id="act-q2">
+    <div class="activity-num">Question 2 / 6</div>
+    <div class="qcm-question">Tu dois utiliser une perceuse. En la prenant, tu remarques que le câble d'alimentation est dénudé par endroits. Que fais-tu ?</div>
+    <div class="qcm-options">
+      <button class="qcm-option" onclick="check('q2',this,false)">J'enroule du scotch autour et je m'en sers quand même</button>
+      <button class="qcm-option" onclick="check('q2',this,false)">Je l'utilise prudemment en évitant de toucher le câble</button>
+      <button class="qcm-option" onclick="check('q2',this,true)">Je la pose, je la signale comme défectueuse (étiquette + tuteur), j'en prends une autre</button>
+      <button class="qcm-option" onclick="check('q2',this,false)">Je demande à un collègue de la tenir pendant que je travaille</button>
+    </div>
+    <div class="qcm-feedback" id="fb-q2"></div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="activity" id="act-q3">
+    <div class="activity-num">Question 3 / 6</div>
+    <div class="qcm-question">Un collègue reçoit une décharge électrique et reste accroché au câble. Quel est ton premier geste ?</div>
+    <div class="qcm-options">
+      <button class="qcm-option" onclick="check('q3',this,false)">Je le tire par le bras pour le dégager</button>
+      <button class="qcm-option" onclick="check('q3',this,true)">Je coupe le courant en priorité (arrêt d'urgence ou disjoncteur), sans le toucher directement</button>
+      <button class="qcm-option" onclick="check('q3',this,false)">J'appelle les secours et j'attends sans rien faire</button>
+      <button class="qcm-option" onclick="check('q3',this,false)">Je lui jette de l'eau pour faire disjoncter le circuit</button>
+    </div>
+    <div class="qcm-feedback" id="fb-q3"></div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="activity" id="act-q4">
+    <div class="activity-num">Question 4 / 6</div>
+    <div class="qcm-question">On te demande d'intervenir sur une machine que tu n'as jamais utilisée. Que fais-tu ?</div>
+    <div class="qcm-options">
+      <button class="qcm-option" onclick="check('q4',this,false)">Je cherche le mode d'emploi sur internet et je me débrouille</button>
+      <button class="qcm-option" onclick="check('q4',this,false)">J'essaie doucement pour voir comment ça fonctionne</button>
+      <button class="qcm-option" onclick="check('q4',this,true)">Je demande une explication ou une démonstration à mon tuteur avant de commencer</button>
+      <button class="qcm-option" onclick="check('q4',this,false)">Je refuse catégoriquement de m'en approcher</button>
+    </div>
+    <div class="qcm-feedback" id="fb-q4"></div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="activity" id="act-q5">
+    <div class="activity-num">Question 5 / 6</div>
+    <div class="qcm-question">Quels EPI sont indispensables pour manipuler des tôles et pièces métalliques coupantes en atelier froid ?</div>
+    <div class="qcm-options">
+      <button class="qcm-option" onclick="check('q5',this,false)">Lunettes de protection uniquement</button>
+      <button class="qcm-option" onclick="check('q5',this,false)">Casque de chantier + bouchons d'oreilles</button>
+      <button class="qcm-option" onclick="check('q5',this,true)">Gants de protection anti-coupure + chaussures de sécurité (+ lunettes si meulage)</button>
+      <button class="qcm-option" onclick="check('q5',this,false)">Aucun EPI particulier si on fait attention</button>
+    </div>
+    <div class="qcm-feedback" id="fb-q5"></div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="activity" id="act-q6">
+    <div class="activity-num">Question 6 / 6</div>
+    <div class="qcm-question">Tu vois un camarade travailler seul sur un brasage (soudure) sans que le responsable soit au courant. Que fais-tu ?</div>
+    <div class="qcm-options">
+      <button class="qcm-option" onclick="check('q6',this,false)">Rien, il a l'air de savoir ce qu'il fait</button>
+      <button class="qcm-option" onclick="check('q6',this,false)">Je reste à côté pour le surveiller discrètement</button>
+      <button class="qcm-option" onclick="check('q6',this,true)">Je préviens le responsable pour qu'il soit informé de l'opération en cours</button>
+      <button class="qcm-option" onclick="check('q6',this,false)">Je lui ordonne d'arrêter immédiatement</button>
+    </div>
+    <div class="qcm-feedback" id="fb-q6"></div>
+  </div>
+
+  <!-- 6. SCORE -->
+  <div class="score-section" id="scoreSection">
+    <div class="score-text" id="scoreText">0 / 10</div>
+    <div class="score-bar-wrap">
+      <div class="score-bar" id="scoreBar" style="width:0%"></div>
+    </div>
+    <div class="score-msg" id="scoreMsg"></div>
+  </div>
+
+  <!-- 7. NAVIGATION -->
+  <div class="bottom-nav">
+    <a href="../index.html" class="btn-prev">← Accueil</a>
+    <a href="electrique.html" class="btn-next">Risque électrique →</a>
+  </div>
+
+</div>
+
+<div class="footer">inerWeb · F. Henninot · LPP Jacques Raynaud · Campus Équatio</div>
+
+<script>
+/* Accessibilité */
+function togDys(){
+  document.body.classList.toggle('dys');
+  document.getElementById('bDys').classList.toggle('on');
+  localStorage.setItem('a11y-dys',document.body.classList.contains('dys'));
+}
+function setF(c){
+  document.body.classList.remove('f-lg','f-xl');
+  if(c!=='normal')document.body.classList.add(c);
+  localStorage.setItem('a11y-size',c);
+}
+(function(){
+  if(localStorage.getItem('a11y-dys')==='true'){document.body.classList.add('dys');document.getElementById('bDys').classList.add('on');}
+  var fs=localStorage.getItem('a11y-size');
+  if(fs==='f-lg'||fs==='f-xl')document.body.classList.add(fs);
+  if(localStorage.getItem('guidedMode')==='true')document.body.classList.add('guided');
+})();
+
+/* QCM */
+var answers={q1:null,q2:null,q3:null,q4:null,q5:null,q6:null};
+var totalQ=6;
+var attempts={};
+
+var feedbacks={
+  q1:{
+    ok:'Bien. Le premier jour, on attend les consignes, on repère les sorties de secours, l\u2019extincteur et le point de rassemblement. C\u2019est la base de l\u2019accueil sécurité.',
+    ko:'Non. Le premier réflexe c\u2019est d\u2019attendre les instructions de ton tuteur. Même avec de bonnes intentions, agir sans consigne peut être dangereux.'
+  },
+  q2:{
+    ok:'Exact. Un outil défectueux ne se répare pas avec du scotch. On le signale, on l\u2019étiquette « hors service » et on prend un outil en bon état.',
+    ko:'Non. Un câble dénudé = risque d\u2019électrocution. Jamais de réparation de fortune. On signale, on met hors service, on prend un autre outil.'
+  },
+  q3:{
+    ok:'Bon réflexe. PROTÉGER d\u2019abord : couper le courant. Ne JAMAIS toucher la victime tant que le courant passe — sinon tu deviens toi aussi victime.',
+    ko:'Attention, geste dangereux. Si tu touches la victime pendant qu\u2019elle est sous tension, le courant passe dans ton corps aussi. Première action : COUPER LE COURANT.'
+  },
+  q4:{
+    ok:'C\u2019est la bonne attitude. Demander une démonstration n\u2019est jamais un signe de faiblesse. C\u2019est un signe de professionnalisme.',
+    ko:'Non. On ne manipule jamais une machine qu\u2019on ne connaît pas sans formation préalable. Demander une démo, c\u2019est normal et obligatoire.'
+  },
+  q5:{
+    ok:'Correct. Pour des pièces coupantes : gants anti-coupure obligatoires + chaussures de sécurité. Lunettes en plus si découpe ou meulage.',
+    ko:'Non. Manipuler des tôles ou des pièces métalliques sans gants anti-coupure = risque de coupures graves. Les chaussures de sécurité protègent les pieds si une pièce tombe.'
+  },
+  q6:{
+    ok:'Bon réflexe. Le brasage implique un chalumeau, des flammes, des risques de brûlure. Une opération à risque doit toujours être connue du responsable. Ce n\u2019est pas de la délation, c\u2019est de la prévention.',
+    ko:'Non. Le brasage est une opération à risque (flammes, gaz, brûlures). Le responsable DOIT être au courant. Le prévenir, ce n\u2019est pas moucharder, c\u2019est protéger tout le monde.'
+  }
+};
+
+function check(qId,btn,isCorrect){
+  if(answers[qId]!==null)return;
+  if(!attempts[qId])attempts[qId]=0;
+  attempts[qId]++;
+
+  var opts=btn.parentElement.querySelectorAll('.qcm-option');
+  var fb=document.getElementById('fb-'+qId);
+
+  if(isCorrect){
+    answers[qId]=true;
+    btn.classList.add('correct');
+    opts.forEach(function(o){o.disabled=true});
+    fb.textContent=feedbacks[qId].ok;
+    fb.className='qcm-feedback show-ok';
+    updateScore();
+  } else {
+    btn.classList.add('incorrect');
+    btn.disabled=true;
+    fb.textContent=feedbacks[qId].ko;
+    fb.className='qcm-feedback show-ko';
+  }
+}
+
+function updateScore(){
+  var done=0,pts=0,max=totalQ*2;
+  for(var k in answers){
+    if(answers[k]!==null){
+      done++;
+      pts+=(attempts[k]===1?2:(attempts[k]===2?1:0));
+    }
+  }
+  if(done===totalQ){
+    var sec=document.getElementById('scoreSection');
+    sec.style.display='block';
+    var s10=Math.round((pts/max)*10);
+    var pct=Math.round((pts/max)*100);
+    document.getElementById('scoreText').textContent=s10+' / 10 ('+pts+' pts sur '+max+')';
+    var bar=document.getElementById('scoreBar');
+    bar.style.width=pct+'%';
+    bar.textContent=s10+'/10';
+    if(pct<70)bar.classList.add('fail');
+
+    var msg=document.getElementById('scoreMsg');
+    if(pct>=70){
+      msg.textContent='Les réflexes de base sont acquis. Tu peux passer au module suivant.';
+      msg.className='score-msg pass';
+    } else {
+      msg.textContent='Relis attentivement les 5 réflexes ci-dessus, puis réessaie.';
+      msg.className='score-msg no-pass';
+    }
+    sec.scrollIntoView({behavior:'smooth',block:'center'});
+
+    /* 8. Signal localStorage */
+    localStorage.setItem('securite_done','true');
+  }
+}
+</script>
+</body>
+</html>

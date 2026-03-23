@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Découverte des métiers — 2nde TNE</title>
+<style>@font-face{font-family:"OpenDyslexic";font-style:normal;font-weight:400;font-display:swap;src:url(assets/OpenDyslexic-Regular.otf) format("opentype")}@font-face{font-family:"OpenDyslexic";font-style:normal;font-weight:700;font-display:swap;src:url(assets/OpenDyslexic-Bold.otf) format("opentype")}</style>
+<style>
+:root{
+  --navy:#0f2d52;--navy-mid:#1a4a6e;
+  --orange:#e8914a;--orange-hover:#d47a35;--orange-warm:#fdf6ef;--orange-glow:rgba(232,145,74,.35);
+  --turquoise:#2aafaf;--turquoise-light:#eef8f7;
+  --mint:#d4f0e8;--mint-deep:#b8e6d8;
+  --bg:#faf7f2;--bg-end:#f0ebe3;
+  --card:#ffffff;--text:#2c3e50;--text-strong:#0f2d52;--muted:#5a7080;
+  --line:#ece4da;
+  --ok:#27ae60;--bad:#e74c3c;
+  --radius:22px;--radius-sm:14px;--radius-pill:999px;
+  --shadow:0 4px 16px rgba(15,45,82,.07),0 1px 3px rgba(232,145,74,.05);
+  --shadow-orange:0 4px 18px rgba(232,145,74,.35);
+  --font:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:var(--font);
+  background:linear-gradient(180deg,var(--bg),var(--bg-end));
+  background-attachment:fixed;
+  color:var(--text);line-height:1.65;font-size:16px;
+}
+body.dys{font-family:'OpenDyslexic',var(--font)}
+body.f-lg{font-size:18px}
+body.f-xl{font-size:20px}
+
+.topbar{
+  position:sticky;top:0;z-index:10;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 20px;
+  background:linear-gradient(135deg,var(--navy),var(--navy-mid),var(--turquoise));
+  border-bottom:4px solid var(--orange);
+  border-radius:0 0 0 40px;
+  box-shadow:0 4px 20px rgba(15,45,82,.15);
+  flex-wrap:wrap;gap:10px;
+}
+.brand{display:flex;gap:10px;align-items:center}
+.brand__mark{
+  width:44px;height:44px;border-radius:var(--radius-sm);
+  display:grid;place-items:center;
+  background:rgba(255,255,255,.95);font-size:20px;
+  box-shadow:0 3px 10px rgba(0,0,0,.1);
+}
+.brand__title{font-weight:900;font-size:14px;color:#fff;letter-spacing:.5px}
+.brand__sub{font-size:12px;color:rgba(255,255,255,.8)}
+.a11y{display:flex;gap:6px;align-items:center}
+.a11y-btn{
+  background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.25);
+  padding:5px 12px;border-radius:var(--radius-pill);cursor:pointer;
+  font-size:.8em;font-family:inherit;transition:all .2s;
+}
+.a11y-btn:hover,.a11y-btn.on{background:var(--orange);border-color:var(--orange)}
+
+.hero{
+  text-align:center;padding:40px 20px 30px;
+  background:linear-gradient(135deg,var(--navy),var(--navy-mid));
+  color:#fff;position:relative;overflow:hidden;
+}
+.hero *{position:relative;z-index:1}
+.hero h1{font-size:2em;font-weight:800;margin-bottom:6px}
+.hero p{font-size:1em;opacity:.85;max-width:500px;margin:0 auto}
+
+.wrap{max-width:700px;margin:0 auto;padding:20px 16px 60px}
+
+/* Étapes */
+.steps{
+  display:flex;flex-direction:column;gap:14px;margin:20px 0;
+}
+.step-card{
+  background:var(--card);border:1px solid var(--line);
+  border-radius:var(--radius);padding:18px 20px;
+  box-shadow:var(--shadow);
+  display:flex;align-items:center;gap:16px;
+}
+.step-num{
+  width:40px;height:40px;border-radius:50%;flex-shrink:0;
+  display:grid;place-items:center;
+  font-weight:900;font-size:1.1em;color:#fff;
+}
+.step-num.s1{background:var(--turquoise)}
+.step-num.s2{background:var(--orange)}
+.step-num.s3{background:var(--navy)}
+.step-body h3{font-size:1em;font-weight:700;color:var(--text-strong);margin-bottom:2px}
+.step-body p{font-size:.9em;color:var(--muted)}
+
+/* Bouton principal */
+.btn-main{
+  display:block;width:100%;padding:16px;margin:20px 0;
+  background:var(--turquoise);color:#fff;border:none;border-radius:var(--radius);
+  font-family:inherit;font-size:1.1em;font-weight:700;
+  cursor:pointer;text-align:center;text-decoration:none;
+  box-shadow:0 4px 14px rgba(42,175,175,.3);transition:all .2s;
+}
+.btn-main:hover{background:#1d9e9e;transform:translateY(-1px)}
+.btn-main.orange{background:var(--orange);box-shadow:var(--shadow-orange)}
+.btn-main.orange:hover{background:var(--orange-hover)}
+.btn-main.navy{background:var(--navy)}
+.btn-main.navy:hover{background:#143052}
+
+/* Quiz */
+.quiz-box{
+  background:var(--card);border:1px solid var(--line);border-left:5px solid var(--orange);
+  border-radius:var(--radius);box-shadow:var(--shadow);padding:24px;margin:20px 0;
+}
+.progress{height:6px;background:var(--line);border-radius:4px;margin-bottom:20px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--orange),var(--turquoise));border-radius:4px;transition:width .4s;width:0}
+.q-block{display:none}
+.q-block.active{display:block;animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.q-text{font-size:1.05em;font-weight:600;color:var(--text-strong);margin-bottom:14px;line-height:1.5}
+.q-count{font-size:.85em;color:var(--turquoise);font-weight:700;margin-bottom:6px}
+.opts{display:grid;gap:10px}
+.opt{
+  padding:14px 16px;border:2px solid var(--line);border-radius:var(--radius);
+  background:var(--card);cursor:pointer;font-family:inherit;font-size:.95em;
+  text-align:left;color:var(--text);transition:all .2s;line-height:1.45;
+}
+.opt:hover{border-color:var(--orange);background:var(--orange-warm)}
+.opt.picked{border-color:var(--orange);background:var(--orange-warm);font-weight:600}
+.q-nav{display:flex;justify-content:flex-end;margin-top:16px}
+.btn-q{
+  border:none;border-radius:var(--radius-pill);padding:11px 22px;
+  font-weight:700;cursor:pointer;display:inline-flex;gap:8px;align-items:center;
+  font-family:inherit;font-size:.95em;transition:all .2s;
+  background:var(--orange);color:#fff;box-shadow:var(--shadow-orange);
+}
+.btn-q:hover{background:var(--orange-hover)}
+.btn-q:disabled{opacity:.4;cursor:not-allowed}
+
+/* Résultat */
+.result{display:none;animation:fadeIn .4s ease}
+.result.show{display:block}
+.result-card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:30px 24px;text-align:center;margin-bottom:16px;
+}
+.result-icon{font-size:3em;margin-bottom:10px}
+.result-title{font-size:1.4em;font-weight:800;color:var(--text-strong);margin-bottom:6px}
+.result-desc{color:var(--muted);max-width:500px;margin:0 auto 16px;line-height:1.5;font-size:.95em}
+.result-note{
+  background:var(--orange-warm);border:1px solid var(--line);border-left:4px solid var(--orange);
+  border-radius:var(--radius-sm);padding:14px;font-size:.9em;color:var(--muted);
+  margin-bottom:20px;text-align:left;line-height:1.6;
+}
+.result-note strong{color:var(--orange)}
+
+/* Parcours */
+.section-label{
+  font-size:1.1em;font-weight:800;color:var(--text-strong);margin:24px 0 12px;
+  padding-left:14px;border-left:4px solid var(--orange);
+}
+.section-label.commun{border-left-color:var(--turquoise)}
+
+.parcours{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.p-card{
+  border:1px solid var(--line);border-radius:var(--radius);padding:18px;
+  text-align:center;transition:all .25s;text-decoration:none;color:var(--text);
+  display:block;background:var(--card);
+}
+.p-card:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:var(--orange)}
+.p-card.commun{border-left:4px solid var(--turquoise)}
+.p-card.metier{border-left:4px solid var(--orange)}
+.p-card .ico{font-size:2em;margin-bottom:6px}
+.p-card .ico.svg-ico{width:44px;height:44px;margin:0 auto 6px}
+.p-card .ico.svg-ico svg{width:100%;height:100%;display:block}
+.svg-mark{width:24px;height:24px;display:block}
+.p-card .name{font-weight:700;color:var(--text-strong);margin-bottom:3px;font-size:.95em}
+.p-card .desc{font-size:.8em;color:var(--muted)}
+.p-card.recommended{border:2px solid var(--orange);box-shadow:var(--shadow-orange)}
+
+.teacher-zone{
+  margin-top:30px;padding:14px 18px;
+  background:var(--orange-warm);border:1px solid var(--line);border-left:4px solid var(--orange);
+  border-radius:var(--radius);font-size:.85em;color:var(--muted);
+  display:flex;gap:10px;align-items:center;flex-wrap:wrap;
+}
+.teacher-zone input{
+  width:80px;padding:6px 10px;border:2px solid var(--line);border-radius:var(--radius-sm);
+  font:inherit;outline:none;transition:all .25s;
+}
+.teacher-zone input:focus{border-color:var(--orange);box-shadow:0 0 0 4px var(--orange-glow)}
+
+.footer{
+  padding:18px 16px;text-align:center;
+  background:linear-gradient(135deg,var(--navy),var(--navy-mid));
+  border-top:3px solid var(--orange);border-radius:24px 0 0 0;
+  margin-top:30px;
+}
+.footer__inner{color:rgba(255,255,255,.85);font-size:.75em}
+
+.notif{
+  position:fixed;top:70px;right:16px;padding:14px 18px;border-radius:var(--radius-sm);
+  color:#fff;font-weight:600;z-index:100;transform:translateX(400px);transition:all .3s;
+  max-width:340px;font-size:.9em;box-shadow:var(--shadow);
+}
+.notif.show{transform:translateX(0)}
+.notif.ok{background:var(--ok)}
+.notif.info{background:var(--navy)}
+
+@media(max-width:600px){
+  .hero h1{font-size:1.5em}
+  .topbar{border-radius:0}
+  .parcours{grid-template-columns:1fr}
+  .step-card{padding:14px 16px}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <div class="brand__mark"><svg class="svg-mark" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4" stroke="var(--ok)" stroke-width="2.5"/></svg></div>
+    <div>
+      <div class="brand__title">LPP Jacques Raynaud · Campus Équatio</div>
+      <div class="brand__sub">2nde TNE — Découverte des métiers</div>
+    </div>
+  </div>
+  <div class="a11y">
+    <button class="a11y-btn" onclick="togDys()" id="bDys">Dys</button>
+    <button class="a11y-btn" onclick="setF('normal')">A</button>
+    <button class="a11y-btn" onclick="setF('f-lg')">A+</button>
+    <button class="a11y-btn" onclick="setF('f-xl')">A++</button>
+  </div>
+</header>
+
+<section class="hero">
+  <h1>Découverte des métiers par le risque</h1>
+  <p>Bienvenue. Tu vas découvrir plusieurs univers professionnels et apprendre les bons réflexes de sécurité.</p>
+</section>
+
+<div class="wrap">
+
+  <!-- ═══════ ÉCRAN 1 : BIENVENUE ═══════ -->
+  <div id="screenWelcome">
+    <div class="steps">
+      <div class="step-card">
+        <div class="step-num s1">1</div>
+        <div class="step-body">
+          <h3>Sécurité de base</h3>
+          <p>Un court module commun sur les réflexes essentiels en atelier et en entreprise.</p>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num s2">2</div>
+        <div class="step-body">
+          <h3>Mini quiz</h3>
+          <p>4 questions pour te proposer un premier parcours métier.</p>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num s3">3</div>
+        <div class="step-body">
+          <h3>Explore tous les parcours</h3>
+          <p>Froid, plomberie, électricité, numérique — tu accèdes à tout librement.</p>
+        </div>
+      </div>
+    </div>
+
+    <a href="commun/accueil.html" class="btn-main">Commencer par la sécurité de base</a>
+
+    <p style="text-align:center;font-size:.85em;color:var(--muted);margin-top:8px">
+      Tu as déjà fait la sécurité ?
+      <a href="#" onclick="goToQuiz();return false" style="color:var(--orange);font-weight:600">Passe directement au quiz</a>
+    </p>
+  </div>
+
+  <!-- ═══════ ÉCRAN 2 : QUIZ DE DÉMARRAGE ═══════ -->
+  <div id="screenQuiz" style="display:none">
+
+    <div style="background:var(--turquoise-light);border-left:4px solid var(--turquoise);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:14px;margin-bottom:20px;font-size:.9em;color:var(--navy)">
+      <strong>Mini quiz de démarrage</strong> — 4 questions rapides. Il n'y a pas de bonne ou mauvaise réponse. On cherche juste ce qui t'attire le plus.
+    </div>
+
+    <div class="quiz-box" id="quizBox">
+      <div class="progress"><div class="progress-fill" id="pBar"></div></div>
+
+      <!-- Q1 -->
+      <div class="q-block active" data-q="1">
+        <div class="q-count">Question 1 / 4</div>
+        <div class="q-text">En stage, quelle activité te donnerait le plus envie de revenir le lendemain ?</div>
+        <div class="opts">
+          <button class="opt" onclick="pick(this)" data-f="3" data-p="1" data-e="0" data-c="0">Régler une machine frigorifique pour qu'elle tourne au bon régime</button>
+          <button class="opt" onclick="pick(this)" data-f="0" data-p="3" data-e="1" data-c="0">Souder un tuyau en cuivre et voir l'installation fonctionner</button>
+          <button class="opt" onclick="pick(this)" data-f="0" data-p="0" data-e="3" data-c="0">Câbler un tableau électrique et mettre sous tension</button>
+          <button class="opt" onclick="pick(this)" data-f="0" data-p="0" data-e="0" data-c="3">Configurer un réseau ou sécuriser un système informatique</button>
+        </div>
+        <div class="q-nav"><button class="btn-q" onclick="next()" disabled>Suivant</button></div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="q-block" data-q="2">
+        <div class="q-count">Question 2 / 4</div>
+        <div class="q-text">Une machine tombe en panne. Quel est ton premier réflexe ?</div>
+        <div class="opts">
+          <button class="opt" onclick="pick(this)" data-f="3" data-p="0" data-e="1" data-c="0">Vérifier les pressions et les températures du circuit</button>
+          <button class="opt" onclick="pick(this)" data-f="0" data-p="3" data-e="0" data-c="0">Chercher une fuite ou un problème mécanique visible</button>
+          <button class="opt" onclick="pick(this)" data-f="1" data-p="0" data-e="3" data-c="0">Regarder le tableau électrique et tester les protections</button>
+          <button class="opt" onclick="pick(this)" data-f="0" data-p="0" data-e="0" data-c="3">Consulter les logs d'erreur ou le système de supervision</button>
+        </div>
+        <div class="q-nav"><button class="btn-q" onclick="next()" disabled>Suivant</button></div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="q-block" data-q="3">
+        <div class="q-count">Question 3 / 4</div>
+        <div class="q-text">Quel espace de travail t'attire le plus ?</div>
+        <div class="opts">
+          <button class="opt" onclick="pick(this)" data-f="3" data-p="0" data-e="0" data-c="0">Une salle des machines avec des compresseurs et des groupes froids</button>
+          <button class="opt" onclick="pick(this)" data-f="0" data-p="3" data-e="0" data-c="0">Un chantier avec des tuyaux, une chaufferie, une salle de bain à installer</button>
+          <button class="opt" onclick="pick(this)" data-f="0" data-p="0" data-e="3" data-c="0">Un local technique avec des armoires électriques et du câblage</button>
+          <button class="opt" onclick="pick(this)" data-f="0" data-p="0" data-e="0" data-c="3">Un bureau ou un datacenter avec des serveurs et des écrans</button>
+        </div>
+        <div class="q-nav"><button class="btn-q" onclick="next()" disabled>Suivant</button></div>
+      </div>
+
+      <!-- Q4 -->
+      <div class="q-block" data-q="4">
+        <div class="q-count">Question 4 / 4</div>
+        <div class="q-text">Parmi ces gestes, lequel te paraît le plus satisfaisant ?</div>
+        <div class="opts">
+          <button class="opt" onclick="pick(this)" data-f="3" data-p="1" data-e="0" data-c="0">Remettre en froid une chambre froide qui ne marchait plus</button>
+          <button class="opt" onclick="pick(this)" data-f="0" data-p="3" data-e="0" data-c="0">Ouvrir un robinet et voir l'eau chaude arriver grâce à ton travail</button>
+          <button class="opt" onclick="pick(this)" data-f="0" data-p="0" data-e="3" data-c="0">Allumer la lumière dans une maison que tu viens de câbler</button>
+          <button class="opt" onclick="pick(this)" data-f="0" data-p="0" data-e="0" data-c="3">Voir un réseau fonctionner après l'avoir configuré de A à Z</button>
+        </div>
+        <div class="q-nav"><button class="btn-q" onclick="showResult()" disabled>Voir mon résultat</button></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ ÉCRAN 3 : RÉSULTAT + PARCOURS ═══════ -->
+  <div class="result" id="resultZone">
+    <div class="result-card" id="resultCard"></div>
+
+    <div class="result-note">
+      <strong>Ce résultat vous propose un parcours pour commencer.</strong><br>
+      Tous les autres parcours restent accessibles ensuite. Tu es libre d'explorer ce qui t'intéresse.
+    </div>
+  </div>
+
+  <!-- ═══════ TOUS LES PARCOURS (toujours visibles) ═══════ -->
+  <div id="allParcours">
+
+    <div class="section-label commun">Tronc commun — Sécurité</div>
+    <div class="parcours" style="margin-bottom:20px">
+      <a href="commun/accueil.html" class="p-card commun"><div class="ico svg-ico"><svg viewBox="0 0 24 24" fill="none" stroke="var(--turquoise)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4" stroke="var(--ok)" stroke-width="2.5"/></svg></div><div class="name">Accueil sécurité</div><div class="desc">Réflexes essentiels en atelier et en entreprise</div></a>
+      <a href="commun/electrique.html" class="p-card commun"><div class="ico svg-ico"><svg viewBox="0 0 24 24"><path d="M12.5 2l-3 8h3l-1 8 6-10h-4l2-6z" fill="var(--orange)" stroke="#000" stroke-width=".5"/></svg></div><div class="name">Risque électrique</div><div class="desc">Les bons réflexes face au courant</div></a>
+      <a href="commun/hauteur.html" class="p-card commun"><div class="ico svg-ico"><svg viewBox="0 0 24 24" fill="none" stroke="var(--turquoise)" stroke-width="2"><path d="M8 2h8v20H8V2z"/><path d="M8 6h8M8 10h8M8 14h8M8 18h8"/></svg></div><div class="name">Travail en hauteur</div><div class="desc">Échafaudages, échelles, protections</div></a>
+    </div>
+
+    <div class="section-label">Parcours métier</div>
+    <div class="parcours" style="margin-bottom:20px">
+      <a href="froid/theme1.html" class="p-card metier" data-filiere="froid"><div class="ico svg-ico"><svg viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2"><path d="M12 2v20M2 12h20M5 5l14 14M19 5L5 19"/><circle cx="12" cy="12" r="3" stroke="var(--turquoise)"/></svg></div><div class="name">Froid & Climatisation</div><div class="desc">Fluides frigorigènes · 3 thèmes</div></a>
+      <a href="plomberie/theme1.html" class="p-card metier" data-filiere="plombier"><div class="ico svg-ico"><svg viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2"><path d="M6 12h6v8H6z"/><path d="M12 8h6v12h-6z"/><path d="M4 12h2M18 8h2"/><circle cx="9" cy="16" r="1" fill="var(--orange)"/><circle cx="15" cy="14" r="1" fill="var(--orange)"/></svg></div><div class="name">Plombier-Chauffagiste</div><div class="desc">Installations sanitaires · 3 thèmes</div></a>
+      <a href="electro/theme1.html" class="p-card metier" data-filiere="elec"><div class="ico svg-ico"><svg viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2"><path d="M9 2v6l-2 4v4h10v-4l-2-4V2"/><path d="M7 16v4h10v-4" stroke="var(--orange)"/><circle cx="12" cy="10" r="1.5" fill="var(--orange)"/></svg></div><div class="name">Électricien · MELEC</div><div class="desc">Installations électriques · 3 thèmes</div></a>
+      <a href="ciel/theme1.html" class="p-card metier" data-filiere="ciel"><div class="ico svg-ico"><svg viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2"><rect x="4" y="4" width="16" height="12" rx="2"/><path d="M8 20h8M12 16v4"/><path d="M9 10l2 2 4-4" stroke="var(--ok)" stroke-width="2"/></svg></div><div class="name">CIEL · Cybersécurité</div><div class="desc">Réseaux et sécurité · 3 thèmes</div></a>
+    </div>
+
+    <div class="section-label" style="border-left-color:#8b5cf6">Documents de référence</div>
+    <p style="font-size:.85em;color:var(--muted);margin-bottom:10px;padding-left:18px">Documents IRIS-ST et INRS à consulter en appui des parcours.</p>
+    <div class="parcours" style="margin-bottom:20px">
+      <a href="docs/index.html" class="p-card" style="border-left:4px solid #8b5cf6"><div class="ico svg-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2"><path d="M14 2H6c-1 0-2 1-2 2v16c0 1 1 2 2 2h12c1 0 2-1 2-2V8l-6-6z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h4"/></svg></div><div class="name">Tous les documents PDF</div><div class="desc">IRIS-ST / INRS — en complément</div></a>
+    </div>
+  </div>
+
+  <div class="teacher-zone">
+    <span>Espace enseignant :</span>
+    <input type="password" id="tCode" placeholder="Code" maxlength="4" onkeyup="checkCode()"/>
+    <span id="tStatus"></span>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer__inner">inerWeb · F. Henninot · LPP Jacques Raynaud · Campus Équatio</div>
+</footer>
+
+<script>
+let scores={froid:0,plombier:0,elec:0,ciel:0}, curQ=1, totalQ=4;
+
+function pick(btn){
+  btn.closest('.q-block').querySelectorAll('.opt').forEach(function(o){o.classList.remove('picked')});
+  btn.classList.add('picked');
+  btn.closest('.q-block').querySelector('.q-nav .btn-q').disabled=false;
+}
+
+function addPoints(){
+  var block=document.querySelector('.q-block[data-q="'+curQ+'"]');
+  var sel=block.querySelector('.opt.picked');
+  if(!sel)return false;
+  scores.froid+=parseInt(sel.dataset.f||0);
+  scores.plombier+=parseInt(sel.dataset.p||0);
+  scores.elec+=parseInt(sel.dataset.e||0);
+  scores.ciel+=parseInt(sel.dataset.c||0);
+  return true;
+}
+
+function next(){
+  if(!addPoints())return;
+  document.querySelector('.q-block[data-q="'+curQ+'"]').classList.remove('active');
+  curQ++;
+  var nb=document.querySelector('.q-block[data-q="'+curQ+'"]');
+  if(nb){nb.classList.add('active');document.getElementById('pBar').style.width=((curQ-1)/totalQ*100)+'%';}
+}
+
+function showResult(){
+  if(!addPoints())return;
+  document.getElementById('pBar').style.width='100%';
+
+  var fil='froid',mx=0;
+  for(var k in scores){if(scores[k]>mx){mx=scores[k];fil=k;}}
+  var total=scores.froid+scores.plombier+scores.elec+scores.ciel;
+
+  // Égalité : laisser le choix
+  var nbMax=0;
+  for(var k in scores){if(scores[k]===mx)nbMax++;}
+  var isEqual=nbMax>1;
+
+  var info={
+    froid:{ico:'<svg viewBox="0 0 24 24" style="width:48px;height:48px;display:inline-block" fill="none" stroke="#2aafaf" stroke-width="2"><path d="M12 2v20M2 12h20M5 5l14 14M19 5L5 19"/><circle cx="12" cy="12" r="3"/></svg>',title:'Froid & Climatisation',desc:'Les machines frigorifiques, la clim, les pompes à chaleur — c\'est ce qui semble t\'attirer. Découvre les risques et les gestes de ce métier.', link:'froid/theme1.html'},
+    plombier:{ico:'<svg viewBox="0 0 24 24" style="width:48px;height:48px;display:inline-block" fill="none" stroke="#0f2d52" stroke-width="2"><path d="M6 12h6v8H6z"/><path d="M12 8h6v12h-6z"/><path d="M4 12h2M18 8h2"/><circle cx="9" cy="16" r="1" fill="#e8914a"/><circle cx="15" cy="14" r="1" fill="#e8914a"/></svg>',title:'Plombier-Chauffagiste',desc:'Le cuivre, l\'eau, les chaudières — tu aimes le concret et le terrain. Découvre les risques et les gestes de ce métier.', link:'plomberie/theme1.html'},
+    elec:{ico:'<svg viewBox="0 0 24 24" style="width:48px;height:48px;display:inline-block" fill="none" stroke="#0f2d52" stroke-width="2"><path d="M9 2v6l-2 4v4h10v-4l-2-4V2"/><path d="M7 16v4h10v-4" stroke="#e8914a"/><circle cx="12" cy="10" r="1.5" fill="#e8914a"/></svg>',title:'Électricien',desc:'Le courant, les tableaux, le câblage — l\'électricité t\'attire. Découvre les risques et les gestes de ce métier.', link:'electro/theme1.html'},
+    ciel:{ico:'<svg viewBox="0 0 24 24" style="width:48px;height:48px;display:inline-block" fill="none" stroke="#0f2d52" stroke-width="2"><rect x="4" y="4" width="16" height="12" rx="2"/><path d="M8 20h8M12 16v4"/><path d="M9 10l2 2 4-4" stroke="#27ae60" stroke-width="2"/></svg>',title:'CIEL · Cybersécurité',desc:'Les réseaux, les serveurs, la sécurité informatique — le numérique est ton univers. Découvre les enjeux de ce métier.', link:'ciel/theme1.html'}
+  };
+
+  var f=info[fil];
+
+  var html='<div class="result-icon">'+f.ico+'</div>';
+  if(isEqual){
+    html+='<div class="result-title">Plusieurs parcours te correspondent</div>';
+    html+='<div class="result-desc">Tu peux choisir librement le parcours qui t\'attire le plus parmi ceux ci-dessous.</div>';
+  } else {
+    html+='<div class="result-title">Pour commencer : '+f.title+'</div>';
+    html+='<div class="result-desc">'+f.desc+'</div>';
+    html+='<a href="'+f.link+'" class="btn-main orange" style="max-width:400px;margin:16px auto 0;display:block">Commencer ce parcours</a>';
+  }
+
+  document.getElementById('resultCard').innerHTML=html;
+
+  document.getElementById('quizBox').style.display='none';
+  document.getElementById('screenQuiz').querySelector('div').style.display='none';
+  document.getElementById('resultZone').classList.add('show');
+
+  // Mettre en avant le parcours conseillé
+  if(!isEqual){
+    document.querySelectorAll('.p-card[data-filiere]').forEach(function(c){
+      c.classList.toggle('recommended',c.dataset.filiere===fil);
+    });
+  }
+
+  localStorage.setItem('orientation_filiere',fil);
+  localStorage.setItem('quiz_done','true');
+}
+
+function goToQuiz(){
+  document.getElementById('screenWelcome').style.display='none';
+  document.getElementById('screenQuiz').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function checkCode(){
+  if(document.getElementById('tCode').value==='1234'){
+    localStorage.setItem('guidedMode','true');
+    document.getElementById('tStatus').textContent='Mode guidé activé';
+    document.getElementById('tStatus').style.color='var(--ok)';
+    notif('Mode guidé activé.','ok');
+  }
+}
+
+function togDys(){
+  document.body.classList.toggle('dys');
+  document.getElementById('bDys').classList.toggle('on');
+  localStorage.setItem('a11y-dys',document.body.classList.contains('dys'));
+}
+function setF(c){
+  document.body.classList.remove('f-lg','f-xl');
+  if(c!=='normal')document.body.classList.add(c);
+  localStorage.setItem('a11y-size',c);
+}
+
+function notif(msg,type){
+  var old=document.querySelector('.notif');if(old)old.remove();
+  var n=document.createElement('div');n.className='notif '+type;n.textContent=msg;
+  document.body.appendChild(n);
+  setTimeout(function(){n.classList.add('show')},50);
+  setTimeout(function(){n.classList.remove('show');setTimeout(function(){n.remove()},300)},3000);
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+  // Restaurer accessibilité
+  if(localStorage.getItem('a11y-dys')==='true'){document.body.classList.add('dys');document.getElementById('bDys').classList.add('on');}
+  var s=localStorage.getItem('a11y-size');if(s&&s!=='normal')document.body.classList.add(s);
+
+  // Mode guidé
+  if(localStorage.getItem('guidedMode')==='true'){
+    document.getElementById('tStatus').textContent='Mode guidé actif';
+    document.getElementById('tStatus').style.color='var(--ok)';
+  }
+
+  // Si le quiz a déjà été fait, montrer directement les parcours
+  if(localStorage.getItem('quiz_done')==='true'){
+    document.getElementById('screenWelcome').style.display='none';
+    document.getElementById('screenQuiz').style.display='none';
+  }
+
+  // Si l'élève revient de l'accueil sécurité, montrer le quiz
+  if(localStorage.getItem('securite_done')==='true' && localStorage.getItem('quiz_done')!=='true'){
+    goToQuiz();
+  }
+});
+</script>
+</body>
+</html>

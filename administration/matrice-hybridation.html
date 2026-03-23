@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Matrice d'hybridation - Decouverte des metiers par le risque - 2nde TNE</title>
+<style>
+:root{--navy:#0f2d52;--orange:#e8914a;--turquoise:#2aafaf;--ok:#27ae60;--bg:#faf7f2}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Calibri,'Segoe UI',sans-serif;background:#eee;padding:20px;font-size:11pt}
+.page{background:white;max-width:210mm;margin:0 auto;padding:20px 25px;box-shadow:0 2px 10px rgba(0,0,0,.12)}
+
+h1{font-size:16pt;color:var(--navy);text-align:center;margin-bottom:4px}
+.subtitle{text-align:center;color:#666;font-size:10pt;margin-bottom:20px}
+.mention{text-align:center;font-size:8.5pt;color:var(--orange);font-weight:700;margin-bottom:15px}
+
+table{width:100%;border-collapse:collapse;font-size:9.5pt;margin-bottom:18px}
+th{background:var(--navy);color:white;padding:8px 10px;text-align:left;font-size:9pt}
+td{padding:8px 10px;border-bottom:1px solid #e5e5e5;vertical-align:top}
+tr:nth-child(even) td{background:#fafafa}
+
+.mode{display:inline-block;padding:3px 10px;border-radius:999px;font-size:8pt;font-weight:700;color:white;margin-bottom:4px}
+.mode-full-num{background:var(--turquoise)}
+.mode-num-papier{background:var(--orange)}
+.mode-papier-num{background:#8b5cf6}
+.mode-full-papier{background:var(--navy)}
+
+.tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:7.5pt;font-weight:700;margin:1px 2px}
+.tag-tel{background:#dbeafe;color:#1e40af}
+.tag-pdf{background:#fef3c7;color:#92400e}
+.tag-fiche{background:#d1fae5;color:#065f46}
+.tag-qcm{background:#ede9fe;color:#5b21b6}
+.tag-sr{background:#fee2e2;color:#991b1b}
+
+.section{margin-top:20px;padding-top:12px;border-top:2px solid var(--navy)}
+.section h2{font-size:12pt;color:var(--navy);margin-bottom:10px;border-left:4px solid var(--orange);padding-left:8px}
+
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:15px;padding:10px;background:#f8f8f8;border-radius:8px}
+.legend-item{display:flex;align-items:center;gap:4px;font-size:8.5pt}
+
+.footer{margin-top:20px;padding-top:10px;border-top:1px solid #ddd;display:flex;justify-content:space-between;font-size:8pt;color:#999}
+.footer strong{color:var(--orange)}
+
+.competence{font-size:8.5pt;color:#666;margin-top:4px}
+.comp-tag{display:inline-block;padding:1px 6px;border-radius:3px;font-size:7pt;font-weight:700;background:var(--navy);color:white;margin-right:3px}
+
+@media print{
+  body{background:white;padding:0}
+  .page{box-shadow:none;margin:0;max-width:100%}
+  .no-print{display:none}
+}
+</style>
+</head>
+<body>
+
+<button class="no-print" onclick="window.print()" style="display:block;margin:0 auto 15px;padding:8px 25px;background:var(--navy);color:white;border:none;border-radius:999px;font-size:11pt;font-weight:700;cursor:pointer">Imprimer</button>
+
+<div class="page">
+
+<h1>Matrice d'hybridation pedagogique</h1>
+<p class="subtitle">Decouverte des metiers par le risque &mdash; 2nde TNE &mdash; Sequence S0</p>
+<p class="mention">Documents ressources : INRS ED 6232 / ED 6276 / Memos IRIS-ST &mdash; reproduits a des fins pedagogiques non commerciales.</p>
+
+<div class="legend">
+  <div class="legend-item"><span class="mode mode-full-num">&nbsp;</span> Full numerique</div>
+  <div class="legend-item"><span class="mode mode-num-papier">&nbsp;</span> Numerique + support papier</div>
+  <div class="legend-item"><span class="mode mode-papier-num">&nbsp;</span> Support numerique + evaluation papier</div>
+  <div class="legend-item"><span class="mode mode-full-papier">&nbsp;</span> Full papier</div>
+  <div class="legend-item"><span class="tag tag-tel">TEL</span> Telephone eleve</div>
+  <div class="legend-item"><span class="tag tag-sr">SR</span> SchoolRoom</div>
+  <div class="legend-item"><span class="tag tag-qcm">QCM</span> QCM interactif</div>
+  <div class="legend-item"><span class="tag tag-pdf">PDF</span> Document IRIS-ST/INRS</div>
+  <div class="legend-item"><span class="tag tag-fiche">FICHE</span> Fiche bilan papier</div>
+</div>
+
+<table>
+<thead>
+<tr>
+  <th style="width:22%">Module</th>
+  <th style="width:14%">Modalite</th>
+  <th style="width:20%">Support QCM</th>
+  <th style="width:20%">Document ressource</th>
+  <th style="width:24%">Evaluation / Trace</th>
+</tr>
+</thead>
+<tbody>
+
+<tr>
+  <td><strong>Quiz orientation filiere</strong><br><span style="font-size:8pt;color:#999">Decouverte des 4 filieres</span></td>
+  <td><span class="mode mode-full-num">Full numerique</span></td>
+  <td><span class="tag tag-tel">TEL</span> <span class="tag tag-qcm">QCM</span><br>inspe/index.html</td>
+  <td>&mdash; (pas de document)</td>
+  <td><span class="tag tag-fiche">FICHE</span> Case a cocher<br><span class="tag tag-sr">SR</span> Vue Classe</td>
+</tr>
+
+<tr>
+  <td><strong>Accueil securite</strong><br><span style="font-size:8pt;color:#999">Droits, tuteur, DUER</span></td>
+  <td><span class="mode mode-num-papier">Num + papier</span></td>
+  <td><span class="tag tag-tel">TEL</span> <span class="tag tag-qcm">QCM</span><br>commun/accueil.html</td>
+  <td><span class="tag tag-pdf">PDF</span> Memo Apprentis IRIS-ST<br><em>2 questions ancrees sur le document</em></td>
+  <td><span class="tag tag-fiche">FICHE</span> Score /10<br><span class="tag tag-sr">SR</span> Photo travail</td>
+</tr>
+
+<tr>
+  <td><strong>Risque electrique</strong><br><span style="font-size:8pt;color:#999">Dangers, VAT, distances</span></td>
+  <td><span class="mode mode-num-papier">Num + papier</span></td>
+  <td><span class="tag tag-tel">TEL</span> <span class="tag tag-qcm">QCM</span><br>commun/electrique.html</td>
+  <td><span class="tag tag-pdf">PDF</span> Risque Electrique IRIS-ST<br><em>2 questions ancrees (75 mA, 3 m)</em></td>
+  <td><span class="tag tag-fiche">FICHE</span> Score /10<br><span class="tag tag-sr">SR</span> Photo travail</td>
+</tr>
+
+<tr>
+  <td><strong>Travail en hauteur</strong><br><span style="font-size:8pt;color:#999">Echafaudages, harnais</span></td>
+  <td><span class="mode mode-full-num">Full numerique</span></td>
+  <td><span class="tag tag-tel">TEL</span> <span class="tag tag-qcm">QCM</span><br>commun/hauteur.html</td>
+  <td><span class="tag tag-pdf">PDF</span> Echelles/Echafaudage IRIS-ST<br><em>(consultation facultative)</em></td>
+  <td><span class="tag tag-fiche">FICHE</span> Score /10</td>
+</tr>
+
+<tr style="background:#eef8f7">
+  <td colspan="5" style="text-align:center;font-weight:900;color:var(--turquoise);font-size:9pt;padding:6px">
+    PARCOURS FILIERE &mdash; L'eleve suit les 3 themes de la filiere choisie au quiz
+  </td>
+</tr>
+
+<tr>
+  <td><strong>Froid &amp; Clim</strong><br><span style="font-size:8pt;color:#999">Themes 1-2-3</span></td>
+  <td><span class="mode mode-num-papier">Num + papier</span></td>
+  <td><span class="tag tag-tel">TEL</span> <span class="tag tag-qcm">QCM</span><br>froid/theme1-2-3.html</td>
+  <td><span class="tag tag-pdf">PDF</span> Depliant Fluides IRIS-ST</td>
+  <td><span class="tag tag-fiche">FICHE</span> Score /10 x3</td>
+</tr>
+
+<tr>
+  <td><strong>Plomberie</strong><br><span style="font-size:8pt;color:#999">Themes 1-2-3</span></td>
+  <td><span class="mode mode-num-papier">Num + papier</span></td>
+  <td><span class="tag tag-tel">TEL</span> <span class="tag tag-qcm">QCM</span><br>plomberie/theme1-2-3.html</td>
+  <td><span class="tag tag-pdf">PDF</span> INRS ED 6232 / Mon metier</td>
+  <td><span class="tag tag-fiche">FICHE</span> Score /10 x3</td>
+</tr>
+
+<tr>
+  <td><strong>Electro</strong><br><span style="font-size:8pt;color:#999">Themes 1-2-3</span></td>
+  <td><span class="mode mode-num-papier">Num + papier</span></td>
+  <td><span class="tag tag-tel">TEL</span> <span class="tag tag-qcm">QCM</span><br>electro/theme1-2-3.html</td>
+  <td><span class="tag tag-pdf">PDF</span> INRS ED 6276</td>
+  <td><span class="tag tag-fiche">FICHE</span> Score /10 x3</td>
+</tr>
+
+<tr>
+  <td><strong>CIEL Cyber</strong><br><span style="font-size:8pt;color:#999">Themes 1-2-3</span></td>
+  <td><span class="mode mode-num-papier">Num + papier</span></td>
+  <td><span class="tag tag-tel">TEL</span> <span class="tag tag-qcm">QCM</span><br>ciel/theme1-2-3.html</td>
+  <td><span class="tag tag-pdf">PDF</span> Memo Cyber IRIS-ST</td>
+  <td><span class="tag tag-fiche">FICHE</span> Score /10 x3</td>
+</tr>
+
+</tbody>
+</table>
+
+<div class="section">
+<h2>Les 4 modalites d'hybridation</h2>
+<table>
+<thead>
+<tr>
+  <th style="width:25%">Modalite</th>
+  <th style="width:30%">QCM / Contenu</th>
+  <th style="width:25%">Document ressource</th>
+  <th style="width:20%">Evaluation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><span class="mode mode-full-num">Full numerique</span></td>
+  <td>QCM sur telephone via SchoolRoom WiFi</td>
+  <td>Aucun document papier necessaire</td>
+  <td>Score affiche a l'ecran<br>Vue Classe SchoolRoom</td>
+</tr>
+<tr>
+  <td><span class="mode mode-num-papier">Num + papier</span></td>
+  <td>QCM sur telephone via SchoolRoom WiFi</td>
+  <td>Document IRIS-ST / INRS papier<br><strong>Questions ancrees sur le document</strong></td>
+  <td>Score a l'ecran + fiche bilan papier</td>
+</tr>
+<tr>
+  <td><span class="mode mode-papier-num">Support num + eval papier</span></td>
+  <td>Contenu affiche sur telephone</td>
+  <td>Document IRIS-ST / INRS papier</td>
+  <td>Fiche bilan papier uniquement<br>(pas de QCM numerique)</td>
+</tr>
+<tr>
+  <td><span class="mode mode-full-papier">Full papier</span></td>
+  <td>Pas de telephone</td>
+  <td>Document IRIS-ST / INRS papier</td>
+  <td>Fiche bilan papier<br>Questionnaire papier imprime</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div class="section">
+<h2>Organisation du dossier numerique</h2>
+<table>
+<thead>
+<tr><th style="width:30%">Dossier</th><th>Contenu</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>01-SchoolRoom/</strong></td><td>Serveur WiFi autonome (.exe) + portail QCM + PDF integres &mdash; double-clic et ca marche</td></tr>
+<tr><td><strong>02-QCM-Numerique/</strong></td><td>Memes fichiers HTML que dans SchoolRoom, utilisables aussi en autonome (cle USB, ENT...)</td></tr>
+<tr><td><strong>03-Documents-Papier/</strong></td><td>Tous les PDF IRIS-ST / INRS &mdash; a imprimer pour distribution en classe</td></tr>
+<tr><td><strong>04-Fiches-Eleves/</strong></td><td>Fiche bilan de seance &mdash; a imprimer (2 par page A4)</td></tr>
+<tr><td><strong>05-Dossier-Enseignant/</strong></td><td>Plans de seance, cette matrice, synthese pedagogique</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="footer">
+  <span>F. Henninot &mdash; LPP Jacques Raynaud &mdash; Campus Equatio</span>
+  <span><strong>inerWeb</strong> Decouverte metiers &mdash; Sequence S0 &mdash; 2nde TNE</span>
+  <span>2025-2026</span>
+</div>
+
+</div>
+</body>
+</html>

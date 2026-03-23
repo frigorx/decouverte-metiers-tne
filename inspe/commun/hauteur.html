@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Travail en hauteur — Module commun</title>
+<style>@font-face{font-family:"OpenDyslexic";font-style:normal;font-weight:400;font-display:swap;src:url(../assets/OpenDyslexic-Regular.otf) format("opentype")}@font-face{font-family:"OpenDyslexic";font-style:normal;font-weight:700;font-display:swap;src:url(../assets/OpenDyslexic-Bold.otf) format("opentype")}</style>
+<style>
+:root{
+  --navy:#0f2d52;--navy-mid:#1a4a6e;
+  --orange:#e8914a;--orange-hover:#d47a35;--orange-warm:#fdf6ef;--orange-glow:rgba(232,145,74,.35);
+  --turquoise:#2aafaf;--turquoise-light:#eef8f7;
+  --bg:#faf7f2;--bg-end:#f0ebe3;
+  --card:#ffffff;--text:#2c3e50;--text-strong:#0f2d52;--muted:#5a7080;
+  --line:#ece4da;
+  --ok:#27ae60;--bad:#e74c3c;
+  --radius:22px;--radius-sm:14px;--radius-pill:999px;
+  --shadow:0 4px 16px rgba(15,45,82,.07),0 1px 3px rgba(232,145,74,.05);
+  --shadow-orange:0 4px 18px rgba(232,145,74,.35);
+  --font:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:var(--font);
+  background:linear-gradient(180deg,var(--bg),var(--bg-end));
+  background-attachment:fixed;
+  color:var(--text);line-height:1.65;font-size:16px;
+}
+body.dys{font-family:'OpenDyslexic',system-ui,sans-serif}
+body.f-lg{font-size:18px}
+body.f-xl{font-size:20px}
+
+.topbar{
+  position:sticky;top:0;z-index:10;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 20px;
+  background:linear-gradient(135deg,var(--navy),var(--navy-mid),var(--turquoise));
+  border-bottom:4px solid var(--orange);
+  border-radius:0 0 0 40px;
+  box-shadow:0 4px 20px rgba(15,45,82,.15);
+  flex-wrap:wrap;gap:10px;
+}
+.brand{display:flex;gap:10px;align-items:center}
+.brand__mark{
+  width:44px;height:44px;border-radius:var(--radius-sm);
+  display:grid;place-items:center;
+  background:rgba(255,255,255,.95);font-size:20px;
+  box-shadow:0 3px 10px rgba(0,0,0,.1);
+}
+.brand__title{font-weight:900;font-size:14px;color:#fff;letter-spacing:.5px}
+.brand__sub{font-size:12px;color:rgba(255,255,255,.8)}
+.a11y{display:flex;gap:6px;align-items:center}
+.a11y-btn{
+  background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.25);
+  padding:5px 12px;border-radius:var(--radius-pill);cursor:pointer;
+  font-size:.8em;font-family:inherit;transition:all .2s;
+}
+.a11y-btn:hover,.a11y-btn.on{background:var(--orange);border-color:var(--orange)}
+
+.container{max-width:700px;margin:0 auto;padding:20px 16px 60px}
+
+.theme-header{
+  background:linear-gradient(135deg,#e67e22,#d35400,var(--navy));
+  color:white;border-radius:var(--radius);padding:28px 24px;
+  margin-bottom:20px;text-align:center;position:relative;overflow:hidden;
+}
+.theme-header *{position:relative;z-index:1}
+.theme-header h1{font-size:1.8em;font-weight:700;margin-bottom:6px}
+.theme-header p{font-size:1em;opacity:.9}
+
+.intro-box{
+  background:var(--orange-warm);border-left:4px solid var(--orange);
+  border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+  padding:14px 18px;margin-bottom:20px;font-size:.9em;color:#5a3518;line-height:1.6;
+}
+
+.stat-box{
+  background:linear-gradient(135deg,var(--navy),var(--navy-mid));
+  color:#fff;border-radius:var(--radius-sm);padding:14px 18px;
+  margin-bottom:24px;text-align:center;font-size:.95em;font-weight:600;
+}
+.stat-box span{color:var(--orange);font-size:1.3em;font-weight:700}
+
+/* Section titles */
+.section-title{
+  font-size:1.15em;font-weight:700;color:var(--navy);margin-bottom:12px;
+  padding-bottom:6px;border-bottom:2px solid var(--orange);display:inline-block;
+}
+
+/* Danger cards */
+.danger-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:24px}
+.danger-card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius-sm);
+  padding:14px;text-align:center;box-shadow:var(--shadow);
+}
+.danger-card .ico{font-size:1.8em;margin-bottom:6px}
+.danger-card h4{font-size:.9em;color:var(--text-strong);margin-bottom:4px}
+.danger-card p{font-size:.78em;color:var(--muted);line-height:1.45}
+.svg-ico{width:40px;height:40px;margin:0 auto 8px}
+.svg-ico svg{width:100%;height:100%;display:block}
+.danger-card .rule{
+  margin-top:6px;font-size:.78em;font-weight:700;color:var(--bad);
+  background:#fdeaea;border-radius:6px;padding:4px 6px;
+}
+
+/* Principe box */
+.principe-box{
+  background:linear-gradient(135deg,var(--ok),#1e8449);color:#fff;
+  border-radius:var(--radius-sm);padding:14px 18px;margin-bottom:14px;
+  text-align:center;font-weight:700;font-size:1em;
+}
+
+/* Protection blocks */
+.protect-block{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:20px;margin-bottom:14px;
+}
+.protect-block h3{font-size:1.05em;color:var(--navy);margin-bottom:10px}
+.protect-block.collective{border-left:5px solid var(--ok)}
+.protect-block.individuelle{border-left:5px solid var(--turquoise)}
+.protect-label{
+  display:inline-block;font-size:.75em;font-weight:700;text-transform:uppercase;
+  padding:3px 10px;border-radius:var(--radius-pill);margin-bottom:10px;color:#fff;
+}
+.protect-label.prio{background:var(--ok)}
+.protect-label.secours{background:var(--turquoise)}
+.protect-item{
+  padding:8px 0;border-bottom:1px solid var(--line);font-size:.9em;line-height:1.5;
+}
+.protect-item:last-child{border-bottom:none}
+.protect-item strong{color:var(--text-strong)}
+
+/* Rules section */
+.rules-section{
+  background:var(--card);border:1px solid var(--line);border-left:5px solid var(--navy);
+  border-radius:var(--radius);padding:20px;margin-bottom:20px;box-shadow:var(--shadow);
+}
+.rules-section h3{font-size:1.1em;color:var(--navy);margin-bottom:12px}
+.rules-sub{font-size:.9em;font-weight:700;color:var(--orange);margin:10px 0 6px;text-transform:uppercase}
+.rules-list{list-style:none;counter-reset:rule}
+.rules-list li{
+  counter-increment:rule;padding:8px 0 8px 36px;position:relative;
+  border-bottom:1px solid var(--line);font-size:.95em;
+}
+.rules-list li:last-child{border-bottom:none}
+.rules-list li::before{
+  content:counter(rule);position:absolute;left:0;top:8px;
+  width:26px;height:26px;border-radius:50%;
+  background:var(--navy);color:#fff;font-weight:700;font-size:.8em;
+  display:grid;place-items:center;
+}
+.rules-list li strong{color:var(--orange)}
+
+/* Verification section */
+.verif-section{
+  background:var(--card);border:1px solid var(--line);border-left:5px solid var(--bad);
+  border-radius:var(--radius);padding:20px;margin-bottom:24px;box-shadow:var(--shadow);
+}
+.verif-section h3{font-size:1.1em;color:var(--navy);margin-bottom:12px}
+.verif-list{list-style:none}
+.verif-list li{
+  padding:8px 0 8px 28px;position:relative;
+  border-bottom:1px solid var(--line);font-size:.9em;
+}
+.verif-list li:last-child{border-bottom:none}
+.verif-list li::before{
+  content:'';position:absolute;left:0;top:14px;
+  width:16px;height:16px;border-radius:4px;border:2px solid var(--bad);
+}
+.verif-list li strong{color:var(--bad)}
+
+/* Questions */
+.activity{
+  background:var(--card);border:1px solid var(--line);border-left:5px solid var(--orange);
+  border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-bottom:18px;
+}
+.activity-num{font-size:.85em;color:var(--turquoise);font-weight:700;margin-bottom:6px}
+.qcm-question{font-size:1em;font-weight:600;color:var(--navy);margin-bottom:14px;line-height:1.5}
+.qcm-options{display:grid;gap:8px}
+.qcm-option{
+  padding:12px 16px;border:2px solid var(--line);border-radius:var(--radius-sm);
+  cursor:pointer;transition:all .2s;background:var(--card);
+  font-family:inherit;font-size:.95em;text-align:left;color:var(--text);width:100%;
+}
+.qcm-option:hover:not(.correct):not(.incorrect){border-color:var(--orange);background:var(--orange-warm)}
+.qcm-option.correct{border-color:var(--ok);background:#d4edda;color:#155724;cursor:default}
+.qcm-option.incorrect{border-color:var(--bad);background:#f8d7da;color:#721c24;cursor:default}
+.qcm-option:disabled{cursor:default}
+.qcm-feedback{
+  margin-top:10px;padding:10px 14px;border-radius:var(--radius-sm);
+  font-weight:600;font-size:.9em;display:none;
+}
+.qcm-feedback.show-ok{display:block;background:#d4edda;color:#155724;border:1px solid #c3e6cb}
+.qcm-feedback.show-ko{display:block;background:#f8d7da;color:#721c24;border:1px solid #f5c6cb}
+
+/* Score */
+.score-section{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:24px;text-align:center;margin-bottom:20px;display:none;
+}
+.score-text{font-size:1.2em;font-weight:700;color:var(--navy)}
+.score-bar-wrap{background:var(--line);border-radius:999px;height:24px;margin:14px 0;overflow:hidden}
+.score-bar{
+  height:100%;border-radius:999px;transition:width .6s ease;
+  background:linear-gradient(90deg,var(--turquoise),var(--ok));
+  display:flex;align-items:center;justify-content:center;
+  color:white;font-weight:700;font-size:.8em;min-width:0;
+}
+.score-bar.fail{background:linear-gradient(90deg,var(--orange),var(--bad))}
+.score-msg{margin-top:8px;font-weight:600}
+.score-msg.pass{color:var(--ok)}
+.score-msg.no-pass{color:var(--bad)}
+
+/* Navigation */
+.bottom-nav{
+  display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:20px;
+}
+.bottom-nav a{
+  padding:12px 22px;border:none;border-radius:999px;
+  font-family:inherit;font-size:.95em;font-weight:600;cursor:pointer;
+  transition:all .2s;text-decoration:none;display:inline-flex;
+  align-items:center;gap:8px;color:white;
+}
+.btn-prev{background:var(--navy)}
+.btn-prev:hover{background:#143052}
+.btn-next{background:var(--turquoise)}
+.btn-next:hover{background:#1d9e9e}
+
+.footer{padding:16px;text-align:center;font-size:.72em;color:var(--muted);border-top:1px solid var(--line);margin-top:30px}
+
+.mb-20{margin-bottom:20px}
+.mb-24{margin-bottom:24px}
+
+@media(max-width:600px){
+  .theme-header h1{font-size:1.4em}
+  .activity{padding:16px}
+  .danger-grid{grid-template-columns:1fr 1fr}
+  .topbar{flex-direction:column;text-align:center}
+  .bottom-nav{flex-direction:column;align-items:stretch;text-align:center}
+  .bottom-nav a{justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <div class="brand__mark"><svg viewBox="0 0 24 24" style="width:24px;height:24px" fill="none" stroke="var(--navy)" stroke-width="2"><path d="M8 2h8v20H8V2z"/><path d="M8 6h8M8 10h8M8 14h8M8 18h8"/></svg></div>
+    <div>
+      <div class="brand__title">LPP Jacques Raynaud · Campus Équatio</div>
+      <div class="brand__sub">2nde TNE — Travail en hauteur</div>
+    </div>
+  </div>
+  <div class="a11y">
+    <a href="../index.html" class="a11y-btn" style="text-decoration:none"><svg viewBox="0 0 24 24" style="width:14px;height:14px;vertical-align:middle" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l9-9 9 9"/><path d="M5 10v10h14V10"/></svg></a>
+    <button class="a11y-btn" onclick="togDys()" id="bDys">Dys</button>
+    <button class="a11y-btn" onclick="setF('normal')">A</button>
+    <button class="a11y-btn" onclick="setF('f-lg')">A+</button>
+    <button class="a11y-btn" onclick="setF('f-xl')">A++</button>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="theme-header">
+    <h1>Travail en hauteur</h1>
+    <p>Les bons réflexes pour ne pas tomber — commun à tous les métiers</p>
+  </div>
+
+  <!-- INTRODUCTION -->
+  <div class="intro-box">
+    <strong>Les chutes de hauteur sont la 2e cause de mortalité au travail en France</strong> (après les accidents de trajet). Que tu montes sur un toit pour poser un split, sur un échafaudage pour tirer des câbles ou simplement sur une échelle pour accéder à un faux plafond, il y a des règles à connaître.
+  </div>
+
+  <div class="stat-box">
+    <span>+ de 10 000</span> accidents avec arrêt par an liés aux chutes de hauteur dans le BTP
+  </div>
+
+  <!-- LES SITUATIONS À RISQUE -->
+  <h2 class="section-title">Les situations à risque</h2>
+  <div class="danger-grid">
+    <div class="danger-card">
+      <div class="ico svg-ico"><svg viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><path d="M8 2h8v20H8V2z"/><path d="M8 6h8M8 10h8M8 14h8M8 18h8"/></svg></div>
+      <h4>Échelles & escabeaux</h4>
+      <p>Glissement du pied, déséquilibre latéral, échelons défectueux</p>
+      <div class="rule">L'échelle n'est PAS un poste de travail — c'est un moyen d'accès</div>
+    </div>
+    <div class="danger-card">
+      <div class="ico svg-ico"><svg viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="1.8"><path d="M20 2H4v16h16V2z"/><path d="M8 2v16M16 2v16M4 8h16M4 14h16"/></svg></div>
+      <h4>Échafaudages</h4>
+      <p>Garde-corps absent, plancher mal fixé, surcharge, montage non conforme</p>
+      <div class="rule">Cause n°1 de chutes mortelles dans le BTP</div>
+    </div>
+    <div class="danger-card">
+      <div class="ico svg-ico"><svg viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><path d="M3 12l9-9 9 9"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6" stroke="var(--navy)"/></svg></div>
+      <h4>Toitures</h4>
+      <p>Matériaux fragiles (fibrociment, lanterneaux), surface mouillée, absence de protection en rive</p>
+      <div class="rule">Ne jamais marcher sur un matériau dont on ignore la résistance</div>
+    </div>
+    <div class="danger-card">
+      <div class="ico svg-ico"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2L1 21h22L12 2z" stroke="var(--bad)" stroke-width="1.5"/><path d="M12 17h.01M12 10v4" stroke="var(--bad)" stroke-width="2.5"/></svg></div>
+      <h4>Ouvertures au sol</h4>
+      <p>Trémies d'escalier, fosses, trappes non protégées</p>
+      <div class="rule">Risque sous-estimé, surtout sur chantiers en cours</div>
+    </div>
+  </div>
+
+  <!-- LES PROTECTIONS -->
+  <h2 class="section-title">Les protections</h2>
+
+  <div class="principe-box">
+    Protection collective D'ABORD — individuelle ENSUITE
+  </div>
+
+  <div class="protect-block collective">
+    <span class="protect-label prio">Prioritaire</span>
+    <h3>Protections collectives</h3>
+    <div class="protect-item">
+      <strong>Garde-corps</strong> — lisse haute (1 m minimum), sous-lisse, plinthe. Protège tout le monde automatiquement sans action individuelle.
+    </div>
+    <div class="protect-item">
+      <strong>Filets de sécurité</strong> — installés au plus près de la zone de travail (norme NF EN 1263).
+    </div>
+    <div class="protect-item">
+      <strong>Plateformes PIRL</strong> — remplacent l'échelle pour les travaux courts, stables avec garde-corps intégrés.
+    </div>
+  </div>
+
+  <div class="protect-block individuelle mb-24">
+    <span class="protect-label secours">Dernier recours</span>
+    <h3>Protections individuelles</h3>
+    <div class="protect-item">
+      <strong>Harnais antichute</strong> — porté sur le corps, répartit les efforts. Anneau dorsal connecté au système d'arrêt des chutes.
+    </div>
+    <div class="protect-item">
+      <strong>Longe + absorbeur d'énergie</strong> — limite la force de choc à 6 kN maximum.
+    </div>
+    <div class="protect-item">
+      <strong>Point d'ancrage</strong> — doit résister à 10 kN. Fixé sur élément structurel solide (béton, acier). <span style="color:var(--bad);font-weight:700">JAMAIS sur une gouttière, un bardage ou un élément léger.</span>
+    </div>
+  </div>
+
+  <!-- RÈGLES POUR LES ÉCHELLES -->
+  <div class="rules-section">
+    <h3>Règles pour les échelles</h3>
+
+    <div class="rules-sub">Avant — Vérifier</div>
+    <ol class="rules-list" style="counter-reset:rule">
+      <li><strong>Montants</strong> — pas de fissure, pas de déformation</li>
+      <li><strong>Échelons</strong> — tous présents, bien fixés</li>
+      <li><strong>Patins antidérapants</strong> — en bon état, propres</li>
+    </ol>
+
+    <div class="rules-sub">Mise en place</div>
+    <ol class="rules-list" style="counter-reset:rule">
+      <li><strong>Angle 75°</strong> — 1 m de base pour 4 m de hauteur (règle du 1/4)</li>
+      <li><strong>Dépassement</strong> — l'échelle dépasse d'au moins 1 m le point d'arrivée</li>
+      <li><strong>Sol stable</strong> — surface plane, pas de gravats, pas de terre meuble</li>
+    </ol>
+
+    <div class="rules-sub">Utilisation</div>
+    <ol class="rules-list" style="counter-reset:rule">
+      <li><strong>3 points d'appui</strong> — toujours (2 mains + 1 pied ou 2 pieds + 1 main)</li>
+      <li><strong>Jamais à deux</strong> — une seule personne à la fois sur l'échelle</li>
+    </ol>
+
+    <div class="rules-sub">Interdictions</div>
+    <ol class="rules-list" style="counter-reset:rule">
+      <li><strong>Pas de charge lourde</strong> — le matériel monte par un autre moyen</li>
+      <li><strong>Pas de vent fort</strong> — risque de déstabilisation</li>
+      <li><strong>Pas d'échelle endommagée</strong> — même pour « juste 2 minutes »</li>
+    </ol>
+  </div>
+
+  <!-- VÉRIFICATION DU MATÉRIEL -->
+  <div class="verif-section">
+    <h3>Vérification du matériel antichute</h3>
+    <ul class="verif-list">
+      <li><strong>Avant chaque utilisation</strong> — examen visuel : sangles, coutures, boucles, mousquetons</li>
+      <li><strong>Rechercher</strong> — coupures, brûlures, traces de produits chimiques, déformations</li>
+      <li><strong>Durée de vie</strong> — harnais textile : environ 5 ans. Vérification périodique annuelle obligatoire (NF EN 365)</li>
+      <li><strong>Après une chute</strong> — le harnais est <strong>détruit immédiatement</strong>, même s'il paraît intact. Les fibres ont subi des contraintes invisibles.</li>
+    </ul>
+  </div>
+
+  <!-- Q1 -->
+  <div class="activity" id="act-q1">
+    <div class="activity-num">Question 1 / 6</div>
+    <div class="qcm-question">On te demande de monter sur un échafaudage pour poser un groupe extérieur de climatisation. En arrivant, tu vois qu'il manque la sous-lisse du garde-corps sur un côté. Que fais-tu ?</div>
+    <div class="qcm-options">
+      <button class="qcm-option" onclick="check('q1',this,false)">Je monte quand même en faisant attention de ne pas m'approcher du bord</button>
+      <button class="qcm-option" onclick="check('q1',this,true)">Je refuse de monter et je signale le problème au chef de chantier. Un garde-corps incomplet = danger</button>
+      <button class="qcm-option" onclick="check('q1',this,false)">Je mets mon harnais, ça compense le garde-corps manquant</button>
+      <button class="qcm-option" onclick="check('q1',this,false)">Je monte rapidement, c'est juste pour 5 minutes</button>
+    </div>
+    <div class="qcm-feedback" id="fb-q1"></div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="activity" id="act-q2">
+    <div class="activity-num">Question 2 / 6</div>
+    <div class="qcm-question">Tu dois utiliser une échelle pour accéder au toit d'un local technique. Quel est le bon angle d'inclinaison ?</div>
+    <div class="qcm-options">
+      <button class="qcm-option" onclick="check('q2',this,false)">Le plus vertical possible pour qu'elle prenne moins de place</button>
+      <button class="qcm-option" onclick="check('q2',this,true)">75° : pour 4 m de hauteur, le pied est à 1 m du mur. L'échelle dépasse d'au moins 1 m le point d'arrivée</button>
+      <button class="qcm-option" onclick="check('q2',this,false)">45°, bien penchée pour être stable</button>
+      <button class="qcm-option" onclick="check('q2',this,false)">L'angle n'a pas d'importance si le sol est plat</button>
+    </div>
+    <div class="qcm-feedback" id="fb-q2"></div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="activity" id="act-q3">
+    <div class="activity-num">Question 3 / 6</div>
+    <div class="qcm-question">Avant d'enfiler ton harnais antichute, que dois-tu vérifier en priorité ?</div>
+    <div class="qcm-options">
+      <button class="qcm-option" onclick="check('q3',this,false)">Qu'il est à ma taille</button>
+      <button class="qcm-option" onclick="check('q3',this,false)">Qu'il a été utilisé récemment par quelqu'un d'autre (donc il marche)</button>
+      <button class="qcm-option" onclick="check('q3',this,true)">L'état des sangles, coutures, boucles et mousquetons — et qu'il n'a pas subi de chute auparavant</button>
+      <button class="qcm-option" onclick="check('q3',this,false)">Juste la date inscrite sur l'étiquette</button>
+    </div>
+    <div class="qcm-feedback" id="fb-q3"></div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="activity" id="act-q4">
+    <div class="activity-num">Question 4 / 6</div>
+    <div class="qcm-question">Quelle est la différence entre une protection collective et une protection individuelle contre les chutes ?</div>
+    <div class="qcm-options">
+      <button class="qcm-option" onclick="check('q4',this,false)">La collective est moins efficace mais moins chère</button>
+      <button class="qcm-option" onclick="check('q4',this,true)">La collective (garde-corps, filet) protège tout le monde automatiquement sans action individuelle — elle est TOUJOURS prioritaire</button>
+      <button class="qcm-option" onclick="check('q4',this,false)">L'individuelle (harnais) est toujours suffisante, la collective est un bonus</button>
+      <button class="qcm-option" onclick="check('q4',this,false)">Il n'y a pas de vraie différence, c'est la même chose</button>
+    </div>
+    <div class="qcm-feedback" id="fb-q4"></div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="activity" id="act-q5">
+    <div class="activity-num">Question 5 / 6</div>
+    <div class="qcm-question">Tu dois monter du matériel (outillage, tuyaux) en hauteur sur un échafaudage. Peux-tu le porter en montant à l'échelle ?</div>
+    <div class="qcm-options">
+      <button class="qcm-option" onclick="check('q5',this,false)">Oui si c'est léger et que je tiens d'une main</button>
+      <button class="qcm-option" onclick="check('q5',this,true)">Non. Je garde les deux mains libres sur l'échelle. Le matériel monte par un autre moyen : corde, seau de levage, monte-charge</button>
+      <button class="qcm-option" onclick="check('q5',this,false)">Oui si je le mets dans un sac à dos</button>
+      <button class="qcm-option" onclick="check('q5',this,false)">Oui si quelqu'un tient l'échelle en bas</button>
+    </div>
+    <div class="qcm-feedback" id="fb-q5"></div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="activity" id="act-q6">
+    <div class="activity-num">Question 6 / 6</div>
+    <div class="qcm-question">Un collègue a fait une chute de 2 mètres, retenu par son harnais. Il est indemne et le harnais semble intact. Que fait-on du harnais ?</div>
+    <div class="qcm-options">
+      <button class="qcm-option" onclick="check('q6',this,false)">On le range, il a bien fait son travail et il est intact</button>
+      <button class="qcm-option" onclick="check('q6',this,false)">On le fait vérifier par une personne compétente et s'il est intact on le remet en service</button>
+      <button class="qcm-option" onclick="check('q6',this,true)">On le met au rebut immédiatement. Un harnais qui a retenu une chute ne doit PLUS JAMAIS être utilisé</button>
+      <button class="qcm-option" onclick="check('q6',this,false)">On le lave, on vérifie les coutures et on le réutilise</button>
+    </div>
+    <div class="qcm-feedback" id="fb-q6"></div>
+  </div>
+
+  <!-- Score -->
+  <div class="score-section" id="scoreSection">
+    <div class="score-text" id="scoreText">0 / 6</div>
+    <div class="score-bar-wrap">
+      <div class="score-bar" id="scoreBar" style="width:0%"></div>
+    </div>
+    <div class="score-msg" id="scoreMsg"></div>
+  </div>
+
+  <!-- Navigation -->
+  <div class="bottom-nav">
+    <a href="electrique.html" class="btn-prev">← Risque électrique</a>
+    <a href="../index.html" class="btn-next">Choisir mon parcours métier →</a>
+  </div>
+
+</div>
+
+<div class="footer">inerWeb · F. Henninot · LPP Jacques Raynaud · Campus Équatio</div>
+
+<script>
+// Accessibilité
+function togDys(){
+  document.body.classList.toggle('dys');
+  document.getElementById('bDys').classList.toggle('on');
+  localStorage.setItem('a11y-dys',document.body.classList.contains('dys'));
+}
+function setF(c){
+  document.body.classList.remove('f-lg','f-xl');
+  if(c!=='normal')document.body.classList.add(c);
+  localStorage.setItem('a11y-size',c);
+}
+(function(){
+  if(localStorage.getItem('a11y-dys')==='true'){document.body.classList.add('dys');document.getElementById('bDys').classList.add('on');}
+  var fs=localStorage.getItem('a11y-size');
+  if(fs==='f-lg'||fs==='f-xl')document.body.classList.add(fs);
+  if(localStorage.getItem('guidedMode')==='true')document.body.classList.add('guided');
+})();
+
+// QCM
+var answers={q1:null,q2:null,q3:null,q4:null,q5:null,q6:null};
+var totalQ=6;
+var attempts={};
+
+var feedbacks={
+  q1:{
+    ok:'Bien. Un garde-corps incomplet (sans sous-lisse) ne protège pas contre les chutes. On refuse de monter et on signale. La protection collective doit être complète.',
+    ko:'Non. Un garde-corps sans sous-lisse ne remplit pas sa fonction. On peut passer dessous et tomber. Le harnais ne remplace pas un garde-corps manquant — la protection collective est toujours prioritaire.'
+  },
+  q2:{
+    ok:'Correct. 75° c\'est la règle : 1 m de base pour 4 m de hauteur. Trop vertical → l\'échelle bascule en arrière. Trop penché → elle glisse. Et elle doit dépasser le point d\'arrivée d\'au moins 1 mètre.',
+    ko:'Non. L\'angle de 75° (règle du 1/4) est une règle de sécurité fondamentale. 1 m de base pour 4 m de hauteur. Et l\'échelle doit toujours dépasser le point d\'arrivée d\'au moins 1 m.'
+  },
+  q3:{
+    ok:'Exact. Avant chaque utilisation : vérification visuelle complète. Sangles ? Coupures ? Brûlures ? Coutures ? Boucles ? Mousquetons ? Et surtout : a-t-il déjà subi une chute ? Si oui → poubelle.',
+    ko:'Non. La taille et la date sont importantes MAIS la priorité est l\'état physique de l\'équipement. Un harnais ayant subi une chute a des contraintes invisibles dans les fibres. Il doit être détruit.'
+  },
+  q4:{
+    ok:'Correct. La protection collective protège TOUT LE MONDE automatiquement, sans que chacun ait besoin de faire quelque chose. C\'est pour ça qu\'elle est prioritaire. Le harnais est un dernier recours quand la collective est impossible.',
+    ko:'Non. La protection collective (garde-corps, filets, PIRL) est toujours prioritaire car elle protège tout le monde sans action individuelle. Le harnais est un dernier recours.'
+  },
+  q5:{
+    ok:'Exact. Règle absolue : sur une échelle, les deux mains sont libres pour se tenir. 3 points d\'appui minimum (2 mains + 1 pied). Le matériel monte séparément par corde, seau de levage ou monte-charge.',
+    ko:'Non. Sur une échelle, on garde TOUJOURS les deux mains libres pour assurer 3 points d\'appui. Le matériel, même léger, monte par un autre moyen. Un déséquilibre avec une charge = chute.'
+  },
+  q6:{
+    ok:'Correct. Même si le harnais semble intact, les fibres textiles ont subi des contraintes extrêmes invisibles à l\'œil nu. L\'absorbeur d\'énergie s\'est déformé. Ce matériel ne garantit plus la sécurité. Mise au rebut immédiate.',
+    ko:'Non. Après une chute retenue, le harnais et la longe ont absorbé des forces énormes. Les fibres sont fragilisées même si rien n\'est visible. L\'absorbeur d\'énergie est déformé. Mise au rebut obligatoire et immédiate.'
+  }
+};
+
+function check(qId,btn,isCorrect){
+  if(answers[qId]!==null)return;
+  if(!attempts[qId])attempts[qId]=0;
+  attempts[qId]++;
+
+  var opts=btn.parentElement.querySelectorAll('.qcm-option');
+  var fb=document.getElementById('fb-'+qId);
+
+  if(isCorrect){
+    answers[qId]=true;
+    btn.classList.add('correct');
+    opts.forEach(function(o){o.disabled=true});
+    fb.textContent=feedbacks[qId].ok;
+    fb.className='qcm-feedback show-ok';
+    updateScore();
+  } else {
+    btn.classList.add('incorrect');
+    btn.disabled=true;
+    fb.textContent=feedbacks[qId].ko;
+    fb.className='qcm-feedback show-ko';
+  }
+}
+
+function updateScore(){
+  var done=0,pts=0,max=totalQ*2;
+  for(var k in answers){
+    if(answers[k]!==null){
+      done++;
+      pts+=(attempts[k]===1?2:(attempts[k]===2?1:0));
+    }
+  }
+  if(done===totalQ){
+    var sec=document.getElementById('scoreSection');
+    sec.style.display='block';
+    var s10=Math.round((pts/max)*10);
+    var pct=Math.round((pts/max)*100);
+    document.getElementById('scoreText').textContent=s10+' / 10 ('+pts+' pts sur '+max+')';
+    var bar=document.getElementById('scoreBar');
+    bar.style.width=pct+'%';
+    bar.textContent=s10+'/10';
+    if(pct<70)bar.classList.add('fail');
+
+    var msg=document.getElementById('scoreMsg');
+    if(pct>=70){
+      msg.textContent='Tu connais les bons réflexes pour travailler en hauteur en sécurité.';
+      msg.className='score-msg pass';
+      localStorage.setItem('hauteur_done','true');
+    } else {
+      msg.textContent='Relis les règles ci-dessus et réessaie.';
+      msg.className='score-msg no-pass';
+    }
+    sec.scrollIntoView({behavior:'smooth',block:'center'});
+  }
+}
+</script>
+</body>
+</html>

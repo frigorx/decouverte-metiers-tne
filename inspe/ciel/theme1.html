@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Thème 1 - Panorama des menaces et bonnes pratiques cyber - CIEL Cybersécurité">
+    <meta name="author" content="F. Henninot - Enseignant Froid & Climatisation">
+    <title>Thème 1 — Panorama des menaces cyber — CIEL Cybersécurité</title>
+
+    <style>@font-face{font-family:"OpenDyslexic";font-style:normal;font-weight:400;font-display:swap;src:url(../assets/OpenDyslexic-Regular.otf) format("opentype")}@font-face{font-family:"OpenDyslexic";font-style:normal;font-weight:700;font-display:swap;src:url(../assets/OpenDyslexic-Bold.otf) format("opentype")}</style>
+
+    <style>
+        :root{
+            --navy:#0f2d52;--navy-mid:#1a4a6e;
+            --orange:#e8914a;--orange-hover:#d47a35;--orange-warm:#fdf6ef;--orange-glow:rgba(232,145,74,.35);
+            --turquoise:#2aafaf;--turquoise-light:#eef8f7;
+            --mint:#d4f0e8;--mint-deep:#b8e6d8;
+            --bg:#faf7f2;--bg-end:#f0ebe3;
+            --card:#ffffff;--text:#2c3e50;--text-strong:#0f2d52;--muted:#5a7080;
+            --line:#ece4da;
+            --ok:#27ae60;--bad:#e74c3c;
+            --radius:22px;--radius-sm:14px;--radius-pill:999px;
+            --shadow:0 4px 16px rgba(15,45,82,.07),0 1px 3px rgba(232,145,74,.05);
+            --shadow-orange:0 4px 18px rgba(232,145,74,.35);
+            --font:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font);
+            background: linear-gradient(180deg, var(--bg), var(--bg-end));
+            background-attachment: fixed;
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        body.dys { font-family: 'OpenDyslexic', system-ui, sans-serif; }
+        body.f-lg { font-size: 18px; }
+        body.f-xl { font-size: 20px; }
+
+        /* ── Topbar ── */
+        .topbar{
+            position:sticky;top:0;z-index:10;
+            display:flex;align-items:center;justify-content:space-between;
+            padding:14px 20px;
+            background:linear-gradient(135deg,var(--navy),var(--navy-mid),var(--turquoise));
+            border-bottom:4px solid var(--orange);
+            border-radius:0 0 0 40px;
+            box-shadow:0 4px 20px rgba(15,45,82,.15);
+            flex-wrap:wrap;gap:10px;
+        }
+        .brand{display:flex;gap:10px;align-items:center}
+        .brand__mark{
+            width:44px;height:44px;border-radius:var(--radius-sm);
+            display:grid;place-items:center;
+            background:rgba(255,255,255,.95);font-size:20px;
+            box-shadow:0 3px 10px rgba(0,0,0,.1);
+        }
+        .brand__title{font-weight:900;font-size:14px;color:#fff;letter-spacing:.5px}
+        .brand__sub{font-size:12px;color:rgba(255,255,255,.8)}
+        .a11y{display:flex;gap:6px;align-items:center}
+        .a11y-btn{
+            background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.25);
+            padding:5px 12px;border-radius:var(--radius-pill);cursor:pointer;
+            font-size:.8em;font-family:inherit;transition:all .2s;
+        }
+        .a11y-btn:hover,.a11y-btn.on{background:var(--orange);border-color:var(--orange)}
+
+        /* ── Main ── */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 32px 20px 60px;
+        }
+
+        /* ── Section titles ── */
+        .section-title {
+            font-size: 1.25em;
+            font-weight: 700;
+            color: var(--navy);
+            margin: 36px 0 16px;
+            padding-left: 14px;
+            border-left: 4px solid var(--orange);
+        }
+
+        /* ── Objective box ── */
+        .objectives {
+            background: var(--orange-warm);
+            border: 1px solid var(--line);
+            border-left: 5px solid var(--orange);
+            border-radius: var(--radius-sm);
+            padding: 20px 24px;
+            margin-bottom: 28px;
+        }
+
+        .objectives h3 {
+            color: var(--navy);
+            margin-bottom: 10px;
+            font-size: 1.05em;
+        }
+
+        .objectives ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .objectives li {
+            padding: 4px 0;
+            padding-left: 22px;
+            position: relative;
+        }
+
+        .objectives li::before {
+            content: '\uD83C\uDFAF';
+            position: absolute;
+            left: 0;
+        }
+
+        /* ── Risk cards grid ── */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px;
+            margin-bottom: 32px;
+        }
+
+        .risk-card {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 22px;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .risk-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(15,45,82,0.12);
+        }
+
+        .risk-card .icon {
+            font-size: 2em;
+            margin-bottom: 8px;
+        }
+
+        .risk-card h4 {
+            color: var(--navy);
+            margin-bottom: 6px;
+            font-size: 1.05em;
+        }
+
+        .risk-card p {
+            font-size: 0.92em;
+            color: #555;
+            line-height: 1.55;
+        }
+
+        /* ── Doc-ref box ── */
+        .doc-ref {
+            background: var(--mint);
+            border: 1px solid #b3e0d4;
+            border-left: 5px solid var(--turquoise);
+            border-radius: var(--radius-sm);
+            padding: 14px 20px;
+            margin: 18px 0;
+            font-size: 0.93em;
+        }
+
+        .page-hint {
+            display: none;
+            font-weight: 700;
+            color: var(--turquoise);
+        }
+
+        body.guided .page-hint {
+            display: inline;
+        }
+
+        /* ── QCM ── */
+        .activity-block {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-bottom: 22px;
+            box-shadow: var(--shadow);
+        }
+
+        .activity-block h4 {
+            color: var(--navy);
+            margin-bottom: 14px;
+            font-size: 1em;
+        }
+
+        .qcm-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .qcm-btn {
+            background: var(--bg);
+            border: 2px solid var(--line);
+            border-radius: 999px;
+            padding: 12px 20px;
+            text-align: left;
+            font-size: 0.95em;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            color: var(--text);
+        }
+
+        .qcm-btn:hover:not(.disabled) {
+            border-color: var(--orange);
+            background: var(--orange-warm);
+        }
+
+        .qcm-btn.correct {
+            background: #d5f5e3;
+            border-color: var(--ok);
+            color: var(--ok);
+            font-weight: 600;
+        }
+
+        .qcm-btn.incorrect {
+            background: #fde8e8;
+            border-color: var(--bad);
+            color: var(--bad);
+        }
+
+        .qcm-btn.disabled {
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        .qcm-feedback {
+            margin-top: 10px;
+            padding: 10px 16px;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 0.93em;
+            display: none;
+        }
+
+        .qcm-feedback.show { display: block; }
+        .qcm-feedback.success { background: #d5f5e3; color: var(--ok); }
+        .qcm-feedback.error { background: #fde8e8; color: var(--bad); }
+
+        /* ── Drag & Drop ── */
+        .dnd-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            margin-top: 14px;
+        }
+
+        .dnd-sources {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .dnd-item {
+            background: var(--orange-warm);
+            border: 2px solid var(--orange);
+            border-radius: 999px;
+            padding: 14px 18px;
+            cursor: grab;
+            font-size: 0.9em;
+            font-weight: 600;
+            transition: all 0.2s;
+            user-select: none;
+        }
+
+        .dnd-item:active { cursor: grabbing; transform: scale(1.05); }
+        .dnd-item.placed { opacity: 0.4; pointer-events: none; }
+
+        .dnd-target-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .dnd-target-group h5 {
+            color: var(--navy);
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+
+        .dnd-zone {
+            min-height: 70px;
+            background: var(--bg);
+            border: 2px dashed var(--line);
+            border-radius: var(--radius-sm);
+            padding: 10px;
+            margin-bottom: 8px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.88em;
+            color: #aaa;
+        }
+
+        .dnd-zone.dragover {
+            border-color: var(--orange);
+            background: var(--orange-warm);
+        }
+
+        .dnd-zone.filled {
+            border-style: solid;
+            border-color: var(--turquoise);
+            color: var(--text);
+            font-weight: 600;
+            background: var(--mint);
+        }
+
+        .dnd-zone.correct-match {
+            border-color: var(--ok);
+            background: #d5f5e3;
+        }
+
+        .dnd-zone.incorrect-match {
+            border-color: var(--bad);
+            background: #fde8e8;
+        }
+
+        .dnd-validate-btn {
+            background: var(--orange);
+            color: #fff;
+            border: none;
+            border-radius: 999px;
+            padding: 12px 28px;
+            font-size: 0.95em;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 14px;
+            transition: background 0.2s;
+        }
+
+        .dnd-validate-btn:hover { background: var(--orange-hover); }
+
+        /* ── Score ── */
+        .score-bar {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 18px 24px;
+            margin: 28px 0;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .score-bar .score-text {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: var(--navy);
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 14px;
+            background: #eee;
+            border-radius: 999px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 999px;
+            background: linear-gradient(90deg, var(--orange), var(--turquoise));
+            transition: width 0.6s ease;
+            width: 0%;
+        }
+
+        /* ── Navigation bottom ── */
+        .nav-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 36px;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .nav-bottom a, .nav-bottom button {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 999px;
+            font-size: 0.95em;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-prev {
+            background: var(--card);
+            color: var(--navy);
+            border: 2px solid var(--navy) !important;
+        }
+        .btn-prev:hover { background: var(--navy); color: #fff; }
+
+        .btn-next {
+            background: var(--ok);
+            color: #fff;
+            display: none;
+        }
+        .btn-next:hover { background: #219a52; }
+        .btn-next.show { display: inline-block; }
+
+        /* ── Footer ── */
+        .footer{padding:16px;text-align:center;font-size:.72em;color:var(--muted);border-top:1px solid var(--line);margin-top:30px}
+
+        /* ── Responsive ── */
+        @media (max-width: 600px) {
+            .topbar { padding: 14px 16px; }
+            .topbar-title { font-size: 1.1em; }
+            .container { padding: 20px 14px 40px; }
+            .cards-grid { grid-template-columns: 1fr; }
+            .dnd-container { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ── TOPBAR ── -->
+    <header class="topbar">
+        <div class="brand">
+            <div class="brand__mark"><svg viewBox="0 0 24 24" style="width:24px;height:24px" fill="none" stroke="var(--navy)" stroke-width="2"><rect x="4" y="4" width="16" height="12" rx="2"/><path d="M8 20h8M12 16v4"/><path d="M9 10l2 2 4-4" stroke="#27ae60" stroke-width="2"/></svg></div>
+            <div>
+                <div class="brand__title">LPP Jacques Raynaud &middot; Campus &Eacute;quatio</div>
+                <div class="brand__sub">2nde TNE &mdash; Th&egrave;me 1/3 &mdash; CIEL Cybers&eacute;curit&eacute;</div>
+            </div>
+        </div>
+        <div class="a11y">
+            <a href="../index.html" class="a11y-btn" style="text-decoration:none"><svg viewBox="0 0 24 24" style="width:14px;height:14px;vertical-align:middle" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l9-9 9 9"/><path d="M5 10v10h14V10"/></svg></a>
+            <button class="a11y-btn" onclick="togDys()" id="bDys">Dys</button>
+            <button class="a11y-btn" onclick="setF('normal')">A</button>
+            <button class="a11y-btn" onclick="setF('f-lg')">A+</button>
+            <button class="a11y-btn" onclick="setF('f-xl')">A++</button>
+        </div>
+    </header>
+
+    <!-- ── CONTENT ── -->
+    <main class="container">
+
+        <!-- Objectifs -->
+        <div class="objectives">
+            <h3>Objectifs &mdash; Comp&eacute;tence C1</h3>
+            <ul>
+                <li>Identifier les principales menaces cyber : phishing, ransomware, malware, ing&eacute;nierie sociale</li>
+                <li>Comprendre les cons&eacute;quences d'une cyberattaque pour l'entreprise (financi&egrave;res, juridiques, r&eacute;putation)</li>
+                <li>Appliquer les bonnes pratiques de cybers&eacute;curit&eacute; au quotidien</li>
+            </ul>
+        </div>
+
+        <!-- Risk Cards -->
+        <h3 class="section-title">Les principales menaces cyber</h3>
+        <div class="cards-grid">
+            <div class="risk-card">
+                <div class="icon">&#127907;</div>
+                <h4>Phishing (hame&ccedil;onnage)</h4>
+                <p>E-mail ou SMS frauduleux imitant une source l&eacute;gitime (banque, imp&ocirc;ts, coll&egrave;gue) pour voler identifiants, mots de passe ou coordonn&eacute;es bancaires.</p>
+            </div>
+            <div class="risk-card">
+                <div class="icon">&#128274;</div>
+                <h4>Ransomware (ran&ccedil;ongiciel)</h4>
+                <p>Logiciel malveillant qui chiffre tous les fichiers de l'entreprise et exige une ran&ccedil;on pour les d&eacute;bloquer. Co&ucirc;t moyen : plusieurs dizaines de milliers d'euros.</p>
+            </div>
+            <div class="risk-card">
+                <div class="icon">&#128027;</div>
+                <h4>Malware &amp; virus</h4>
+                <p>Programmes install&eacute;s &agrave; l'insu de l'utilisateur via pi&egrave;ces jointes, cl&eacute;s USB ou t&eacute;l&eacute;chargements. Ils espionnent, volent ou d&eacute;truisent les donn&eacute;es.</p>
+            </div>
+            <div class="risk-card">
+                <div class="icon">&#128373;</div>
+                <h4>Ing&eacute;nierie sociale</h4>
+                <p>Manipulation psychologique : faux appel du support IT, faux RIB d'un fournisseur, usurpation d'identit&eacute; d'un sup&eacute;rieur. L'humain est le maillon faible.</p>
+            </div>
+            <div class="risk-card">
+                <div class="icon">&#128179;</div>
+                <h4>Fraude au faux RIB</h4>
+                <p>L'attaquant se fait passer pour un fournisseur et envoie un nouveau RIB. Le virement part sur le compte du pirate. Perte financi&egrave;re directe et souvent irr&eacute;cup&eacute;rable.</p>
+            </div>
+            <div class="risk-card">
+                <div class="icon">&#128246;</div>
+                <h4>WiFi pi&eacute;g&eacute; (Evil Twin)</h4>
+                <p>Faux point d'acc&egrave;s WiFi cr&eacute;&eacute; par un pirate dans un lieu public. Tout le trafic (mots de passe, mails) transite par son &eacute;quipement et peut &ecirc;tre intercept&eacute;.</p>
+            </div>
+        </div>
+
+        <!-- Conséquences -->
+        <h3 class="section-title">Cons&eacute;quences pour l'entreprise</h3>
+        <div class="cards-grid">
+            <div class="risk-card">
+                <div class="icon">&#128176;</div>
+                <h4>Pertes financi&egrave;res</h4>
+                <p>Ran&ccedil;on, fraude au virement, arr&ecirc;t de production, co&ucirc;t de remise en &eacute;tat des syst&egrave;mes. Les PME sont particuli&egrave;rement vuln&eacute;rables.</p>
+            </div>
+            <div class="risk-card">
+                <div class="icon">&#9878;&#65039;</div>
+                <h4>Sanctions juridiques (RGPD)</h4>
+                <p>En cas de fuite de donn&eacute;es personnelles, l'entreprise risque des amendes CNIL jusqu'&agrave; 4&nbsp;% du chiffre d'affaires et doit notifier les personnes concern&eacute;es.</p>
+            </div>
+            <div class="risk-card">
+                <div class="icon">&#128200;</div>
+                <h4>R&eacute;putation &amp; confiance</h4>
+                <p>Une cyberattaque m&eacute;diatis&eacute;e fait fuir clients et partenaires. La confiance num&eacute;rique est longue &agrave; reconstruire.</p>
+            </div>
+            <div class="risk-card">
+                <div class="icon">&#9940;</div>
+                <h4>Arr&ecirc;t d'activit&eacute;</h4>
+                <p>Syst&egrave;mes bloqu&eacute;s, production &agrave; l'arr&ecirc;t, mails inaccessibles. Certaines entreprises ne s'en rel&egrave;vent jamais (60&nbsp;% des PME ferment dans les 18 mois).</p>
+            </div>
+        </div>
+
+        <!-- Bonnes pratiques -->
+        <h3 class="section-title">Bonnes pratiques essentielles</h3>
+        <div class="cards-grid">
+            <div class="risk-card">
+                <div class="icon">&#128272;</div>
+                <h4>Mots de passe forts</h4>
+                <p>12 caract&egrave;res minimum, m&eacute;lange majuscules/minuscules/chiffres/caract&egrave;res sp&eacute;ciaux. Un mot de passe unique par service. Utiliser un gestionnaire de mots de passe.</p>
+            </div>
+            <div class="risk-card">
+                <div class="icon">&#128241;</div>
+                <h4>Authentification MFA</h4>
+                <p>Activer la double authentification (MFA/2FA) partout o&ugrave; c'est possible : code SMS, application d'authentification ou cl&eacute; physique.</p>
+            </div>
+            <div class="risk-card">
+                <div class="icon">&#128190;</div>
+                <h4>Sauvegardes 3-2-1</h4>
+                <p>3 copies des donn&eacute;es, sur 2 supports diff&eacute;rents, dont 1 hors site (cloud ou disque externe d&eacute;connect&eacute;). Tester r&eacute;guli&egrave;rement la restauration.</p>
+            </div>
+            <div class="risk-card">
+                <div class="icon">&#128260;</div>
+                <h4>Mises &agrave; jour &amp; vigilance</h4>
+                <p>Appliquer imm&eacute;diatement les mises &agrave; jour de s&eacute;curit&eacute;. Ne jamais ouvrir une pi&egrave;ce jointe suspecte. V&eacute;rifier l'exp&eacute;diteur avant de cliquer.</p>
+            </div>
+        </div>
+
+        <!-- Activities -->
+        <h3 class="section-title">Activit&eacute;s</h3>
+
+        <!-- Q1 -->
+        <div class="activity-block" id="q1-block">
+            <div class="doc-ref">&#128214; Consulte le &laquo;&nbsp;M&eacute;mo IRIS-ST Cyber-S&eacute;curit&eacute; 2023&nbsp;&raquo; <span class="page-hint"> &mdash; Page 1</span></div>
+            <h4>Question 1 &mdash; Qu'est-ce que le phishing (hame&ccedil;onnage)&nbsp;?</h4>
+            <div class="qcm-options">
+                <button class="qcm-btn" data-correct="false" onclick="checkQCM(this, 'q1')">A. Un virus qui d&eacute;truit le disque dur de l'ordinateur</button>
+                <button class="qcm-btn" data-correct="false" onclick="checkQCM(this, 'q1')">B. Une attaque qui surcharge un serveur pour le rendre inaccessible</button>
+                <button class="qcm-btn" data-correct="true" onclick="checkQCM(this, 'q1')">C. Un message frauduleux imitant une source l&eacute;gitime pour voler des informations</button>
+                <button class="qcm-btn" data-correct="false" onclick="checkQCM(this, 'q1')">D. Un logiciel qui acc&eacute;l&egrave;re la connexion Internet</button>
+            </div>
+            <div class="qcm-feedback" id="q1-feedback"></div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="activity-block" id="q2-block">
+            <div class="doc-ref">&#128214; Consulte le &laquo;&nbsp;M&eacute;mo IRIS-ST Cyber-S&eacute;curit&eacute; 2023&nbsp;&raquo; <span class="page-hint"> &mdash; Page 2</span></div>
+            <h4>Question 2 &mdash; Quel est le nombre minimum de caract&egrave;res recommand&eacute; pour un mot de passe s&eacute;curis&eacute;&nbsp;?</h4>
+            <div class="qcm-options">
+                <button class="qcm-btn" data-correct="false" onclick="checkQCM(this, 'q2')">A. 6 caract&egrave;res</button>
+                <button class="qcm-btn" data-correct="false" onclick="checkQCM(this, 'q2')">B. 8 caract&egrave;res</button>
+                <button class="qcm-btn" data-correct="true" onclick="checkQCM(this, 'q2')">C. 12 caract&egrave;res minimum, avec majuscules, chiffres et caract&egrave;res sp&eacute;ciaux</button>
+                <button class="qcm-btn" data-correct="false" onclick="checkQCM(this, 'q2')">D. 4 chiffres suffisent si on change souvent</button>
+            </div>
+            <div class="qcm-feedback" id="q2-feedback"></div>
+        </div>
+
+        <!-- Q3 Drag & Drop -->
+        <div class="activity-block" id="q3-block">
+            <div class="doc-ref">&#128214; Consulte le &laquo;&nbsp;M&eacute;mo IRIS-ST Cyber-S&eacute;curit&eacute; 2023&nbsp;&raquo; <span class="page-hint"> &mdash; Pages 1-3</span></div>
+            <h4>Question 3 &mdash; Associe chaque menace &agrave; sa cons&eacute;quence principale</h4>
+
+            <div class="dnd-sources" id="dnd-sources">
+                <div class="dnd-item" draggable="true" data-match="ransomware">Fichiers chiffr&eacute;s, ran&ccedil;on exig&eacute;e</div>
+                <div class="dnd-item" draggable="true" data-match="phishing">Vol d'identifiants et mots de passe</div>
+                <div class="dnd-item" draggable="true" data-match="fauxrib">Virement d&eacute;tourn&eacute; vers un compte pirate</div>
+                <div class="dnd-item" draggable="true" data-match="wifi">Trafic intercept&eacute; (mails, mots de passe)</div>
+            </div>
+
+            <div class="dnd-container">
+                <div class="dnd-target-group">
+                    <h5>&#127907; Phishing</h5>
+                    <div class="dnd-zone" data-expect="phishing" id="zone-phishing">D&eacute;pose ici</div>
+                </div>
+                <div class="dnd-target-group">
+                    <h5>&#128274; Ransomware</h5>
+                    <div class="dnd-zone" data-expect="ransomware" id="zone-ransomware">D&eacute;pose ici</div>
+                </div>
+                <div class="dnd-target-group">
+                    <h5>&#128179; Faux RIB</h5>
+                    <div class="dnd-zone" data-expect="fauxrib" id="zone-fauxrib">D&eacute;pose ici</div>
+                </div>
+                <div class="dnd-target-group">
+                    <h5>&#128246; WiFi pi&eacute;g&eacute;</h5>
+                    <div class="dnd-zone" data-expect="wifi" id="zone-wifi">D&eacute;pose ici</div>
+                </div>
+            </div>
+
+            <button class="dnd-validate-btn" id="dnd-validate" onclick="validateDnD()">Valider</button>
+            <div class="qcm-feedback" id="q3-feedback"></div>
+        </div>
+
+        <!-- Score -->
+        <div class="score-bar">
+            <div class="score-text" id="score-text">Score : 0 / 3</div>
+            <div class="progress-track">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-bottom">
+            <a href="../index.html" class="btn-prev">&larr; Accueil</a>
+            <a href="theme2.html" class="btn-next" id="btn-next">Th&egrave;me 2 &rarr;</a>
+        </div>
+    </main>
+
+    <div class="footer">inerWeb &middot; F. Henninot &middot; LPP Jacques Raynaud &middot; Campus &Eacute;quatio</div>
+
+    <script>
+        /* ── Guided Mode ── */
+        let guidedMode = localStorage.getItem('guidedMode') === 'true';
+        document.addEventListener('DOMContentLoaded', function() {
+            if (guidedMode) document.body.classList.add('guided');
+            loadState();
+        });
+
+        /* ── Accessibility ── */
+        function togDys(){
+            document.body.classList.toggle('dys');
+            document.getElementById('bDys').classList.toggle('on');
+            localStorage.setItem('a11y-dys',document.body.classList.contains('dys'));
+        }
+        function setF(c){
+            document.body.classList.remove('f-lg','f-xl');
+            if(c!=='normal')document.body.classList.add(c);
+            localStorage.setItem('a11y-size',c);
+        }
+
+        // Restaurer préférences
+        (function() {
+            if (localStorage.getItem('a11y-dys') === 'true') {
+                document.body.classList.add('dys');
+                document.getElementById('bDys').classList.add('on');
+            }
+            var fs = localStorage.getItem('a11y-size');
+            if (fs === 'f-lg' || fs === 'f-xl') {
+                document.body.classList.add(fs);
+            }
+        })();
+
+        /* ── Data ── */
+        const STORAGE_KEY = 'inerweb_ciel_data';
+
+        function getData() {
+            try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch(e) { return {}; }
+        }
+
+        function saveData(d) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(d));
+        }
+
+        /* ── QCM Logic ── */
+        let scores = { q1: false, q2: false, q3: false };
+        var attempts = {};
+        var points = {};
+        var totalQuestions = 3;
+
+        function checkQCM(btn, qId) {
+            if (scores[qId]) return;
+            if (!attempts[qId]) attempts[qId] = 0;
+            attempts[qId]++;
+            const block = document.getElementById(qId + '-block');
+            const feedback = document.getElementById(qId + '-feedback');
+            const isCorrect = btn.getAttribute('data-correct') === 'true';
+
+            if (isCorrect) {
+                btn.classList.add('correct');
+                block.querySelectorAll('.qcm-btn').forEach(b => b.classList.add('disabled'));
+                var pts = attempts[qId] === 1 ? 2 : (attempts[qId] === 2 ? 1 : 0);
+                points[qId] = pts;
+                var msg = attempts[qId] === 1 ? 'Bonne réponse du premier coup ! (+2 pts)' : (attempts[qId] === 2 ? 'Bonne réponse au 2e essai (+1 pt)' : 'Bonne réponse après plusieurs essais (+0 pt)');
+                feedback.textContent = msg;
+                feedback.className = 'qcm-feedback show success';
+                scores[qId] = true;
+                updateScore();
+            } else {
+                btn.classList.add('incorrect');
+                btn.classList.add('disabled');
+                btn.style.pointerEvents = 'none';
+                btn.style.opacity = '0.5';
+                feedback.textContent = 'Incorrect — réessaie !';
+                feedback.className = 'qcm-feedback show error';
+            }
+        }
+
+        /* ── Drag & Drop ── */
+        let draggedItem = null;
+
+        document.querySelectorAll('.dnd-item').forEach(function(item) {
+            item.addEventListener('dragstart', function(e) {
+                draggedItem = this;
+                e.dataTransfer.effectAllowed = 'move';
+                setTimeout(() => this.style.opacity = '0.5', 0);
+            });
+            item.addEventListener('dragend', function() {
+                this.style.opacity = '1';
+                draggedItem = null;
+            });
+
+            // Touch support
+            item.addEventListener('touchstart', function(e) {
+                draggedItem = this;
+            }, { passive: true });
+
+            item.addEventListener('touchmove', function(e) {
+                e.preventDefault();
+                var touch = e.touches[0];
+                var el = document.elementFromPoint(touch.clientX, touch.clientY);
+                var zone = el ? el.closest('.dnd-zone') : null;
+                document.querySelectorAll('.dnd-zone').forEach(function(z) { z.classList.remove('dragover'); });
+                if (zone && !zone.classList.contains('filled')) zone.classList.add('dragover');
+            }, { passive: false });
+        });
+
+        document.querySelectorAll('.dnd-zone').forEach(function(zone) {
+            zone.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                this.classList.add('dragover');
+            });
+            zone.addEventListener('dragleave', function() {
+                this.classList.remove('dragover');
+            });
+            zone.addEventListener('drop', function(e) {
+                e.preventDefault();
+                this.classList.remove('dragover');
+                if (draggedItem && !this.classList.contains('filled')) {
+                    this.textContent = draggedItem.textContent;
+                    this.setAttribute('data-placed', draggedItem.getAttribute('data-match'));
+                    this.classList.add('filled');
+                    draggedItem.classList.add('placed');
+                }
+            });
+
+            // Touch support
+            zone.addEventListener('touchend', function(e) {
+                if (draggedItem && !this.classList.contains('filled')) {
+                    this.textContent = draggedItem.textContent;
+                    this.setAttribute('data-placed', draggedItem.getAttribute('data-match'));
+                    this.classList.add('filled');
+                    draggedItem.classList.add('placed');
+                    draggedItem = null;
+                }
+            });
+        });
+
+        function validateDnD() {
+            const zones = document.querySelectorAll('.dnd-zone');
+            let allFilled = true;
+            let allCorrect = true;
+
+            zones.forEach(function(zone) {
+                if (!zone.classList.contains('filled')) { allFilled = false; return; }
+                const expected = zone.getAttribute('data-expect');
+                const placed = zone.getAttribute('data-placed');
+                if (placed === expected) {
+                    zone.classList.add('correct-match');
+                    zone.classList.remove('incorrect-match');
+                } else {
+                    zone.classList.add('incorrect-match');
+                    zone.classList.remove('correct-match');
+                    allCorrect = false;
+                }
+            });
+
+            const feedback = document.getElementById('q3-feedback');
+
+            if (!allFilled) {
+                feedback.textContent = 'Place tous les \u00e9l\u00e9ments avant de valider.';
+                feedback.className = 'qcm-feedback show error';
+                return;
+            }
+
+            if (!attempts['q3']) attempts['q3'] = 0;
+            attempts['q3']++;
+
+            if (allCorrect) {
+                var pts = attempts['q3'] === 1 ? 2 : (attempts['q3'] === 2 ? 1 : 0);
+                points['q3'] = pts;
+                var msg = attempts['q3'] === 1 ? 'Toutes les associations sont correctes du premier coup ! (+2 pts)' : (attempts['q3'] === 2 ? 'Correct au 2e essai (+1 pt)' : 'Correct après plusieurs essais (+0 pt)');
+                feedback.textContent = msg;
+                feedback.className = 'qcm-feedback show success';
+                scores.q3 = true;
+                updateScore();
+            } else {
+                feedback.textContent = 'Certaines associations sont incorrectes — réessaie !';
+                feedback.className = 'qcm-feedback show error';
+                setTimeout(function() {
+                    zones.forEach(function(zone) {
+                        zone.classList.remove('filled', 'correct-match', 'incorrect-match');
+                        zone.textContent = 'Dépose ici';
+                        zone.removeAttribute('data-placed');
+                    });
+                    document.querySelectorAll('.dnd-item').forEach(function(item) {
+                        item.classList.remove('placed');
+                    });
+                    feedback.className = 'qcm-feedback';
+                }, 2500);
+            }
+        }
+
+        /* ── Score ── */
+        function updateScore() {
+            var totalPts = 0;
+            for (var k in points) totalPts += points[k];
+            var maxPts = totalQuestions * 2;
+            var note10 = Math.round((totalPts / maxPts) * 10);
+            var pct = Math.round((totalPts / maxPts) * 100);
+
+            document.getElementById('score-text').textContent = note10 + ' / 10 (' + totalPts + ' pts sur ' + maxPts + ')';
+            document.getElementById('progress-fill').style.width = pct + '%';
+
+            if (note10 >= 7) {
+                document.getElementById('btn-next').classList.add('show');
+            }
+
+            // Save
+            const data = getData();
+            data.theme1 = { score: totalPts, total: maxPts, pct: pct, note10: note10, completed: note10 >= 7, date: new Date().toISOString() };
+            saveData(data);
+        }
+
+        function loadState() {
+            const data = getData();
+            if (data.theme1 && data.theme1.completed) {
+                document.getElementById('btn-next').classList.add('show');
+                document.getElementById('score-text').textContent = (data.theme1.note10 || Math.round(data.theme1.pct/10)) + ' / 10 (' + data.theme1.score + ' pts sur ' + data.theme1.total + ') (déjà validé)';
+                document.getElementById('progress-fill').style.width = data.theme1.pct + '%';
+            }
+        }
+    </script>
+</body>
+</html>

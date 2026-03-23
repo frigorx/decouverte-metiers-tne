@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Thème 2 - Bonnes pratiques au poste de travail numérique - CIEL Cybersécurité">
+    <meta name="author" content="F. Henninot - Enseignant Froid & Climatisation">
+    <title>Thème 2 — Bonnes pratiques au poste de travail numérique — CIEL Cybersécurité</title>
+
+    <style>@font-face{font-family:"OpenDyslexic";font-style:normal;font-weight:400;font-display:swap;src:url(../assets/OpenDyslexic-Regular.otf) format("opentype")}@font-face{font-family:"OpenDyslexic";font-style:normal;font-weight:700;font-display:swap;src:url(../assets/OpenDyslexic-Bold.otf) format("opentype")}</style>
+
+    <style>
+        :root{
+            --navy:#0f2d52;--navy-mid:#1a4a6e;
+            --orange:#e8914a;--orange-hover:#d47a35;--orange-warm:#fdf6ef;--orange-glow:rgba(232,145,74,.35);
+            --turquoise:#2aafaf;--turquoise-light:#eef8f7;
+            --mint:#d4f0e8;--mint-deep:#b8e6d8;
+            --bg:#faf7f2;--bg-end:#f0ebe3;
+            --card:#ffffff;--text:#2c3e50;--text-strong:#0f2d52;--muted:#5a7080;
+            --line:#ece4da;
+            --ok:#27ae60;--bad:#e74c3c;
+            --radius:22px;--radius-sm:14px;--radius-pill:999px;
+            --shadow:0 4px 16px rgba(15,45,82,.07),0 1px 3px rgba(232,145,74,.05);
+            --shadow-orange:0 4px 18px rgba(232,145,74,.35);
+            --font:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font);
+            background: linear-gradient(180deg, var(--bg), var(--bg-end));
+            background-attachment: fixed;
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        body.dys { font-family: 'OpenDyslexic', system-ui, sans-serif; }
+        body.f-lg { font-size: 18px; }
+        body.f-xl { font-size: 20px; }
+
+        /* ── Topbar ── */
+        .topbar{
+            position:sticky;top:0;z-index:10;
+            display:flex;align-items:center;justify-content:space-between;
+            padding:14px 20px;
+            background:linear-gradient(135deg,var(--navy),var(--navy-mid),var(--turquoise));
+            border-bottom:4px solid var(--orange);
+            border-radius:0 0 0 40px;
+            box-shadow:0 4px 20px rgba(15,45,82,.15);
+            flex-wrap:wrap;gap:10px;
+        }
+        .brand{display:flex;gap:10px;align-items:center}
+        .brand__mark{
+            width:44px;height:44px;border-radius:var(--radius-sm);
+            display:grid;place-items:center;
+            background:rgba(255,255,255,.95);font-size:20px;
+            box-shadow:0 3px 10px rgba(0,0,0,.1);
+        }
+        .brand__title{font-weight:900;font-size:14px;color:#fff;letter-spacing:.5px}
+        .brand__sub{font-size:12px;color:rgba(255,255,255,.8)}
+        .a11y{display:flex;gap:6px;align-items:center}
+        .a11y-btn{
+            background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.25);
+            padding:5px 12px;border-radius:var(--radius-pill);cursor:pointer;
+            font-size:.8em;font-family:inherit;transition:all .2s;
+        }
+        .a11y-btn:hover,.a11y-btn.on{background:var(--orange);border-color:var(--orange)}
+
+        /* ── Main ── */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 32px 20px 60px;
+        }
+
+        /* ── Section titles ── */
+        .section-title {
+            font-size: 1.25em;
+            font-weight: 700;
+            color: var(--navy);
+            margin: 36px 0 16px;
+            padding-left: 14px;
+            border-left: 4px solid var(--orange);
+        }
+
+        /* ── Objective box ── */
+        .objectives {
+            background: var(--orange-warm);
+            border: 1px solid var(--line);
+            border-left: 5px solid var(--orange);
+            border-radius: var(--radius-sm);
+            padding: 20px 24px;
+            margin-bottom: 28px;
+        }
+
+        .objectives h3 {
+            color: var(--navy);
+            margin-bottom: 10px;
+            font-size: 1.05em;
+        }
+
+        .objectives ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .objectives li {
+            padding: 4px 0;
+            padding-left: 22px;
+            position: relative;
+        }
+
+        .objectives li::before {
+            content: '\uD83C\uDFAF';
+            position: absolute;
+            left: 0;
+        }
+
+        /* ── Risk cards grid ── */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px;
+            margin-bottom: 32px;
+        }
+
+        .risk-card {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 22px;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .risk-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(15,45,82,0.12);
+        }
+
+        .risk-card .icon {
+            font-size: 2em;
+            margin-bottom: 8px;
+        }
+
+        .risk-card h4 {
+            color: var(--navy);
+            margin-bottom: 6px;
+            font-size: 1.05em;
+        }
+
+        .risk-card p {
+            font-size: 0.92em;
+            color: #555;
+            line-height: 1.55;
+        }
+
+        /* ── Doc-ref box ── */
+        .doc-ref {
+            background: var(--mint);
+            border: 1px solid #b3e0d4;
+            border-left: 5px solid var(--turquoise);
+            border-radius: var(--radius-sm);
+            padding: 14px 20px;
+            margin: 18px 0;
+            font-size: 0.93em;
+        }
+
+        .page-hint {
+            display: none;
+            font-weight: 700;
+            color: var(--turquoise);
+        }
+
+        body.guided .page-hint {
+            display: inline;
+        }
+
+        /* ── QCM ── */
+        .activity-block {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-bottom: 22px;
+            box-shadow: var(--shadow);
+        }
+
+        .activity-block h4 {
+            color: var(--navy);
+            margin-bottom: 14px;
+            font-size: 1em;
+        }
+
+        .qcm-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .qcm-btn {
+            background: var(--bg);
+            border: 2px solid var(--line);
+            border-radius: 999px;
+            padding: 12px 20px;
+            text-align: left;
+            font-size: 0.95em;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            color: var(--text);
+        }
+
+        .qcm-btn:hover:not(.disabled) {
+            border-color: var(--orange);
+            background: var(--orange-warm);
+        }
+
+        .qcm-btn.correct {
+            background: #d5f5e3;
+            border-color: var(--ok);
+            color: var(--ok);
+            font-weight: 600;
+        }
+
+        .qcm-btn.incorrect {
+            background: #fde8e8;
+            border-color: var(--bad);
+            color: var(--bad);
+        }
+
+        .qcm-btn.disabled {
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        .qcm-feedback {
+            margin-top: 10px;
+            padding: 10px 16px;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 0.93em;
+            display: none;
+        }
+
+        .qcm-feedback.show { display: block; }
+        .qcm-feedback.success { background: #d5f5e3; color: var(--ok); }
+        .qcm-feedback.error { background: #fde8e8; color: var(--bad); }
+
+        /* ── Drag & Drop ── */
+        .dnd-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            margin-top: 14px;
+        }
+
+        .dnd-sources {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .dnd-item {
+            background: var(--orange-warm);
+            border: 2px solid var(--orange);
+            border-radius: 999px;
+            padding: 8px 18px;
+            cursor: grab;
+            font-size: 0.9em;
+            font-weight: 600;
+            transition: all 0.2s;
+            user-select: none;
+        }
+
+        .dnd-item:active { cursor: grabbing; transform: scale(1.05); }
+        .dnd-item.placed { opacity: 0.4; pointer-events: none; }
+
+        .dnd-target-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .dnd-target-group h5 {
+            color: var(--navy);
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+
+        .dnd-zone {
+            min-height: 50px;
+            background: var(--bg);
+            border: 2px dashed var(--line);
+            border-radius: var(--radius-sm);
+            padding: 10px;
+            margin-bottom: 8px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.88em;
+            color: #aaa;
+        }
+
+        .dnd-zone.dragover {
+            border-color: var(--orange);
+            background: var(--orange-warm);
+        }
+
+        .dnd-zone.filled {
+            border-style: solid;
+            border-color: var(--turquoise);
+            color: var(--text);
+            font-weight: 600;
+            background: var(--mint);
+        }
+
+        .dnd-zone.correct-match {
+            border-color: var(--ok);
+            background: #d5f5e3;
+        }
+
+        .dnd-zone.incorrect-match {
+            border-color: var(--bad);
+            background: #fde8e8;
+        }
+
+        .dnd-validate-btn {
+            background: var(--orange);
+            color: #fff;
+            border: none;
+            border-radius: 999px;
+            padding: 12px 28px;
+            font-size: 0.95em;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 14px;
+            transition: background 0.2s;
+        }
+
+        .dnd-validate-btn:hover { background: var(--orange-hover); }
+
+        /* ── Score ── */
+        .score-bar {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 18px 24px;
+            margin: 28px 0;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .score-bar .score-text {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: var(--navy);
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 14px;
+            background: #eee;
+            border-radius: 999px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 999px;
+            background: linear-gradient(90deg, var(--orange), var(--turquoise));
+            transition: width 0.6s ease;
+            width: 0%;
+        }
+
+        /* ── Navigation bottom ── */
+        .nav-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 36px;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .nav-bottom a, .nav-bottom button {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 999px;
+            font-size: 0.95em;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-prev {
+            background: var(--card);
+            color: var(--navy);
+            border: 2px solid var(--navy) !important;
+        }
+        .btn-prev:hover { background: var(--navy); color: #fff; }
+
+        .btn-next {
+            background: var(--ok);
+            color: #fff;
+            display: none;
+        }
+        .btn-next:hover { background: #219a52; }
+        .btn-next.show { display: inline-block; }
+
+        /* ── Footer ── */
+        .footer{padding:16px;text-align:center;font-size:.72em;color:var(--muted);border-top:1px solid var(--line);margin-top:30px}
+
+        /* ── Responsive ── */
+        @media (max-width: 600px) {
+            .topbar { padding: 14px 16px; }
+            .topbar-title { font-size: 1.1em; }
+            .container { padding: 20px 14px 40px; }
+            .cards-grid { grid-template-columns: 1fr; }
+            .dnd-container { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ── TOPBAR ── -->
+    <header class="topbar">
+        <div class="brand">
+            <div class="brand__mark"><svg viewBox="0 0 24 24" style="width:24px;height:24px" fill="none" stroke="var(--navy)" stroke-width="2"><rect x="4" y="4" width="16" height="12" rx="2"/><path d="M8 20h8M12 16v4"/><path d="M9 10l2 2 4-4" stroke="#27ae60" stroke-width="2"/></svg></div>
+            <div>
+                <div class="brand__title">LPP Jacques Raynaud &middot; Campus &Eacute;quatio</div>
+                <div class="brand__sub">2nde TNE &mdash; Th&egrave;me 2/3 &mdash; CIEL Cybers&eacute;curit&eacute;</div>
+            </div>
+        </div>
+        <div class="a11y">
+            <a href="../index.html" class="a11y-btn" style="text-decoration:none"><svg viewBox="0 0 24 24" style="width:14px;height:14px;vertical-align:middle" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l9-9 9 9"/><path d="M5 10v10h14V10"/></svg></a>
+            <button class="a11y-btn" onclick="togDys()" id="bDys">Dys</button>
+            <button class="a11y-btn" onclick="setF('normal')">A</button>
+            <button class="a11y-btn" onclick="setF('f-lg')">A+</button>
+            <button class="a11y-btn" onclick="setF('f-xl')">A++</button>
+        </div>
+    </header>
+
+    <!-- ── CONTENT ── -->
+    <main class="container">
+
+        <!-- Objectifs -->
+        <div class="objectives">
+            <h3>Objectifs &mdash; Comp&eacute;tence C2</h3>
+            <ul>
+                <li>Conna&icirc;tre les principes du RGPD et les droits des personnes sur leurs donn&eacute;es personnelles</li>
+                <li>Distinguer donn&eacute;es personnelles, donn&eacute;es sensibles et s&eacute;parer usages professionnels et personnels</li>
+                <li>Appliquer les bonnes pratiques de gestion des mots de passe, des sauvegardes et du stockage s&eacute;curis&eacute;</li>
+            </ul>
+        </div>
+
+        <!-- RGPD -->
+        <h3 class="section-title">Le RGPD et les droits des personnes</h3>
+        <div class="cards-grid">
+            <div class="risk-card">
+                <div class="icon">&#9878;&#65039;</div>
+                <h4>Le RGPD, c'est quoi&nbsp;?</h4>
+                <p>Le R&egrave;glement G&eacute;n&eacute;ral sur la Protection des Donn&eacute;es (2018) encadre la collecte et le traitement des donn&eacute;es personnelles dans toute l'Union europ&eacute;enne. Il s'applique &agrave; toute entreprise, association ou administration.</p>
+            </div>
+            <div class="risk-card">
+                <div class="icon">&#9989;</div>
+                <h4>Le consentement</h4>
+                <p>Toute collecte de donn&eacute;es personnelles n&eacute;cessite le consentement libre, sp&eacute;cifique, &eacute;clair&eacute; et univoque de la personne. Les cases pr&eacute;-coch&eacute;es sont interdites. Le consentement doit pouvoir &ecirc;tre retir&eacute; &agrave; tout moment.</p>
+            </div>
+            <div class="risk-card">
+                <div class="icon">&#128101;</div>
+                <h4>Droits des personnes</h4>
+                <p>Chaque individu dispose de droits : acc&egrave;s &agrave; ses donn&eacute;es, rectification, opposition au traitement, portabilit&eacute; vers un autre service, et limitation du traitement.</p>
+            </div>
+            <div class="risk-card">
+                <div class="icon">&#128465;&#65039;</div>
+                <h4>Droit &agrave; l'oubli</h4>
+                <p>Toute personne peut demander l'effacement de ses donn&eacute;es personnelles. L'organisme a un mois pour r&eacute;pondre. Ce droit s'applique aussi aux moteurs de recherche (d&eacute;r&eacute;f&eacute;rencement).</p>
+            </div>
+        </div>
+
+        <!-- Données personnelles -->
+        <h3 class="section-title">Donn&eacute;es personnelles et donn&eacute;es sensibles</h3>
+        <div class="cards-grid">
+            <div class="risk-card">
+                <div class="icon">&#128100;</div>
+                <h4>Donn&eacute;e personnelle</h4>
+                <p>Toute information permettant d'identifier directement ou indirectement une personne : nom, pr&eacute;nom, e-mail, adresse IP, num&eacute;ro de t&eacute;l&eacute;phone, photo, plaque d'immatriculation, identifiant en ligne.</p>
+            </div>
+            <div class="risk-card">
+                <div class="icon">&#128680;</div>
+                <h4>Donn&eacute;es sensibles</h4>
+                <p>Cat&eacute;gorie particuli&egrave;re &agrave; protection renforc&eacute;e : origine ethnique, opinions politiques, convictions religieuses, donn&eacute;es de sant&eacute;, orientation sexuelle, donn&eacute;es biom&eacute;triques. Leur traitement est interdit sauf exceptions l&eacute;gales.</p>
+            </div>
+            <div class="risk-card">
+                <div class="icon">&#128269;</div>
+                <h4>Ce qui n'est PAS une donn&eacute;e personnelle</h4>
+                <p>Un num&eacute;ro SIRET d'entreprise, des statistiques anonymis&eacute;es, un code produit, la m&eacute;t&eacute;o du jour. D&egrave;s qu'on ne peut plus remonter &agrave; une personne physique, ce n'est plus une donn&eacute;e personnelle.</p>
+            </div>
+        </div>
+
+        <!-- Usage pro/perso -->
+        <h3 class="section-title">S&eacute;paration usages professionnels et personnels</h3>
+        <div class="cards-grid">
+            <div class="risk-card">
+                <div class="icon">&#128187;</div>
+                <h4>Charte informatique</h4>
+                <p>Document interne qui d&eacute;finit les r&egrave;gles d'utilisation du mat&eacute;riel et des ressources num&eacute;riques de l'entreprise. Elle pr&eacute;cise ce qui est autoris&eacute; et ce qui est interdit (sites, logiciels, cl&eacute;s USB perso).</p>
+            </div>
+            <div class="risk-card">
+                <div class="icon">&#128256;</div>
+                <h4>S&eacute;parer pro et perso</h4>
+                <p>Ne pas utiliser sa messagerie professionnelle pour des inscriptions personnelles. Ne pas stocker de photos perso sur le serveur de l'entreprise. Utiliser des mots de passe diff&eacute;rents pour chaque sph&egrave;re.</p>
+            </div>
+            <div class="risk-card">
+                <div class="icon">&#9888;&#65039;</div>
+                <h4>Responsabilit&eacute;s</h4>
+                <p>Le salari&eacute; est responsable de l'usage qu'il fait du mat&eacute;riel professionnel. Un t&eacute;l&eacute;chargement ill&eacute;gal ou une fuite de donn&eacute;es via une cl&eacute; USB perso peut entra&icirc;ner une sanction disciplinaire voire p&eacute;nale.</p>
+            </div>
+        </div>
+
+        <!-- Mots de passe & sauvegardes -->
+        <h3 class="section-title">Mots de passe et stockage s&eacute;curis&eacute;</h3>
+        <div class="cards-grid">
+            <div class="risk-card">
+                <div class="icon">&#128272;</div>
+                <h4>Mots de passe robustes</h4>
+                <p>12 caract&egrave;res minimum avec majuscules, minuscules, chiffres et caract&egrave;res sp&eacute;ciaux. Un mot de passe unique par service. Jamais de post-it sur l'&eacute;cran ni de fichier &laquo;&nbsp;mots_de_passe.txt&nbsp;&raquo;.</p>
+            </div>
+            <div class="risk-card">
+                <div class="icon">&#128273;</div>
+                <h4>Gestionnaire de mots de passe</h4>
+                <p>Logiciel s&eacute;curis&eacute; (KeePass, Bitwarden) qui stocke tous les mots de passe dans un coffre-fort chiffr&eacute;. Un seul mot de passe ma&icirc;tre &agrave; retenir. Recommand&eacute; par l'ANSSI et la CNIL.</p>
+            </div>
+            <div class="risk-card">
+                <div class="icon">&#128190;</div>
+                <h4>R&egrave;gle de sauvegarde 3-2-1</h4>
+                <p>3 copies de chaque fichier important, sur 2 supports diff&eacute;rents (disque dur + cloud), dont 1 copie hors site. Tester r&eacute;guli&egrave;rement que la restauration fonctionne.</p>
+            </div>
+            <div class="risk-card">
+                <div class="icon">&#9729;&#65039;</div>
+                <h4>Stockage s&eacute;curis&eacute;</h4>
+                <p>Privil&eacute;gier les espaces de stockage valid&eacute;s par l'entreprise (serveur interne, cloud professionnel). Chiffrer les cl&eacute;s USB et disques externes. Ne jamais stocker de donn&eacute;es sensibles sur un support non chiffr&eacute;.</p>
+            </div>
+        </div>
+
+        <!-- Activities -->
+        <h3 class="section-title">Activit&eacute;s</h3>
+
+        <!-- Q1 -->
+        <div class="activity-block" id="q1-block">
+            <div class="doc-ref">&#128214; Consulte le &laquo;&nbsp;CNIL &mdash; Guide pratique RGPD&nbsp;&raquo; <span class="page-hint"> &mdash; Chapitre 1</span></div>
+            <h4>Question 1 &mdash; Parmi ces &eacute;l&eacute;ments, lequel est une donn&eacute;e personnelle&nbsp;?</h4>
+            <div class="qcm-options">
+                <button class="qcm-btn" data-correct="false" onclick="checkQCM(this, 'q1')">A. Le num&eacute;ro SIRET d'une entreprise</button>
+                <button class="qcm-btn" data-correct="false" onclick="checkQCM(this, 'q1')">B. La temp&eacute;rature relev&eacute;e par une sonde frigorifique</button>
+                <button class="qcm-btn" data-correct="true" onclick="checkQCM(this, 'q1')">C. L'adresse e-mail professionnelle d'un salari&eacute; (prenom.nom@entreprise.fr)</button>
+                <button class="qcm-btn" data-correct="false" onclick="checkQCM(this, 'q1')">D. Le code-barres d'un produit en rayon</button>
+            </div>
+            <div class="qcm-feedback" id="q1-feedback"></div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="activity-block" id="q2-block">
+            <div class="doc-ref">&#128214; Consulte le &laquo;&nbsp;CNIL &mdash; Guide pratique RGPD&nbsp;&raquo; <span class="page-hint"> &mdash; Chapitre 3</span></div>
+            <h4>Question 2 &mdash; Quel droit permet &agrave; une personne de demander la suppression de ses donn&eacute;es personnelles&nbsp;?</h4>
+            <div class="qcm-options">
+                <button class="qcm-btn" data-correct="false" onclick="checkQCM(this, 'q2')">A. Le droit de portabilit&eacute;</button>
+                <button class="qcm-btn" data-correct="true" onclick="checkQCM(this, 'q2')">B. Le droit &agrave; l'effacement (droit &agrave; l'oubli)</button>
+                <button class="qcm-btn" data-correct="false" onclick="checkQCM(this, 'q2')">C. Le droit d'acc&egrave;s</button>
+                <button class="qcm-btn" data-correct="false" onclick="checkQCM(this, 'q2')">D. Le droit de pr&eacute;emption</button>
+            </div>
+            <div class="qcm-feedback" id="q2-feedback"></div>
+        </div>
+
+        <!-- Q3 Drag & Drop -->
+        <div class="activity-block" id="q3-block">
+            <div class="doc-ref">&#128214; Consulte le &laquo;&nbsp;CNIL &mdash; Guide pratique RGPD&nbsp;&raquo; <span class="page-hint"> &mdash; Chapitres 1-4</span></div>
+            <h4>Question 3 &mdash; Classe chaque &eacute;l&eacute;ment dans la bonne cat&eacute;gorie</h4>
+
+            <div class="dnd-sources" id="dnd-sources">
+                <div class="dnd-item" draggable="true" data-match="perso">Adresse e-mail d'un salari&eacute;</div>
+                <div class="dnd-item" draggable="true" data-match="sensible">Groupe sanguin d'un patient</div>
+                <div class="dnd-item" draggable="true" data-match="nonperso">Num&eacute;ro SIRET d'une soci&eacute;t&eacute;</div>
+                <div class="dnd-item" draggable="true" data-match="sensible">Opinion politique d'un individu</div>
+            </div>
+
+            <div class="dnd-container">
+                <div class="dnd-target-group">
+                    <h5>&#128100; Donn&eacute;e personnelle</h5>
+                    <div class="dnd-zone" data-expect="perso" id="zone-perso">D&eacute;pose ici</div>
+                </div>
+                <div class="dnd-target-group">
+                    <h5>&#128680; Donn&eacute;e sensible</h5>
+                    <div class="dnd-zone" data-expect="sensible" id="zone-sensible1">D&eacute;pose ici</div>
+                    <div class="dnd-zone" data-expect="sensible" id="zone-sensible2">D&eacute;pose ici</div>
+                </div>
+                <div class="dnd-target-group">
+                    <h5>&#128269; Pas une donn&eacute;e personnelle</h5>
+                    <div class="dnd-zone" data-expect="nonperso" id="zone-nonperso">D&eacute;pose ici</div>
+                </div>
+            </div>
+
+            <button class="dnd-validate-btn" id="dnd-validate" onclick="validateDnD()">Valider</button>
+            <div class="qcm-feedback" id="q3-feedback"></div>
+        </div>
+
+        <!-- Score -->
+        <div class="score-bar">
+            <div class="score-text" id="score-text">Score : 0 / 3</div>
+            <div class="progress-track">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-bottom">
+            <a href="theme1.html" class="btn-prev">&larr; Th&egrave;me 1</a>
+            <a href="theme3.html" class="btn-next" id="btn-next">Th&egrave;me 3 &rarr;</a>
+        </div>
+    </main>
+
+    <div class="footer">inerWeb &middot; F. Henninot &middot; LPP Jacques Raynaud &middot; Campus &Eacute;quatio</div>
+
+    <script>
+        /* ── Guided Mode ── */
+        let guidedMode = localStorage.getItem('guidedMode') === 'true';
+        document.addEventListener('DOMContentLoaded', function() {
+            if (guidedMode) document.body.classList.add('guided');
+            loadState();
+        });
+
+        /* ── Accessibility ── */
+        function togDys(){
+            document.body.classList.toggle('dys');
+            document.getElementById('bDys').classList.toggle('on');
+            localStorage.setItem('a11y-dys',document.body.classList.contains('dys'));
+        }
+        function setF(c){
+            document.body.classList.remove('f-lg','f-xl');
+            if(c!=='normal')document.body.classList.add(c);
+            localStorage.setItem('a11y-size',c);
+        }
+
+        // Restaurer préférences
+        (function() {
+            if (localStorage.getItem('a11y-dys') === 'true') {
+                document.body.classList.add('dys');
+                document.getElementById('bDys').classList.add('on');
+            }
+            var fs = localStorage.getItem('a11y-size');
+            if (fs === 'f-lg' || fs === 'f-xl') {
+                document.body.classList.add(fs);
+            }
+        })();
+
+        /* ── Data ── */
+        const STORAGE_KEY = 'inerweb_ciel_data';
+
+        function getData() {
+            try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch(e) { return {}; }
+        }
+
+        function saveData(d) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(d));
+        }
+
+        /* ── QCM Logic ── */
+        let scores = { q1: false, q2: false, q3: false };
+        var attempts = {};
+        var points = {};
+        var totalQuestions = 3;
+
+        function checkQCM(btn, qId) {
+            if (scores[qId]) return;
+            if (!attempts[qId]) attempts[qId] = 0;
+            attempts[qId]++;
+            const block = document.getElementById(qId + '-block');
+            const feedback = document.getElementById(qId + '-feedback');
+            const isCorrect = btn.getAttribute('data-correct') === 'true';
+
+            if (isCorrect) {
+                btn.classList.add('correct');
+                block.querySelectorAll('.qcm-btn').forEach(b => b.classList.add('disabled'));
+                var pts = attempts[qId] === 1 ? 2 : (attempts[qId] === 2 ? 1 : 0);
+                points[qId] = pts;
+                var msg = attempts[qId] === 1 ? 'Bonne réponse du premier coup ! (+2 pts)' : (attempts[qId] === 2 ? 'Bonne réponse au 2e essai (+1 pt)' : 'Bonne réponse après plusieurs essais (+0 pt)');
+                feedback.textContent = msg;
+                feedback.className = 'qcm-feedback show success';
+                scores[qId] = true;
+                updateScore();
+            } else {
+                btn.classList.add('incorrect');
+                btn.classList.add('disabled');
+                btn.style.pointerEvents = 'none';
+                btn.style.opacity = '0.5';
+                feedback.textContent = 'Incorrect — réessaie !';
+                feedback.className = 'qcm-feedback show error';
+            }
+        }
+
+        /* ── Drag & Drop ── */
+        let draggedItem = null;
+
+        document.querySelectorAll('.dnd-item').forEach(function(item) {
+            item.addEventListener('dragstart', function(e) {
+                draggedItem = this;
+                e.dataTransfer.effectAllowed = 'move';
+                setTimeout(() => this.style.opacity = '0.5', 0);
+            });
+            item.addEventListener('dragend', function() {
+                this.style.opacity = '1';
+                draggedItem = null;
+            });
+
+            // Touch support
+            item.addEventListener('touchstart', function(e) {
+                draggedItem = this;
+            }, { passive: true });
+        });
+
+        document.querySelectorAll('.dnd-zone').forEach(function(zone) {
+            zone.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                this.classList.add('dragover');
+            });
+            zone.addEventListener('dragleave', function() {
+                this.classList.remove('dragover');
+            });
+            zone.addEventListener('drop', function(e) {
+                e.preventDefault();
+                this.classList.remove('dragover');
+                if (draggedItem && !this.classList.contains('filled')) {
+                    this.textContent = draggedItem.textContent;
+                    this.setAttribute('data-placed', draggedItem.getAttribute('data-match'));
+                    this.classList.add('filled');
+                    draggedItem.classList.add('placed');
+                }
+            });
+
+            // Touch support
+            zone.addEventListener('touchend', function(e) {
+                if (draggedItem && !this.classList.contains('filled')) {
+                    this.textContent = draggedItem.textContent;
+                    this.setAttribute('data-placed', draggedItem.getAttribute('data-match'));
+                    this.classList.add('filled');
+                    draggedItem.classList.add('placed');
+                    draggedItem = null;
+                }
+            });
+        });
+
+        function validateDnD() {
+            const zones = document.querySelectorAll('.dnd-zone');
+            let allFilled = true;
+            let allCorrect = true;
+
+            zones.forEach(function(zone) {
+                if (!zone.classList.contains('filled')) { allFilled = false; return; }
+                const expected = zone.getAttribute('data-expect');
+                const placed = zone.getAttribute('data-placed');
+                if (placed === expected) {
+                    zone.classList.add('correct-match');
+                    zone.classList.remove('incorrect-match');
+                } else {
+                    zone.classList.add('incorrect-match');
+                    zone.classList.remove('correct-match');
+                    allCorrect = false;
+                }
+            });
+
+            const feedback = document.getElementById('q3-feedback');
+
+            if (!allFilled) {
+                feedback.textContent = 'Place tous les \u00e9l\u00e9ments avant de valider.';
+                feedback.className = 'qcm-feedback show error';
+                return;
+            }
+
+            if (!attempts['q3']) attempts['q3'] = 0;
+            attempts['q3']++;
+
+            if (allCorrect) {
+                var pts = attempts['q3'] === 1 ? 2 : (attempts['q3'] === 2 ? 1 : 0);
+                points['q3'] = pts;
+                var msg = attempts['q3'] === 1 ? 'Toutes les associations sont correctes du premier coup ! (+2 pts)' : (attempts['q3'] === 2 ? 'Correct au 2e essai (+1 pt)' : 'Correct après plusieurs essais (+0 pt)');
+                feedback.textContent = msg;
+                feedback.className = 'qcm-feedback show success';
+                scores.q3 = true;
+                updateScore();
+            } else {
+                feedback.textContent = 'Certaines associations sont incorrectes — réessaie !';
+                feedback.className = 'qcm-feedback show error';
+                setTimeout(function() {
+                    zones.forEach(function(zone) {
+                        zone.classList.remove('filled', 'correct-match', 'incorrect-match');
+                        zone.textContent = 'Dépose ici';
+                        zone.removeAttribute('data-placed');
+                    });
+                    document.querySelectorAll('.dnd-item').forEach(function(item) {
+                        item.classList.remove('placed');
+                    });
+                    feedback.className = 'qcm-feedback';
+                }, 2500);
+            }
+        }
+
+        /* ── Score ── */
+        function updateScore() {
+            var totalPts = 0;
+            for (var k in points) totalPts += points[k];
+            var maxPts = totalQuestions * 2;
+            var note10 = Math.round((totalPts / maxPts) * 10);
+            var pct = Math.round((totalPts / maxPts) * 100);
+
+            document.getElementById('score-text').textContent = note10 + ' / 10 (' + totalPts + ' pts sur ' + maxPts + ')';
+            document.getElementById('progress-fill').style.width = pct + '%';
+
+            if (note10 >= 7) {
+                document.getElementById('btn-next').classList.add('show');
+            }
+
+            // Save
+            const data = getData();
+            data.theme2 = { score: totalPts, total: maxPts, pct: pct, note10: note10, completed: note10 >= 7, date: new Date().toISOString() };
+            saveData(data);
+        }
+
+        function loadState() {
+            const data = getData();
+            if (data.theme2 && data.theme2.completed) {
+                document.getElementById('btn-next').classList.add('show');
+                document.getElementById('score-text').textContent = (data.theme2.note10 || Math.round(data.theme2.pct/10)) + ' / 10 (' + data.theme2.score + ' pts sur ' + data.theme2.total + ') (déjà validé)';
+                document.getElementById('progress-fill').style.width = data.theme2.pct + '%';
+            }
+        }
+    </script>
+</body>
+</html>

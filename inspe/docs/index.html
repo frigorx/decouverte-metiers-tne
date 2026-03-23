@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Documents IRIS-ST &amp; INRS — Ressources pédagogiques</title>
+<style>
+:root{
+  --navy:#0f2d52;--navy-mid:#1a4a6e;
+  --orange:#e8914a;--orange-hover:#d47a35;--orange-warm:#fdf6ef;
+  --turquoise:#2aafaf;
+  --bg:#faf7f2;--bg-end:#f0ebe3;
+  --card:#ffffff;--text:#2c3e50;--text-strong:#0f2d52;--muted:#5a7080;
+  --line:#ece4da;
+  --radius:22px;--radius-sm:14px;--radius-pill:999px;
+  --shadow:0 4px 16px rgba(15,45,82,.07),0 1px 3px rgba(232,145,74,.05);
+  --font:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:linear-gradient(180deg,var(--bg),var(--bg-end));background-attachment:fixed;color:var(--text);line-height:1.65;font-size:16px}
+
+.topbar{
+  position:sticky;top:0;z-index:10;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 20px;
+  background:linear-gradient(135deg,var(--navy),var(--navy-mid),var(--turquoise));
+  border-bottom:4px solid var(--orange);
+  border-radius:0 0 0 40px;
+  box-shadow:0 4px 20px rgba(15,45,82,.15);
+  flex-wrap:wrap;gap:10px;
+}
+.brand{display:flex;gap:10px;align-items:center}
+.brand__mark{width:44px;height:44px;border-radius:var(--radius-sm);display:grid;place-items:center;background:rgba(255,255,255,.95);font-size:20px;box-shadow:0 3px 10px rgba(0,0,0,.1)}
+.brand__title{font-weight:900;font-size:14px;color:#fff;letter-spacing:.5px}
+.brand__sub{font-size:12px;color:rgba(255,255,255,.8)}
+
+.hero{text-align:center;padding:40px 20px 30px;background:linear-gradient(135deg,var(--navy),var(--navy-mid));color:#fff;position:relative;overflow:hidden}
+.hero h1{font-size:2em;font-weight:800;margin-bottom:6px}
+.hero p{font-size:1em;opacity:.85}
+
+.wrap{max-width:900px;margin:0 auto;padding:24px 16px 60px}
+
+.section-label{
+  font-size:1.1em;font-weight:800;color:var(--text-strong);margin:28px 0 14px;
+  padding-left:14px;border-left:4px solid var(--orange);
+}
+.section-label.commun{border-left-color:var(--turquoise)}
+
+.docs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.doc-card{
+  border:1px solid var(--line);border-radius:var(--radius);padding:20px;
+  text-align:center;transition:all .3s;text-decoration:none;color:var(--text);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  background:var(--card);
+}
+.doc-card:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--orange)}
+.doc-card .ico{font-size:2.2em}
+.doc-card .name{font-weight:700;color:var(--text-strong);font-size:.95em}
+.doc-card .desc{font-size:.8em;color:var(--muted)}
+.doc-card .badge{
+  display:inline-block;padding:3px 10px;border-radius:var(--radius-pill);
+  font-size:.72em;font-weight:700;margin-top:4px;
+}
+.badge-froid{background:#dbeafe;color:#1e40af}
+.badge-elec{background:#fef3c7;color:#92400e}
+.badge-ciel{background:#ede9fe;color:#5b21b6}
+.badge-commun{background:#d1fae5;color:#065f46}
+.badge-plomb{background:#fed7aa;color:#9a3412}
+
+.back-link{
+  display:inline-flex;align-items:center;gap:6px;margin-top:20px;
+  padding:10px 20px;background:var(--navy);color:#fff;border-radius:var(--radius-pill);
+  text-decoration:none;font-weight:600;font-size:.9em;transition:all .2s;
+}
+.back-link:hover{background:var(--orange)}
+
+.footer{padding:18px 16px;text-align:center;background:linear-gradient(135deg,var(--navy),var(--navy-mid));border-top:3px solid var(--orange);border-radius:24px 0 0 0;margin-top:30px}
+.footer__inner{color:rgba(255,255,255,.85);font-size:.75em}
+
+.note{background:var(--orange-warm);border:1px solid var(--line);border-left:4px solid var(--orange);border-radius:var(--radius-sm);padding:14px;font-size:.85em;color:var(--muted);margin-bottom:20px}
+.note strong{color:var(--orange)}
+
+@media(max-width:600px){
+  .hero h1{font-size:1.5em}
+  .topbar{border-radius:0}
+  .docs{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <div class="brand__mark">&#128196;</div>
+    <div>
+      <div class="brand__title">LPP Jacques Raynaud</div>
+      <div class="brand__sub">Documents IRIS-ST &amp; INRS</div>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <h1>&#128218; Documents de reference</h1>
+  <p>Depliants et memos de prevention - Usage pedagogique</p>
+</section>
+
+<div class="wrap">
+
+  <div class="note">
+    <strong>&#9432; Documents ressources :</strong> INRS ED 6232 / ED 6276 / Memos IRIS-ST &mdash; reproduits a des fins pedagogiques non commerciales.
+  </div>
+
+  <div class="section-label">&#10052; Froid &amp; Climatisation</div>
+  <div class="docs" style="margin-bottom:20px">
+    <a href="IRIS-ST-Fluides-Frigoristes.pdf" target="_blank" class="doc-card">
+      <div class="ico">&#10052;</div>
+      <div class="name">Fluides frigorigenes</div>
+      <div class="desc">Depliant IRIS-ST - Risques sante et environnement</div>
+      <span class="badge badge-froid">Module Froid</span>
+    </a>
+  </div>
+
+  <div class="section-label">&#9889; Electricite</div>
+  <div class="docs" style="margin-bottom:20px">
+    <a href="IRIS-ST-Risque-Electrique.pdf" target="_blank" class="doc-card">
+      <div class="ico">&#9889;</div>
+      <div class="name">Risque electrique</div>
+      <div class="desc">Depliant IRIS-ST - Dangers de l'electricite</div>
+      <span class="badge badge-elec">Module Electrique</span>
+    </a>
+    <a href="INRS-ED6276-Electricien.pdf" target="_blank" class="doc-card">
+      <div class="ico">&#128214;</div>
+      <div class="name">INRS ED 6276</div>
+      <div class="desc">Guide complet pour les electriciens</div>
+      <span class="badge badge-elec">Module Electro</span>
+    </a>
+  </div>
+
+  <div class="section-label" style="border-left-color:#5b21b6">&#128274; CIEL - Cybersecurite</div>
+  <div class="docs" style="margin-bottom:20px">
+    <a href="IRIS-ST-Cyber-Securite.pdf" target="_blank" class="doc-card">
+      <div class="ico">&#128274;</div>
+      <div class="name">Memo Cyber-Securite</div>
+      <div class="desc">IRIS-ST 2023 - Menaces et bonnes pratiques</div>
+      <span class="badge badge-ciel">Module CIEL</span>
+    </a>
+  </div>
+
+  <div class="section-label" style="border-left-color:#9a3412">&#128295; Plomberie - Chauffage</div>
+  <div class="docs" style="margin-bottom:20px">
+    <a href="IRIS-ST-Plombier-Chauffagiste.pdf" target="_blank" class="doc-card">
+      <div class="ico">&#128295;</div>
+      <div class="name">Mon metier plombier-chauffagiste</div>
+      <div class="desc">IRIS-ST - Risques et prevention</div>
+      <span class="badge badge-plomb">Module Plomberie</span>
+    </a>
+  </div>
+
+  <div class="section-label commun">&#128203; Tronc commun</div>
+  <div class="docs" style="margin-bottom:20px">
+    <a href="IRIS-ST-Memo-Apprentis.pdf" target="_blank" class="doc-card">
+      <div class="ico">&#127891;</div>
+      <div class="name">Memo Apprentis &amp; Prevention</div>
+      <div class="desc">IRIS-ST - Droits, obligations, securite</div>
+      <span class="badge badge-commun">Module Accueil</span>
+    </a>
+    <a href="IRIS-ST-Echelles-Escabeaux.pdf" target="_blank" class="doc-card">
+      <div class="ico">&#129693;</div>
+      <div class="name">Echelles, escabeaux et PIRL</div>
+      <div class="desc">IRIS-ST - Travail en hauteur</div>
+      <span class="badge badge-commun">Module Hauteur</span>
+    </a>
+    <a href="IRIS-ST-Echafaudage-Fixe.pdf" target="_blank" class="doc-card">
+      <div class="ico">&#127959;</div>
+      <div class="name">Echafaudage fixe</div>
+      <div class="desc">IRIS-ST - Montage et securite</div>
+      <span class="badge badge-commun">Module Hauteur</span>
+    </a>
+    <a href="IRIS-ST-Soudage.pdf" target="_blank" class="doc-card">
+      <div class="ico">&#128293;</div>
+      <div class="name">Operations de soudage</div>
+      <div class="desc">IRIS-ST - Risques et protections</div>
+      <span class="badge badge-plomb">Bonus</span>
+    </a>
+  </div>
+
+  <a href="../index.html" class="back-link">&#8592; Retour aux modules QCM</a>
+</div>
+
+<footer class="footer">
+  <div class="footer__inner">inerWeb &middot; F. Henninot &middot; LPP Jacques Raynaud &middot; Campus Equatio &middot; Documents IRIS-ST &amp; INRS</div>
+</footer>
+
+</body>
+</html>

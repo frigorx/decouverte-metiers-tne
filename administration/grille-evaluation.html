@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grille d'évaluation — Decouverte des metiers 2nde TNE</title>
+<style>
+  @page {
+    size: A4 portrait;
+    margin: 12mm 10mm 14mm 10mm;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #1a1a1a;
+    background: #fff;
+    font-size: 11pt;
+    line-height: 1.45;
+    padding: 10mm;
+  }
+
+  /* ---------- En-tête ---------- */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 3px solid #0f2d52;
+    padding-bottom: 8px;
+    margin-bottom: 14px;
+  }
+  .header-left h1 {
+    font-size: 16pt;
+    color: #0f2d52;
+    margin-bottom: 2px;
+  }
+  .header-left .subtitle {
+    font-size: 10pt;
+    color: #555;
+  }
+  .header-right {
+    text-align: right;
+    font-size: 9pt;
+    color: #666;
+    line-height: 1.5;
+  }
+  .badge {
+    display: inline-block;
+    background: #0f2d52;
+    color: #fff;
+    padding: 2px 10px;
+    border-radius: 3px;
+    font-size: 8.5pt;
+    font-weight: 600;
+    letter-spacing: .5px;
+  }
+
+  /* ---------- Sections ---------- */
+  h2 {
+    font-size: 12pt;
+    color: #0f2d52;
+    border-left: 4px solid #e8914a;
+    padding-left: 8px;
+    margin: 16px 0 8px 0;
+  }
+  h3 {
+    font-size: 10.5pt;
+    color: #0f2d52;
+    margin: 12px 0 6px 0;
+  }
+
+  /* ---------- Tableaux ---------- */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 12px;
+    font-size: 10pt;
+  }
+  th, td {
+    border: 1px solid #bbb;
+    padding: 5px 8px;
+    text-align: center;
+    vertical-align: middle;
+  }
+  th {
+    background: #0f2d52;
+    color: #fff;
+    font-weight: 600;
+    font-size: 9.5pt;
+  }
+
+  /* Niveaux - couleurs */
+  .pa  { background: #0f2d52; color: #fff; font-weight: 700; }
+  .ac  { background: #27ae60; color: #fff; font-weight: 700; }
+  .ec  { background: #e8914a; color: #fff; font-weight: 700; }
+  .na  { background: #e74c3c; color: #fff; font-weight: 700; }
+
+  .pa-light  { background: #dce4ed; }
+  .ac-light  { background: #d5f0e0; }
+  .ec-light  { background: #fbe8d5; }
+  .na-light  { background: #fbd5d5; }
+
+  /* Tableau détaillé */
+  .tbl-modules td:first-child {
+    text-align: left;
+    font-weight: 600;
+    background: #f4f6f8;
+  }
+  .tbl-modules td:nth-child(2) {
+    font-size: 9pt;
+    color: #555;
+    text-align: left;
+  }
+
+  /* ---------- Encarts ---------- */
+  .encart {
+    background: #f4f6f8;
+    border: 1px solid #d0d4da;
+    border-radius: 5px;
+    padding: 10px 14px;
+    margin-bottom: 12px;
+    font-size: 10pt;
+  }
+  .encart ul {
+    margin: 4px 0 0 18px;
+  }
+  .encart li {
+    margin-bottom: 3px;
+  }
+  .encart li::marker {
+    color: #e8914a;
+  }
+
+  .encart-important {
+    border-left: 4px solid #27ae60;
+    background: #eaf7ef;
+  }
+
+  /* ---------- Critères complémentaires ---------- */
+  .tbl-criteres td:first-child {
+    text-align: left;
+    font-weight: 600;
+    width: 35%;
+    background: #f4f6f8;
+  }
+  .tbl-criteres td {
+    text-align: left;
+    font-size: 9.5pt;
+  }
+  .indicateur {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 4px;
+    vertical-align: middle;
+  }
+
+  /* ---------- Footer ---------- */
+  .footer {
+    margin-top: 16px;
+    padding-top: 8px;
+    border-top: 2px solid #0f2d52;
+    display: flex;
+    justify-content: space-between;
+    font-size: 8pt;
+    color: #777;
+  }
+  .footer .source {
+    font-style: italic;
+  }
+
+  /* ---------- Impression ---------- */
+  @media print {
+    body { padding: 0; }
+    .no-print { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== EN-TÊTE ===== -->
+<div class="header">
+  <div class="header-left">
+    <h1>Grille de correspondance Score / Niveau d'acquisition</h1>
+    <div class="subtitle">Séquence <strong>Decouverte des metiers</strong> — 2<sup>nde</sup> TNE &nbsp; <span class="badge">inerWeb</span></div>
+  </div>
+  <div class="header-right">
+    Année scolaire 2025-2026<br>
+    Évaluation formative par QCM
+  </div>
+</div>
+
+<!-- ===== 1. TABLEAU DE CORRESPONDANCE PRINCIPAL ===== -->
+<h2>1. Correspondance Score QCM / Niveau d'acquisition</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="width:22%">Score obtenu</th>
+      <th style="width:12%">Code</th>
+      <th style="width:34%">Niveau d'acquisition</th>
+      <th style="width:32%">Indicateur</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="pa-light">
+      <td><strong>9 – 10 / 10</strong></td>
+      <td class="pa">PA</td>
+      <td>Parfaitement Acquis</td>
+      <td>Maîtrise complète des notions</td>
+    </tr>
+    <tr class="ac-light">
+      <td><strong>7 – 8 / 10</strong></td>
+      <td class="ac">Ac</td>
+      <td>Acquis</td>
+      <td>Bonne compréhension, quelques imprécisions</td>
+    </tr>
+    <tr class="ec-light">
+      <td><strong>5 – 6 / 10</strong></td>
+      <td class="ec">EC</td>
+      <td>En Cours d'acquisition</td>
+      <td>Notions partiellement comprises</td>
+    </tr>
+    <tr class="na-light">
+      <td><strong>0 – 4 / 10</strong></td>
+      <td class="na">NA</td>
+      <td>Non Acquis</td>
+      <td>Reprise nécessaire du module</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ===== 2. TABLEAU DÉTAILLÉ PAR MODULE ===== -->
+<h2>2. Détail par module (7 modules)</h2>
+
+<table class="tbl-modules">
+  <thead>
+    <tr>
+      <th style="width:26%">Module</th>
+      <th style="width:28%">Modalité d'évaluation</th>
+      <th style="width:10%">Barème</th>
+      <th style="width:9%">NA</th>
+      <th style="width:9%">EC</th>
+      <th style="width:9%">Ac</th>
+      <th style="width:9%">PA</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Quiz orientation</td>
+      <td>Positionnement initial — pas de score</td>
+      <td style="color:#888;">—</td>
+      <td colspan="4" style="text-align:center; font-style:italic; color:#888;">Fait / Pas fait</td>
+    </tr>
+    <tr>
+      <td>Accueil sécurité</td>
+      <td>QCM numérique + 2 questions papier</td>
+      <td><strong>/ 10</strong></td>
+      <td class="na">0-4</td>
+      <td class="ec">5-6</td>
+      <td class="ac">7-8</td>
+      <td class="pa">9-10</td>
+    </tr>
+    <tr>
+      <td>Risque électrique</td>
+      <td>QCM numérique + 2 questions papier</td>
+      <td><strong>/ 10</strong></td>
+      <td class="na">0-4</td>
+      <td class="ec">5-6</td>
+      <td class="ac">7-8</td>
+      <td class="pa">9-10</td>
+    </tr>
+    <tr>
+      <td>Travail en hauteur</td>
+      <td>QCM numérique</td>
+      <td><strong>/ 10</strong></td>
+      <td class="na">0-4</td>
+      <td class="ec">5-6</td>
+      <td class="ac">7-8</td>
+      <td class="pa">9-10</td>
+    </tr>
+    <tr>
+      <td>Thème 1 filière</td>
+      <td>QCM numérique</td>
+      <td><strong>/ 10</strong></td>
+      <td class="na">0-4</td>
+      <td class="ec">5-6</td>
+      <td class="ac">7-8</td>
+      <td class="pa">9-10</td>
+    </tr>
+    <tr>
+      <td>Thème 2 filière</td>
+      <td>QCM numérique</td>
+      <td><strong>/ 10</strong></td>
+      <td class="na">0-4</td>
+      <td class="ec">5-6</td>
+      <td class="ac">7-8</td>
+      <td class="pa">9-10</td>
+    </tr>
+    <tr>
+      <td>Thème 3 filière</td>
+      <td>QCM numérique</td>
+      <td><strong>/ 10</strong></td>
+      <td class="na">0-4</td>
+      <td class="ec">5-6</td>
+      <td class="ac">7-8</td>
+      <td class="pa">9-10</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ===== 3. ÉVALUATION FORMATIVE ===== -->
+<h2>3. Évaluation formative — Principes</h2>
+
+<div class="encart encart-important">
+  <ul>
+    <li>Les QCM sont <strong>formatifs</strong> : ils ne donnent pas lieu à une note dans le bulletin scolaire.</li>
+    <li>L'objectif principal est la <strong>prise de conscience des decouverte des metiers</strong> par l'apprenant, en lien avec sa future activité en atelier et en entreprise.</li>
+    <li>La <strong>fiche bilan individuelle</strong> (imprimée ou numérique) constitue la trace d'apprentissage de l'élève sur l'ensemble de la séquence.</li>
+    <li>L'enseignant utilise les niveaux <span class="na" style="padding:1px 6px;border-radius:2px;font-size:9pt;">NA</span> <span class="ec" style="padding:1px 6px;border-radius:2px;font-size:9pt;">EC</span> <span class="ac" style="padding:1px 6px;border-radius:2px;font-size:9pt;">Ac</span> <span class="pa" style="padding:1px 6px;border-radius:2px;font-size:9pt;">PA</span> pour le <strong>suivi de compétences</strong> et l'individualisation du parcours.</li>
+    <li>L'élève a la <strong>possibilité de refaire les modules</strong> pour progresser et améliorer son niveau d'acquisition.</li>
+  </ul>
+</div>
+
+<!-- ===== 4. CRITÈRES COMPLÉMENTAIRES ===== -->
+<h2>4. Critères complémentaires d'observation</h2>
+
+<table class="tbl-criteres">
+  <thead>
+    <tr>
+      <th style="text-align:left;">Critère</th>
+      <th style="text-align:left;">Niveaux observables</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Utilisation du document papier<br><span style="font-weight:400;font-size:8.5pt;color:#888;">IRIS-ST / INRS</span></td>
+      <td>
+        <span class="indicateur" style="background:#27ae60;"></span> <strong>Autonome</strong> — L'élève consulte et exploite le document seul<br>
+        <span class="indicateur" style="background:#e8914a;"></span> <strong>Avec aide</strong> — L'élève a besoin d'un guidage pour repérer les informations<br>
+        <span class="indicateur" style="background:#e74c3c;"></span> <strong>Non utilisé</strong> — L'élève ne se réfère pas au document
+      </td>
+    </tr>
+    <tr>
+      <td>Engagement dans l'activité<br><span style="font-weight:400;font-size:8.5pt;color:#888;">Vue Classe — SchoolRoom</span></td>
+      <td>
+        <span class="indicateur" style="background:#27ae60;"></span> <strong>Temps actif &ge; 80 %</strong> — Engagement soutenu<br>
+        <span class="indicateur" style="background:#e8914a;"></span> <strong>Temps actif 50 – 79 %</strong> — Engagement partiel<br>
+        <span class="indicateur" style="background:#e74c3c;"></span> <strong>Temps actif &lt; 50 %</strong> — Engagement insuffisant
+      </td>
+    </tr>
+    <tr>
+      <td>Progression dans la séquence</td>
+      <td>
+        Nombre d'étapes complétées : <strong>&nbsp; &nbsp; / 6</strong><br>
+        <span style="font-size:9pt;color:#666;">
+          <span class="indicateur" style="background:#27ae60;"></span> 6/6 complétées &nbsp;
+          <span class="indicateur" style="background:#e8914a;"></span> 3-5/6 complétées &nbsp;
+          <span class="indicateur" style="background:#e74c3c;"></span> 0-2/6 complétées
+        </span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ===== FOOTER ===== -->
+<div class="footer">
+  <div class="source">Sources documentaires : INRS (www.inrs.fr) — IRIS-ST (www.iris-st.org) — Usage pédagogique uniquement</div>
+  <div><strong>F. Henninot</strong> — LPP Jacques Raynaud — Campus Equatio</div>
+</div>
+
+</body>
+</html>

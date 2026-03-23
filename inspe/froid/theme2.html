@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Thème 2 - Réglementation F-GAZ et attestations - IRIS-ST">
+    <meta name="author" content="F. Henninot - Enseignant Froid & Climatisation">
+    <title>Thème 2 — Réglementation F-GAZ — Froid &amp; Climatisation</title>
+
+    <style>@font-face{font-family:"OpenDyslexic";font-style:normal;font-weight:400;font-display:swap;src:url(../assets/OpenDyslexic-Regular.otf) format("opentype")}@font-face{font-family:"OpenDyslexic";font-style:normal;font-weight:700;font-display:swap;src:url(../assets/OpenDyslexic-Bold.otf) format("opentype")}</style>
+
+    <style>
+        :root{
+            --navy:#0f2d52;--navy-mid:#1a4a6e;
+            --orange:#e8914a;--orange-hover:#d47a35;--orange-warm:#fdf6ef;--orange-glow:rgba(232,145,74,.35);
+            --turquoise:#2aafaf;--turquoise-light:#eef8f7;
+            --mint:#d4f0e8;--mint-deep:#b8e6d8;
+            --bg:#faf7f2;--bg-end:#f0ebe3;
+            --card:#ffffff;--text:#2c3e50;--text-strong:#0f2d52;--muted:#5a7080;
+            --line:#ece4da;
+            --ok:#27ae60;--bad:#e74c3c;
+            --radius:22px;--radius-sm:14px;--radius-pill:999px;
+            --shadow:0 4px 16px rgba(15,45,82,.07),0 1px 3px rgba(232,145,74,.05);
+            --shadow-orange:0 4px 18px rgba(232,145,74,.35);
+            --font:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font);
+            background: linear-gradient(180deg, var(--bg), var(--bg-end));
+            background-attachment: fixed;
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        body.dys { font-family: 'OpenDyslexic', system-ui, sans-serif; }
+        body.f-lg { font-size: 18px; }
+        body.f-xl { font-size: 20px; }
+
+        .topbar{
+            position:sticky;top:0;z-index:10;
+            display:flex;align-items:center;justify-content:space-between;
+            padding:14px 20px;
+            background:linear-gradient(135deg,var(--navy),var(--navy-mid),var(--turquoise));
+            border-bottom:4px solid var(--orange);
+            border-radius:0 0 0 40px;
+            box-shadow:0 4px 20px rgba(15,45,82,.15);
+            flex-wrap:wrap;gap:10px;
+        }
+        .brand{display:flex;gap:10px;align-items:center}
+        .brand__mark{
+            width:44px;height:44px;border-radius:var(--radius-sm);
+            display:grid;place-items:center;
+            background:rgba(255,255,255,.95);font-size:20px;
+            box-shadow:0 3px 10px rgba(0,0,0,.1);
+        }
+        .brand__title{font-weight:900;font-size:14px;color:#fff;letter-spacing:.5px}
+        .brand__sub{font-size:12px;color:rgba(255,255,255,.8)}
+        .a11y{display:flex;gap:6px;align-items:center}
+        .a11y-btn{
+            background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.25);
+            padding:5px 12px;border-radius:var(--radius-pill);cursor:pointer;
+            font-size:.8em;font-family:inherit;transition:all .2s;
+        }
+        .a11y-btn:hover,.a11y-btn.on{background:var(--orange);border-color:var(--orange)}
+
+        .container { max-width: 900px; margin: 0 auto; padding: 32px 20px 60px; }
+
+        .section-title {
+            font-size: 1.25em;
+            font-weight: 700;
+            color: var(--navy);
+            margin: 36px 0 16px;
+            padding-left: 14px;
+            border-left: 4px solid var(--orange);
+        }
+
+        .objectives {
+            background: var(--orange-warm);
+            border: 1px solid var(--line);
+            border-left: 5px solid var(--orange);
+            border-radius: var(--radius-sm);
+            padding: 20px 24px;
+            margin-bottom: 28px;
+        }
+        .objectives h3 { color: var(--navy); margin-bottom: 10px; font-size: 1.05em; }
+        .objectives ul { list-style: none; padding: 0; }
+        .objectives li { padding: 4px 0; padding-left: 22px; position: relative; }
+        .objectives li::before { content: '\2014'; position: absolute; left: 0; }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px;
+            margin-bottom: 32px;
+        }
+
+        .rule-card {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 22px;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .rule-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(15,45,82,0.12);
+        }
+        .rule-card .icon { font-size: 2em; margin-bottom: 8px; }
+        .rule-card h4 { color: var(--navy); margin-bottom: 6px; font-size: 1.05em; }
+        .rule-card p { font-size: 0.92em; color: #555; line-height: 1.55; }
+
+        .doc-ref {
+            background: var(--mint);
+            border: 1px solid #b3e0d4;
+            border-left: 5px solid var(--turquoise);
+            border-radius: var(--radius-sm);
+            padding: 14px 20px;
+            margin: 18px 0;
+            font-size: 0.93em;
+        }
+
+        .page-hint { display: none; font-weight: 700; color: var(--turquoise); }
+        body.guided .page-hint { display: inline; }
+
+        .activity-block {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-bottom: 22px;
+            box-shadow: var(--shadow);
+        }
+        .activity-block h4 { color: var(--navy); margin-bottom: 14px; font-size: 1em; }
+
+        .qcm-options { display: flex; flex-direction: column; gap: 10px; }
+
+        .qcm-btn {
+            background: var(--bg);
+            border: 2px solid var(--line);
+            border-radius: 999px;
+            padding: 12px 20px;
+            text-align: left;
+            font-size: 0.95em;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            color: var(--text);
+        }
+        .qcm-btn:hover:not(.disabled) { border-color: var(--orange); background: var(--orange-warm); }
+        .qcm-btn.correct { background: #d5f5e3; border-color: var(--ok); color: var(--ok); font-weight: 600; }
+        .qcm-btn.incorrect { background: #fde8e8; border-color: var(--bad); color: var(--bad); }
+        .qcm-btn.disabled { pointer-events: none; opacity: 0.6; }
+
+        .qcm-feedback {
+            margin-top: 10px;
+            padding: 10px 16px;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 0.93em;
+            display: none;
+        }
+        .qcm-feedback.show { display: block; }
+        .qcm-feedback.success { background: #d5f5e3; color: var(--ok); }
+        .qcm-feedback.error { background: #fde8e8; color: var(--bad); }
+
+        .score-bar {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 18px 24px;
+            margin: 28px 0;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+        .score-bar .score-text { font-size: 1.3em; font-weight: 700; color: var(--navy); }
+
+        .progress-track {
+            width: 100%;
+            height: 14px;
+            background: #eee;
+            border-radius: 999px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            border-radius: 999px;
+            background: linear-gradient(90deg, var(--orange), var(--turquoise));
+            transition: width 0.6s ease;
+            width: 0%;
+        }
+
+        .nav-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 36px;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .nav-bottom a, .nav-bottom button {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 999px;
+            font-size: 0.95em;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-prev { background: var(--card); color: var(--navy); border: 2px solid var(--navy) !important; }
+        .btn-prev:hover { background: var(--navy); color: #fff; }
+        .btn-next { background: var(--ok); color: #fff; display: none; }
+        .btn-next:hover { background: #219a52; }
+        .btn-next.show { display: inline-block; }
+
+        .footer{padding:16px;text-align:center;font-size:.72em;color:var(--muted);border-top:1px solid var(--line);margin-top:30px}
+
+        @media (max-width: 600px) {
+            .topbar { padding: 14px 16px; }
+            .topbar-title { font-size: 1.1em; }
+            .container { padding: 20px 14px 40px; }
+            .cards-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="topbar">
+        <div class="brand">
+            <div class="brand__mark"><svg viewBox="0 0 24 24" style="width:24px;height:24px" fill="none" stroke="var(--navy)" stroke-width="2"><path d="M12 2v20M2 12h20M5 5l14 14M19 5L5 19"/><circle cx="12" cy="12" r="3" stroke="#2aafaf"/></svg></div>
+            <div>
+                <div class="brand__title">LPP Jacques Raynaud · Campus Équatio</div>
+                <div class="brand__sub">2nde TNE — Thème 2/3 — Froid & Climatisation</div>
+            </div>
+        </div>
+        <div class="a11y">
+            <a href="../index.html" class="a11y-btn" style="text-decoration:none"><svg viewBox="0 0 24 24" style="width:14px;height:14px;vertical-align:middle" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l9-9 9 9"/><path d="M5 10v10h14V10"/></svg></a>
+            <button class="a11y-btn" onclick="togDys()" id="bDys">Dys</button>
+            <button class="a11y-btn" onclick="setF('normal')">A</button>
+            <button class="a11y-btn" onclick="setF('f-lg')">A+</button>
+            <button class="a11y-btn" onclick="setF('f-xl')">A++</button>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <div class="objectives">
+            <h3>Objectifs &mdash; Comp&eacute;tence C2</h3>
+            <ul>
+                <li>Conna&icirc;tre l'attestation de capacit&eacute; et son caract&egrave;re obligatoire</li>
+                <li>Comprendre l'obligation de r&eacute;cup&eacute;ration des fluides</li>
+                <li>Assurer la tra&ccedil;abilit&eacute; des interventions (fiche CERFA)</li>
+            </ul>
+        </div>
+
+        <h3 class="section-title">R&egrave;gles et obligations</h3>
+        <div class="cards-grid">
+            <div class="rule-card">
+                <div class="icon">—</div>
+                <h4>Attestation de capacit&eacute;</h4>
+                <p>Obligatoire pour toute entreprise manipulant des fluides frigorig&egrave;nes. D&eacute;livr&eacute;e par un organisme agr&eacute;&eacute;.</p>
+            </div>
+            <div class="rule-card">
+                <div class="icon">—</div>
+                <h4>R&eacute;cup&eacute;ration obligatoire</h4>
+                <p>Interdit de rejeter les fluides dans l'atmosph&egrave;re. Utilisation d'une bouteille de r&eacute;cup&eacute;ration d&eacute;di&eacute;e.</p>
+            </div>
+            <div class="rule-card">
+                <div class="icon">—</div>
+                <h4>Fiche d'intervention</h4>
+                <p>Tra&ccedil;abilit&eacute; obligatoire : type et quantit&eacute; de fluide manipul&eacute;, nature de l'intervention (CERFA).</p>
+            </div>
+            <div class="rule-card">
+                <div class="icon">—</div>
+                <h4>R&egrave;glement F-GAZ</h4>
+                <p>R&eacute;duction progressive des HFC au niveau europ&eacute;en. Syst&egrave;me de quotas pour limiter les &eacute;missions.</p>
+            </div>
+        </div>
+
+        <h3 class="section-title">Activit&eacute;s</h3>
+
+        <!-- Q1 -->
+        <div class="activity-block" id="q1-block">
+            <div class="doc-ref">Consulte le m&eacute;mo IRIS-ST &laquo;&nbsp;Frigoristes-chauffagistes&nbsp;: les fluides frigorig&egrave;nes&nbsp;&raquo; <span class="page-hint"> &mdash; Page 3</span></div>
+            <h4>Question 1 &mdash; Selon le m&eacute;mo IRIS-ST, que doit poss&eacute;der une entreprise pour manipuler des fluides frigorig&egrave;nes&nbsp;?</h4>
+            <div class="qcm-options">
+                <button class="qcm-btn" data-correct="false" onclick="checkQCM(this, 'q1')">A. Un agr&eacute;ment pr&eacute;fectoral</button>
+                <button class="qcm-btn" data-correct="true" onclick="checkQCM(this, 'q1')">B. Une attestation de capacit&eacute; d&eacute;livr&eacute;e par un organisme agr&eacute;&eacute;</button>
+                <button class="qcm-btn" data-correct="false" onclick="checkQCM(this, 'q1')">C. Un simple dipl&ocirc;me de frigoriste</button>
+                <button class="qcm-btn" data-correct="false" onclick="checkQCM(this, 'q1')">D. Aucun document particulier</button>
+            </div>
+            <div class="qcm-feedback" id="q1-feedback"></div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="activity-block" id="q2-block">
+            <div class="doc-ref">Consulte le m&eacute;mo IRIS-ST &laquo;&nbsp;Frigoristes-chauffagistes&nbsp;: les fluides frigorig&egrave;nes&nbsp;&raquo; <span class="page-hint"> &mdash; Page 3</span></div>
+            <h4>Question 2 &mdash; Que doit faire le frigoriste avec le fluide lors d'une intervention sur un circuit&nbsp;?</h4>
+            <div class="qcm-options">
+                <button class="qcm-btn" data-correct="false" onclick="checkQCM(this, 'q2')">A. Le laisser s'&eacute;chapper si c'est une petite quantit&eacute;</button>
+                <button class="qcm-btn" data-correct="true" onclick="checkQCM(this, 'q2')">B. Le r&eacute;cup&eacute;rer obligatoirement dans une bouteille de r&eacute;cup&eacute;ration</button>
+                <button class="qcm-btn" data-correct="false" onclick="checkQCM(this, 'q2')">C. Le br&ucirc;ler pour l'&eacute;liminer</button>
+                <button class="qcm-btn" data-correct="false" onclick="checkQCM(this, 'q2')">D. Le diluer dans l'eau</button>
+            </div>
+            <div class="qcm-feedback" id="q2-feedback"></div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="activity-block" id="q3-block">
+            <div class="doc-ref">Consulte le m&eacute;mo IRIS-ST &laquo;&nbsp;Frigoristes-chauffagistes&nbsp;: les fluides frigorig&egrave;nes&nbsp;&raquo; <span class="page-hint"> &mdash; Page 4</span></div>
+            <h4>Question 3 &mdash; La fiche d'intervention (CERFA) doit mentionner :</h4>
+            <div class="qcm-options">
+                <button class="qcm-btn" data-correct="false" onclick="checkQCM(this, 'q3')">A. Uniquement le nom du client</button>
+                <button class="qcm-btn" data-correct="true" onclick="checkQCM(this, 'q3')">B. Le type de fluide, la quantit&eacute; manipul&eacute;e et la nature de l'intervention</button>
+                <button class="qcm-btn" data-correct="false" onclick="checkQCM(this, 'q3')">C. Seulement la date de l'intervention</button>
+                <button class="qcm-btn" data-correct="false" onclick="checkQCM(this, 'q3')">D. Le prix de la prestation</button>
+            </div>
+            <div class="qcm-feedback" id="q3-feedback"></div>
+        </div>
+
+        <!-- Score -->
+        <div class="score-bar">
+            <div class="score-text" id="score-text">Score : 0 / 3</div>
+            <div class="progress-track">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-bottom">
+            <a href="theme1.html" class="btn-prev">&larr; Th&egrave;me 1</a>
+            <a href="theme3.html" class="btn-next" id="btn-next">Th&egrave;me 3 &rarr;</a>
+        </div>
+    </main>
+
+    <div class="footer">inerWeb · F. Henninot · LPP Jacques Raynaud · Campus Équatio</div>
+
+    <script>
+        /* ── Guided Mode ── */
+        let guidedMode = localStorage.getItem('guidedMode') === 'true';
+        document.addEventListener('DOMContentLoaded', function() {
+            if (guidedMode) document.body.classList.add('guided');
+            loadState();
+        });
+
+        /* ── Accessibility ── */
+        function togDys(){
+            document.body.classList.toggle('dys');
+            document.getElementById('bDys').classList.toggle('on');
+            localStorage.setItem('a11y-dys',document.body.classList.contains('dys'));
+        }
+        function setF(c){
+            document.body.classList.remove('f-lg','f-xl');
+            if(c!=='normal')document.body.classList.add(c);
+            localStorage.setItem('a11y-size',c);
+        }
+
+        // Restaurer préférences
+        (function() {
+            if (localStorage.getItem('a11y-dys') === 'true') {
+                document.body.classList.add('dys');
+                document.getElementById('bDys').classList.add('on');
+            }
+            var fs = localStorage.getItem('a11y-size');
+            if (fs === 'f-lg' || fs === 'f-xl') {
+                document.body.classList.add(fs);
+            }
+        })();
+
+        /* ── Data ── */
+        const STORAGE_KEY = 'inerweb_froid_data';
+        function getData() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch(e) { return {}; } }
+        function saveData(d) { localStorage.setItem(STORAGE_KEY, JSON.stringify(d)); }
+
+        /* ── QCM Logic ── */
+        let scores = { q1: false, q2: false, q3: false };
+        var attempts = {};
+        var points = {};
+        var totalQuestions = 3;
+        var maxPoints = totalQuestions * 2;
+
+        function checkQCM(btn, qId) {
+            if (scores[qId]) return;
+            if (!attempts[qId]) attempts[qId] = 0;
+            attempts[qId]++;
+            const block = document.getElementById(qId + '-block');
+            const feedback = document.getElementById(qId + '-feedback');
+            const isCorrect = btn.getAttribute('data-correct') === 'true';
+
+            if (isCorrect) {
+                btn.classList.add('correct');
+                block.querySelectorAll('.qcm-btn').forEach(b => b.classList.add('disabled'));
+                var pts = 0;
+                var msg = '';
+                if (attempts[qId] === 1) { pts = 2; msg = 'Bonne r\u00e9ponse du premier coup ! (+2 pts)'; }
+                else if (attempts[qId] === 2) { pts = 1; msg = 'Bonne r\u00e9ponse au 2e essai (+1 pt)'; }
+                else { pts = 0; msg = 'Bonne r\u00e9ponse mais apr\u00e8s plusieurs essais (+0 pt)'; }
+                points[qId] = pts;
+                feedback.textContent = msg;
+                feedback.className = 'qcm-feedback show success';
+                scores[qId] = true;
+                updateScore();
+            } else {
+                btn.classList.add('incorrect');
+                btn.disabled = true;
+                btn.classList.add('disabled');
+                var attLeft = '';
+                if (attempts[qId] === 1) attLeft = 'Incorrect \u2014 encore 2 essais pour marquer des points';
+                else if (attempts[qId] === 2) attLeft = 'Incorrect \u2014 dernier essai (0 pt)';
+                else attLeft = 'Incorrect \u2014 essaie encore';
+                feedback.textContent = attLeft;
+                feedback.className = 'qcm-feedback show error';
+            }
+        }
+
+        function updateScore() {
+            var totalPts = 0;
+            for (var k in points) { totalPts += points[k]; }
+            var score10 = Math.round((totalPts / maxPoints) * 10);
+            document.getElementById('score-text').textContent = score10 + ' / 10 (' + totalPts + ' pts sur ' + maxPoints + ')';
+            document.getElementById('progress-fill').style.width = Math.round((totalPts / maxPoints) * 100) + '%';
+
+            var pct = Math.round((totalPts / maxPoints) * 100);
+            if (Object.values(scores).filter(Boolean).length === totalQuestions) {
+                document.getElementById('btn-next').classList.add('show');
+            }
+
+            const data = getData();
+            data.theme2 = { score: totalPts, total: maxPoints, pct: pct, score10: score10, completed: Object.values(scores).filter(Boolean).length === totalQuestions, date: new Date().toISOString() };
+            saveData(data);
+        }
+
+        function loadState() {
+            const data = getData();
+            if (data.theme2 && data.theme2.completed) {
+                document.getElementById('btn-next').classList.add('show');
+                document.getElementById('score-text').textContent = data.theme2.score10 + ' / 10 (' + data.theme2.score + ' pts sur ' + data.theme2.total + ') (d\u00e9j\u00e0 valid\u00e9)';
+                document.getElementById('progress-fill').style.width = data.theme2.pct + '%';
+            }
+        }
+    </script>
+</body>
+</html>

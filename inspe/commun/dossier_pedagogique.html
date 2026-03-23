@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dossier Pédagogique — Modules Communs TNE</title>
+    <style>@font-face{font-family:"OpenDyslexic";font-style:normal;font-weight:400;font-display:swap;src:url(../assets/OpenDyslexic-Regular.otf) format("opentype")}@font-face{font-family:"OpenDyslexic";font-style:normal;font-weight:700;font-display:swap;src:url(../assets/OpenDyslexic-Bold.otf) format("opentype")}</style>
+    <style>
+:root{
+  --navy:#0f2d52;--navy-mid:#1a4a6e;
+  --orange:#e8914a;--orange-hover:#d47a35;--orange-warm:#fdf6ef;--orange-glow:rgba(232,145,74,.35);
+  --turquoise:#2aafaf;--turquoise-light:#eef8f7;
+  --mint:#d4f0e8;--mint-deep:#b8e6d8;--mint-border:#7ecfbf;
+  --bg:#faf7f2;--bg-end:#f0ebe3;
+  --card:#ffffff;--text:#2c3e50;--text-strong:#0f2d52;--muted:#5a7080;
+  --line:#ece4da;
+  --ok:#27ae60;--bad:#e74c3c;--warn:#e8914a;
+  --radius:22px;--radius-sm:14px;--radius-pill:999px;
+  --shadow:0 4px 16px rgba(15,45,82,.07),0 1px 3px rgba(232,145,74,.05);
+  --shadow-orange:0 4px 18px rgba(232,145,74,.35);
+  --font:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:var(--font);
+  background:linear-gradient(180deg,var(--bg),var(--bg-end));
+  background-attachment:fixed;
+  color:var(--text);line-height:1.65;font-size:16px;
+}
+body.dys{font-family:'OpenDyslexic',var(--font)}
+body.f-lg{font-size:18px}
+body.f-xl{font-size:20px}
+
+/* ── Topbar ── */
+.topbar{
+  position:sticky;top:0;z-index:10;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 20px;
+  background:linear-gradient(135deg,var(--navy),var(--navy-mid),var(--turquoise));
+  border-bottom:4px solid var(--orange);
+  border-radius:0 0 0 40px;
+  box-shadow:0 4px 20px rgba(15,45,82,.15);
+  flex-wrap:wrap;gap:10px;
+}
+.brand{display:flex;gap:10px;align-items:center}
+.brand__mark{
+  width:44px;height:44px;border-radius:var(--radius-sm);
+  display:grid;place-items:center;
+  background:rgba(255,255,255,.95);font-size:20px;
+  box-shadow:0 3px 10px rgba(0,0,0,.1);
+}
+.brand__title{font-weight:900;font-size:14px;color:#fff;letter-spacing:.5px}
+.brand__sub{font-size:12px;color:rgba(255,255,255,.8)}
+.a11y{display:flex;gap:6px;align-items:center}
+.a11y-btn{
+  background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.25);
+  padding:5px 12px;border-radius:var(--radius-pill);cursor:pointer;
+  font-size:.8em;font-family:inherit;transition:all .2s;
+}
+.a11y-btn:hover,.a11y-btn.on{background:var(--orange);border-color:var(--orange)}
+
+/* ── Wrap ── */
+.wrap{max-width:960px;margin:0 auto;padding:24px 16px 60px}
+
+/* ── Page de garde ── */
+.page-garde{
+  background:var(--card);border:1px solid var(--line);
+  border-top:5px solid var(--orange);
+  border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:40px 30px;margin-bottom:28px;text-align:center;
+}
+.page-garde .etab{font-size:1.4em;font-weight:800;color:var(--navy);margin-bottom:4px}
+.page-garde .campus{font-size:1.1em;color:var(--turquoise);margin-bottom:20px}
+.page-garde .titre-module{font-size:1.8em;font-weight:800;color:var(--text-strong);margin:20px 0 8px}
+.page-garde .sous-titre{font-size:1.05em;color:var(--muted);margin-bottom:20px}
+.page-garde .infos{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:500px;margin:20px auto;text-align:left;font-size:.95em}
+.page-garde .infos dt{font-weight:700;color:var(--orange)}
+.page-garde .infos dd{margin-bottom:8px}
+
+/* ── Nav menu ── */
+.nav-menu{
+  background:linear-gradient(135deg,var(--mint),var(--mint-deep));
+  border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:12px;margin-bottom:24px;
+  display:flex;flex-wrap:wrap;gap:8px;justify-content:center;
+}
+.nav-item{
+  padding:9px 16px;background:#fff;border:2px solid transparent;
+  border-radius:var(--radius-pill);cursor:pointer;transition:all .25s;
+  text-decoration:none;color:var(--navy);font-weight:700;font-size:.9em;font-family:inherit;
+}
+.nav-item:hover{background:var(--orange-warm);color:var(--orange);border-color:var(--orange)}
+.nav-item.active{background:var(--orange);color:#fff;border-color:var(--orange);box-shadow:var(--shadow-orange)}
+
+/* ── Sections ── */
+.section{display:none}
+.section.active{display:block;animation:fadeIn .4s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+
+.section h2{
+  color:var(--orange);font-size:1.6em;font-weight:800;
+  margin-bottom:20px;padding-bottom:12px;
+  border-bottom:3px solid var(--orange);
+}
+.section h3{color:var(--navy);font-size:1.2em;margin:20px 0 12px}
+
+/* ── Cards ── */
+.card{
+  background:var(--card);border:1px solid var(--line);border-left:5px solid var(--orange);
+  border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-bottom:20px;
+}
+.card h3{color:var(--navy);font-size:1.1em;margin:0 0 10px}
+.card p{color:var(--muted);font-size:.95em;margin:0 0 10px}
+.card ul,.card ol{margin:8px 0 0 18px;color:var(--muted);font-size:.95em}
+.card li{margin:4px 0}
+
+.card-warning{border-left-color:var(--warn);background:var(--orange-warm)}
+.card-info{border-left-color:var(--turquoise);background:var(--turquoise-light)}
+.card-success{border-left-color:var(--ok);background:#eafaf1}
+
+/* ── Grid ── */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin:16px 0}
+.grid-item{
+  background:var(--card);border:1px solid var(--line);
+  border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);
+  transition:transform .2s;
+}
+.grid-item:hover{transform:translateY(-3px)}
+.grid-item h3{color:var(--navy);font-size:1.05em;margin:0 0 10px}
+.grid-item h4{color:var(--orange);font-size:1em;margin:0 0 8px}
+.grid-item ul{margin:0 0 0 16px;color:var(--muted);font-size:.92em}
+.grid-item li{margin:4px 0}
+.grid-item p{color:var(--muted);font-size:.92em}
+
+/* ── Table ── */
+.table{
+  width:100%;border-collapse:collapse;margin:16px 0;
+  background:var(--card);border-radius:var(--radius);overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.table th,.table td{padding:14px;text-align:left;border-bottom:1px solid var(--line)}
+.table th{background:linear-gradient(135deg,var(--navy),var(--navy-mid));color:#fff;font-weight:700;font-size:.9em}
+.table tr:hover{background:var(--orange-warm)}
+.table td{font-size:.92em}
+
+/* ── Badges ── */
+.badge{
+  display:inline-block;padding:4px 12px;border-radius:var(--radius-pill);
+  font-size:.85em;font-weight:600;margin:2px;
+}
+.badge-primary{background:var(--navy);color:#fff}
+.badge-success{background:var(--ok);color:#fff}
+.badge-warning{background:var(--warn);color:#fff}
+.badge-info{background:var(--turquoise);color:#fff}
+
+/* ── Highlight ── */
+.highlight{
+  background:linear-gradient(120deg,var(--mint) 0%,var(--mint-deep) 100%);
+  padding:2px 8px;border-radius:6px;font-weight:700;color:var(--navy);
+}
+
+/* ── Footer ── */
+.footer{
+  padding:18px 16px;
+  background:linear-gradient(135deg,var(--navy),var(--navy-mid));
+  border-top:3px solid var(--orange);border-radius:24px 0 0 0;
+  margin-top:30px;text-align:center;
+}
+.footer__inner{color:rgba(255,255,255,.85);font-size:.75em}
+
+/* ── Print ── */
+@media print{
+  body{background:#fff}
+  .topbar,.nav-menu,.footer,.a11y{display:none!important}
+  .section{display:block!important;page-break-inside:avoid}
+  .card{box-shadow:none;border-left:3px solid var(--orange)}
+  .grid-item{box-shadow:none;border:1px solid #ddd}
+}
+
+/* ── Responsive ── */
+@media(max-width:700px){
+  .topbar{border-radius:0;padding:12px 14px}
+  .nav-menu{flex-direction:column}
+  .grid{grid-template-columns:1fr}
+  .page-garde .infos{grid-template-columns:1fr}
+  .page-garde .titre-module{font-size:1.4em}
+}
+    </style>
+</head>
+<body>
+
+<!-- ── TOPBAR ── -->
+<header class="topbar">
+    <div class="brand">
+        <div class="brand__mark"><svg viewBox="0 0 24 24" style="width:24px;height:24px" fill="none" stroke="var(--navy)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4" stroke="#27ae60" stroke-width="2.5"/></svg></div>
+        <div>
+            <div class="brand__title">LPP Jacques Raynaud · Campus Équatio</div>
+            <div class="brand__sub">Dossier Pédagogique — Modules Communs TNE</div>
+        </div>
+    </div>
+    <div class="a11y">
+        <a href="../index.html" class="a11y-btn" style="text-decoration:none"><svg viewBox="0 0 24 24" style="width:14px;height:14px;vertical-align:middle" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l9-9 9 9"/><path d="M5 10v10h14V10"/></svg></a>
+        <button class="a11y-btn" onclick="togDys()" id="bDys">Dys</button>
+        <button class="a11y-btn" onclick="setF('normal')">A</button>
+        <button class="a11y-btn" onclick="setF('f-lg')">A+</button>
+        <button class="a11y-btn" onclick="setF('f-xl')">A++</button>
+        <button class="a11y-btn" onclick="window.print()"></button>
+    </div>
+</header>
+
+<div class="wrap">
+
+    <!-- Page de garde -->
+    <div class="page-garde">
+        <div class="etab">Lycée Professionnel Privé Jacques Raynaud</div>
+        <div class="campus">Campus Équatio — Marseille</div>
+        <hr style="border:none;border-top:2px solid var(--line);margin:15px auto;max-width:300px;">
+        <div class="titre-module">Modules Communs — Découverte des métiers par les risques professionnels</div>
+        <div class="sous-titre">Tronc commun applicable à toutes les filières TNE</div>
+        <dl class="infos">
+            <dt>Niveau</dt><dd>2nde TNE — Transition Numérique et Énergétique</dd>
+            <dt>Année scolaire</dt><dd>2025 – 2026</dd>
+            <dt>Enseignant</dt><dd>F. Henninot</dd>
+            <dt>Plateforme</dt><dd>inerWeb — Risques professionnels</dd>
+        </dl>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav-menu">
+        <button class="nav-item active" onclick="showSection('presentation',this)">Présentation</button>
+        <button class="nav-item" onclick="showSection('pedagogie',this)">Approche pédagogique</button>
+        <button class="nav-item" onclick="showSection('contenu',this)">Contenu des modules</button>
+        <button class="nav-item" onclick="showSection('competences',this)">Référentiel et compétences</button>
+        <button class="nav-item" onclick="showSection('evaluation',this)">Évaluation</button>
+        <button class="nav-item" onclick="showSection('technique',this)">Aspects techniques</button>
+        <button class="nav-item" onclick="showSection('mise-en-oeuvre',this)">Mise en œuvre</button>
+    </div>
+
+    <!-- Section 1: Présentation -->
+    <div id="presentation" class="section active">
+        <h2>Présentation des Modules Communs</h2>
+
+        <div class="card card-info">
+            <h3>Contexte et Objectifs</h3>
+            <p>Ces modules pédagogiques transversaux ont été développés dans le cadre du projet <strong class="highlight">inerWeb</strong>, plateforme dédiée à l'enseignement professionnel des métiers de l'énergétique et du bâtiment.</p>
+            <p><strong>Objectif principal :</strong> Donner à tous les apprenants, quelle que soit leur filière, les bases communes indispensables en prévention des risques professionnels : droits et devoirs en entreprise, risque électrique et travail en hauteur.</p>
+        </div>
+
+        <div class="grid">
+            <div class="grid-item">
+                <h3>Public Cible</h3>
+                <ul>
+                    <li><span class="badge badge-success">2nde TNE</span> TOUTES filières (Froid, Plomberie, Électricité, CIEL)</li>
+                    <li><span class="badge badge-primary">CAP IFCA</span> Installateur Froid et Conditionnement d'Air</li>
+                    <li><span class="badge badge-primary">CAP MIT</span> Monteur Installations Thermiques</li>
+                    <li><span class="badge badge-primary">CAP MIS</span> Monteur Installations Sanitaires</li>
+                    <li><span class="badge badge-primary">CAP MELEC</span> Métiers de l'Électricité</li>
+                    <li><span class="badge badge-success">Bac Pro MFER</span> Métiers du Froid et des Énergies Renouvelables</li>
+                    <li><span class="badge badge-success">Bac Pro MELEC</span> Métiers de l'Électricité</li>
+                    <li><span class="badge badge-success">Bac Pro CIEL</span> Cybersécurité, Informatique et réseaux, Électronique</li>
+                    <li><span class="badge badge-info">Formation Continue</span> Adultes & Stagiaires</li>
+                </ul>
+            </div>
+
+            <div class="grid-item">
+                <h3>Référentiels INRS Transverses</h3>
+                <p><strong>Documents sources :</strong></p>
+                <p>Mémo Apprentis et prévention<br>
+                Risque électrique commun<br>
+                Travail en hauteur — NF EN 365, INRS ED 6110</p>
+                <br>
+                <p>• Conforme aux exigences réglementaires<br>
+                • Transversal à tous les métiers du bâtiment et de l'énergie<br>
+                • Adapté aux évolutions normatives</p>
+            </div>
+        </div>
+
+        <div class="card card-warning">
+            <h3>Enjeux de la Formation</h3>
+            <p>Ce tronc commun constitue le <strong>premier contact avec le monde professionnel</strong> pour la majorité des apprenants. Les enjeux sont critiques :</p>
+            <ul>
+                <li>Connaissance de ses droits et devoirs en tant qu'apprenti ou stagiaire</li>
+                <li>Risques communs à tous les métiers du bâtiment et de l'énergie</li>
+                <li>Le risque électrique concerne TOUTES les filières, pas seulement les électriciens</li>
+                <li>Le travail en hauteur est la 2e cause de mortalité au travail dans le BTP</li>
+                <li>Prérequis indispensable avant tout passage aux modules métier spécialisés</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Section 2: Approche Pédagogique -->
+    <div id="pedagogie" class="section">
+        <h2>Approche pédagogique Innovante</h2>
+
+        <div class="card">
+            <h3>Pédagogie Active et Immersive</h3>
+            <p>Les modules s'appuient sur une approche pédagogique moderne, favorisant l'engagement et la mémorisation :</p>
+        </div>
+
+        <div class="grid">
+            <div class="grid-item">
+                <h3>Gamification</h3>
+                <ul>
+                    <li>Système de badges et récompenses</li>
+                    <li>Progression par déblocage de niveaux</li>
+                    <li>Challenges et quiz interactifs</li>
+                    <li>Tableau de bord personnel</li>
+                </ul>
+            </div>
+
+            <div class="grid-item">
+                <h3>Apprentissage Spiralaire</h3>
+                <ul>
+                    <li>Révision constante des acquis</li>
+                    <li>Approfondissement progressif</li>
+                    <li>Connexions entre les concepts</li>
+                    <li>Ancrage mémoriel renforcé</li>
+                </ul>
+            </div>
+
+            <div class="grid-item">
+                <h3>Pédagogie Différenciée</h3>
+                <ul>
+                    <li>Parcours adaptatifs</li>
+                    <li>Supports multimédias variés</li>
+                    <li>Rythme personnalisable</li>
+                    <li>Accessibilité DYS</li>
+                </ul>
+            </div>
+
+            <div class="grid-item">
+                <h3>Multimodalité</h3>
+                <ul>
+                    <li>Compatible tous supports</li>
+                    <li>Mode hors-ligne disponible</li>
+                    <li>Interface responsive</li>
+                    <li>Sauvegarde automatique</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card card-success">
+            <h3>Accessibilité et Inclusion</h3>
+            <p>Les modules intègrent les dernières recommandations en matière d'accessibilité numérique :</p>
+            <ul>
+                <li><strong>Police OpenDyslexic</strong> : Facilite la lecture pour les élèves dyslexiques</li>
+                <li><strong>Contraste ajustable</strong> : Mode haute lisibilité</li>
+                <li><strong>Taille de police variable</strong> : Adaptation aux besoins visuels</li>
+                <li><strong>Navigation clavier</strong> : Accessibilité motrice</li>
+                <li><strong>Tooltips d'aide</strong> : Assistance contextuelle</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Section 3: Contenu des Modules -->
+    <div id="contenu" class="section">
+        <h2>Architecture des Modules</h2>
+
+        <div class="card">
+            <h3>Durée Totale : 2h15 (135 minutes — 3 modules de 45 min)</h3>
+            <p>Le parcours commun est structuré en 3 modules progressifs, chacun ciblant des compétences transversales indispensables :</p>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Module</th>
+                    <th>Thématique</th>
+                    <th>Durée</th>
+                    <th>Compétences</th>
+                    <th>Contenus Clés</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="badge badge-primary">1</span></td>
+                    <td><strong>Accueil sécurité en entreprise</strong><br>Droits, devoirs et acteurs de la prévention</td>
+                    <td>45 min</td>
+                    <td><span class="badge badge-info">CC1</span> <span class="badge badge-info">CC2</span></td>
+                    <td>Droits de l'apprenti, tuteur, DUER, obligations employeur</td>
+                </tr>
+                <tr>
+                    <td><span class="badge badge-primary">2</span></td>
+                    <td><strong>Risque électrique commun</strong><br>Les dangers de l'électricité pour TOUS les métiers</td>
+                    <td>45 min</td>
+                    <td><span class="badge badge-info">CC3</span> <span class="badge badge-info">CC4</span></td>
+                    <td>Contacts directs/indirects, arc électrique, premiers secours</td>
+                </tr>
+                <tr>
+                    <td><span class="badge badge-primary">3</span></td>
+                    <td><strong>Travail en hauteur</strong><br>Risques de chute et protections</td>
+                    <td>45 min</td>
+                    <td><span class="badge badge-info">CC5</span> <span class="badge badge-info">CC6</span></td>
+                    <td>Échafaudages, harnais, protections collectives, vérification matériel</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Détail des Modules</h3>
+
+        <div class="card">
+            <h3>Module 1 — Accueil sécurité en entreprise (45 min)</h3>
+            <ul>
+                <li><strong>Les droits de l'apprenti et du stagiaire</strong> : cadre légal, contrat, responsabilités</li>
+                <li><strong>Le tuteur et son rôle</strong> : accompagnement, formation au poste, référent sécurité</li>
+                <li><strong>Le Document Unique d'Évaluation des Risques (DUER)</strong> : obligation légale, contenu, consultation</li>
+                <li><strong>Les obligations de l'employeur</strong> : formation sécurité, EPI, suivi médical</li>
+            </ul>
+            <p style="margin-top:10px"><span class="badge badge-info">CC1</span> Connaître ses droits et devoirs en entreprise · <span class="badge badge-info">CC2</span> Identifier les acteurs de la prévention</p>
+        </div>
+
+        <div class="card">
+            <h3>Module 2 — Risque électrique commun (45 min)</h3>
+            <ul>
+                <li><strong>Les dangers de l'électricité pour TOUS les métiers</strong> : omniprésence du risque sur chantier</li>
+                <li><strong>Contact direct, contact indirect, arc électrique</strong> : mécanismes et situations à risque</li>
+                <li><strong>Effets sur le corps humain</strong> : seuils de tension, brûlures, tétanisation, fibrillation</li>
+                <li><strong>Premiers secours face à une électrisation</strong> : dégagement, alerte, gestes de survie</li>
+            </ul>
+            <p style="margin-top:10px"><span class="badge badge-info">CC3</span> Reconnaître les dangers de l'électricité · <span class="badge badge-info">CC4</span> Appliquer les gestes de premiers secours</p>
+        </div>
+
+        <div class="card">
+            <h3>Module 3 — Travail en hauteur (45 min)</h3>
+            <ul>
+                <li><strong>Risques de chute</strong> : échafaudages, échelles, toitures, trémies</li>
+                <li><strong>Protections collectives</strong> : garde-corps, filets, plateformes sécurisées</li>
+                <li><strong>Protections individuelles</strong> : harnais, longe, point d'ancrage (NF EN 365)</li>
+                <li><strong>Vérification du matériel</strong> : contrôle visuel, dates de péremption, registre</li>
+            </ul>
+            <p style="margin-top:10px"><span class="badge badge-info">CC5</span> Identifier les risques de chute de hauteur · <span class="badge badge-info">CC6</span> Participer à la prévention des risques professionnels</p>
+        </div>
+
+        <div class="grid">
+            <div class="grid-item">
+                <h3>Types d'Activités Intégrées</h3>
+                <ul>
+                    <li><strong>QCM interactifs</strong> : Vérification des connaissances</li>
+                    <li><strong>Drag & Drop</strong> : Classification et tri</li>
+                    <li><strong>Textes à trous</strong> : Mémorisation active</li>
+                    <li><strong>Associations</strong> : Liens conceptuels</li>
+                    <li><strong>Analyses de cas</strong> : Situations professionnelles</li>
+                    <li><strong>Simulations</strong> : Mise en pratique virtuelle</li>
+                </ul>
+            </div>
+
+            <div class="grid-item">
+                <h3>Suivi Pédagogique</h3>
+                <ul>
+                    <li><strong>Progression temps réel</strong> : Barres de progression</li>
+                    <li><strong>Scores détaillés</strong> : Par compétence et global</li>
+                    <li><strong>Historique complet</strong> : Traces d'apprentissage</li>
+                    <li><strong>Recommandations</strong> : Parcours personnalisés</li>
+                    <li><strong>Export données</strong> : Suivi enseignant</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 4: Référentiel & Compétences -->
+    <div id="competences" class="section">
+        <h2>Référentiel et Compétences</h2>
+
+        <div class="card card-info">
+            <h3>Compétences Communes du Tronc Commun</h3>
+            <p>Le parcours commun développe 6 compétences transversales (CC1-CC6) indispensables avant tout passage aux modules métier :</p>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th style="width:10%">Code</th>
+                    <th style="width:45%">Compétence Commune</th>
+                    <th style="width:20%">Niveau Attendu</th>
+                    <th style="width:25%">Évaluation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="badge badge-primary">CC1</span></td>
+                    <td><strong>Connaître ses droits et devoirs en entreprise</strong><br><em>Cadre légal de l'apprenti et du stagiaire</em></td>
+                    <td><span class="badge badge-success">Maîtrise</span></td>
+                    <td>Module 1</td>
+                </tr>
+                <tr>
+                    <td><span class="badge badge-primary">CC2</span></td>
+                    <td><strong>Identifier les acteurs de la prévention</strong><br><em>Tuteur, DUER, obligations employeur</em></td>
+                    <td><span class="badge badge-success">Maîtrise</span></td>
+                    <td>Module 1</td>
+                </tr>
+                <tr>
+                    <td><span class="badge badge-primary">CC3</span></td>
+                    <td><strong>Reconnaître les dangers de l'électricité</strong><br><em>Contacts, arc électrique, seuils de tension</em></td>
+                    <td><span class="badge badge-warning">Application</span></td>
+                    <td>Module 2</td>
+                </tr>
+                <tr>
+                    <td><span class="badge badge-primary">CC4</span></td>
+                    <td><strong>Appliquer les gestes de premiers secours</strong><br><em>Dégagement, alerte, gestes de survie</em></td>
+                    <td><span class="badge badge-success">Maîtrise</span></td>
+                    <td>Module 2</td>
+                </tr>
+                <tr>
+                    <td><span class="badge badge-primary">CC5</span></td>
+                    <td><strong>Identifier les risques de chute de hauteur</strong><br><em>Échafaudages, échelles, toitures, trémies</em></td>
+                    <td><span class="badge badge-warning">Application</span></td>
+                    <td>Module 3</td>
+                </tr>
+                <tr>
+                    <td><span class="badge badge-primary">CC6</span></td>
+                    <td><strong>Participer à la prévention des risques professionnels</strong><br><em>Protections collectives et individuelles, vérification matériel</em></td>
+                    <td><span class="badge badge-success">Maîtrise</span></td>
+                    <td>Module 3</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="card card-success">
+            <h3>Correspondances Référentiels Officiels</h3>
+            <p>Tableau de correspondance entre les compétences communes du tronc commun (CC1-CC6) et les compétences du référentiel 2nde TNE (CC5-CC9) :</p>
+
+            <table class="table" style="margin-top:15px">
+                <thead>
+                    <tr>
+                        <th>Code Module</th>
+                        <th>Compétence tronc commun</th>
+                        <th>CC (réf. TNE)</th>
+                        <th>Correspondance référentiel</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="badge badge-primary">CC1</span></td>
+                        <td>Connaître ses droits et devoirs en entreprise</td>
+                        <td><span class="badge badge-info">CC5</span> <span class="badge badge-info">CC6</span></td>
+                        <td>Travailler en équipe + Participer à la prévention des risques</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-primary">CC2</span></td>
+                        <td>Identifier les acteurs de la prévention</td>
+                        <td><span class="badge badge-info">CC6</span> <span class="badge badge-info">CC7</span></td>
+                        <td>Prévention des risques + Respecter les règles environnementales</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-primary">CC3</span></td>
+                        <td>Reconnaître les dangers de l'électricité</td>
+                        <td><span class="badge badge-info">CC6</span> <span class="badge badge-info">CC8</span></td>
+                        <td>Prévention des risques + S'adapter à une situation professionnelle</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-primary">CC4</span></td>
+                        <td>Appliquer les gestes de premiers secours</td>
+                        <td><span class="badge badge-info">CC6</span></td>
+                        <td>Participer à la prévention des risques (urgence, premiers secours)</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-primary">CC5</span></td>
+                        <td>Identifier les risques de chute de hauteur</td>
+                        <td><span class="badge badge-info">CC6</span> <span class="badge badge-info">CC9</span></td>
+                        <td>Prévention des risques + Mobiliser des outils numériques</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-primary">CC6</span></td>
+                        <td>Participer à la prévention des risques professionnels</td>
+                        <td><span class="badge badge-info">CC5</span> <span class="badge badge-info">CC6</span></td>
+                        <td>Travailler en équipe + Prévention des risques</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p style="margin-top:15px;font-size:.9em;color:var(--muted)"><em>Note : CC6 du référentiel TNE (Participer à la prévention des risques professionnels) est la compétence commune pivot de ce tronc commun. Les compétences CC5, CC7, CC8 et CC9 du référentiel sont mobilisées de façon transversale selon les modules abordés.</em></p>
+
+            <h3 style="margin-top:25px">Correspondances par diplôme</h3>
+            <div class="grid" style="margin-top:15px">
+                <div class="grid-item">
+                    <h4><span class="badge badge-primary">CAP IFCA</span></h4>
+                    <p><strong>UP1 - Préparer une intervention</strong><br>
+                    C1.1 : Identifier les risques liés à l'activité<br>
+                    C1.2 : Appliquer les consignes de sécurité</p>
+                </div>
+
+                <div class="grid-item">
+                    <h4><span class="badge badge-primary">CAP MIT / MIS</span></h4>
+                    <p><strong>UP1 - Réaliser / Installer</strong><br>
+                    C1.1 : Prévenir les risques liés à l'activité<br>
+                    C2.3 : Respecter les règles de sécurité</p>
+                </div>
+
+                <div class="grid-item">
+                    <h4><span class="badge badge-primary">CAP MELEC</span></h4>
+                    <p><strong>UP1 - Réaliser une installation</strong><br>
+                    C1.1 : Identifier les risques électriques<br>
+                    C1.3 : Appliquer les règles de sécurité</p>
+                </div>
+
+                <div class="grid-item">
+                    <h4><span class="badge badge-success">Bac Pro MFER</span></h4>
+                    <p><strong>A1 - Étude préparatoire</strong><br>
+                    C1.1 : Analyser le besoin<br>
+                    C1.4 : Identifier les risques métier</p>
+                </div>
+
+                <div class="grid-item">
+                    <h4><span class="badge badge-success">Bac Pro MELEC</span></h4>
+                    <p><strong>A1 - Préparation des opérations</strong><br>
+                    C1.2 : Identifier les risques électriques<br>
+                    C2.1 : Appliquer les mesures de prévention</p>
+                </div>
+
+                <div class="grid-item">
+                    <h4><span class="badge badge-success">Bac Pro CIEL</span></h4>
+                    <p><strong>A1 - Étude et conception</strong><br>
+                    C1.3 : Identifier les risques liés à l'environnement<br>
+                    C2.2 : Appliquer les règles de sécurité</p>
+                </div>
+
+                <div class="grid-item">
+                    <h4><span class="badge badge-info">2nde TNE</span></h4>
+                    <p><strong>Compétences communes CC5-CC9</strong><br>
+                    CC6 : Participer à la prévention des risques<br>
+                    CC7 : Respecter les règles environnementales</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 5: Évaluation -->
+    <div id="evaluation" class="section">
+        <h2>Système d'Évaluation</h2>
+
+        <div class="card">
+            <h3>Évaluation Formative par Module</h3>
+            <p>Le tronc commun repose sur une <strong class="highlight">évaluation formative continue</strong> à chaque module. Il n'y a pas de certification finale, mais une <strong>validation des prérequis</strong> indispensable avant le passage aux modules métier spécialisés.</p>
+        </div>
+
+        <div class="grid">
+            <div class="grid-item">
+                <h3>Évaluation Formative</h3>
+                <ul>
+                    <li><strong>Feedback immédiat</strong> : Correction instantanée à chaque activité</li>
+                    <li><strong>Progression visible</strong> : Barres de compétences par module</li>
+                    <li><strong>Parcours adaptatif</strong> : Remédiation automatique</li>
+                    <li><strong>Encouragements</strong> : Motivation constante</li>
+                </ul>
+            </div>
+
+            <div class="grid-item">
+                <h3>Validation des Prérequis</h3>
+                <ul>
+                    <li><strong>Quiz de fin de module</strong> : 10 questions par module</li>
+                    <li><strong>Seuil de validation</strong> : 7/10 (70%) par module</li>
+                    <li><strong>Attestation de validation</strong> : Déblocage des modules métier</li>
+                    <li><strong>Rattrapage possible</strong> : Reprise des modules non validés</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card card-warning">
+            <h3>Critères d'Évaluation par Module</h3>
+            <table class="table" style="margin-top:15px">
+                <thead>
+                    <tr>
+                        <th>Module</th>
+                        <th>Critère Principal</th>
+                        <th>Description</th>
+                        <th>Seuil Validation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Module 1 — Accueil sécurité</strong></td>
+                        <td>Connaissances réglementaires</td>
+                        <td>Droits, devoirs, acteurs de la prévention</td>
+                        <td>≥ 70%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Module 2 — Risque électrique</strong></td>
+                        <td>Identification des dangers</td>
+                        <td>Reconnaître les situations à risque, gestes de secours</td>
+                        <td>≥ 70%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Module 3 — Travail en hauteur</strong></td>
+                        <td>Prévention et protections</td>
+                        <td>Protections collectives et individuelles, vérification</td>
+                        <td>≥ 70%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card card-info">
+            <h3>Outils de Suivi Enseignant</h3>
+            <p>L'espace enseignant (accessible via code) offre un suivi des apprentissages :</p>
+            <ul>
+                <li><strong>Mode guidé</strong> : Activation du suivi progression par module</li>
+                <li><strong>Scores par compétence</strong> : Résultats quiz et exercices interactifs</li>
+                <li><strong>Observation directe</strong> : Grilles d'évaluation imprimables</li>
+                <li><strong>Stockage local</strong> : Données élèves en localStorage (aucun serveur distant)</li>
+                <li><strong>Passerelle métier</strong> : Validation automatique des prérequis pour les modules spécialisés</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Section 6: Aspects Techniques -->
+    <div id="technique" class="section">
+        <h2>Architecture Technique</h2>
+
+        <div class="card">
+            <h3>Technologies Utilisées</h3>
+            <p>Les modules reposent sur des technologies web standard, garantissant une compatibilité maximale et une maintenance simplifiée.</p>
+        </div>
+
+        <div class="grid">
+            <div class="grid-item">
+                <h3>Front-End</h3>
+                <ul>
+                    <li><strong>HTML5</strong> : Structure sémantique</li>
+                    <li><strong>CSS3</strong> : Design responsive</li>
+                    <li><strong>JavaScript ES6+</strong> : Interactions</li>
+                    <li><strong>PWA</strong> : Fonctionnement hors-ligne</li>
+                </ul>
+            </div>
+
+            <div class="grid-item">
+                <h3>Stockage</h3>
+                <ul>
+                    <li><strong>LocalStorage</strong> : Sauvegarde locale</li>
+                    <li><strong>IndexedDB</strong> : Données complexes</li>
+                    <li><strong>Export JSON</strong> : Interopérabilité</li>
+                    <li><strong>Cloud sync</strong> : Sauvegarde distante</li>
+                </ul>
+            </div>
+
+            <div class="grid-item">
+                <h3>Compatibilité</h3>
+                <ul>
+                    <li><strong>Multi-navigateurs</strong> : Chrome, Firefox, Safari, Edge</li>
+                    <li><strong>Multi-plateformes</strong> : Windows, macOS, Linux, Android, iOS</li>
+                    <li><strong>Responsive Design</strong> : Adaptation automatique</li>
+                    <li><strong>Accessibilité WCAG 2.1</strong> : Niveau AA</li>
+                </ul>
+            </div>
+
+            <div class="grid-item">
+                <h3>Sécurité</h3>
+                <ul>
+                    <li><strong>Chiffrement</strong> : Données sensibles</li>
+                    <li><strong>HTTPS</strong> : Communications sécurisées</li>
+                    <li><strong>CSP</strong> : Protection XSS</li>
+                    <li><strong>Données</strong> : Dispositif en logique de minimisation des données, en local, sans serveur externe tiers</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card card-success">
+            <h3>Performances et Optimisations</h3>
+            <ul>
+                <li><strong>Lazy Loading</strong> : Chargement progressif des ressources</li>
+                <li><strong>Compression</strong> : Images WebP, CSS/JS minifiés</li>
+                <li><strong>Cache intelligent</strong> : Mise à jour sélective</li>
+                <li><strong>Déploiement CDN</strong> : Livraison optimisée</li>
+            </ul>
+        </div>
+
+        <div class="card card-info">
+            <h3>Analytics et Monitoring</h3>
+            <p>Suivi détaillé de l'utilisation pédagogique (dispositif en logique de minimisation des données, en local, sans serveur externe tiers) :</p>
+            <ul>
+                <li>Temps passé par module et activité</li>
+                <li>Taux de réussite par question</li>
+                <li>Parcours d'apprentissage</li>
+                <li>Difficultés récurrentes identifiées</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Section 7: Mise en Œuvre -->
+    <div id="mise-en-oeuvre" class="section">
+        <h2>Guide de Mise en Œuvre</h2>
+
+        <div class="card card-warning">
+            <h3>Prérequis Techniques</h3>
+            <div class="grid" style="margin-top:15px">
+                <div class="grid-item">
+                    <h4>Matériel</h4>
+                    <ul>
+                        <li>Ordinateurs/tablettes récents (&lt; 5 ans)</li>
+                        <li>Résolution minimum : 1024x768</li>
+                        <li>RAM : 4 Go minimum</li>
+                        <li>Connexion internet (1 Mbps/élève)</li>
+                    </ul>
+                </div>
+                <div class="grid-item">
+                    <h4>Logiciels</h4>
+                    <ul>
+                        <li>Navigateur moderne (Chrome 90+, Firefox 88+, Safari 14+)</li>
+                        <li>JavaScript activé</li>
+                        <li>Cookies et localStorage autorisés</li>
+                        <li>PDF Reader intégré</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Étapes de Déploiement</h3>
+            <ol>
+                <li><strong>Configuration espace enseignant</strong> : Paramétrage classes toutes filières</li>
+                <li><strong>Test technique</strong> : Vérification sur quelques postes pilotes</li>
+                <li><strong>Formation enseignant</strong> : Prise en main de l'interface</li>
+                <li><strong>Déploiement classe</strong> : Installation sur tous les postes</li>
+                <li><strong>Session découverte</strong> : Premier module avec les élèves</li>
+                <li><strong>Suivi continu</strong> : Accompagnement et ajustements</li>
+            </ol>
+        </div>
+
+        <div class="grid">
+            <div class="grid-item">
+                <h3>Modalités d'Usage</h3>
+                <ul>
+                    <li><strong>Classe entière</strong> : Progression synchrone toutes filières</li>
+                    <li><strong>Îlots différenciés</strong> : Rythmes personnalisés</li>
+                    <li><strong>Travail autonome</strong> : Compléments de cours</li>
+                    <li><strong>Remédiation</strong> : Rattrapage ciblé avant modules métier</li>
+                </ul>
+            </div>
+
+            <div class="grid-item">
+                <h3>Planning Type</h3>
+                <ul>
+                    <li><strong>Module 1</strong> : Accueil sécurité (45 min — semaine 1)</li>
+                    <li><strong>Module 2</strong> : Risque électrique (45 min — semaine 2)</li>
+                    <li><strong>Module 3</strong> : Travail en hauteur (45 min — semaine 3)</li>
+                    <li><strong>Validation</strong> : Prérequis validés → passage modules métier</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card card-success">
+            <h3>Support et Maintenance</h3>
+            <p><strong>Équipe inerWeb disponible :</strong></p>
+            <ul>
+                <li><strong>Support technique</strong> : support@inerweb.fr</li>
+                <li><strong>Accompagnement pédagogique</strong> : pedagogie@inerweb.fr</li>
+                <li><strong>Mises à jour</strong> : Automatiques et transparentes</li>
+                <li><strong>Documentation</strong> : Wiki complet en ligne</li>
+                <li><strong>Formations</strong> : Webinaires mensuels</li>
+            </ul>
+        </div>
+
+        <div class="card card-info">
+            <h3>Indicateurs de Réussite</h3>
+            <p>Critères d'évaluation de l'efficacité du dispositif :</p>
+            <table class="table" style="margin-top:15px">
+                <thead>
+                    <tr>
+                        <th>Indicateur</th>
+                        <th>Objectif</th>
+                        <th>Mesure</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Taux de complétion</td>
+                        <td>&gt; 90%</td>
+                        <td>Élèves ayant terminé les 3 modules</td>
+                    </tr>
+                    <tr>
+                        <td>Score moyen</td>
+                        <td>&gt; 8/10</td>
+                        <td>Moyenne par module (quiz formatifs)</td>
+                    </tr>
+                    <tr>
+                        <td>Satisfaction enseignant</td>
+                        <td>&gt; 8/10</td>
+                        <td>Enquête post-utilisation</td>
+                    </tr>
+                    <tr>
+                        <td>Engagement élèves</td>
+                        <td>&gt; 85%</td>
+                        <td>Temps actif / Temps total</td>
+                    </tr>
+                    <tr>
+                        <td>Taux de validation prérequis</td>
+                        <td>&gt; 95%</td>
+                        <td>Élèves validant les 3 modules avant passage métier</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<footer class="footer">
+    <div class="footer__inner">inerWeb · F. Henninot · LPP Jacques Raynaud · Campus Équatio</div>
+</footer>
+
+<script>
+function showSection(id, btn){
+    document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+    window.scrollTo({top:document.querySelector('.nav-menu').offsetTop-80,behavior:'smooth'});
+}
+
+function togDys(){
+    document.body.classList.toggle('dys');
+    document.getElementById('bDys').classList.toggle('on');
+    localStorage.setItem('a11y-dys',document.body.classList.contains('dys'));
+}
+function setF(c){
+    document.body.classList.remove('f-lg','f-xl');
+    if(c!=='normal')document.body.classList.add(c);
+    localStorage.setItem('a11y-size',c);
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+    if(localStorage.getItem('a11y-dys')==='true'){document.body.classList.add('dys');document.getElementById('bDys').classList.add('on');}
+    var s=localStorage.getItem('a11y-size');if(s&&s!=='normal')document.body.classList.add(s);
+});
+</script>
+</body>
+</html>

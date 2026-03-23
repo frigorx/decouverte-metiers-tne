@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Correspondance Referentiel TNE / Modules QCM inerWeb Decouverte metiers</title>
+<style>
+  :root {
+    --navy: #0f2d52;
+    --orange: #e8914a;
+    --turquoise: #2aafaf;
+    --navy-light: #1a4070;
+    --orange-light: #f5c49a;
+    --turquoise-light: #b0e4e4;
+    --bg: #f8f9fb;
+    --border: #c8ced8;
+  }
+
+  @page {
+    size: A4 landscape;
+    margin: 12mm;
+  }
+
+  @media print {
+    body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .no-print { display: none; }
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: "Segoe UI", Calibri, Arial, sans-serif;
+    background: var(--bg);
+    color: #1a1a1a;
+    font-size: 11pt;
+    line-height: 1.4;
+  }
+
+  .page {
+    max-width: 297mm;
+    margin: 0 auto;
+    padding: 18px 24px;
+  }
+
+  /* ---------- EN-TETE ---------- */
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 3px solid var(--navy);
+    padding-bottom: 10px;
+    margin-bottom: 14px;
+  }
+
+  header .logo-zone {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  header .logo-icon {
+    width: 44px;
+    height: 44px;
+    background: var(--navy);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: -0.5px;
+  }
+
+  header h1 {
+    font-size: 16pt;
+    color: var(--navy);
+    font-weight: 700;
+    line-height: 1.15;
+  }
+
+  header h1 span {
+    display: block;
+    font-size: 10pt;
+    font-weight: 400;
+    color: #555;
+  }
+
+  .badge-ref {
+    background: var(--navy);
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 9pt;
+    text-align: center;
+    line-height: 1.4;
+    font-weight: 600;
+  }
+
+  /* ---------- BLOC REFERENTIEL ---------- */
+  .ref-block {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 14px;
+  }
+
+  .ref-card {
+    flex: 1;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    border-left: 4px solid var(--turquoise);
+  }
+
+  .ref-card h3 {
+    font-size: 9.5pt;
+    color: var(--navy);
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+
+  .ref-card p, .ref-card li {
+    font-size: 9pt;
+    color: #333;
+  }
+
+  .ref-card ul {
+    margin-left: 14px;
+    margin-top: 3px;
+  }
+
+  .ref-card.orange { border-left-color: var(--orange); }
+
+  /* ---------- COMPETENCES ---------- */
+  .comp-bar {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+
+  .comp-tag {
+    background: var(--navy);
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 8.5pt;
+    font-weight: 600;
+    flex: 1 1 auto;
+    text-align: center;
+    min-width: 160px;
+  }
+
+  .comp-tag:nth-child(2) { background: var(--navy-light); }
+  .comp-tag:nth-child(3) { background: var(--turquoise); color: #fff; }
+  .comp-tag:nth-child(4) { background: var(--orange); color: #fff; }
+  .comp-tag:nth-child(5) { background: #3d7a99; }
+
+  /* ---------- TABLEAU ---------- */
+  .table-wrapper {
+    overflow-x: auto;
+    margin-bottom: 12px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9pt;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+
+  thead th {
+    background: var(--navy);
+    color: #fff;
+    padding: 8px 6px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 8.5pt;
+    border-right: 1px solid rgba(255,255,255,0.15);
+    vertical-align: bottom;
+    line-height: 1.25;
+  }
+
+  thead th:first-child {
+    text-align: left;
+    padding-left: 10px;
+    min-width: 220px;
+  }
+
+  thead th.comp-col { min-width: 68px; }
+
+  thead th .comp-id {
+    display: block;
+    font-size: 11pt;
+    font-weight: 800;
+    margin-bottom: 2px;
+  }
+
+  tbody tr { border-bottom: 1px solid #e8ebf0; }
+  tbody tr:nth-child(even) { background: #f5f7fa; }
+  tbody tr:hover { background: #eef3f9; }
+
+  tbody td {
+    padding: 7px 6px;
+    vertical-align: middle;
+    text-align: center;
+    border-right: 1px solid #e8ebf0;
+  }
+
+  tbody td:first-child {
+    text-align: left;
+    padding-left: 10px;
+    font-weight: 500;
+  }
+
+  .module-num {
+    display: inline-block;
+    background: var(--turquoise);
+    color: #fff;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 20px;
+    font-size: 8pt;
+    font-weight: 700;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+
+  .module-num.orange { background: var(--orange); }
+
+  .module-detail {
+    display: block;
+    font-size: 7.5pt;
+    color: #777;
+    font-weight: 400;
+    margin-left: 26px;
+    margin-top: 1px;
+  }
+
+  /* Pastilles */
+  .dot {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    line-height: 18px;
+    font-size: 10pt;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .dot.navy   { background: var(--navy); }
+  .dot.orange { background: var(--orange); }
+  .dot.turq   { background: var(--turquoise); }
+  .dot.empty  { background: transparent; border: 2px dashed #ccc; }
+
+  /* Ligne separateur filiere */
+  .filiere-sep td {
+    background: var(--orange-light) !important;
+    font-weight: 700;
+    color: var(--navy);
+    font-size: 8.5pt;
+    text-align: left !important;
+    padding-left: 10px !important;
+    letter-spacing: 0.3px;
+  }
+
+  /* ---------- LEGENDE ---------- */
+  .legend {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 10px;
+    font-size: 8.5pt;
+    color: #555;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .legend .dot { width: 14px; height: 14px; line-height: 14px; font-size: 8pt; }
+
+  /* ---------- FILIERES ---------- */
+  .filieres-bar {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+
+  .filiere-tag {
+    background: #fff;
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    padding: 5px 12px;
+    font-size: 8.5pt;
+    font-weight: 600;
+    color: var(--navy);
+    flex: 1;
+    text-align: center;
+  }
+
+  .filiere-tag .icon { margin-right: 4px; }
+
+  /* ---------- PIED DE PAGE ---------- */
+  .resources {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 14px;
+    font-size: 8pt;
+    color: #666;
+    margin-bottom: 8px;
+    border-left: 4px solid var(--turquoise);
+  }
+
+  .resources strong { color: var(--navy); }
+
+  footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 8pt;
+    color: #999;
+    border-top: 1px solid var(--border);
+    padding-top: 6px;
+  }
+
+  footer .author {
+    font-weight: 600;
+    color: var(--navy);
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- EN-TETE -->
+  <header>
+    <div class="logo-zone">
+      <div class="logo-icon">iW</div>
+      <h1>
+        Correspondance Referentiel / Modules QCM
+        <span>Portail inerWeb Decouverte metiers &mdash; Securite et Decouverte des metiers par le risquefessionnels</span>
+      </h1>
+    </div>
+    <div class="badge-ref">
+      2nde TNE<br>
+      Transition Numerique<br>
+      et Energetique
+    </div>
+  </header>
+
+  <!-- BLOCS REFERENTIEL -->
+  <div class="ref-block">
+    <div class="ref-card">
+      <h3>Bloc de competences commun</h3>
+      <p>Securite et prevention des decouverte des metiers</p>
+      <ul>
+        <li>Technicien en Installation des Systemes Energetiques et Climatiques</li>
+        <li>Maintenance et Efficacite Energetique</li>
+        <li>CIEL (Cybersecurite, Informatique et reseaux, Electronique)</li>
+      </ul>
+    </div>
+    <div class="ref-card orange">
+      <h3>Sequence pedagogique</h3>
+      <p><strong>S0 :</strong> Decouverte des metiers par le risque</p>
+      <p style="margin-top:4px; font-size:8.5pt; color:#777;">Sequence d'accueil &mdash; 7 modules QCM progressifs, du tronc commun aux specialites filiere</p>
+    </div>
+  </div>
+
+  <!-- COMPETENCES -->
+  <div class="comp-bar">
+    <div class="comp-tag">C1 &mdash; Identifier les risques lies a l'activite</div>
+    <div class="comp-tag">C2 &mdash; Appliquer les mesures de prevention</div>
+    <div class="comp-tag">C3 &mdash; Connaitre droits et obligations</div>
+    <div class="comp-tag">C4 &mdash; Connaitre les EPI et leur usage adapte</div>
+    <div class="comp-tag">C5 &mdash; Utiliser les documents techniques (INRS, IRIS-ST)</div>
+  </div>
+
+  <!-- FILIERES -->
+  <div class="filieres-bar">
+    <div class="filiere-tag">&#10052; Froid &amp; Climatisation</div>
+    <div class="filiere-tag">&#9832; Plomberie-Chauffage</div>
+    <div class="filiere-tag">&#9889; Electrotechnique</div>
+    <div class="filiere-tag">&#128274; CIEL Cybersecurite</div>
+  </div>
+
+  <!-- LEGENDE -->
+  <div class="legend">
+    <span style="font-weight:600; color:var(--navy);">Legende :</span>
+    <div class="legend-item"><span class="dot navy">&#10003;</span> Competence principale</div>
+    <div class="legend-item"><span class="dot turq">&#9679;</span> Competence secondaire</div>
+    <div class="legend-item"><span class="dot orange">~</span> Competence abordee</div>
+    <div class="legend-item"><span class="dot empty"></span> Non concernee</div>
+  </div>
+
+  <!-- TABLEAU CROISE -->
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Module QCM inerWeb Decouverte metiers</th>
+          <th class="comp-col"><span class="comp-id">C1</span>Identifier<br>les risques</th>
+          <th class="comp-col"><span class="comp-id">C2</span>Mesures de<br>prevention</th>
+          <th class="comp-col"><span class="comp-id">C3</span>Droits &amp;<br>obligations</th>
+          <th class="comp-col"><span class="comp-id">C4</span>EPI et<br>protections</th>
+          <th class="comp-col"><span class="comp-id">C5</span>Documents<br>techniques</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- TRONC COMMUN -->
+        <tr class="filiere-sep"><td colspan="6">TRONC COMMUN &mdash; Modules 1 a 4</td></tr>
+
+        <tr>
+          <td>
+            <span class="module-num">1</span> Quiz orientation filiere
+            <span class="module-detail">Decouverte des 4 filieres TNE</span>
+          </td>
+          <td><span class="dot turq">&#9679;</span></td>
+          <td><span class="dot empty"></span></td>
+          <td><span class="dot orange">~</span></td>
+          <td><span class="dot empty"></span></td>
+          <td><span class="dot empty"></span></td>
+        </tr>
+
+        <tr>
+          <td>
+            <span class="module-num">2</span> Accueil securite en entreprise
+            <span class="module-detail">Droits, tuteur, DUER &mdash; Doc IRIS-ST Memo Apprentis</span>
+          </td>
+          <td><span class="dot navy">&#10003;</span></td>
+          <td><span class="dot turq">&#9679;</span></td>
+          <td><span class="dot navy">&#10003;</span></td>
+          <td><span class="dot turq">&#9679;</span></td>
+          <td><span class="dot navy">&#10003;</span></td>
+        </tr>
+
+        <tr>
+          <td>
+            <span class="module-num">3</span> Risque electrique commun
+            <span class="module-detail">Dangers, VAT, distances &mdash; Doc IRIS-ST Risque Electrique</span>
+          </td>
+          <td><span class="dot navy">&#10003;</span></td>
+          <td><span class="dot navy">&#10003;</span></td>
+          <td><span class="dot turq">&#9679;</span></td>
+          <td><span class="dot navy">&#10003;</span></td>
+          <td><span class="dot navy">&#10003;</span></td>
+        </tr>
+
+        <tr>
+          <td>
+            <span class="module-num">4</span> Travail en hauteur
+            <span class="module-detail">Echafaudages, harnais, echelles</span>
+          </td>
+          <td><span class="dot navy">&#10003;</span></td>
+          <td><span class="dot navy">&#10003;</span></td>
+          <td><span class="dot turq">&#9679;</span></td>
+          <td><span class="dot navy">&#10003;</span></td>
+          <td><span class="dot turq">&#9679;</span></td>
+        </tr>
+
+        <!-- SPECIALITE FILIERE -->
+        <tr class="filiere-sep"><td colspan="6">SPECIALITE FILIERE &mdash; Modules 5 a 7 (adaptes selon la filiere de l'eleve)</td></tr>
+
+        <tr>
+          <td>
+            <span class="module-num orange">5</span> Theme 1 &mdash; Risques specifiques metier
+            <span class="module-detail">Risques propres a chaque filiere (fluides frigorigenes, gaz, courant fort, cyber...)</span>
+          </td>
+          <td><span class="dot navy">&#10003;</span></td>
+          <td><span class="dot navy">&#10003;</span></td>
+          <td><span class="dot orange">~</span></td>
+          <td><span class="dot navy">&#10003;</span></td>
+          <td><span class="dot turq">&#9679;</span></td>
+        </tr>
+
+        <tr>
+          <td>
+            <span class="module-num orange">6</span> Theme 2 &mdash; Droits et obligations
+            <span class="module-detail">Cadre reglementaire, responsabilites employeur/salarie, EPI obligatoires</span>
+          </td>
+          <td><span class="dot turq">&#9679;</span></td>
+          <td><span class="dot turq">&#9679;</span></td>
+          <td><span class="dot navy">&#10003;</span></td>
+          <td><span class="dot orange">~</span></td>
+          <td><span class="dot navy">&#10003;</span></td>
+        </tr>
+
+        <tr>
+          <td>
+            <span class="module-num orange">7</span> Theme 3 &mdash; Cas pratiques
+            <span class="module-detail">Mises en situation, analyse de risques, mesures correctives</span>
+          </td>
+          <td><span class="dot navy">&#10003;</span></td>
+          <td><span class="dot navy">&#10003;</span></td>
+          <td><span class="dot turq">&#9679;</span></td>
+          <td><span class="dot navy">&#10003;</span></td>
+          <td><span class="dot navy">&#10003;</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- RESSOURCES -->
+  <div class="resources">
+    <strong>Documents ressources :</strong> INRS ED 6232 / ED 6276 / Memos IRIS-ST &mdash; reproduits a des fins pedagogiques non commerciales.
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="author">F. Henninot &mdash; LPP Jacques Raynaud &mdash; Campus Equatio</span>
+    <span>2nde TNE &mdash; 2025-2026</span>
+    <span>inerWeb Decouverte metiers</span>
+  </footer>
+
+</div>
+
+</body>
+</html>
