@@ -792,28 +792,43 @@ function updateSynthesis() {
   var levels = {};
   for (var c in comp) { levels[c] = comp[c].level || comp[c]; }
 
-  // Points forts
+  // Compteurs par niveau
+  var nbGrey = 0, nbRed = 0, nbOrange = 0, nbGreen = 0, nbBlue = 0, nbEval = 0;
+  for (var c in levels) {
+    if (levels[c] === 'grey') nbGrey++;
+    else if (levels[c] === 'red') nbRed++;
+    else if (levels[c] === 'orange') nbOrange++;
+    else if (levels[c] === 'green') nbGreen++;
+    else if (levels[c] === 'blue') nbBlue++;
+    if (levels[c] !== 'grey') nbEval++;
+  }
+
+  // Points forts (acquis + parfaitement acquis)
   var forces = [];
   if (levels.c1 === 'green' || levels.c1 === 'blue') forces.push('Repérage efficace des informations');
   if (levels.c3 === 'green' || levels.c3 === 'blue') forces.push('Bonne analyse des données');
   if (levels.c8 === 'green' || levels.c8 === 'blue') forces.push('Documents bien renseignés');
   if (completed >= 3) forces.push('Parcours complet');
+  if (nbBlue === 3) forces.push('Excellent niveau global');
   document.getElementById('synthForce').textContent = forces.length > 0 ? forces.join(' · ') : '—';
 
-  // Points à revoir
+  // Points à revoir (non acquis + en cours d'acquisition)
   var faibles = [];
-  if (levels.c1 === 'red') faibles.push('Recherche d\'information');
-  if (levels.c3 === 'red') faibles.push('Analyse des données');
-  if (levels.c8 === 'red') faibles.push('Renseignement des documents');
+  if (levels.c1 === 'red') faibles.push('Recherche d\'information à reprendre');
+  else if (levels.c1 === 'orange') faibles.push('Recherche d\'information à consolider');
+  if (levels.c3 === 'red') faibles.push('Analyse des données à reprendre');
+  else if (levels.c3 === 'orange') faibles.push('Analyse des données à consolider');
+  if (levels.c8 === 'red') faibles.push('Renseignement des documents à reprendre');
+  else if (levels.c8 === 'orange') faibles.push('Renseignement des documents à consolider');
   if (pct > 0 && pct < 30) faibles.push('Score global insuffisant');
   document.getElementById('synthWeak').textContent = faibles.length > 0 ? faibles.join(' · ') : '—';
 
   // Reprise nécessaire
-  var nbRed = 0, nbEval = 0;
-  for (var c in levels) { if (levels[c] === 'red') nbRed++; if (levels[c] !== 'grey') nbEval++; }
   var repriseEl = document.getElementById('synthReprise');
   if (nbRed >= 2 || (pct > 0 && pct < 30)) {
     repriseEl.textContent = 'Oui'; repriseEl.className = 'yn non';
+  } else if (nbRed === 1 && nbOrange >= 1) {
+    repriseEl.textContent = 'Oui — partielle'; repriseEl.className = 'yn non';
   } else if (nbEval > 0) {
     repriseEl.textContent = 'Non'; repriseEl.className = 'yn oui';
   } else {
@@ -821,11 +836,12 @@ function updateSynthesis() {
   }
 
   // Prêt à continuer
-  var nbOk = 0;
-  for (var c in levels) { if (levels[c] === 'green' || levels[c] === 'blue') nbOk++; }
+  var nbOk = nbGreen + nbBlue;
   var contEl = document.getElementById('synthContinue');
   if (nbOk >= 2 && pct >= 50) {
     contEl.textContent = 'Oui'; contEl.className = 'yn oui';
+  } else if (nbOk >= 1 && nbOrange >= 1 && pct >= 40) {
+    contEl.textContent = 'Oui — avec accompagnement'; contEl.className = 'yn oui';
   } else if (nbEval > 0) {
     contEl.textContent = 'Non'; contEl.className = 'yn non';
   } else {
