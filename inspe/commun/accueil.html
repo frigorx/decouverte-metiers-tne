@@ -212,8 +212,17 @@ body.f-xl{font-size:20px}
   font-size:.88em;color:var(--navy-mid);line-height:1.5;
 }
 
+/* Mode guidé — page-hint */
+.page-hint{display:none;margin-top:8px;padding:8px 14px;background:#fff3cd;border-left:3px solid #ffc107;border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:.85em;color:#856404;line-height:1.5}
+body.guided .page-hint{display:block}
+
 /* Masquage conditionnel */
 .hidden{display:none!important}
+
+.retenir{background:var(--turquoise-light);border:1px solid #b8dfe0;border-left:4px solid var(--turquoise);border-radius:var(--radius-sm);padding:14px 16px;margin-top:14px;font-size:.88em;line-height:1.6}
+.retenir strong{color:var(--turquoise);display:block;margin-bottom:6px}
+.retenir ul{margin:0;padding-left:18px}
+.retenir li{margin-bottom:4px;color:var(--text)}
 
 @media(max-width:600px){
   .theme-header h1{font-size:1.4em}
@@ -237,7 +246,7 @@ body.f-xl{font-size:20px}
   </div>
   <div class="a11y">
     <a href="../index.html" class="a11y-btn"><svg viewBox="0 0 24 24" style="width:14px;height:14px;vertical-align:middle" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l9-9 9 9"/><path d="M5 10v10h14V10"/></svg></a>
-    <button class="a11y-btn" onclick="togDys()" id="bDys">Dys</button>
+    <button class="a11y-btn" onclick="togDys()" id="bDys">Lecture facilitée</button>
     <button class="a11y-btn" onclick="setF('normal')">A</button>
     <button class="a11y-btn" onclick="setF('f-lg')">A+</button>
     <button class="a11y-btn" onclick="setF('f-xl')">A++</button>
@@ -290,16 +299,18 @@ body.f-xl{font-size:20px}
     <div class="step-num">Étape 1 / 6</div>
     <div class="step-title">Le rôle du tuteur</div>
     <div class="step-consigne">Ouvre le document IRIS-ST — Page 1. Lis la partie sur le rôle du tuteur.</div>
+    <div class="page-hint">Aide : regarde dans la partie « Rôle du tuteur » page 1.</div>
     <button class="btn-action" onclick="showQuestion(1)">J'ai lu, je réponds</button>
     <div class="question-zone" id="qzone1">
-      <div class="qcm-question">D'après le document, quel est le rôle principal du tuteur en entreprise ?</div>
+      <div class="qcm-question">D'après le document, quelle est la mission principale du tuteur vis-à-vis du nouvel arrivant ?</div>
       <div class="qcm-options">
-        <button class="qcm-option" onclick="check(1,this,0)">Vérifier les notes de l'apprenti au CFA</button>
-        <button class="qcm-option" onclick="check(1,this,1)">Accompagner le nouvel arrivant et veiller à sa sécurité</button>
-        <button class="qcm-option" onclick="check(1,this,0)">Signer les feuilles de présence</button>
-        <button class="qcm-option" onclick="check(1,this,0)">Fixer les horaires de travail</button>
+        <button class="qcm-option" onclick="check(1,this,1)">Lui transmettre les consignes de sécurité liées à son poste</button>
+        <button class="qcm-option" onclick="check(1,this,0)">Organiser son planning de travail hebdomadaire</button>
+        <button class="qcm-option" onclick="check(1,this,0)">Évaluer ses compétences techniques à la fin du stage</button>
+        <button class="qcm-option" onclick="check(1,this,0)">Lui fournir ses équipements de protection individuelle</button>
       </div>
       <div class="qcm-feedback" id="fb1"></div>
+      <div class="retenir"><strong>Il faut retenir :</strong><ul><li>Le tuteur transmet les consignes de sécurité du poste</li><li>Il est ton référent pendant toute la durée du stage</li><li>Tu peux le solliciter à tout moment en cas de doute</li></ul></div>
       <button class="btn-next-step" id="next1" onclick="goStep(2)">Étape suivante →</button>
     </div>
   </div>
@@ -309,16 +320,18 @@ body.f-xl{font-size:20px}
     <div class="step-num">Étape 2 / 6</div>
     <div class="step-title">Tes droits en entreprise</div>
     <div class="step-consigne">Toujours dans le document — Page 2. Repère les droits du salarié / stagiaire.</div>
+    <div class="page-hint">Aide : page 2, partie sur les droits du salarié.</div>
     <button class="btn-action" onclick="showQuestion(2)">J'ai lu, je réponds</button>
     <div class="question-zone" id="qzone2">
-      <div class="qcm-question">D'après le document, quel document l'employeur doit-il obligatoirement te présenter à ton arrivée ?</div>
+      <div class="qcm-question">Selon le document, le Document Unique d'Évaluation des Risques (DUER) doit être :</div>
       <div class="qcm-options">
-        <button class="qcm-option" onclick="check(2,this,0)">Le règlement intérieur uniquement</button>
-        <button class="qcm-option" onclick="check(2,this,1)">Le document unique d'évaluation des risques (DUER)</button>
-        <button class="qcm-option" onclick="check(2,this,0)">Le contrat de travail signé</button>
-        <button class="qcm-option" onclick="check(2,this,0)">La fiche de paie du mois précédent</button>
+        <button class="qcm-option" onclick="check(2,this,0)">Rédigé uniquement par le médecin du travail</button>
+        <button class="qcm-option" onclick="check(2,this,1)">Consultable par tous les salariés, y compris les stagiaires</button>
+        <button class="qcm-option" onclick="check(2,this,0)">Remis en main propre à chaque nouvel arrivant</button>
+        <button class="qcm-option" onclick="check(2,this,0)">Affiché dans le hall d'entrée de l'entreprise</button>
       </div>
       <div class="qcm-feedback" id="fb2"></div>
+      <div class="retenir"><strong>Il faut retenir :</strong><ul><li>Le DUER recense tous les risques identifiés dans l'entreprise</li><li>Tout salarié et tout stagiaire peut le consulter</li><li>L'employeur doit te le présenter à ton arrivée</li></ul></div>
       <button class="btn-next-step" id="next2" onclick="goStep(3)">Étape suivante →</button>
     </div>
   </div>
@@ -328,16 +341,18 @@ body.f-xl{font-size:20px}
     <div class="step-num">Étape 3 / 6</div>
     <div class="step-title">En cas d'accident</div>
     <div class="step-consigne">Page 3 du document. Lis la partie sur la conduite à tenir en cas d'accident.</div>
+    <div class="page-hint">Aide : page 3, partie « Conduite à tenir en cas d'accident ».</div>
     <button class="btn-action" onclick="showQuestion(3)">J'ai lu, je réponds</button>
     <div class="question-zone" id="qzone3">
-      <div class="qcm-question">D'après le document, à qui dois-tu signaler immédiatement un accident du travail ?</div>
+      <div class="qcm-question">D'après le document, quelle est la première démarche à effectuer après un accident du travail ?</div>
       <div class="qcm-options">
-        <button class="qcm-option" onclick="check(3,this,0)">À tes collègues de travail</button>
-        <button class="qcm-option" onclick="check(3,this,0)">À l'inspection du travail</button>
-        <button class="qcm-option" onclick="check(3,this,1)">À ton employeur ou ton tuteur</button>
-        <button class="qcm-option" onclick="check(3,this,0)">À la mairie de la commune</button>
+        <button class="qcm-option" onclick="check(3,this,0)">Rédiger un rapport d'accident pour l'inspection du travail</button>
+        <button class="qcm-option" onclick="check(3,this,0)">Prévenir le médecin traitant dans les 48 heures</button>
+        <button class="qcm-option" onclick="check(3,this,1)">Informer immédiatement l'employeur ou le tuteur</button>
+        <button class="qcm-option" onclick="check(3,this,0)">Déposer une main courante au commissariat</button>
       </div>
       <div class="qcm-feedback" id="fb3"></div>
+      <div class="retenir"><strong>Il faut retenir :</strong><ul><li>Accident = prévenir immédiatement ton employeur ou ton tuteur</li><li>L'employeur a 48h pour déclarer l'accident à la CPAM</li><li>Tu as droit à une prise en charge médicale</li></ul></div>
       <button class="btn-next-step" id="next3" onclick="goStep(4)">Étape suivante →</button>
     </div>
   </div>
@@ -347,16 +362,18 @@ body.f-xl{font-size:20px}
     <div class="step-num">Étape 4 / 6</div>
     <div class="step-title">Les protections au travail</div>
     <div class="step-consigne">Page 2 du document. Repère ce qui concerne la protection des jeunes travailleurs.</div>
+    <div class="page-hint">Aide : page 2, cherche la partie sur la protection des jeunes travailleurs.</div>
     <button class="btn-action" onclick="showQuestion(4)">J'ai lu, je réponds</button>
     <div class="question-zone" id="qzone4">
-      <div class="qcm-question">D'après le document, quelle protection spéciale concerne les travailleurs de moins de 18 ans ?</div>
+      <div class="qcm-question">D'après le document, quelle restriction s'applique spécifiquement aux travailleurs de moins de 18 ans ?</div>
       <div class="qcm-options">
-        <button class="qcm-option" onclick="check(4,this,0)">Ils ne peuvent pas travailler le matin</button>
-        <button class="qcm-option" onclick="check(4,this,0)">Ils ont droit à une pause supplémentaire</button>
-        <button class="qcm-option" onclick="check(4,this,1)">Certains travaux dangereux leur sont interdits</button>
-        <button class="qcm-option" onclick="check(4,this,0)">Ils doivent porter un badge spécial</button>
+        <button class="qcm-option" onclick="check(4,this,0)">Ils doivent être accompagnés en permanence par le tuteur</button>
+        <button class="qcm-option" onclick="check(4,this,0)">Ils ne peuvent pas utiliser de machines électriques</button>
+        <button class="qcm-option" onclick="check(4,this,1)">Certains travaux jugés dangereux leur sont réglementairement interdits</button>
+        <button class="qcm-option" onclick="check(4,this,0)">Ils bénéficient d'horaires aménagés avec pauses doublées</button>
       </div>
       <div class="qcm-feedback" id="fb4"></div>
+      <div class="retenir"><strong>Il faut retenir :</strong><ul><li>Les mineurs ne peuvent pas effectuer certains travaux dangereux</li><li>Ces interdictions sont réglementaires, pas négociables</li><li>Ton tuteur doit veiller au respect de ces restrictions</li></ul></div>
       <button class="btn-next-step" id="next4" onclick="goStep(5)">Étape suivante →</button>
     </div>
   </div>
@@ -366,16 +383,18 @@ body.f-xl{font-size:20px}
     <div class="step-num">Étape 5 / 6</div>
     <div class="step-title">L'accueil sécurité</div>
     <div class="step-consigne">Page 1 du document. Lis la partie sur l'accueil du nouvel arrivant.</div>
+    <div class="page-hint">Aide : page 1, partie « Accueil du nouvel arrivant ».</div>
     <button class="btn-action" onclick="showQuestion(5)">J'ai lu, je réponds</button>
     <div class="question-zone" id="qzone5">
-      <div class="qcm-question">D'après le document, que doit comprendre l'accueil sécurité en entreprise ?</div>
+      <div class="qcm-question">D'après le document, l'accueil sécurité doit obligatoirement inclure :</div>
       <div class="qcm-options">
-        <button class="qcm-option" onclick="check(5,this,0)">Uniquement la visite des locaux</button>
-        <button class="qcm-option" onclick="check(5,this,0)">La remise du badge d'accès</button>
-        <button class="qcm-option" onclick="check(5,this,1)">L'information sur les risques du poste et les consignes de sécurité</button>
-        <button class="qcm-option" onclick="check(5,this,0)">La présentation aux clients de l'entreprise</button>
+        <button class="qcm-option" onclick="check(5,this,0)">Une visite complète de tous les ateliers de l'entreprise</button>
+        <button class="qcm-option" onclick="check(5,this,0)">La présentation du comité social et économique (CSE)</button>
+        <button class="qcm-option" onclick="check(5,this,1)">L'information sur les risques du poste et les mesures de prévention</button>
+        <button class="qcm-option" onclick="check(5,this,0)">La remise d'un livret d'accueil avec les coordonnées du personnel</button>
       </div>
       <div class="qcm-feedback" id="fb5"></div>
+      <div class="retenir"><strong>Il faut retenir :</strong><ul><li>L'accueil sécurité porte sur les risques du poste et les consignes</li><li>Il doit avoir lieu AVANT que tu commences à travailler</li><li>C'est une obligation de l'employeur, pas une option</li></ul></div>
       <button class="btn-next-step" id="next5" onclick="goStep(6)">Étape suivante →</button>
     </div>
   </div>
@@ -384,17 +403,19 @@ body.f-xl{font-size:20px}
   <div class="step-card" id="step6">
     <div class="step-num">Étape 6 / 6</div>
     <div class="step-title">Le droit de retrait</div>
-    <div class="step-consigne">Cherche dans le document la notion de droit de retrait ou de danger grave.</div>
+    <div class="step-consigne">Dans le document, repère la partie qui parle du droit de retrait face à un danger.</div>
+    <div class="page-hint">Aide : cherche « droit de retrait » ou « danger grave » dans le document.</div>
     <button class="btn-action" onclick="showQuestion(6)">J'ai lu, je réponds</button>
     <div class="question-zone" id="qzone6">
-      <div class="qcm-question">D'après le document, dans quelle situation peux-tu exercer ton droit de retrait ?</div>
+      <div class="qcm-question">D'après le document, le droit de retrait peut être exercé quand :</div>
       <div class="qcm-options">
-        <button class="qcm-option" onclick="check(6,this,0)">Si le travail est trop fatigant</button>
-        <button class="qcm-option" onclick="check(6,this,0)">Si tu n'aimes pas la tâche demandée</button>
-        <button class="qcm-option" onclick="check(6,this,1)">Si tu estimes qu'il y a un danger grave et imminent pour ta vie ou ta santé</button>
-        <button class="qcm-option" onclick="check(6,this,0)">Si ton tuteur est absent</button>
+        <button class="qcm-option" onclick="check(6,this,0)">Le salarié estime que sa charge de travail est excessive</button>
+        <button class="qcm-option" onclick="check(6,this,0)">Les conditions météo rendent le travail inconfortable</button>
+        <button class="qcm-option" onclick="check(6,this,1)">Le salarié a un motif raisonnable de penser qu'il court un danger grave et imminent</button>
+        <button class="qcm-option" onclick="check(6,this,0)">Le tuteur ou le responsable est temporairement absent du site</button>
       </div>
       <div class="qcm-feedback" id="fb6"></div>
+      <div class="retenir"><strong>Il faut retenir :</strong><ul><li>Le droit de retrait concerne un danger grave et imminent</li><li>Tu n'as pas besoin de l'autorisation de ton supérieur</li><li>Tu dois informer ton employeur de ta décision</li></ul></div>
       <button class="btn-next-step" id="next6" onclick="showScore()">Voir mon score →</button>
     </div>
   </div>
@@ -445,28 +466,28 @@ var currentStep=0;
 /* Feedbacks */
 var feedbacks={
   1:{
-    ok:'Exact. Le tuteur est ton référent sécurité en entreprise.',
-    ko:'Relis la page 1. Le tuteur a un rôle d\u2019accompagnement et de vigilance sur ta sécurité.'
+    ok:'Exact. Le tuteur est chargé de transmettre les consignes de sécurité. C\u2019est sa mission première vis-à-vis du nouvel arrivant.',
+    ko:'Relis la page 1. Le tuteur a une mission précise liée à la sécurité du nouvel arrivant.'
   },
   2:{
-    ok:'Correct. Le DUER recense tous les risques du poste. Tu as le droit de le consulter.',
-    ko:'Relis la page 2 du mémo. L\u2019employeur doit présenter un document qui recense les risques.'
+    ok:'Correct. Le DUER est consultable par tout salarié et tout stagiaire. C\u2019est un droit.',
+    ko:'Relis la page 2 du document. Cherche les droits liés au DUER.'
   },
   3:{
-    ok:'Bien. L\u2019employeur ou le tuteur doit être prévenu immédiatement.',
-    ko:'Relis la page 3. Le signalement se fait à ton employeur ou à ton tuteur, pas à un organisme extérieur.'
+    ok:'Exact. Le signalement immédiat à l\u2019employeur ou au tuteur est la première étape obligatoire.',
+    ko:'Relis la page 3. La démarche à suivre en cas d\u2019accident y est décrite précisément.'
   },
   4:{
-    ok:'Exact. Les mineurs sont protégés par des interdictions de travaux dangereux.',
-    ko:'Relis la page 2. Il y a une mention spécifique sur les travaux interdits aux mineurs.'
+    ok:'Exact. La réglementation interdit certains travaux dangereux aux mineurs.',
+    ko:'Relis la page 2. Il y a une mention spécifique sur les restrictions pour les moins de 18 ans.'
   },
   5:{
-    ok:'Correct. L\u2019accueil sécurité porte sur les risques et les consignes, pas sur l\u2019administratif.',
-    ko:'Relis la page 1. L\u2019accueil sécurité concerne les risques et les mesures de prévention.'
+    ok:'Correct. L\u2019accueil sécurité porte sur les risques et les mesures de prévention, pas sur l\u2019administratif.',
+    ko:'Relis la page 1. L\u2019accueil sécurité a un contenu précis décrit dans le document.'
   },
   6:{
-    ok:'Exact. Le droit de retrait s\u2019exerce face à un danger grave et imminent.',
-    ko:'Cherche dans le document : le droit de retrait est lié à un danger grave et imminent.'
+    ok:'Exact. Le droit de retrait concerne un danger grave et imminent, pas un inconfort ou une surcharge.',
+    ko:'Cherche dans le document la définition exacte du droit de retrait. C\u2019est lié à la gravité du danger.'
   }
 };
 
@@ -574,6 +595,7 @@ function showScore(){
     msg.textContent='Module validé. Tu peux passer au module suivant.';
     msg.className='score-msg pass';
     localStorage.setItem('securite_done','true');
+    try{localStorage.setItem('inerweb_commun_accueil',JSON.stringify({completed:true,score10:s10,score:pts,total:max}));}catch(e){}
   } else {
     msg.textContent='Score insuffisant. Relis le document et réessaie.';
     msg.className='score-msg no-pass';

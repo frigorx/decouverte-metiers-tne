@@ -207,6 +207,14 @@ body.f-xl{font-size:20px}
 .welcome{transition:opacity .3s}
 .welcome.hidden{display:none}
 
+.page-hint{display:none;background:var(--orange-warm);border:1px dashed var(--orange);border-radius:var(--radius-sm);padding:10px 14px;margin-top:8px;font-size:.85em;color:#5a3518}
+body.guided .page-hint{display:block}
+
+.retenir{background:var(--turquoise-light);border:1px solid #b8dfe0;border-left:4px solid var(--turquoise);border-radius:var(--radius-sm);padding:14px 16px;margin-top:14px;font-size:.88em;line-height:1.6}
+.retenir strong{color:var(--turquoise);display:block;margin-bottom:6px}
+.retenir ul{margin:0;padding-left:18px}
+.retenir li{margin-bottom:4px;color:var(--text)}
+
 @media(max-width:600px){
   .theme-header h1{font-size:1.4em}
   .step{padding:16px}
@@ -230,7 +238,7 @@ body.f-xl{font-size:20px}
   </div>
   <div class="a11y">
     <a href="../index.html" class="a11y-btn" style="text-decoration:none"><svg viewBox="0 0 24 24" style="width:14px;height:14px;vertical-align:middle" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l9-9 9 9"/><path d="M5 10v10h14V10"/></svg></a>
-    <button class="a11y-btn" onclick="togDys()" id="bDys">Dys</button>
+    <button class="a11y-btn" onclick="togDys()" id="bDys">Lecture facilitée</button>
     <button class="a11y-btn" onclick="setF('normal')">A</button>
     <button class="a11y-btn" onclick="setF('f-lg')">A+</button>
     <button class="a11y-btn" onclick="setF('f-xl')">A++</button>
@@ -274,16 +282,18 @@ body.f-xl{font-size:20px}
     <div class="step-consigne">
       Ouvre le document IRIS-ST — Page 1. Observe le schéma des effets du courant sur le corps humain.
     </div>
+    <div class="page-hint">Observe le schéma des seuils page 1. Repère la ligne du 30 mA.</div>
     <button class="btn-read" onclick="showQuestion(1)">J'ai lu, je réponds</button>
     <div class="question-zone" id="qzone1">
-      <div class="qcm-question">D'après le document, à partir de quelle intensité le courant provoque-t-il une fibrillation cardiaque ?</div>
+      <div class="qcm-question">D'après le schéma des effets du courant dans le document (page 1), quel effet apparaît au seuil de 30 mA ?</div>
       <div class="qcm-options">
-        <button class="qcm-option" onclick="check(1,this,0)">10 mA</button>
-        <button class="qcm-option" onclick="check(1,this,1)">30 mA</button>
-        <button class="qcm-option" onclick="check(1,this,2)">75 mA</button>
-        <button class="qcm-option" onclick="check(1,this,3)">150 mA</button>
+        <button class="qcm-option" onclick="check(1,this,0)">Perception d'un léger picotement</button>
+        <button class="qcm-option" onclick="check(1,this,1)">Contraction musculaire empêchant de lâcher</button>
+        <button class="qcm-option" onclick="check(1,this,2)">Paralysie des muscles respiratoires</button>
+        <button class="qcm-option" onclick="check(1,this,3)">Fibrillation cardiaque irréversible</button>
       </div>
       <div class="qcm-feedback" id="fb1"></div>
+      <div class="retenir"><strong>Il faut retenir :</strong><ul><li>30 mA = paralysie respiratoire (seuil du différentiel)</li><li>75 mA = fibrillation cardiaque</li><li>Le courant tue à des intensités très faibles</li></ul></div>
       <button class="btn-next-step" id="btnNext1" onclick="goStep(2)">Étape suivante →</button>
     </div>
   </div>
@@ -295,16 +305,18 @@ body.f-xl{font-size:20px}
     <div class="step-consigne">
       Page 2 du document. Repère les distances de sécurité à respecter près des lignes électriques.
     </div>
+    <div class="page-hint">Page 2, cherche les distances de sécurité près des lignes aériennes.</div>
     <button class="btn-read" onclick="showQuestion(2)">J'ai lu, je réponds</button>
     <div class="question-zone" id="qzone2">
-      <div class="qcm-question">D'après le document, quelle distance minimale faut-il respecter par rapport à un réseau aérien de moins de 50 000 volts ?</div>
+      <div class="qcm-question">D'après le document, quelle est la distance minimale de sécurité à respecter à proximité d'un réseau aérien nu de moins de 50 000 volts ?</div>
       <div class="qcm-options">
-        <button class="qcm-option" onclick="check(2,this,0)">1 mètre</button>
-        <button class="qcm-option" onclick="check(2,this,1)">2 mètres</button>
-        <button class="qcm-option" onclick="check(2,this,2)">3 mètres</button>
-        <button class="qcm-option" onclick="check(2,this,3)">5 mètres</button>
+        <button class="qcm-option" onclick="check(2,this,0)">2 mètres</button>
+        <button class="qcm-option" onclick="check(2,this,1)">3 mètres</button>
+        <button class="qcm-option" onclick="check(2,this,2)">5 mètres</button>
+        <button class="qcm-option" onclick="check(2,this,3)">La distance dépend uniquement du matériau de l'échelle</button>
       </div>
       <div class="qcm-feedback" id="fb2"></div>
+      <div class="retenir"><strong>Il faut retenir :</strong><ul><li>3 mètres minimum près d'une ligne basse tension (&lt; 50 kV)</li><li>5 mètres minimum en haute tension</li><li>L'arc électrique peut jaillir sans contact</li></ul></div>
       <button class="btn-next-step" id="btnNext2" onclick="goStep(3)">Étape suivante →</button>
     </div>
   </div>
@@ -316,16 +328,18 @@ body.f-xl{font-size:20px}
     <div class="step-consigne">
       Cherche dans le document la procédure de consignation (mise hors tension sécurisée).
     </div>
+    <div class="page-hint">Cherche la procédure de consignation. L'ordre des étapes est numéroté.</div>
     <button class="btn-read" onclick="showQuestion(3)">J'ai lu, je réponds</button>
     <div class="question-zone" id="qzone3">
-      <div class="qcm-question">D'après le document, quelle est la première étape de la consignation avant d'intervenir sur un circuit électrique ?</div>
+      <div class="qcm-question">Selon le document, quelle est la toute première étape de la procédure de consignation ?</div>
       <div class="qcm-options">
-        <button class="qcm-option" onclick="check(3,this,0)">Vérifier l'absence de tension</button>
-        <button class="qcm-option" onclick="check(3,this,1)">Séparer (couper l'alimentation)</button>
-        <button class="qcm-option" onclick="check(3,this,2)">Mettre à la terre</button>
-        <button class="qcm-option" onclick="check(3,this,3)">Poser un cadenas</button>
+        <button class="qcm-option" onclick="check(3,this,0)">Condamner le dispositif de coupure par un cadenas</button>
+        <button class="qcm-option" onclick="check(3,this,1)">Vérifier l'absence de tension avec un VAT</button>
+        <button class="qcm-option" onclick="check(3,this,2)">Séparer l'installation de sa source d'alimentation</button>
+        <button class="qcm-option" onclick="check(3,this,3)">Identifier formellement le circuit concerné</button>
       </div>
       <div class="qcm-feedback" id="fb3"></div>
+      <div class="retenir"><strong>Il faut retenir :</strong><ul><li>Ordre de consignation : Séparer → Condamner → Identifier → Vérifier (VAT) → Protéger</li><li>L'ordre est essentiel pour la sécurité</li><li>La vérification d'absence de tension (VAT) vient APRÈS la condamnation</li></ul></div>
       <button class="btn-next-step" id="btnNext3" onclick="goStep(4)">Étape suivante →</button>
     </div>
   </div>
@@ -337,16 +351,18 @@ body.f-xl{font-size:20px}
     <div class="step-consigne">
       Dans le document, repère les équipements de protection contre le risque électrique.
     </div>
+    <div class="page-hint">Cherche dans le document la partie sur les protections de chantier.</div>
     <button class="btn-read" onclick="showQuestion(4)">J'ai lu, je réponds</button>
     <div class="question-zone" id="qzone4">
-      <div class="qcm-question">D'après le document, quel dispositif de protection est obligatoire sur les chantiers pour couper automatiquement le courant en cas de fuite ?</div>
+      <div class="qcm-question">D'après le document, pourquoi le différentiel 30 mA est-il obligatoire sur les chantiers ?</div>
       <div class="qcm-options">
-        <button class="qcm-option" onclick="check(4,this,0)">Un disjoncteur thermique</button>
-        <button class="qcm-option" onclick="check(4,this,1)">Un différentiel 30 mA</button>
-        <button class="qcm-option" onclick="check(4,this,2)">Un parafoudre</button>
-        <button class="qcm-option" onclick="check(4,this,3)">Une mise à la terre seule</button>
+        <button class="qcm-option" onclick="check(4,this,0)">Il protège les installations contre les courts-circuits</button>
+        <button class="qcm-option" onclick="check(4,this,1)">Il limite la consommation électrique des appareils</button>
+        <button class="qcm-option" onclick="check(4,this,2)">Il coupe le courant dès qu'une fuite dangereuse est détectée</button>
+        <button class="qcm-option" onclick="check(4,this,3)">Il empêche les surtensions en cas d'orage</button>
       </div>
       <div class="qcm-feedback" id="fb4"></div>
+      <div class="retenir"><strong>Il faut retenir :</strong><ul><li>Le différentiel 30 mA est obligatoire sur les chantiers</li><li>Il coupe le courant dès qu'une fuite dangereuse est détectée</li><li>30 mA = le seuil de paralysie respiratoire</li></ul></div>
       <button class="btn-next-step" id="btnNext4" onclick="goStep(5)">Étape suivante →</button>
     </div>
   </div>
@@ -356,18 +372,20 @@ body.f-xl{font-size:20px}
     <div class="step-num">Étape 5 / 6</div>
     <div class="step-title">Les situations à risque</div>
     <div class="step-consigne">
-      Relis le document dans son ensemble. Repère les situations décrites comme dangereuses.
+      Dans le document, repère la distinction entre contact direct et contact indirect.
     </div>
+    <div class="page-hint">Cherche dans le document la partie sur les types de contacts électriques.</div>
     <button class="btn-read" onclick="showQuestion(5)">J'ai lu, je réponds</button>
     <div class="question-zone" id="qzone5">
-      <div class="qcm-question">D'après le document, pourquoi le contact indirect (toucher le carter métallique d'une machine) est-il dangereux ?</div>
+      <div class="qcm-question">D'après le document, qu'est-ce qu'un contact indirect avec l'électricité ?</div>
       <div class="qcm-options">
-        <button class="qcm-option" onclick="check(5,this,0)">Parce que le métal est chaud</button>
-        <button class="qcm-option" onclick="check(5,this,1)">Parce que le métal est coupant</button>
-        <button class="qcm-option" onclick="check(5,this,2)">Parce qu'un défaut d'isolement peut faire passer le courant dans le carter</button>
-        <button class="qcm-option" onclick="check(5,this,3)">Parce que les machines vibrent</button>
+        <button class="qcm-option" onclick="check(5,this,0)">Toucher un fil électrique dénudé avec un outil métallique</button>
+        <button class="qcm-option" onclick="check(5,this,1)">Recevoir un arc électrique à distance d'une installation</button>
+        <button class="qcm-option" onclick="check(5,this,2)">Toucher une masse métallique mise sous tension par un défaut d'isolement</button>
+        <button class="qcm-option" onclick="check(5,this,3)">Travailler à proximité d'une ligne aérienne sous tension</button>
       </div>
       <div class="qcm-feedback" id="fb5"></div>
+      <div class="retenir"><strong>Il faut retenir :</strong><ul><li>Contact direct = toucher un conducteur sous tension</li><li>Contact indirect = toucher une masse métallique rendue conductrice par un défaut</li><li>Les deux sont mortels</li></ul></div>
       <button class="btn-next-step" id="btnNext5" onclick="goStep(6)">Étape suivante →</button>
     </div>
   </div>
@@ -379,16 +397,18 @@ body.f-xl{font-size:20px}
     <div class="step-consigne">
       Cherche dans le document la conduite à tenir en cas d'accident électrique.
     </div>
+    <div class="page-hint">Cherche la partie « Conduite à tenir en cas d'accident ».</div>
     <button class="btn-read" onclick="showQuestion(6)">J'ai lu, je réponds</button>
     <div class="question-zone" id="qzone6">
-      <div class="qcm-question">D'après le document, quel est le premier geste à faire face à une personne électrisée ?</div>
+      <div class="qcm-question">D'après le document, quel est le tout premier geste à faire face à une victime d'accident électrique ?</div>
       <div class="qcm-options">
-        <button class="qcm-option" onclick="check(6,this,0)">La tirer par les vêtements pour la dégager</button>
-        <button class="qcm-option" onclick="check(6,this,1)">Couper le courant avant de toucher la victime</button>
-        <button class="qcm-option" onclick="check(6,this,2)">Appeler immédiatement le 15</button>
-        <button class="qcm-option" onclick="check(6,this,3)">Lui jeter de l'eau</button>
+        <button class="qcm-option" onclick="check(6,this,0)">Appeler immédiatement les secours (15 ou 112)</button>
+        <button class="qcm-option" onclick="check(6,this,1)">Éloigner la victime de la source électrique à mains nues</button>
+        <button class="qcm-option" onclick="check(6,this,2)">Couper ou faire couper le courant avant tout contact avec la victime</button>
+        <button class="qcm-option" onclick="check(6,this,3)">Pratiquer un massage cardiaque en attendant les secours</button>
       </div>
       <div class="qcm-feedback" id="fb6"></div>
+      <div class="retenir"><strong>Il faut retenir :</strong><ul><li>Premier geste : COUPER le courant</li><li>Ne JAMAIS toucher la victime sous tension</li><li>Appeler les secours APRÈS avoir coupé</li></ul></div>
       <button class="btn-next-step" id="btnNext6" onclick="showScore()">Voir mon score →</button>
     </div>
   </div>
@@ -428,26 +448,27 @@ function setF(c){
   if(localStorage.getItem('a11y-dys')==='true'){document.body.classList.add('dys');document.getElementById('bDys').classList.add('on');}
   var fs=localStorage.getItem('a11y-size');
   if(fs==='f-lg'||fs==='f-xl')document.body.classList.add(fs);
+  if(localStorage.getItem('guidedMode')==='true') document.body.classList.add('guided');
 })();
 
 // Données des questions
 var TOTAL=6;
-var correctIndex=[2,2,1,1,2,1]; // index de la bonne réponse (0-based) pour chaque étape
+var correctIndex=[2,1,2,2,2,2]; // index de la bonne réponse (0-based) pour chaque étape
 var feedbackOK=[
-  "Exact. 75 mA suffit à provoquer une fibrillation cardiaque. C'est pour ça que les protections sont réglées bien en dessous.",
-  "Correct. 3 mètres minimum en basse tension, 5 mètres en haute tension.",
-  "Exact. On SÉPARE d'abord (on coupe), puis on condamne, identifie, vérifie et protège.",
-  "Correct. Le différentiel 30 mA coupe le courant dès qu'il détecte une fuite — c'est la protection de base sur chantier.",
-  "Exact. Un défaut d'isolement = courant de fuite dans le carter. C'est un contact indirect, invisible mais dangereux.",
-  "Exact. On coupe le courant EN PREMIER. Toucher la victime sous tension, c'est devenir victime soi-même."
+  "Exact. 30 mA provoque la paralysie respiratoire. C'est ce seuil qui justifie la protection différentielle 30 mA.",
+  "Correct. 3 mètres en basse tension (< 50 kV). 5 mètres pour la haute tension.",
+  "Exact. On SÉPARE d'abord, puis on condamne, identifie, vérifie (VAT) et protège. L'ordre est essentiel.",
+  "Correct. Le différentiel 30 mA détecte les fuites de courant et coupe avant que le seuil dangereux (30 mA = paralysie respiratoire) ne soit atteint.",
+  "Exact. Le contact indirect se produit quand on touche une masse métallique (carter, châssis) rendue conductrice par un défaut d'isolement.",
+  "Exact. Couper le courant est le premier geste obligatoire. Toucher la victime avant = devenir victime."
 ];
 var feedbackKO=[
-  "Relis le schéma page 1. Les seuils sont indiqués en mA avec les effets correspondants.",
-  "Relis la page 2. Les distances de sécurité y sont clairement indiquées.",
-  "Relis la procédure de consignation dans le document. L'ordre des étapes est important.",
-  "Relis le document. Cherche la protection qui détecte les fuites de courant.",
-  "Relis la partie du document sur les contacts directs et indirects.",
-  "Relis le document. La première action est toujours de couper le courant."
+  "Relis le schéma page 1. Les seuils sont 0,5 mA → perception, 10 mA → non-lâcher, 30 mA → ?, 75 mA → fibrillation.",
+  "Relis la page 2. Les distances de sécurité y sont indiquées selon la tension.",
+  "Relis la procédure de consignation dans le document. Les étapes sont numérotées dans un ordre précis.",
+  "Relis le document. Le différentiel a un rôle de protection très précis lié aux fuites.",
+  "Relis le document. La distinction entre contact direct et indirect y est expliquée.",
+  "Relis la conduite à tenir en cas d'accident dans le document. L'ordre des actions est crucial."
 ];
 
 var attempts=[];
@@ -543,6 +564,7 @@ function showScore(){
     bar.classList.remove('fail');
     msg.className='score-msg pass';
     msg.textContent='Module validé. Tu sais repérer les dangers électriques dans le document.';
+    try{var s10=Math.round((total/max)*10);localStorage.setItem('inerweb_commun_electrique',JSON.stringify({completed:true,score10:s10,score:total,total:max}));}catch(e){}
   }else{
     bar.classList.add('fail');
     msg.className='score-msg no-pass';
