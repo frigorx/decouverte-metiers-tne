@@ -68,113 +68,77 @@ body.f-xl{font-size:20px}
 .theme-header h1{font-size:1.8em;font-weight:700;margin-bottom:6px}
 .theme-header p{font-size:1em;opacity:.9}
 
-.intro-box{
+/* Accueil */
+.accueil-box{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:24px;margin-bottom:20px;text-align:center;
+}
+.accueil-box .objectif{
+  font-size:.95em;color:var(--text);margin-bottom:16px;line-height:1.6;
+}
+.accueil-box .rappel{
+  background:var(--orange-warm);border:1px dashed var(--orange);border-radius:var(--radius-sm);
+  padding:10px 14px;margin-bottom:18px;font-size:.88em;color:#5a3518;line-height:1.5;
+}
+.doc-btns{display:flex;flex-direction:column;gap:10px;margin-bottom:18px;align-items:center}
+.doc-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 20px;border-radius:var(--radius-pill);
+  background:var(--navy);color:#fff;text-decoration:none;
+  font-weight:600;font-size:.92em;transition:all .2s;
+  border:none;cursor:pointer;font-family:inherit;
+}
+.doc-btn:hover{background:var(--navy-mid);box-shadow:var(--shadow)}
+.doc-btn svg{flex-shrink:0}
+.btn-commencer{
+  padding:14px 32px;border-radius:var(--radius-pill);
+  background:linear-gradient(135deg,var(--orange),var(--orange-hover));
+  color:#fff;font-weight:700;font-size:1.05em;border:none;cursor:pointer;
+  font-family:inherit;transition:all .2s;box-shadow:var(--shadow-orange);
+}
+.btn-commencer:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(232,145,74,.45)}
+
+/* Barre de progression */
+.progress-wrap{
+  background:var(--line);border-radius:999px;height:10px;margin-bottom:20px;overflow:hidden;
+}
+.progress-fill{
+  height:100%;border-radius:999px;transition:width .4s ease;
+  background:linear-gradient(90deg,var(--turquoise),var(--ok));width:0%;
+}
+.progress-label{
+  text-align:center;font-size:.82em;color:var(--muted);font-weight:600;margin-bottom:6px;
+}
+
+/* Etapes */
+.step{display:none}
+.step.active{display:block}
+
+.step-card{
+  background:var(--card);border:1px solid var(--line);border-left:5px solid var(--orange);
+  border-radius:var(--radius);box-shadow:var(--shadow);padding:24px;margin-bottom:18px;
+}
+.step-title{
+  font-size:1.15em;font-weight:700;color:var(--navy);margin-bottom:12px;
+  padding-bottom:6px;border-bottom:2px solid var(--orange);
+}
+.step-consigne{
   background:var(--orange-warm);border-left:4px solid var(--orange);
   border-radius:0 var(--radius-sm) var(--radius-sm) 0;
-  padding:14px 18px;margin-bottom:20px;font-size:.9em;color:#5a3518;line-height:1.6;
+  padding:12px 16px;margin-bottom:16px;font-size:.9em;color:#5a3518;line-height:1.6;
 }
+.btn-lu{
+  display:block;margin:0 auto 18px;
+  padding:12px 28px;border-radius:var(--radius-pill);
+  background:var(--turquoise);color:#fff;font-weight:700;font-size:.95em;
+  border:none;cursor:pointer;font-family:inherit;transition:all .2s;
+}
+.btn-lu:hover{background:#1d9e9e;transform:translateY(-1px)}
+.btn-lu:disabled{opacity:.5;cursor:default;transform:none}
 
-.stat-box{
-  background:linear-gradient(135deg,var(--navy),var(--navy-mid));
-  color:#fff;border-radius:var(--radius-sm);padding:14px 18px;
-  margin-bottom:24px;text-align:center;font-size:.95em;font-weight:600;
-}
-.stat-box span{color:var(--orange);font-size:1.3em;font-weight:700}
+.question-zone{display:none}
+.question-zone.visible{display:block}
 
-/* Section titles */
-.section-title{
-  font-size:1.15em;font-weight:700;color:var(--navy);margin-bottom:12px;
-  padding-bottom:6px;border-bottom:2px solid var(--orange);display:inline-block;
-}
-
-/* Danger cards */
-.danger-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:24px}
-.danger-card{
-  background:var(--card);border:1px solid var(--line);border-radius:var(--radius-sm);
-  padding:14px;text-align:center;box-shadow:var(--shadow);
-}
-.danger-card .ico{font-size:1.8em;margin-bottom:6px}
-.danger-card h4{font-size:.9em;color:var(--text-strong);margin-bottom:4px}
-.danger-card p{font-size:.78em;color:var(--muted);line-height:1.45}
-.svg-ico{width:40px;height:40px;margin:0 auto 8px}
-.svg-ico svg{width:100%;height:100%;display:block}
-.danger-card .rule{
-  margin-top:6px;font-size:.78em;font-weight:700;color:var(--bad);
-  background:#fdeaea;border-radius:6px;padding:4px 6px;
-}
-
-/* Principe box */
-.principe-box{
-  background:linear-gradient(135deg,var(--ok),#1e8449);color:#fff;
-  border-radius:var(--radius-sm);padding:14px 18px;margin-bottom:14px;
-  text-align:center;font-weight:700;font-size:1em;
-}
-
-/* Protection blocks */
-.protect-block{
-  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
-  box-shadow:var(--shadow);padding:20px;margin-bottom:14px;
-}
-.protect-block h3{font-size:1.05em;color:var(--navy);margin-bottom:10px}
-.protect-block.collective{border-left:5px solid var(--ok)}
-.protect-block.individuelle{border-left:5px solid var(--turquoise)}
-.protect-label{
-  display:inline-block;font-size:.75em;font-weight:700;text-transform:uppercase;
-  padding:3px 10px;border-radius:var(--radius-pill);margin-bottom:10px;color:#fff;
-}
-.protect-label.prio{background:var(--ok)}
-.protect-label.secours{background:var(--turquoise)}
-.protect-item{
-  padding:8px 0;border-bottom:1px solid var(--line);font-size:.9em;line-height:1.5;
-}
-.protect-item:last-child{border-bottom:none}
-.protect-item strong{color:var(--text-strong)}
-
-/* Rules section */
-.rules-section{
-  background:var(--card);border:1px solid var(--line);border-left:5px solid var(--navy);
-  border-radius:var(--radius);padding:20px;margin-bottom:20px;box-shadow:var(--shadow);
-}
-.rules-section h3{font-size:1.1em;color:var(--navy);margin-bottom:12px}
-.rules-sub{font-size:.9em;font-weight:700;color:var(--orange);margin:10px 0 6px;text-transform:uppercase}
-.rules-list{list-style:none;counter-reset:rule}
-.rules-list li{
-  counter-increment:rule;padding:8px 0 8px 36px;position:relative;
-  border-bottom:1px solid var(--line);font-size:.95em;
-}
-.rules-list li:last-child{border-bottom:none}
-.rules-list li::before{
-  content:counter(rule);position:absolute;left:0;top:8px;
-  width:26px;height:26px;border-radius:50%;
-  background:var(--navy);color:#fff;font-weight:700;font-size:.8em;
-  display:grid;place-items:center;
-}
-.rules-list li strong{color:var(--orange)}
-
-/* Verification section */
-.verif-section{
-  background:var(--card);border:1px solid var(--line);border-left:5px solid var(--bad);
-  border-radius:var(--radius);padding:20px;margin-bottom:24px;box-shadow:var(--shadow);
-}
-.verif-section h3{font-size:1.1em;color:var(--navy);margin-bottom:12px}
-.verif-list{list-style:none}
-.verif-list li{
-  padding:8px 0 8px 28px;position:relative;
-  border-bottom:1px solid var(--line);font-size:.9em;
-}
-.verif-list li:last-child{border-bottom:none}
-.verif-list li::before{
-  content:'';position:absolute;left:0;top:14px;
-  width:16px;height:16px;border-radius:4px;border:2px solid var(--bad);
-}
-.verif-list li strong{color:var(--bad)}
-
-/* Questions */
-.activity{
-  background:var(--card);border:1px solid var(--line);border-left:5px solid var(--orange);
-  border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-bottom:18px;
-}
-.activity-num{font-size:.85em;color:var(--turquoise);font-weight:700;margin-bottom:6px}
 .qcm-question{font-size:1em;font-weight:600;color:var(--navy);margin-bottom:14px;line-height:1.5}
 .qcm-options{display:grid;gap:8px}
 .qcm-option{
@@ -188,10 +152,19 @@ body.f-xl{font-size:20px}
 .qcm-option:disabled{cursor:default}
 .qcm-feedback{
   margin-top:10px;padding:10px 14px;border-radius:var(--radius-sm);
-  font-weight:600;font-size:.9em;display:none;
+  font-weight:600;font-size:.9em;display:none;line-height:1.5;
 }
 .qcm-feedback.show-ok{display:block;background:#d4edda;color:#155724;border:1px solid #c3e6cb}
 .qcm-feedback.show-ko{display:block;background:#f8d7da;color:#721c24;border:1px solid #f5c6cb}
+
+.btn-next-step{
+  display:none;margin:14px auto 0;
+  padding:12px 28px;border-radius:var(--radius-pill);
+  background:var(--orange);color:#fff;font-weight:700;font-size:.95em;
+  border:none;cursor:pointer;font-family:inherit;transition:all .2s;
+}
+.btn-next-step:hover{background:var(--orange-hover);transform:translateY(-1px)}
+.btn-next-step.visible{display:block}
 
 /* Score */
 .score-section{
@@ -228,16 +201,14 @@ body.f-xl{font-size:20px}
 
 .footer{padding:16px;text-align:center;font-size:.72em;color:var(--muted);border-top:1px solid var(--line);margin-top:30px}
 
-.mb-20{margin-bottom:20px}
-.mb-24{margin-bottom:24px}
-
 @media(max-width:600px){
   .theme-header h1{font-size:1.4em}
-  .activity{padding:16px}
-  .danger-grid{grid-template-columns:1fr 1fr}
+  .step-card{padding:16px}
   .topbar{flex-direction:column;text-align:center}
   .bottom-nav{flex-direction:column;align-items:stretch;text-align:center}
   .bottom-nav a{justify-content:center}
+  .doc-btns{align-items:stretch}
+  .doc-btn{justify-content:center}
 }
 </style>
 </head>
@@ -247,8 +218,8 @@ body.f-xl{font-size:20px}
   <div class="brand">
     <div class="brand__mark"><svg viewBox="0 0 24 24" style="width:24px;height:24px" fill="none" stroke="var(--navy)" stroke-width="2"><path d="M8 2h8v20H8V2z"/><path d="M8 6h8M8 10h8M8 14h8M8 18h8"/></svg></div>
     <div>
-      <div class="brand__title">LPP Jacques Raynaud · Campus Équatio</div>
-      <div class="brand__sub">2nde TNE — Travail en hauteur</div>
+      <div class="brand__title">LPP Jacques Raynaud &middot; Campus Equatio</div>
+      <div class="brand__sub">2nde TNE &mdash; Travail en hauteur</div>
     </div>
   </div>
   <div class="a11y">
@@ -265,206 +236,156 @@ body.f-xl{font-size:20px}
   <!-- HEADER -->
   <div class="theme-header">
     <h1>Travail en hauteur</h1>
-    <p>Les bons réflexes pour ne pas tomber — commun à tous les métiers</p>
+    <p>Lecture guid&eacute;e des documents IRIS-ST</p>
   </div>
 
-  <!-- INTRODUCTION -->
-  <div class="intro-box">
-    <strong>Les chutes de hauteur sont la 2e cause de mortalité au travail en France</strong> (après les accidents de trajet). Que tu montes sur un toit pour poser un split, sur un échafaudage pour tirer des câbles ou simplement sur une échelle pour accéder à un faux plafond, il y a des règles à connaître.
+  <!-- PROGRESSION -->
+  <div class="progress-label" id="progressLabel"></div>
+  <div class="progress-wrap" id="progressWrap" style="display:none">
+    <div class="progress-fill" id="progressFill"></div>
   </div>
 
-  <div class="stat-box">
-    <span>+ de 10 000</span> accidents avec arrêt par an liés aux chutes de hauteur dans le BTP
-  </div>
-
-  <!-- LES SITUATIONS À RISQUE -->
-  <h2 class="section-title">Les situations à risque</h2>
-  <div class="danger-grid">
-    <div class="danger-card">
-      <div class="ico svg-ico"><svg viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><path d="M8 2h8v20H8V2z"/><path d="M8 6h8M8 10h8M8 14h8M8 18h8"/></svg></div>
-      <h4>Échelles & escabeaux</h4>
-      <p>Glissement du pied, déséquilibre latéral, échelons défectueux</p>
-      <div class="rule">L'échelle n'est PAS un poste de travail — c'est un moyen d'accès</div>
-    </div>
-    <div class="danger-card">
-      <div class="ico svg-ico"><svg viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="1.8"><path d="M20 2H4v16h16V2z"/><path d="M8 2v16M16 2v16M4 8h16M4 14h16"/></svg></div>
-      <h4>Échafaudages</h4>
-      <p>Garde-corps absent, plancher mal fixé, surcharge, montage non conforme</p>
-      <div class="rule">Cause n°1 de chutes mortelles dans le BTP</div>
-    </div>
-    <div class="danger-card">
-      <div class="ico svg-ico"><svg viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><path d="M3 12l9-9 9 9"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6" stroke="var(--navy)"/></svg></div>
-      <h4>Toitures</h4>
-      <p>Matériaux fragiles (fibrociment, lanterneaux), surface mouillée, absence de protection en rive</p>
-      <div class="rule">Ne jamais marcher sur un matériau dont on ignore la résistance</div>
-    </div>
-    <div class="danger-card">
-      <div class="ico svg-ico"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2L1 21h22L12 2z" stroke="var(--bad)" stroke-width="1.5"/><path d="M12 17h.01M12 10v4" stroke="var(--bad)" stroke-width="2.5"/></svg></div>
-      <h4>Ouvertures au sol</h4>
-      <p>Trémies d'escalier, fosses, trappes non protégées</p>
-      <div class="rule">Risque sous-estimé, surtout sur chantiers en cours</div>
+  <!-- PAGE D'ACCUEIL -->
+  <div class="step active" id="step-0">
+    <div class="accueil-box">
+      <p class="objectif">Ce module v&eacute;rifie que tu sais rep&eacute;rer les r&egrave;gles de s&eacute;curit&eacute; pour le travail en hauteur dans les documents de r&eacute;f&eacute;rence.</p>
+      <div class="rappel">Tu as besoin de deux documents IRIS-ST pour r&eacute;pondre. Ouvre-les maintenant et garde-les accessibles.</div>
+      <div class="doc-btns">
+        <a href="../docs/IRIS-ST-Echelles-Escabeaux.pdf" target="_blank" class="doc-btn">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+          Ouvrir &mdash; &Eacute;chelles et Escabeaux
+        </a>
+        <a href="../docs/IRIS-ST-Echafaudage-Fixe.pdf" target="_blank" class="doc-btn">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+          Ouvrir &mdash; &Eacute;chafaudage Fixe
+        </a>
+      </div>
+      <button class="btn-commencer" onclick="goStep(1)">Commencer</button>
     </div>
   </div>
 
-  <!-- LES PROTECTIONS -->
-  <h2 class="section-title">Les protections</h2>
-
-  <div class="principe-box">
-    Protection collective D'ABORD — individuelle ENSUITE
-  </div>
-
-  <div class="protect-block collective">
-    <span class="protect-label prio">Prioritaire</span>
-    <h3>Protections collectives</h3>
-    <div class="protect-item">
-      <strong>Garde-corps</strong> — lisse haute (1 m minimum), sous-lisse, plinthe. Protège tout le monde automatiquement sans action individuelle.
-    </div>
-    <div class="protect-item">
-      <strong>Filets de sécurité</strong> — installés au plus près de la zone de travail (norme NF EN 1263).
-    </div>
-    <div class="protect-item">
-      <strong>Plateformes PIRL</strong> — remplacent l'échelle pour les travaux courts, stables avec garde-corps intégrés.
-    </div>
-  </div>
-
-  <div class="protect-block individuelle mb-24">
-    <span class="protect-label secours">Dernier recours</span>
-    <h3>Protections individuelles</h3>
-    <div class="protect-item">
-      <strong>Harnais antichute</strong> — porté sur le corps, répartit les efforts. Anneau dorsal connecté au système d'arrêt des chutes.
-    </div>
-    <div class="protect-item">
-      <strong>Longe + absorbeur d'énergie</strong> — limite la force de choc à 6 kN maximum.
-    </div>
-    <div class="protect-item">
-      <strong>Point d'ancrage</strong> — doit résister à 10 kN. Fixé sur élément structurel solide (béton, acier). <span style="color:var(--bad);font-weight:700">JAMAIS sur une gouttière, un bardage ou un élément léger.</span>
+  <!-- ÉTAPE 1 -->
+  <div class="step" id="step-1">
+    <div class="step-card">
+      <div class="step-title">&Eacute;tape 1 &mdash; L'&eacute;chelle : moyen d'acc&egrave;s, pas poste de travail</div>
+      <div class="step-consigne">Ouvre le document <strong>&Eacute;chelles et Escabeaux</strong>. Lis la premi&egrave;re page.</div>
+      <button class="btn-lu" id="btnLu1" onclick="showQuestion(1)">J'ai lu, je r&eacute;ponds</button>
+      <div class="question-zone" id="qzone-1">
+        <div class="qcm-question">D'apr&egrave;s le document, quelle est la r&egrave;gle principale concernant l'utilisation d'une &eacute;chelle sur un chantier ?</div>
+        <div class="qcm-options">
+          <button class="qcm-option" onclick="check(1,this,false)">On peut travailler sur une &eacute;chelle toute la journ&eacute;e si elle est stable</button>
+          <button class="qcm-option" onclick="check(1,this,true)">L'&eacute;chelle est un moyen d'acc&egrave;s, pas un poste de travail &mdash; usage limit&eacute; aux travaux courts</button>
+          <button class="qcm-option" onclick="check(1,this,false)">Deux personnes peuvent monter en m&ecirc;me temps si elles sont l&eacute;g&egrave;res</button>
+          <button class="qcm-option" onclick="check(1,this,false)">L'angle d'inclinaison n'a pas d'importance</button>
+        </div>
+        <div class="qcm-feedback" id="fb-1"></div>
+        <button class="btn-next-step" id="btnNext1" onclick="goStep(2)">&Eacute;tape suivante &rarr;</button>
+      </div>
     </div>
   </div>
 
-  <!-- RÈGLES POUR LES ÉCHELLES -->
-  <div class="rules-section">
-    <h3>Règles pour les échelles</h3>
-
-    <div class="rules-sub">Avant — Vérifier</div>
-    <ol class="rules-list" style="counter-reset:rule">
-      <li><strong>Montants</strong> — pas de fissure, pas de déformation</li>
-      <li><strong>Échelons</strong> — tous présents, bien fixés</li>
-      <li><strong>Patins antidérapants</strong> — en bon état, propres</li>
-    </ol>
-
-    <div class="rules-sub">Mise en place</div>
-    <ol class="rules-list" style="counter-reset:rule">
-      <li><strong>Angle 75°</strong> — 1 m de base pour 4 m de hauteur (règle du 1/4)</li>
-      <li><strong>Dépassement</strong> — l'échelle dépasse d'au moins 1 m le point d'arrivée</li>
-      <li><strong>Sol stable</strong> — surface plane, pas de gravats, pas de terre meuble</li>
-    </ol>
-
-    <div class="rules-sub">Utilisation</div>
-    <ol class="rules-list" style="counter-reset:rule">
-      <li><strong>3 points d'appui</strong> — toujours (2 mains + 1 pied ou 2 pieds + 1 main)</li>
-      <li><strong>Jamais à deux</strong> — une seule personne à la fois sur l'échelle</li>
-    </ol>
-
-    <div class="rules-sub">Interdictions</div>
-    <ol class="rules-list" style="counter-reset:rule">
-      <li><strong>Pas de charge lourde</strong> — le matériel monte par un autre moyen</li>
-      <li><strong>Pas de vent fort</strong> — risque de déstabilisation</li>
-      <li><strong>Pas d'échelle endommagée</strong> — même pour « juste 2 minutes »</li>
-    </ol>
-  </div>
-
-  <!-- VÉRIFICATION DU MATÉRIEL -->
-  <div class="verif-section">
-    <h3>Vérification du matériel antichute</h3>
-    <ul class="verif-list">
-      <li><strong>Avant chaque utilisation</strong> — examen visuel : sangles, coutures, boucles, mousquetons</li>
-      <li><strong>Rechercher</strong> — coupures, brûlures, traces de produits chimiques, déformations</li>
-      <li><strong>Durée de vie</strong> — harnais textile : environ 5 ans. Vérification périodique annuelle obligatoire (NF EN 365)</li>
-      <li><strong>Après une chute</strong> — le harnais est <strong>détruit immédiatement</strong>, même s'il paraît intact. Les fibres ont subi des contraintes invisibles.</li>
-    </ul>
-  </div>
-
-  <!-- Q1 -->
-  <div class="activity" id="act-q1">
-    <div class="activity-num">Question 1 / 6</div>
-    <div class="qcm-question">On te demande de monter sur un échafaudage pour poser un groupe extérieur de climatisation. En arrivant, tu vois qu'il manque la sous-lisse du garde-corps sur un côté. Que fais-tu ?</div>
-    <div class="qcm-options">
-      <button class="qcm-option" onclick="check('q1',this,false)">Je monte quand même en faisant attention de ne pas m'approcher du bord</button>
-      <button class="qcm-option" onclick="check('q1',this,true)">Je refuse de monter et je signale le problème au chef de chantier. Un garde-corps incomplet = danger</button>
-      <button class="qcm-option" onclick="check('q1',this,false)">Je mets mon harnais, ça compense le garde-corps manquant</button>
-      <button class="qcm-option" onclick="check('q1',this,false)">Je monte rapidement, c'est juste pour 5 minutes</button>
+  <!-- ÉTAPE 2 -->
+  <div class="step" id="step-2">
+    <div class="step-card">
+      <div class="step-title">&Eacute;tape 2 &mdash; V&eacute;rification avant utilisation</div>
+      <div class="step-consigne">Dans le document <strong>&Eacute;chelles et Escabeaux</strong>, cherche ce qu'il faut v&eacute;rifier avant d'utiliser une &eacute;chelle.</div>
+      <button class="btn-lu" id="btnLu2" onclick="showQuestion(2)">J'ai lu, je r&eacute;ponds</button>
+      <div class="question-zone" id="qzone-2">
+        <div class="qcm-question">D'apr&egrave;s le document, que faut-il v&eacute;rifier sur une &eacute;chelle avant de l'utiliser ?</div>
+        <div class="qcm-options">
+          <button class="qcm-option" onclick="check(2,this,false)">Qu'elle est de la bonne couleur</button>
+          <button class="qcm-option" onclick="check(2,this,true)">Les montants, les &eacute;chelons, les patins antid&eacute;rapants et l'absence de d&eacute;formation</button>
+          <button class="qcm-option" onclick="check(2,this,false)">Qu'elle porte un autocollant de conformit&eacute; r&eacute;cent</button>
+          <button class="qcm-option" onclick="check(2,this,false)">Qu'elle a &eacute;t&eacute; utilis&eacute;e la veille sans probl&egrave;me</button>
+        </div>
+        <div class="qcm-feedback" id="fb-2"></div>
+        <button class="btn-next-step" id="btnNext2" onclick="goStep(3)">&Eacute;tape suivante &rarr;</button>
+      </div>
     </div>
-    <div class="qcm-feedback" id="fb-q1"></div>
   </div>
 
-  <!-- Q2 -->
-  <div class="activity" id="act-q2">
-    <div class="activity-num">Question 2 / 6</div>
-    <div class="qcm-question">Tu dois utiliser une échelle pour accéder au toit d'un local technique. Quel est le bon angle d'inclinaison ?</div>
-    <div class="qcm-options">
-      <button class="qcm-option" onclick="check('q2',this,false)">Le plus vertical possible pour qu'elle prenne moins de place</button>
-      <button class="qcm-option" onclick="check('q2',this,true)">75° : pour 4 m de hauteur, le pied est à 1 m du mur. L'échelle dépasse d'au moins 1 m le point d'arrivée</button>
-      <button class="qcm-option" onclick="check('q2',this,false)">45°, bien penchée pour être stable</button>
-      <button class="qcm-option" onclick="check('q2',this,false)">L'angle n'a pas d'importance si le sol est plat</button>
+  <!-- ÉTAPE 3 -->
+  <div class="step" id="step-3">
+    <div class="step-card">
+      <div class="step-title">&Eacute;tape 3 &mdash; L'angle d'inclinaison</div>
+      <div class="step-consigne">Cherche dans le document <strong>&Eacute;chelles</strong> l'illustration ou l'indication de l'angle correct.</div>
+      <button class="btn-lu" id="btnLu3" onclick="showQuestion(3)">J'ai lu, je r&eacute;ponds</button>
+      <div class="question-zone" id="qzone-3">
+        <div class="qcm-question">D'apr&egrave;s le document, quel est l'angle d'inclinaison correct pour une &eacute;chelle ?</div>
+        <div class="qcm-options">
+          <button class="qcm-option" onclick="check(3,this,false)">45&deg; &mdash; bien pench&eacute;e pour &ecirc;tre stable</button>
+          <button class="qcm-option" onclick="check(3,this,true)">75&deg; &mdash; pour 4 m de hauteur, le pied est &agrave; 1 m du mur</button>
+          <button class="qcm-option" onclick="check(3,this,false)">90&deg; &mdash; verticale contre le mur</button>
+          <button class="qcm-option" onclick="check(3,this,false)">Peu importe si le sol est plat</button>
+        </div>
+        <div class="qcm-feedback" id="fb-3"></div>
+        <button class="btn-next-step" id="btnNext3" onclick="goStep(4)">&Eacute;tape suivante &rarr;</button>
+      </div>
     </div>
-    <div class="qcm-feedback" id="fb-q2"></div>
   </div>
 
-  <!-- Q3 -->
-  <div class="activity" id="act-q3">
-    <div class="activity-num">Question 3 / 6</div>
-    <div class="qcm-question">Avant d'enfiler ton harnais antichute, que dois-tu vérifier en priorité ?</div>
-    <div class="qcm-options">
-      <button class="qcm-option" onclick="check('q3',this,false)">Qu'il est à ma taille</button>
-      <button class="qcm-option" onclick="check('q3',this,false)">Qu'il a été utilisé récemment par quelqu'un d'autre (donc il marche)</button>
-      <button class="qcm-option" onclick="check('q3',this,true)">L'état des sangles, coutures, boucles et mousquetons — et qu'il n'a pas subi de chute auparavant</button>
-      <button class="qcm-option" onclick="check('q3',this,false)">Juste la date inscrite sur l'étiquette</button>
+  <!-- ÉTAPE 4 -->
+  <div class="step" id="step-4">
+    <div class="step-card">
+      <div class="step-title">&Eacute;tape 4 &mdash; Le garde-corps</div>
+      <div class="step-consigne">Ouvre maintenant le document <strong>&Eacute;chafaudage Fixe</strong>. Lis la partie sur les garde-corps.</div>
+      <button class="btn-lu" id="btnLu4" onclick="showQuestion(4)">J'ai lu, je r&eacute;ponds</button>
+      <div class="question-zone" id="qzone-4">
+        <div class="qcm-question">D'apr&egrave;s le document, de quoi se compose un garde-corps complet sur un &eacute;chafaudage ?</div>
+        <div class="qcm-options">
+          <button class="qcm-option" onclick="check(4,this,false)">Une seule barre en haut</button>
+          <button class="qcm-option" onclick="check(4,this,true)">Une lisse haute, une lisse interm&eacute;diaire (sous-lisse) et une plinthe</button>
+          <button class="qcm-option" onclick="check(4,this,false)">Un filet de s&eacute;curit&eacute; uniquement</button>
+          <button class="qcm-option" onclick="check(4,this,false)">Une corde tendue entre deux poteaux</button>
+        </div>
+        <div class="qcm-feedback" id="fb-4"></div>
+        <button class="btn-next-step" id="btnNext4" onclick="goStep(5)">&Eacute;tape suivante &rarr;</button>
+      </div>
     </div>
-    <div class="qcm-feedback" id="fb-q3"></div>
   </div>
 
-  <!-- Q4 -->
-  <div class="activity" id="act-q4">
-    <div class="activity-num">Question 4 / 6</div>
-    <div class="qcm-question">Quelle est la différence entre une protection collective et une protection individuelle contre les chutes ?</div>
-    <div class="qcm-options">
-      <button class="qcm-option" onclick="check('q4',this,false)">La collective est moins efficace mais moins chère</button>
-      <button class="qcm-option" onclick="check('q4',this,true)">La collective (garde-corps, filet) protège tout le monde automatiquement sans action individuelle — elle est TOUJOURS prioritaire</button>
-      <button class="qcm-option" onclick="check('q4',this,false)">L'individuelle (harnais) est toujours suffisante, la collective est un bonus</button>
-      <button class="qcm-option" onclick="check('q4',this,false)">Il n'y a pas de vraie différence, c'est la même chose</button>
+  <!-- ÉTAPE 5 -->
+  <div class="step" id="step-5">
+    <div class="step-card">
+      <div class="step-title">&Eacute;tape 5 &mdash; Protection collective ou individuelle</div>
+      <div class="step-consigne">Dans le document <strong>&Eacute;chafaudage Fixe</strong>, rep&egrave;re la diff&eacute;rence entre protection collective et individuelle.</div>
+      <button class="btn-lu" id="btnLu5" onclick="showQuestion(5)">J'ai lu, je r&eacute;ponds</button>
+      <div class="question-zone" id="qzone-5">
+        <div class="qcm-question">D'apr&egrave;s le document, pourquoi la protection collective (garde-corps, filets) est-elle prioritaire sur la protection individuelle (harnais) ?</div>
+        <div class="qcm-options">
+          <button class="qcm-option" onclick="check(5,this,false)">Parce qu'elle co&ucirc;te moins cher</button>
+          <button class="qcm-option" onclick="check(5,this,true)">Parce qu'elle prot&egrave;ge tout le monde automatiquement, sans action individuelle</button>
+          <button class="qcm-option" onclick="check(5,this,false)">Parce que le harnais est interdit sur les &eacute;chafaudages</button>
+          <button class="qcm-option" onclick="check(5,this,false)">Il n'y a pas de priorit&eacute;, c'est &eacute;quivalent</button>
+        </div>
+        <div class="qcm-feedback" id="fb-5"></div>
+        <button class="btn-next-step" id="btnNext5" onclick="goStep(6)">&Eacute;tape suivante &rarr;</button>
+      </div>
     </div>
-    <div class="qcm-feedback" id="fb-q4"></div>
   </div>
 
-  <!-- Q5 -->
-  <div class="activity" id="act-q5">
-    <div class="activity-num">Question 5 / 6</div>
-    <div class="qcm-question">Tu dois monter du matériel (outillage, tuyaux) en hauteur sur un échafaudage. Peux-tu le porter en montant à l'échelle ?</div>
-    <div class="qcm-options">
-      <button class="qcm-option" onclick="check('q5',this,false)">Oui si c'est léger et que je tiens d'une main</button>
-      <button class="qcm-option" onclick="check('q5',this,true)">Non. Je garde les deux mains libres sur l'échelle. Le matériel monte par un autre moyen : corde, seau de levage, monte-charge</button>
-      <button class="qcm-option" onclick="check('q5',this,false)">Oui si je le mets dans un sac à dos</button>
-      <button class="qcm-option" onclick="check('q5',this,false)">Oui si quelqu'un tient l'échelle en bas</button>
+  <!-- ÉTAPE 6 -->
+  <div class="step" id="step-6">
+    <div class="step-card">
+      <div class="step-title">&Eacute;tape 6 &mdash; Apr&egrave;s une chute retenue</div>
+      <div class="step-consigne">Cherche dans le document <strong>&Eacute;chafaudage Fixe</strong> ou <strong>&Eacute;chelles</strong> ce qui se passe apr&egrave;s une chute retenue par un harnais.</div>
+      <button class="btn-lu" id="btnLu6" onclick="showQuestion(6)">J'ai lu, je r&eacute;ponds</button>
+      <div class="question-zone" id="qzone-6">
+        <div class="qcm-question">D'apr&egrave;s les documents, que doit-on faire d'un harnais qui a retenu une chute ?</div>
+        <div class="qcm-options">
+          <button class="qcm-option" onclick="check(6,this,false)">Le ranger, il a fait son travail</button>
+          <button class="qcm-option" onclick="check(6,this,false)">Le faire v&eacute;rifier puis le r&eacute;utiliser s'il est intact</button>
+          <button class="qcm-option" onclick="check(6,this,true)">Le mettre au rebut imm&eacute;diatement &mdash; il ne doit plus jamais &ecirc;tre utilis&eacute;</button>
+          <button class="qcm-option" onclick="check(6,this,false)">Le laver et v&eacute;rifier les coutures</button>
+        </div>
+        <div class="qcm-feedback" id="fb-6"></div>
+      </div>
     </div>
-    <div class="qcm-feedback" id="fb-q5"></div>
-  </div>
-
-  <!-- Q6 -->
-  <div class="activity" id="act-q6">
-    <div class="activity-num">Question 6 / 6</div>
-    <div class="qcm-question">Un collègue a fait une chute de 2 mètres, retenu par son harnais. Il est indemne et le harnais semble intact. Que fait-on du harnais ?</div>
-    <div class="qcm-options">
-      <button class="qcm-option" onclick="check('q6',this,false)">On le range, il a bien fait son travail et il est intact</button>
-      <button class="qcm-option" onclick="check('q6',this,false)">On le fait vérifier par une personne compétente et s'il est intact on le remet en service</button>
-      <button class="qcm-option" onclick="check('q6',this,true)">On le met au rebut immédiatement. Un harnais qui a retenu une chute ne doit PLUS JAMAIS être utilisé</button>
-      <button class="qcm-option" onclick="check('q6',this,false)">On le lave, on vérifie les coutures et on le réutilise</button>
-    </div>
-    <div class="qcm-feedback" id="fb-q6"></div>
   </div>
 
   <!-- Score -->
   <div class="score-section" id="scoreSection">
-    <div class="score-text" id="scoreText">0 / 6</div>
+    <div class="score-text" id="scoreText"></div>
     <div class="score-bar-wrap">
       <div class="score-bar" id="scoreBar" style="width:0%"></div>
     </div>
@@ -473,13 +394,13 @@ body.f-xl{font-size:20px}
 
   <!-- Navigation -->
   <div class="bottom-nav">
-    <a href="electrique.html" class="btn-prev">← Risque électrique</a>
-    <a href="../index.html" class="btn-next">Choisir mon parcours métier →</a>
+    <a href="electrique.html" class="btn-prev">&larr; Risque &eacute;lectrique</a>
+    <a href="../index.html" class="btn-next">Choisir mon parcours m&eacute;tier &rarr;</a>
   </div>
 
 </div>
 
-<div class="footer">inerWeb · F. Henninot · LPP Jacques Raynaud · Campus Équatio</div>
+<div class="footer">inerWeb &middot; F. Henninot &middot; LPP Jacques Raynaud &middot; Campus Equatio</div>
 
 <script>
 // Accessibilité
@@ -497,43 +418,74 @@ function setF(c){
   if(localStorage.getItem('a11y-dys')==='true'){document.body.classList.add('dys');document.getElementById('bDys').classList.add('on');}
   var fs=localStorage.getItem('a11y-size');
   if(fs==='f-lg'||fs==='f-xl')document.body.classList.add(fs);
-  if(localStorage.getItem('guidedMode')==='true')document.body.classList.add('guided');
 })();
 
-// QCM
-var answers={q1:null,q2:null,q3:null,q4:null,q5:null,q6:null};
+// Données
 var totalQ=6;
-var attempts={};
-
+var answers={}; // qId -> true quand trouvé
+var attempts={}; // qId -> nb tentatives
 var feedbacks={
-  q1:{
-    ok:'Bien. Un garde-corps incomplet (sans sous-lisse) ne protège pas contre les chutes. On refuse de monter et on signale. La protection collective doit être complète.',
-    ko:'Non. Un garde-corps sans sous-lisse ne remplit pas sa fonction. On peut passer dessous et tomber. Le harnais ne remplace pas un garde-corps manquant — la protection collective est toujours prioritaire.'
+  1:{
+    ok:"Exact. L'\u00e9chelle sert \u00e0 acc\u00e9der en hauteur, pas \u00e0 y travailler longtemps.",
+    ko:"Relis la premi\u00e8re page du document \u00c9chelles. La r\u00e8gle fondamentale y est clairement indiqu\u00e9e."
   },
-  q2:{
-    ok:'Correct. 75° c\'est la règle : 1 m de base pour 4 m de hauteur. Trop vertical → l\'échelle bascule en arrière. Trop penché → elle glisse. Et elle doit dépasser le point d\'arrivée d\'au moins 1 mètre.',
-    ko:'Non. L\'angle de 75° (règle du 1/4) est une règle de sécurité fondamentale. 1 m de base pour 4 m de hauteur. Et l\'échelle doit toujours dépasser le point d\'arrivée d\'au moins 1 m.'
+  2:{
+    ok:"Correct. Examen visuel obligatoire avant chaque utilisation.",
+    ko:"Relis le document. Les points de v\u00e9rification y sont list\u00e9s pr\u00e9cis\u00e9ment."
   },
-  q3:{
-    ok:'Exact. Avant chaque utilisation : vérification visuelle complète. Sangles ? Coupures ? Brûlures ? Coutures ? Boucles ? Mousquetons ? Et surtout : a-t-il déjà subi une chute ? Si oui → poubelle.',
-    ko:'Non. La taille et la date sont importantes MAIS la priorité est l\'état physique de l\'équipement. Un harnais ayant subi une chute a des contraintes invisibles dans les fibres. Il doit être détruit.'
+  3:{
+    ok:"Exact. 75\u00b0 c'est la r\u00e8gle du 1/4 : 1 m de base pour 4 m de hauteur.",
+    ko:"Relis le document. L'angle et la r\u00e8gle du 1/4 y sont expliqu\u00e9s avec un sch\u00e9ma."
   },
-  q4:{
-    ok:'Correct. La protection collective protège TOUT LE MONDE automatiquement, sans que chacun ait besoin de faire quelque chose. C\'est pour ça qu\'elle est prioritaire. Le harnais est un dernier recours quand la collective est impossible.',
-    ko:'Non. La protection collective (garde-corps, filets, PIRL) est toujours prioritaire car elle protège tout le monde sans action individuelle. Le harnais est un dernier recours.'
+  4:{
+    ok:"Correct. Lisse + sous-lisse + plinthe = garde-corps complet. S'il manque un \u00e9l\u00e9ment, on ne monte pas.",
+    ko:"Relis le document \u00c9chafaudage Fixe. Les \u00e9l\u00e9ments du garde-corps y sont d\u00e9taill\u00e9s."
   },
-  q5:{
-    ok:'Exact. Règle absolue : sur une échelle, les deux mains sont libres pour se tenir. 3 points d\'appui minimum (2 mains + 1 pied). Le matériel monte séparément par corde, seau de levage ou monte-charge.',
-    ko:'Non. Sur une échelle, on garde TOUJOURS les deux mains libres pour assurer 3 points d\'appui. Le matériel, même léger, monte par un autre moyen. Un déséquilibre avec une charge = chute.'
+  5:{
+    ok:"Exact. La collective prot\u00e8ge tout le monde sans que chacun ait quelque chose \u00e0 faire. Le harnais est un dernier recours.",
+    ko:"Relis le document. La hi\u00e9rarchie des protections y est expliqu\u00e9e."
   },
-  q6:{
-    ok:'Correct. Même si le harnais semble intact, les fibres textiles ont subi des contraintes extrêmes invisibles à l\'œil nu. L\'absorbeur d\'énergie s\'est déformé. Ce matériel ne garantit plus la sécurité. Mise au rebut immédiate.',
-    ko:'Non. Après une chute retenue, le harnais et la longe ont absorbé des forces énormes. Les fibres sont fragilisées même si rien n\'est visible. L\'absorbeur d\'énergie est déformé. Mise au rebut obligatoire et immédiate.'
+  6:{
+    ok:"Correct. Apr\u00e8s une chute, les fibres sont fragilis\u00e9es m\u00eame si rien n'est visible. Mise au rebut obligatoire.",
+    ko:"Cherche dans les documents. Un harnais ayant subi une chute a des contraintes invisibles."
   }
 };
 
+// Navigation par étapes
+var currentStep=0;
+
+function goStep(n){
+  document.getElementById('step-'+currentStep).classList.remove('active');
+  document.getElementById('step-'+n).classList.add('active');
+  currentStep=n;
+  updateProgress();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function updateProgress(){
+  var wrap=document.getElementById('progressWrap');
+  var fill=document.getElementById('progressFill');
+  var label=document.getElementById('progressLabel');
+  if(currentStep===0){
+    wrap.style.display='none';
+    label.textContent='';
+    return;
+  }
+  wrap.style.display='block';
+  var answered=0;
+  for(var k in answers) if(answers[k])answered++;
+  var pct=Math.round((answered/totalQ)*100);
+  fill.style.width=pct+'%';
+  label.textContent='\u00c9tape '+currentStep+' / '+totalQ+(answered>0?' \u2014 '+answered+' r\u00e9ponse'+(answered>1?'s':'')+' valid\u00e9e'+(answered>1?'s':''):'');
+}
+
+function showQuestion(n){
+  document.getElementById('btnLu'+n).disabled=true;
+  document.getElementById('qzone-'+n).classList.add('visible');
+}
+
 function check(qId,btn,isCorrect){
-  if(answers[qId]!==null)return;
+  if(answers[qId])return;
   if(!attempts[qId])attempts[qId]=0;
   attempts[qId]++;
 
@@ -546,7 +498,11 @@ function check(qId,btn,isCorrect){
     opts.forEach(function(o){o.disabled=true});
     fb.textContent=feedbacks[qId].ok;
     fb.className='qcm-feedback show-ok';
-    updateScore();
+    // Afficher bouton étape suivante (sauf dernière)
+    var btnNext=document.getElementById('btnNext'+qId);
+    if(btnNext)btnNext.classList.add('visible');
+    updateProgress();
+    checkAllDone();
   } else {
     btn.classList.add('incorrect');
     btn.disabled=true;
@@ -555,12 +511,12 @@ function check(qId,btn,isCorrect){
   }
 }
 
-function updateScore(){
+function checkAllDone(){
   var done=0,pts=0,max=totalQ*2;
-  for(var k in answers){
-    if(answers[k]!==null){
+  for(var i=1;i<=totalQ;i++){
+    if(answers[i]){
       done++;
-      pts+=(attempts[k]===1?2:(attempts[k]===2?1:0));
+      pts+=(attempts[i]===1?2:(attempts[i]===2?1:0));
     }
   }
   if(done===totalQ){
@@ -576,14 +532,14 @@ function updateScore(){
 
     var msg=document.getElementById('scoreMsg');
     if(pct>=70){
-      msg.textContent='Tu connais les bons réflexes pour travailler en hauteur en sécurité.';
+      msg.textContent='Tu connais les r\u00e8gles de s\u00e9curit\u00e9 pour le travail en hauteur. Module valid\u00e9.';
       msg.className='score-msg pass';
-      localStorage.setItem('hauteur_done','true');
+      try{localStorage.setItem('hauteur_done','true');}catch(e){}
     } else {
-      msg.textContent='Relis les règles ci-dessus et réessaie.';
+      msg.textContent='Score insuffisant. Relis les documents IRIS-ST et r\u00e9essaie.';
       msg.className='score-msg no-pass';
     }
-    sec.scrollIntoView({behavior:'smooth',block:'center'});
+    setTimeout(function(){sec.scrollIntoView({behavior:'smooth',block:'center'});},300);
   }
 }
 </script>

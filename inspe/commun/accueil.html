@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sécurité de base — Module commun</title>
+<title>Sécurité de base — Accueil en entreprise</title>
 <style>@font-face{font-family:"OpenDyslexic";font-style:normal;font-weight:400;font-display:swap;src:url(../assets/OpenDyslexic-Regular.otf) format("opentype")}@font-face{font-family:"OpenDyslexic";font-style:normal;font-weight:700;font-display:swap;src:url(../assets/OpenDyslexic-Bold.otf) format("opentype")}</style>
 <style>
 :root{
@@ -29,10 +29,6 @@ body{
 body.dys{font-family:'OpenDyslexic',system-ui,sans-serif}
 body.f-lg{font-size:18px}
 body.f-xl{font-size:20px}
-
-/* Mode guidé */
-.page-hint{display:none;font-size:.85em;color:var(--turquoise);font-style:italic;margin-bottom:8px}
-body.guided .page-hint{display:inline}
 
 .topbar{
   position:sticky;top:0;z-index:10;
@@ -85,89 +81,65 @@ body.guided .page-hint{display:inline}
   font-size:.88em;color:var(--muted);
 }
 
-/* Section titre */
-.section-title{
-  font-size:1.15em;font-weight:800;color:var(--navy);
-  margin:28px 0 14px;padding-left:14px;
-  border-left:4px solid var(--orange);line-height:1.3;
+/* Bouton document */
+.doc-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 24px;border:none;border-radius:var(--radius-pill);
+  background:var(--orange);color:#fff;font-family:inherit;
+  font-size:.95em;font-weight:700;cursor:pointer;
+  text-decoration:none;transition:all .2s;
+  box-shadow:var(--shadow-orange);
+}
+.doc-btn:hover{background:var(--orange-hover);transform:translateY(-1px)}
+.doc-btn svg{flex-shrink:0}
+
+/* Barre de progression */
+.progress-wrap{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:16px 20px;margin-bottom:20px;
+}
+.progress-label{font-size:.9em;font-weight:700;color:var(--navy);margin-bottom:8px}
+.progress-bar-wrap{background:var(--line);border-radius:999px;height:20px;overflow:hidden}
+.progress-bar{
+  height:100%;border-radius:999px;transition:width .5s ease;
+  background:linear-gradient(90deg,var(--turquoise),var(--ok));
+  display:flex;align-items:center;justify-content:center;
+  color:white;font-weight:700;font-size:.75em;min-width:0;
 }
 
-/* Cartes réflexes */
-.reflex-cards{display:grid;gap:14px;margin-bottom:28px}
-.reflex-card{
-  background:var(--card);border:1px solid var(--line);
-  border-radius:var(--radius);padding:18px 16px;
-  box-shadow:var(--shadow);position:relative;overflow:hidden;
+/* Bouton commencer / J'ai lu */
+.btn-action{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 28px;border:none;border-radius:var(--radius-pill);
+  background:var(--turquoise);color:#fff;font-family:inherit;
+  font-size:1em;font-weight:700;cursor:pointer;
+  transition:all .2s;margin-top:12px;
 }
-.reflex-card::before{
-  content:'';position:absolute;top:0;left:0;width:5px;height:100%;
-  background:var(--orange);border-radius:999px 0 0 999px;
-}
-.reflex-card-head{display:flex;align-items:center;gap:12px;margin-bottom:10px}
-.reflex-icon{
-  width:48px;height:48px;border-radius:var(--radius-sm);flex-shrink:0;
-  display:grid;place-items:center;font-size:1.5em;
-  background:var(--orange-warm);
-}
-.reflex-card-head h3{font-size:1em;font-weight:700;color:var(--text-strong)}
-.reflex-rule{
-  font-size:.92em;color:var(--text);margin-bottom:8px;line-height:1.55;
-  padding-left:8px;border-left:3px solid var(--turquoise-light);
-}
-.reflex-example{
-  background:var(--turquoise-light);border-radius:var(--radius-sm);
-  padding:10px 14px;font-size:.88em;color:var(--navy-mid);
-  margin-bottom:8px;line-height:1.5;
-}
-.reflex-example::before{content:'Exemple : ';font-weight:700;color:var(--turquoise)}
-.reflex-avoid{
-  font-size:.85em;color:var(--muted);padding-left:8px;
-  border-left:3px solid var(--line);
-}
-.reflex-avoid strong{color:var(--bad)}
+.btn-action:hover{background:#1d9e9e;transform:translateY(-1px)}
+.btn-action:disabled{opacity:.5;cursor:default;transform:none}
 
-.svg-ico{width:36px;height:36px;flex-shrink:0}
-.svg-ico svg{width:100%;height:100%;display:block}
-
-/* Section urgence */
-.urgence-section{
-  background:linear-gradient(135deg,#fff5f5,#fff0f0);
-  border:2px solid var(--bad);border-radius:var(--radius);
-  padding:20px 18px;margin-bottom:28px;
-}
-.urgence-section h2{
-  font-size:1.1em;color:var(--bad);margin-bottom:14px;text-align:center;
-}
-.urgence-steps{display:grid;gap:12px}
-.urgence-step{
-  display:flex;align-items:flex-start;gap:12px;
-  background:var(--card);border-radius:var(--radius-sm);padding:14px;
-  border:1px solid rgba(231,76,60,.15);
-}
-.urgence-num{
-  width:36px;height:36px;border-radius:50%;flex-shrink:0;
-  display:grid;place-items:center;font-weight:900;font-size:.9em;color:#fff;
-}
-.urgence-num.u1{background:#e74c3c}
-.urgence-num.u2{background:#e67e22}
-.urgence-num.u3{background:#27ae60}
-.urgence-num.u4{background:#2c3e50}
-.urgence-step h4{font-size:.95em;color:var(--text-strong);margin-bottom:2px}
-.urgence-step p{font-size:.87em;color:var(--muted);line-height:1.5}
-.urgence-tel{
-  display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:12px;
-}
-.urgence-tel span{
-  background:var(--bad);color:#fff;padding:6px 16px;border-radius:var(--radius-pill);
-  font-weight:700;font-size:.9em;
-}
-
-/* Questions */
-.activity{
+/* Étapes */
+.step-card{
   background:var(--card);border:1px solid var(--line);border-left:5px solid var(--orange);
-  border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-bottom:18px;
+  border-radius:var(--radius);box-shadow:var(--shadow);padding:24px 22px;margin-bottom:18px;
+  display:none;
 }
-.activity-num{font-size:.85em;color:var(--turquoise);font-weight:700;margin-bottom:6px}
+.step-card.active{display:block}
+.step-num{font-size:.85em;color:var(--turquoise);font-weight:700;margin-bottom:6px}
+.step-title{font-size:1.15em;font-weight:800;color:var(--navy);margin-bottom:12px}
+.step-consigne{
+  background:var(--orange-warm);border-left:3px solid var(--orange);
+  border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+  padding:12px 16px;font-size:.92em;color:var(--navy);line-height:1.6;margin-bottom:14px;
+}
+
+/* Zone question (cachée par défaut) */
+.question-zone{display:none}
+.question-zone.visible{display:block;animation:fadeIn .4s ease}
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* Questions QCM */
 .qcm-question{font-size:1em;font-weight:600;color:var(--navy);margin-bottom:14px;line-height:1.5}
 .qcm-options{display:grid;gap:8px}
 .qcm-option{
@@ -185,6 +157,17 @@ body.guided .page-hint{display:inline}
 }
 .qcm-feedback.show-ok{display:block;background:#d4edda;color:#155724;border:1px solid #c3e6cb}
 .qcm-feedback.show-ko{display:block;background:#f8d7da;color:#721c24;border:1px solid #f5c6cb}
+
+/* Bouton étape suivante */
+.btn-next-step{
+  display:none;align-items:center;gap:8px;
+  padding:12px 24px;border:none;border-radius:var(--radius-pill);
+  background:var(--navy);color:#fff;font-family:inherit;
+  font-size:.95em;font-weight:600;cursor:pointer;
+  transition:all .2s;margin-top:14px;
+}
+.btn-next-step.visible{display:inline-flex}
+.btn-next-step:hover{background:#143052}
 
 /* Score */
 .score-section{
@@ -221,16 +204,24 @@ body.guided .page-hint{display:inline}
 
 .footer{padding:16px;text-align:center;font-size:.72em;color:var(--muted);border-top:1px solid var(--line);margin-top:30px}
 
+/* Page d'accueil du module */
+.welcome-screen{text-align:center;margin-bottom:10px}
+.welcome-screen .pfmp-note{
+  display:block;margin-top:12px;padding:10px 16px;
+  background:var(--orange-warm);border-radius:var(--radius-sm);
+  font-size:.88em;color:var(--navy-mid);line-height:1.5;
+}
+
+/* Masquage conditionnel */
+.hidden{display:none!important}
+
 @media(max-width:600px){
   .theme-header h1{font-size:1.4em}
   .theme-header{padding:24px 18px}
-  .activity{padding:16px}
+  .step-card{padding:18px 16px}
   .topbar{flex-direction:column;text-align:center}
   .bottom-nav{flex-direction:column;align-items:stretch;text-align:center}
   .bottom-nav a{justify-content:center}
-  .reflex-card{padding:14px 12px}
-  .reflex-icon{width:40px;height:40px;font-size:1.3em}
-  .urgence-step{flex-direction:column;align-items:center;text-align:center}
 }
 </style>
 </head>
@@ -255,207 +246,160 @@ body.guided .page-hint{display:inline}
 
 <div class="container">
 
-  <!-- 1. HEADER THÉMATIQUE -->
+  <!-- HEADER THÉMATIQUE -->
   <div class="theme-header">
-    <h1>Sécurité de base</h1>
-    <p>Les réflexes essentiels avant d'aller en atelier ou en entreprise</p>
+    <h1>Sécurité de base — Accueil en entreprise</h1>
+    <p>Ce module vérifie que tu sais te repérer dans le mémo de sécurité que tu recevras en arrivant en entreprise.</p>
   </div>
 
-  <!-- 2. INTRODUCTION CONTEXTE -->
-  <div class="intro-box">
-    <strong>Pourquoi ce module ?</strong> Que tu ailles en stage, en entreprise ou en atelier au lycée, il y a des réflexes qui sauvent. Ce module vérifie que tu les connais avant de commencer.
-    <span class="note">Les règles de sécurité sont les mêmes pour les stagiaires, les apprentis et les salariés. Personne n'est au-dessus de la prévention.</span>
+  <!-- PAGE D'ACCUEIL DU MODULE -->
+  <div id="welcomeScreen" class="welcome-screen">
+    <div class="intro-box" style="text-align:left">
+      <strong>Tu as besoin du document IRIS-ST « Apprentis et prévention » pour répondre aux questions.</strong>
+      <span class="note">Chaque question te demande de lire une page précise du document, puis de répondre. L'écran te guide, mais les réponses sont dans le document.</span>
+    </div>
+
+    <a href="../docs/IRIS-ST-Memo-Apprentis.pdf" target="_blank" class="doc-btn" style="margin-bottom:16px">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      Ouvrir le document
+    </a>
+
+    <div class="welcome-screen">
+      <span class="pfmp-note">Ce document parle d'apprentis, mais les mêmes règles s'appliquent aux stagiaires PFMP.</span>
+    </div>
+
+    <button class="btn-action" onclick="startModule()">Commencer</button>
   </div>
 
-  <span class="page-hint">Lis attentivement chaque réflexe ci-dessous. Ils te serviront pour répondre aux questions ensuite.</span>
+  <!-- BARRE DE PROGRESSION -->
+  <div class="progress-wrap hidden" id="progressWrap">
+    <div class="progress-label" id="progressLabel">Étape 1 / 6</div>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar" id="progressBar" style="width:16.7%">1/6</div>
+    </div>
+    <div style="text-align:right;margin-top:8px">
+      <a href="../docs/IRIS-ST-Memo-Apprentis.pdf" target="_blank" class="doc-btn" style="font-size:.82em;padding:8px 16px">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Ouvrir le document
+      </a>
+    </div>
+  </div>
 
-  <!-- 3. LES 5 RÉFLEXES QUI SAUVENT -->
-  <h2 class="section-title">Les 5 réflexes qui sauvent</h2>
-
-  <div class="reflex-cards">
-
-    <!-- Réflexe 1 -->
-    <div class="reflex-card">
-      <div class="reflex-card-head">
-        <div class="reflex-icon svg-ico"><svg viewBox="0 0 24 24" fill="none" stroke="var(--turquoise)" stroke-width="2"><circle cx="10" cy="10" r="7"/><path d="M15 15l5 5"/><path d="M8 10l2 2 3-3" stroke="var(--ok)" stroke-width="2.5"/></svg></div>
-        <h3>Vérifier avant d'utiliser</h3>
+  <!-- ÉTAPE 1 -->
+  <div class="step-card" id="step1">
+    <div class="step-num">Étape 1 / 6</div>
+    <div class="step-title">Le rôle du tuteur</div>
+    <div class="step-consigne">Ouvre le document IRIS-ST — Page 1. Lis la partie sur le rôle du tuteur.</div>
+    <button class="btn-action" onclick="showQuestion(1)">J'ai lu, je réponds</button>
+    <div class="question-zone" id="qzone1">
+      <div class="qcm-question">D'après le document, quel est le rôle principal du tuteur en entreprise ?</div>
+      <div class="qcm-options">
+        <button class="qcm-option" onclick="check(1,this,0)">Vérifier les notes de l'apprenti au CFA</button>
+        <button class="qcm-option" onclick="check(1,this,1)">Accompagner le nouvel arrivant et veiller à sa sécurité</button>
+        <button class="qcm-option" onclick="check(1,this,0)">Signer les feuilles de présence</button>
+        <button class="qcm-option" onclick="check(1,this,0)">Fixer les horaires de travail</button>
       </div>
-      <div class="reflex-rule">Tout outil, toute machine, tout EPI doit être vérifié avant usage. Un contrôle visuel rapide peut éviter un accident grave.</div>
-      <div class="reflex-example">Avant de brancher une perceuse, je vérifie le câble, la prise et le mandrin. Si tout est en ordre, je peux travailler.</div>
-      <div class="reflex-avoid"><strong>Ce que ça évite :</strong> accident causé par du matériel défectueux.</div>
-    </div>
-
-    <!-- Réflexe 2 -->
-    <div class="reflex-card">
-      <div class="reflex-card-head">
-        <div class="reflex-icon svg-ico"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="var(--bad)" stroke-width="2.5"/><path d="M7 12h10" stroke="var(--bad)" stroke-width="4"/></svg></div>
-        <h3>Matériel douteux = STOP</h3>
-      </div>
-      <div class="reflex-rule">Un câble abîmé, une fissure, une pièce manquante — on ne touche pas, on signale immédiatement.</div>
-      <div class="reflex-example">Un flexible qui fuit, un carter fendu, un garde-corps manquant — je m'arrête et je préviens mon tuteur ou le responsable.</div>
-      <div class="reflex-avoid"><strong>Ce que ça évite :</strong> utilisation d'un équipement dangereux.</div>
-    </div>
-
-    <!-- Réflexe 3 -->
-    <div class="reflex-card">
-      <div class="reflex-card-head">
-        <div class="reflex-icon svg-ico"><svg viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><path d="M12 2L1 21h22L12 2z" fill="var(--orange-warm)"/><path d="M12 17h.01M12 10v4" stroke="var(--orange)" stroke-width="2.5"/></svg></div>
-        <h3>Alerter immédiatement</h3>
-      </div>
-      <div class="reflex-rule">Danger, accident, doute — on prévient le tuteur ou le responsable tout de suite. Pas « à la fin de la journée », pas « après la pause ».</div>
-      <div class="reflex-example">Je sens une odeur bizarre, je vois un collègue blessé, j'entends un bruit anormal — j'alerte immédiatement.</div>
-      <div class="reflex-avoid"><strong>Numéros d'urgence :</strong> 15 (SAMU) · 18 (Pompiers) · 112 (Urgence européenne).</div>
-    </div>
-
-    <!-- Réflexe 4 -->
-    <div class="reflex-card">
-      <div class="reflex-card-head">
-        <div class="reflex-icon svg-ico"><svg viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.5"><path d="M6 10v9h4v-7l1-1V9l-2-2-3 3z"/><path d="M18 10v9h-4v-7l-1-1V9l2-2 3 3z"/></svg></div>
-        <h3>Les EPI ne sont pas optionnels</h3>
-      </div>
-      <div class="reflex-rule">Chaussures de sécurité, lunettes, gants, casque anti-bruit — chaque poste a ses EPI obligatoires. On les porte, toujours.</div>
-      <div class="reflex-example">En atelier froid : chaussures de sécurité + gants + lunettes. Toujours. Sans exception.</div>
-      <div class="reflex-avoid"><strong>Ce que ça évite :</strong> blessures aux yeux, aux mains, aux pieds.</div>
-    </div>
-
-    <!-- Réflexe 5 -->
-    <div class="reflex-card">
-      <div class="reflex-card-head">
-        <div class="reflex-icon svg-ico"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="7" r="3" stroke="var(--navy)" stroke-width="2"/><path d="M6 21c0-4 3-4 6-4s6 0 6 4" stroke="var(--navy)" stroke-width="2"/><circle cx="18" cy="14" r="2" stroke="var(--bad)" stroke-width="1.5"/></svg></div>
-        <h3>Jamais seul sans consigne</h3>
-      </div>
-      <div class="reflex-rule">On ne fait pas une opération à risque sans l'accord explicite du responsable. Si le tuteur est absent, on attend.</div>
-      <div class="reflex-example">Mon tuteur est parti 5 minutes. Je ne touche pas à la machine en cours, j'attends son retour.</div>
-      <div class="reflex-avoid"><strong>Ce que ça évite :</strong> accident sans témoin, intervention non maîtrisée.</div>
-    </div>
-
-  </div>
-
-  <!-- 4. EN CAS D'URGENCE -->
-  <div class="urgence-section">
-    <h2>🚨 En cas d'urgence</h2>
-
-    <div class="urgence-steps">
-      <div class="urgence-step">
-        <div class="urgence-num u1">1</div>
-        <div>
-          <h4>Protéger</h4>
-          <p>Sécuriser la zone pour éviter un sur-accident. Si possible, couper l'énergie (électricité, gaz). Ne pas se mettre en danger soi-même.</p>
-        </div>
-      </div>
-      <div class="urgence-step">
-        <div class="urgence-num u2">2</div>
-        <div>
-          <h4>Alerter</h4>
-          <p>Appeler les secours : 15 (SAMU), 18 (Pompiers) ou 112. Donner le lieu précis, la nature de l'accident et le nombre de victimes.</p>
-        </div>
-      </div>
-      <div class="urgence-step">
-        <div class="urgence-num u3">3</div>
-        <div>
-          <h4>Secourir</h4>
-          <p>Uniquement les gestes qu'on maîtrise. Mettre en PLS si la victime est inconsciente mais respire. Ne pas déplacer un blessé sauf danger immédiat.</p>
-        </div>
-      </div>
-      <div class="urgence-step">
-        <div class="urgence-num u4">4</div>
-        <div>
-          <h4>Ne pas faire</h4>
-          <p>Ne jamais toucher un électrisé avant d'avoir coupé le courant. Ne pas déplacer un blessé du dos ou de la nuque. Ne pas donner à boire à une victime inconsciente.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="urgence-tel">
-      <span>15 — SAMU</span>
-      <span>18 — Pompiers</span>
-      <span>112 — Urgence EU</span>
+      <div class="qcm-feedback" id="fb1"></div>
+      <button class="btn-next-step" id="next1" onclick="goStep(2)">Étape suivante →</button>
     </div>
   </div>
 
-  <!-- 5. ACTIVITÉS -->
-  <h2 class="section-title">Vérifie tes réflexes</h2>
-  <span class="page-hint">Réponds aux 6 questions ci-dessous. Tu as le droit à 2 essais par question. Ton score s'affichera à la fin.</span>
-
-  <!-- Q1 -->
-  <div class="activity" id="act-q1">
-    <div class="activity-num">Question 1 / 6</div>
-    <div class="qcm-question">Premier jour en stage — tu arrives à l'atelier. Que fais-tu en premier ?</div>
-    <div class="qcm-options">
-      <button class="qcm-option" onclick="check('q1',this,false)">Je commence à ranger pour montrer ma motivation</button>
-      <button class="qcm-option" onclick="check('q1',this,true)">J'attends les consignes de mon tuteur et je repère les sorties de secours et l'extincteur</button>
-      <button class="qcm-option" onclick="check('q1',this,false)">Je regarde ce que font les autres et je fais pareil</button>
-      <button class="qcm-option" onclick="check('q1',this,false)">Je mets mes EPI et je me lance sur la première tâche visible</button>
+  <!-- ÉTAPE 2 -->
+  <div class="step-card" id="step2">
+    <div class="step-num">Étape 2 / 6</div>
+    <div class="step-title">Tes droits en entreprise</div>
+    <div class="step-consigne">Toujours dans le document — Page 2. Repère les droits du salarié / stagiaire.</div>
+    <button class="btn-action" onclick="showQuestion(2)">J'ai lu, je réponds</button>
+    <div class="question-zone" id="qzone2">
+      <div class="qcm-question">D'après le document, quel document l'employeur doit-il obligatoirement te présenter à ton arrivée ?</div>
+      <div class="qcm-options">
+        <button class="qcm-option" onclick="check(2,this,0)">Le règlement intérieur uniquement</button>
+        <button class="qcm-option" onclick="check(2,this,1)">Le document unique d'évaluation des risques (DUER)</button>
+        <button class="qcm-option" onclick="check(2,this,0)">Le contrat de travail signé</button>
+        <button class="qcm-option" onclick="check(2,this,0)">La fiche de paie du mois précédent</button>
+      </div>
+      <div class="qcm-feedback" id="fb2"></div>
+      <button class="btn-next-step" id="next2" onclick="goStep(3)">Étape suivante →</button>
     </div>
-    <div class="qcm-feedback" id="fb-q1"></div>
   </div>
 
-  <!-- Q2 -->
-  <div class="activity" id="act-q2">
-    <div class="activity-num">Question 2 / 6</div>
-    <div class="qcm-question">Tu dois utiliser une perceuse. En la prenant, tu remarques que le câble d'alimentation est dénudé par endroits. Que fais-tu ?</div>
-    <div class="qcm-options">
-      <button class="qcm-option" onclick="check('q2',this,false)">J'enroule du scotch autour et je m'en sers quand même</button>
-      <button class="qcm-option" onclick="check('q2',this,false)">Je l'utilise prudemment en évitant de toucher le câble</button>
-      <button class="qcm-option" onclick="check('q2',this,true)">Je la pose, je la signale comme défectueuse (étiquette + tuteur), j'en prends une autre</button>
-      <button class="qcm-option" onclick="check('q2',this,false)">Je demande à un collègue de la tenir pendant que je travaille</button>
+  <!-- ÉTAPE 3 -->
+  <div class="step-card" id="step3">
+    <div class="step-num">Étape 3 / 6</div>
+    <div class="step-title">En cas d'accident</div>
+    <div class="step-consigne">Page 3 du document. Lis la partie sur la conduite à tenir en cas d'accident.</div>
+    <button class="btn-action" onclick="showQuestion(3)">J'ai lu, je réponds</button>
+    <div class="question-zone" id="qzone3">
+      <div class="qcm-question">D'après le document, à qui dois-tu signaler immédiatement un accident du travail ?</div>
+      <div class="qcm-options">
+        <button class="qcm-option" onclick="check(3,this,0)">À tes collègues de travail</button>
+        <button class="qcm-option" onclick="check(3,this,0)">À l'inspection du travail</button>
+        <button class="qcm-option" onclick="check(3,this,1)">À ton employeur ou ton tuteur</button>
+        <button class="qcm-option" onclick="check(3,this,0)">À la mairie de la commune</button>
+      </div>
+      <div class="qcm-feedback" id="fb3"></div>
+      <button class="btn-next-step" id="next3" onclick="goStep(4)">Étape suivante →</button>
     </div>
-    <div class="qcm-feedback" id="fb-q2"></div>
   </div>
 
-  <!-- Q3 -->
-  <div class="activity" id="act-q3">
-    <div class="activity-num">Question 3 / 6</div>
-    <div class="qcm-question">Un collègue reçoit une décharge électrique et reste accroché au câble. Quel est ton premier geste ?</div>
-    <div class="qcm-options">
-      <button class="qcm-option" onclick="check('q3',this,false)">Je le tire par le bras pour le dégager</button>
-      <button class="qcm-option" onclick="check('q3',this,true)">Je coupe le courant en priorité (arrêt d'urgence ou disjoncteur), sans le toucher directement</button>
-      <button class="qcm-option" onclick="check('q3',this,false)">J'appelle les secours et j'attends sans rien faire</button>
-      <button class="qcm-option" onclick="check('q3',this,false)">Je lui jette de l'eau pour faire disjoncter le circuit</button>
+  <!-- ÉTAPE 4 -->
+  <div class="step-card" id="step4">
+    <div class="step-num">Étape 4 / 6</div>
+    <div class="step-title">Les protections au travail</div>
+    <div class="step-consigne">Page 2 du document. Repère ce qui concerne la protection des jeunes travailleurs.</div>
+    <button class="btn-action" onclick="showQuestion(4)">J'ai lu, je réponds</button>
+    <div class="question-zone" id="qzone4">
+      <div class="qcm-question">D'après le document, quelle protection spéciale concerne les travailleurs de moins de 18 ans ?</div>
+      <div class="qcm-options">
+        <button class="qcm-option" onclick="check(4,this,0)">Ils ne peuvent pas travailler le matin</button>
+        <button class="qcm-option" onclick="check(4,this,0)">Ils ont droit à une pause supplémentaire</button>
+        <button class="qcm-option" onclick="check(4,this,1)">Certains travaux dangereux leur sont interdits</button>
+        <button class="qcm-option" onclick="check(4,this,0)">Ils doivent porter un badge spécial</button>
+      </div>
+      <div class="qcm-feedback" id="fb4"></div>
+      <button class="btn-next-step" id="next4" onclick="goStep(5)">Étape suivante →</button>
     </div>
-    <div class="qcm-feedback" id="fb-q3"></div>
   </div>
 
-  <!-- Q4 -->
-  <div class="activity" id="act-q4">
-    <div class="activity-num">Question 4 / 6</div>
-    <div class="qcm-question">On te demande d'intervenir sur une machine que tu n'as jamais utilisée. Que fais-tu ?</div>
-    <div class="qcm-options">
-      <button class="qcm-option" onclick="check('q4',this,false)">Je cherche le mode d'emploi sur internet et je me débrouille</button>
-      <button class="qcm-option" onclick="check('q4',this,false)">J'essaie doucement pour voir comment ça fonctionne</button>
-      <button class="qcm-option" onclick="check('q4',this,true)">Je demande une explication ou une démonstration à mon tuteur avant de commencer</button>
-      <button class="qcm-option" onclick="check('q4',this,false)">Je refuse catégoriquement de m'en approcher</button>
+  <!-- ÉTAPE 5 -->
+  <div class="step-card" id="step5">
+    <div class="step-num">Étape 5 / 6</div>
+    <div class="step-title">L'accueil sécurité</div>
+    <div class="step-consigne">Page 1 du document. Lis la partie sur l'accueil du nouvel arrivant.</div>
+    <button class="btn-action" onclick="showQuestion(5)">J'ai lu, je réponds</button>
+    <div class="question-zone" id="qzone5">
+      <div class="qcm-question">D'après le document, que doit comprendre l'accueil sécurité en entreprise ?</div>
+      <div class="qcm-options">
+        <button class="qcm-option" onclick="check(5,this,0)">Uniquement la visite des locaux</button>
+        <button class="qcm-option" onclick="check(5,this,0)">La remise du badge d'accès</button>
+        <button class="qcm-option" onclick="check(5,this,1)">L'information sur les risques du poste et les consignes de sécurité</button>
+        <button class="qcm-option" onclick="check(5,this,0)">La présentation aux clients de l'entreprise</button>
+      </div>
+      <div class="qcm-feedback" id="fb5"></div>
+      <button class="btn-next-step" id="next5" onclick="goStep(6)">Étape suivante →</button>
     </div>
-    <div class="qcm-feedback" id="fb-q4"></div>
   </div>
 
-  <!-- Q5 -->
-  <div class="activity" id="act-q5">
-    <div class="activity-num">Question 5 / 6</div>
-    <div class="qcm-question">Quels EPI sont indispensables pour manipuler des tôles et pièces métalliques coupantes en atelier froid ?</div>
-    <div class="qcm-options">
-      <button class="qcm-option" onclick="check('q5',this,false)">Lunettes de protection uniquement</button>
-      <button class="qcm-option" onclick="check('q5',this,false)">Casque de chantier + bouchons d'oreilles</button>
-      <button class="qcm-option" onclick="check('q5',this,true)">Gants de protection anti-coupure + chaussures de sécurité (+ lunettes si meulage)</button>
-      <button class="qcm-option" onclick="check('q5',this,false)">Aucun EPI particulier si on fait attention</button>
+  <!-- ÉTAPE 6 -->
+  <div class="step-card" id="step6">
+    <div class="step-num">Étape 6 / 6</div>
+    <div class="step-title">Le droit de retrait</div>
+    <div class="step-consigne">Cherche dans le document la notion de droit de retrait ou de danger grave.</div>
+    <button class="btn-action" onclick="showQuestion(6)">J'ai lu, je réponds</button>
+    <div class="question-zone" id="qzone6">
+      <div class="qcm-question">D'après le document, dans quelle situation peux-tu exercer ton droit de retrait ?</div>
+      <div class="qcm-options">
+        <button class="qcm-option" onclick="check(6,this,0)">Si le travail est trop fatigant</button>
+        <button class="qcm-option" onclick="check(6,this,0)">Si tu n'aimes pas la tâche demandée</button>
+        <button class="qcm-option" onclick="check(6,this,1)">Si tu estimes qu'il y a un danger grave et imminent pour ta vie ou ta santé</button>
+        <button class="qcm-option" onclick="check(6,this,0)">Si ton tuteur est absent</button>
+      </div>
+      <div class="qcm-feedback" id="fb6"></div>
+      <button class="btn-next-step" id="next6" onclick="showScore()">Voir mon score →</button>
     </div>
-    <div class="qcm-feedback" id="fb-q5"></div>
   </div>
 
-  <!-- Q6 -->
-  <div class="activity" id="act-q6">
-    <div class="activity-num">Question 6 / 6</div>
-    <div class="qcm-question">Tu vois un camarade travailler seul sur un brasage (soudure) sans que le responsable soit au courant. Que fais-tu ?</div>
-    <div class="qcm-options">
-      <button class="qcm-option" onclick="check('q6',this,false)">Rien, il a l'air de savoir ce qu'il fait</button>
-      <button class="qcm-option" onclick="check('q6',this,false)">Je reste à côté pour le surveiller discrètement</button>
-      <button class="qcm-option" onclick="check('q6',this,true)">Je préviens le responsable pour qu'il soit informé de l'opération en cours</button>
-      <button class="qcm-option" onclick="check('q6',this,false)">Je lui ordonne d'arrêter immédiatement</button>
-    </div>
-    <div class="qcm-feedback" id="fb-q6"></div>
-  </div>
-
-  <!-- 6. SCORE -->
+  <!-- SCORE -->
   <div class="score-section" id="scoreSection">
     <div class="score-text" id="scoreText">0 / 10</div>
     <div class="score-bar-wrap">
@@ -464,7 +408,7 @@ body.guided .page-hint{display:inline}
     <div class="score-msg" id="scoreMsg"></div>
   </div>
 
-  <!-- 7. NAVIGATION -->
+  <!-- NAVIGATION -->
   <div class="bottom-nav">
     <a href="../index.html" class="btn-prev">← Accueil</a>
     <a href="electrique.html" class="btn-next">Risque électrique →</a>
@@ -490,48 +434,84 @@ function setF(c){
   if(localStorage.getItem('a11y-dys')==='true'){document.body.classList.add('dys');document.getElementById('bDys').classList.add('on');}
   var fs=localStorage.getItem('a11y-size');
   if(fs==='f-lg'||fs==='f-xl')document.body.classList.add(fs);
-  if(localStorage.getItem('guidedMode')==='true')document.body.classList.add('guided');
 })();
 
-/* QCM */
-var answers={q1:null,q2:null,q3:null,q4:null,q5:null,q6:null};
+/* État du module */
 var totalQ=6;
-var attempts={};
+var answers={}; // qId -> true quand répondu
+var attempts={}; // qId -> nombre de tentatives
+var currentStep=0;
 
+/* Feedbacks */
 var feedbacks={
-  q1:{
-    ok:'Bien. Le premier jour, on attend les consignes, on repère les sorties de secours, l\u2019extincteur et le point de rassemblement. C\u2019est la base de l\u2019accueil sécurité.',
-    ko:'Non. Le premier réflexe c\u2019est d\u2019attendre les instructions de ton tuteur. Même avec de bonnes intentions, agir sans consigne peut être dangereux.'
+  1:{
+    ok:'Exact. Le tuteur est ton référent sécurité en entreprise.',
+    ko:'Relis la page 1. Le tuteur a un rôle d\u2019accompagnement et de vigilance sur ta sécurité.'
   },
-  q2:{
-    ok:'Exact. Un outil défectueux ne se répare pas avec du scotch. On le signale, on l\u2019étiquette « hors service » et on prend un outil en bon état.',
-    ko:'Non. Un câble dénudé = risque d\u2019électrocution. Jamais de réparation de fortune. On signale, on met hors service, on prend un autre outil.'
+  2:{
+    ok:'Correct. Le DUER recense tous les risques du poste. Tu as le droit de le consulter.',
+    ko:'Relis la page 2 du mémo. L\u2019employeur doit présenter un document qui recense les risques.'
   },
-  q3:{
-    ok:'Bon réflexe. PROTÉGER d\u2019abord : couper le courant. Ne JAMAIS toucher la victime tant que le courant passe — sinon tu deviens toi aussi victime.',
-    ko:'Attention, geste dangereux. Si tu touches la victime pendant qu\u2019elle est sous tension, le courant passe dans ton corps aussi. Première action : COUPER LE COURANT.'
+  3:{
+    ok:'Bien. L\u2019employeur ou le tuteur doit être prévenu immédiatement.',
+    ko:'Relis la page 3. Le signalement se fait à ton employeur ou à ton tuteur, pas à un organisme extérieur.'
   },
-  q4:{
-    ok:'C\u2019est la bonne attitude. Demander une démonstration n\u2019est jamais un signe de faiblesse. C\u2019est un signe de professionnalisme.',
-    ko:'Non. On ne manipule jamais une machine qu\u2019on ne connaît pas sans formation préalable. Demander une démo, c\u2019est normal et obligatoire.'
+  4:{
+    ok:'Exact. Les mineurs sont protégés par des interdictions de travaux dangereux.',
+    ko:'Relis la page 2. Il y a une mention spécifique sur les travaux interdits aux mineurs.'
   },
-  q5:{
-    ok:'Correct. Pour des pièces coupantes : gants anti-coupure obligatoires + chaussures de sécurité. Lunettes en plus si découpe ou meulage.',
-    ko:'Non. Manipuler des tôles ou des pièces métalliques sans gants anti-coupure = risque de coupures graves. Les chaussures de sécurité protègent les pieds si une pièce tombe.'
+  5:{
+    ok:'Correct. L\u2019accueil sécurité porte sur les risques et les consignes, pas sur l\u2019administratif.',
+    ko:'Relis la page 1. L\u2019accueil sécurité concerne les risques et les mesures de prévention.'
   },
-  q6:{
-    ok:'Bon réflexe. Le brasage implique un chalumeau, des flammes, des risques de brûlure. Une opération à risque doit toujours être connue du responsable. Ce n\u2019est pas de la délation, c\u2019est de la prévention.',
-    ko:'Non. Le brasage est une opération à risque (flammes, gaz, brûlures). Le responsable DOIT être au courant. Le prévenir, ce n\u2019est pas moucharder, c\u2019est protéger tout le monde.'
+  6:{
+    ok:'Exact. Le droit de retrait s\u2019exerce face à un danger grave et imminent.',
+    ko:'Cherche dans le document : le droit de retrait est lié à un danger grave et imminent.'
   }
 };
 
+/* Démarrage du module */
+function startModule(){
+  document.getElementById('welcomeScreen').classList.add('hidden');
+  document.getElementById('progressWrap').classList.remove('hidden');
+  goStep(1);
+}
+
+/* Navigation entre étapes */
+function goStep(n){
+  // Masquer toutes les étapes
+  for(var i=1;i<=totalQ;i++){
+    document.getElementById('step'+i).classList.remove('active');
+  }
+  // Afficher l'étape demandée
+  document.getElementById('step'+n).classList.add('active');
+  currentStep=n;
+  updateProgress();
+  // Scroll vers le haut de l'étape
+  document.getElementById('step'+n).scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+/* Afficher la zone question */
+function showQuestion(n){
+  var zone=document.getElementById('qzone'+n);
+  zone.classList.add('visible');
+  // Désactiver le bouton "J'ai lu"
+  var card=document.getElementById('step'+n);
+  var btn=card.querySelector('.btn-action');
+  btn.disabled=true;
+  btn.textContent='Question ci-dessous';
+  // Scroll vers la question
+  zone.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+/* Vérifier une réponse */
 function check(qId,btn,isCorrect){
-  if(answers[qId]!==null)return;
+  if(answers[qId])return;
   if(!attempts[qId])attempts[qId]=0;
   attempts[qId]++;
 
   var opts=btn.parentElement.querySelectorAll('.qcm-option');
-  var fb=document.getElementById('fb-'+qId);
+  var fb=document.getElementById('fb'+qId);
 
   if(isCorrect){
     answers[qId]=true;
@@ -539,7 +519,8 @@ function check(qId,btn,isCorrect){
     opts.forEach(function(o){o.disabled=true});
     fb.textContent=feedbacks[qId].ok;
     fb.className='qcm-feedback show-ok';
-    updateScore();
+    // Afficher le bouton "Étape suivante"
+    document.getElementById('next'+qId).classList.add('visible');
   } else {
     btn.classList.add('incorrect');
     btn.disabled=true;
@@ -548,38 +529,56 @@ function check(qId,btn,isCorrect){
   }
 }
 
-function updateScore(){
-  var done=0,pts=0,max=totalQ*2;
-  for(var k in answers){
-    if(answers[k]!==null){
-      done++;
-      pts+=(attempts[k]===1?2:(attempts[k]===2?1:0));
+/* Mise à jour de la barre de progression */
+function updateProgress(){
+  var pct=Math.round((currentStep/totalQ)*100);
+  document.getElementById('progressLabel').textContent='Étape '+currentStep+' / '+totalQ;
+  var bar=document.getElementById('progressBar');
+  bar.style.width=pct+'%';
+  bar.textContent=currentStep+'/'+totalQ;
+}
+
+/* Affichage du score */
+function showScore(){
+  var pts=0,max=totalQ*2;
+  for(var i=1;i<=totalQ;i++){
+    if(answers[i]){
+      pts+=(attempts[i]===1?2:(attempts[i]===2?1:0));
     }
   }
-  if(done===totalQ){
-    var sec=document.getElementById('scoreSection');
-    sec.style.display='block';
-    var s10=Math.round((pts/max)*10);
-    var pct=Math.round((pts/max)*100);
-    document.getElementById('scoreText').textContent=s10+' / 10 ('+pts+' pts sur '+max+')';
-    var bar=document.getElementById('scoreBar');
-    bar.style.width=pct+'%';
-    bar.textContent=s10+'/10';
-    if(pct<70)bar.classList.add('fail');
+  var s10=Math.round((pts/max)*10);
+  var pct=Math.round((pts/max)*100);
 
-    var msg=document.getElementById('scoreMsg');
-    if(pct>=70){
-      msg.textContent='Les réflexes de base sont acquis. Tu peux passer au module suivant.';
-      msg.className='score-msg pass';
-    } else {
-      msg.textContent='Relis attentivement les 5 réflexes ci-dessus, puis réessaie.';
-      msg.className='score-msg no-pass';
-    }
-    sec.scrollIntoView({behavior:'smooth',block:'center'});
+  // Masquer l'étape courante
+  for(var j=1;j<=totalQ;j++){
+    document.getElementById('step'+j).classList.remove('active');
+  }
 
-    /* 8. Signal localStorage */
+  // Mettre la barre à 100%
+  document.getElementById('progressLabel').textContent='Terminé !';
+  var pBar=document.getElementById('progressBar');
+  pBar.style.width='100%';
+  pBar.textContent='6/6';
+
+  // Afficher le score
+  var sec=document.getElementById('scoreSection');
+  sec.style.display='block';
+  document.getElementById('scoreText').textContent=s10+' / 10 ('+pts+' pts sur '+max+')';
+  var bar=document.getElementById('scoreBar');
+  bar.style.width=pct+'%';
+  bar.textContent=s10+'/10';
+  if(pct<70)bar.classList.add('fail');
+
+  var msg=document.getElementById('scoreMsg');
+  if(pct>=70){
+    msg.textContent='Module validé. Tu peux passer au module suivant.';
+    msg.className='score-msg pass';
     localStorage.setItem('securite_done','true');
+  } else {
+    msg.textContent='Score insuffisant. Relis le document et réessaie.';
+    msg.className='score-msg no-pass';
   }
+  sec.scrollIntoView({behavior:'smooth',block:'center'});
 }
 </script>
 </body>

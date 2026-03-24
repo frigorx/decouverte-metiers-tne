@@ -30,10 +30,6 @@ body.dys{font-family:'OpenDyslexic',system-ui,sans-serif}
 body.f-lg{font-size:18px}
 body.f-xl{font-size:20px}
 
-/* Mode guidé */
-.page-hint{display:none;background:var(--orange-warm);border:1px dashed var(--orange);border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:14px;font-size:.85em;color:#5a3518}
-body.guided .page-hint{display:block}
-
 .topbar{
   position:sticky;top:0;z-index:10;
   display:flex;align-items:center;justify-content:space-between;
@@ -63,7 +59,7 @@ body.guided .page-hint{display:block}
 
 .container{max-width:700px;margin:0 auto;padding:20px 16px 60px}
 
-/* Header thématique orange → navy */
+/* Header thématique */
 .theme-header{
   background:linear-gradient(135deg,var(--orange),var(--orange-hover),var(--navy));
   color:white;border-radius:var(--radius);padding:28px 24px;
@@ -73,114 +69,77 @@ body.guided .page-hint{display:block}
 .theme-header h1{font-size:1.8em;font-weight:700;margin-bottom:6px}
 .theme-header p{font-size:1em;opacity:.9}
 
-/* Introduction */
-.intro-box{
+/* Boîte objectif */
+.obj-box{
   background:var(--orange-warm);border-left:4px solid var(--orange);
   border-radius:0 var(--radius-sm) var(--radius-sm) 0;
-  padding:14px 18px;margin-bottom:20px;font-size:.9em;color:#5a3518;line-height:1.6;
-}
-.stat-box{
-  background:var(--card);border:1px solid var(--line);border-left:4px solid var(--bad);
-  border-radius:0 var(--radius-sm) var(--radius-sm) 0;
-  padding:12px 16px;margin-bottom:24px;font-size:.85em;color:var(--text);
-}
-.stat-box strong{color:var(--bad)}
-
-/* Section titre */
-.section-title{
-  font-size:1.15em;font-weight:700;color:var(--navy);margin:24px 0 12px;
-  padding-bottom:6px;border-bottom:2px solid var(--orange);display:inline-block;
+  padding:14px 18px;margin-bottom:14px;font-size:.92em;color:#5a3518;line-height:1.6;
 }
 
-/* Cartes dangers */
-.danger-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:24px}
-.danger-card{
-  background:var(--card);border:1px solid var(--line);border-radius:var(--radius-sm);
-  padding:16px 12px;text-align:center;box-shadow:var(--shadow);
-  transition:transform .2s;
-}
-.danger-card:hover{transform:translateY(-2px)}
-.danger-card .ico{font-size:2em;margin-bottom:8px}
-.danger-card h4{font-size:.9em;color:var(--text-strong);margin-bottom:4px}
-.danger-card p{font-size:.78em;color:var(--muted);line-height:1.4}
-.svg-ico{width:40px;height:40px;margin:0 auto 8px}
-.svg-ico svg{width:100%;height:100%;display:block}
-
-/* Seuils du courant */
-.seuils{display:grid;gap:8px;margin-bottom:12px}
-.seuil{
-  background:var(--card);border:1px solid var(--line);border-radius:var(--radius-sm);
-  padding:12px 16px;display:flex;align-items:center;gap:14px;
-  box-shadow:var(--shadow);transition:transform .2s;
-}
-.seuil:hover{transform:translateY(-1px)}
-.seuil-val{
-  font-size:1.1em;font-weight:800;min-width:70px;text-align:center;
-  padding:6px 10px;border-radius:var(--radius-sm);color:#fff;flex-shrink:0;
-}
-.seuil-1{background:#3498db}
-.seuil-2{background:var(--orange)}
-.seuil-3{background:#e67e22}
-.seuil-4{background:var(--bad)}
-.seuil-5{background:#8e0000}
-.seuil-info h4{font-size:.9em;color:var(--text-strong);margin-bottom:2px}
-.seuil-info p{font-size:.8em;color:var(--muted);line-height:1.4}
-.seuil-note{
+/* Boîte rappel document */
+.doc-box{
   background:var(--turquoise-light);border-left:4px solid var(--turquoise);
   border-radius:0 var(--radius-sm) var(--radius-sm) 0;
-  padding:12px 16px;margin-bottom:24px;font-size:.82em;color:var(--navy);line-height:1.5;
+  padding:14px 18px;margin-bottom:20px;font-size:.9em;color:var(--navy);line-height:1.6;
+}
+.doc-box a{color:var(--turquoise);font-weight:700;text-decoration:underline}
+
+/* Boutons accueil */
+.welcome-btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:24px}
+.btn-doc,.btn-start{
+  padding:14px 28px;border:none;border-radius:var(--radius-pill);
+  font-family:inherit;font-size:1em;font-weight:700;cursor:pointer;
+  transition:all .2s;text-decoration:none;display:inline-flex;
+  align-items:center;gap:8px;color:white;
+}
+.btn-doc{background:var(--turquoise)}
+.btn-doc:hover{background:#1d9e9e}
+.btn-start{background:var(--orange)}
+.btn-start:hover{background:var(--orange-hover)}
+
+/* Barre de progression */
+.progress-wrap{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:16px 20px;margin-bottom:20px;box-shadow:var(--shadow);
+}
+.progress-label{font-size:.85em;font-weight:600;color:var(--navy);margin-bottom:8px}
+.progress-bar-bg{background:var(--line);border-radius:999px;height:20px;overflow:hidden}
+.progress-bar-fill{
+  height:100%;border-radius:999px;transition:width .5s ease;
+  background:linear-gradient(90deg,var(--turquoise),var(--ok));
+  display:flex;align-items:center;justify-content:center;
+  color:white;font-weight:700;font-size:.75em;min-width:0;
 }
 
-/* Règles d'or */
-.rules-section{
-  background:var(--card);border:1px solid var(--line);border-left:5px solid var(--navy);
-  border-radius:var(--radius);padding:20px;margin-bottom:24px;box-shadow:var(--shadow);
-}
-.rules-section h3{font-size:1.1em;color:var(--navy);margin-bottom:12px}
-.rules-list{list-style:none;counter-reset:rule}
-.rules-list li{
-  counter-increment:rule;padding:10px 0 10px 44px;position:relative;
-  border-bottom:1px solid var(--line);font-size:.92em;line-height:1.5;
-}
-.rules-list li:last-child{border-bottom:none}
-.rules-list li::before{
-  content:counter(rule);position:absolute;left:0;top:10px;
-  width:30px;height:30px;border-radius:50%;
-  background:var(--navy);color:#fff;font-weight:700;font-size:.85em;
-  display:grid;place-items:center;
-}
-.rules-list li strong{color:var(--orange)}
-.rules-list li span{color:var(--muted);font-size:.9em}
-
-/* En cas d'accident */
-.urgence-section{
-  background:linear-gradient(135deg,#fff5f5,#fff);border:2px solid var(--bad);
-  border-radius:var(--radius);padding:20px;margin-bottom:24px;box-shadow:var(--shadow);
-}
-.urgence-section h3{font-size:1.1em;color:var(--bad);margin-bottom:14px}
-.urgence-step{
-  display:flex;align-items:flex-start;gap:12px;padding:10px 0;
-  border-bottom:1px solid rgba(231,76,60,.15);
-}
-.urgence-step:last-child{border-bottom:none}
-.urgence-num{
-  width:34px;height:34px;border-radius:50%;flex-shrink:0;
-  background:var(--bad);color:#fff;font-weight:800;font-size:.9em;
-  display:grid;place-items:center;
-}
-.urgence-step h4{font-size:.95em;color:var(--text-strong);margin-bottom:2px}
-.urgence-step p{font-size:.82em;color:var(--muted);line-height:1.4}
-.urgence-warn{
-  margin-top:10px;padding:8px 14px;background:rgba(231,76,60,.08);
-  border-radius:var(--radius-sm);font-size:.82em;color:var(--bad);font-weight:600;
-}
-
-/* Questions */
-.activity{
+/* Étape */
+.step{
   background:var(--card);border:1px solid var(--line);border-left:5px solid var(--orange);
   border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-bottom:18px;
+  display:none;
 }
-.activity-num{font-size:.85em;color:var(--turquoise);font-weight:700;margin-bottom:6px}
+.step.active{display:block}
+.step-num{font-size:.85em;color:var(--turquoise);font-weight:700;margin-bottom:6px}
+.step-title{font-size:1.15em;font-weight:700;color:var(--navy);margin-bottom:12px}
+.step-consigne{
+  background:var(--orange-warm);border:1px dashed var(--orange);
+  border-radius:var(--radius-sm);padding:14px 16px;margin-bottom:16px;
+  font-size:.92em;color:#5a3518;line-height:1.6;
+}
+
+/* Bouton J'ai lu */
+.btn-read{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 24px;border:none;border-radius:var(--radius-pill);
+  background:var(--navy);color:white;font-family:inherit;
+  font-size:.95em;font-weight:600;cursor:pointer;transition:all .2s;
+  margin-bottom:16px;
+}
+.btn-read:hover{background:#143052}
+
+/* Zone question (cachée tant que pas cliqué "J'ai lu") */
+.question-zone{display:none}
+.question-zone.visible{display:block}
+
 .qcm-question{font-size:1em;font-weight:600;color:var(--navy);margin-bottom:14px;line-height:1.5}
 .qcm-options{display:grid;gap:8px}
 .qcm-option{
@@ -198,6 +157,16 @@ body.guided .page-hint{display:block}
 }
 .qcm-feedback.show-ok{display:block;background:#d4edda;color:#155724;border:1px solid #c3e6cb}
 .qcm-feedback.show-ko{display:block;background:#f8d7da;color:#721c24;border:1px solid #f5c6cb}
+
+/* Bouton étape suivante */
+.btn-next-step{
+  display:none;margin-top:14px;
+  padding:12px 24px;border:none;border-radius:var(--radius-pill);
+  background:var(--turquoise);color:white;font-family:inherit;
+  font-size:.95em;font-weight:600;cursor:pointer;transition:all .2s;
+}
+.btn-next-step:hover{background:#1d9e9e}
+.btn-next-step.visible{display:inline-flex;align-items:center;gap:8px}
 
 /* Score */
 .score-section{
@@ -234,16 +203,18 @@ body.guided .page-hint{display:block}
 
 .footer{padding:16px;text-align:center;font-size:.72em;color:var(--muted);border-top:1px solid var(--line);margin-top:30px}
 
+/* Accueil caché quand on démarre */
+.welcome{transition:opacity .3s}
+.welcome.hidden{display:none}
+
 @media(max-width:600px){
   .theme-header h1{font-size:1.4em}
-  .activity{padding:16px}
-  .danger-grid{grid-template-columns:1fr 1fr}
+  .step{padding:16px}
   .topbar{flex-direction:column;text-align:center}
   .bottom-nav{flex-direction:column;align-items:stretch;text-align:center}
   .bottom-nav a{justify-content:center}
-  .seuil{flex-direction:column;text-align:center;gap:8px}
-  .seuil-val{min-width:auto;width:100%}
-  .urgence-step{flex-direction:column;align-items:center;text-align:center;gap:8px}
+  .welcome-btns{flex-direction:column;align-items:stretch}
+  .btn-doc,.btn-start{justify-content:center}
 }
 </style>
 </head>
@@ -271,219 +242,160 @@ body.guided .page-hint{display:block}
   <!-- HEADER -->
   <div class="theme-header">
     <h1>Le risque électrique</h1>
-    <p>Les bons réflexes face au courant — commun à tous les métiers</p>
+    <p>Lecture guidée du document IRIS-ST</p>
   </div>
 
-  <!-- MODE GUIDÉ -->
-  <div class="page-hint">
-    Lis attentivement chaque section avant de répondre aux questions. Les informations sur les seuils du courant et les règles d'or te seront utiles pour choisir les bonnes réponses.
-  </div>
-
-  <!-- INTRODUCTION -->
-  <div class="intro-box">
-    <strong>L'électricité tue.</strong> Chaque année, des accidents graves surviennent sur les chantiers et en atelier. Ce module te donne les réflexes essentiels, quel que soit ton futur métier.
-  </div>
-
-  <div class="stat-box">
-    <strong>~200 accidents</strong> d'origine électrique par an dans le BTP, dont <strong>15 à 20 mortels</strong>. <strong>30 % touchent des non-électriciens</strong> : plombiers, frigoristes, peintres... Tout le monde est concerné.
-  </div>
-
-  <!-- POURQUOI C'EST DANGEREUX -->
-  <div class="section-title">Pourquoi c'est dangereux</div>
-
-  <div class="danger-grid">
-    <div class="danger-card">
-      <div class="ico svg-ico"><svg viewBox="0 0 24 24"><path d="M12.5 2l-3 8h3l-1 8 6-10h-4l2-6z" fill="var(--orange)" stroke="#000" stroke-width=".5"/></svg></div>
-      <h4>Électrocution</h4>
-      <p>Passage du courant dans le corps. Peut provoquer arrêt cardiaque, brûlures internes.</p>
+  <!-- PAGE D'ACCUEIL -->
+  <div class="welcome" id="welcome">
+    <div class="obj-box">
+      <strong>Objectif :</strong> Ce module vérifie que tu sais repérer les dangers électriques et les bons réflexes dans le document de référence.
     </div>
-    <div class="danger-card">
-      <div class="ico svg-ico"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2C8 6 6 10 8 14c1 2 2 3 1 5-1 3 3 4 3 4s4-4 3-8c-1-2 0-4 2-6s-2-7-5-7z" fill="var(--bad)" stroke="#000" stroke-width=".5"/></svg></div>
-      <h4>Arc électrique</h4>
-      <p>Flash thermique avec brûlures graves (jusqu'à 20 000 °C), projection de métal fondu.</p>
+    <div class="doc-box">
+      Tu as besoin du document IRIS-ST « Le risque électrique » pour répondre. Ouvre-le avant de commencer.
     </div>
-    <div class="danger-card">
-      <div class="ico svg-ico"><svg viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><circle cx="12" cy="12" r="6"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M19 5l-3 3M8 16l-3 3"/></svg></div>
-      <h4>Court-circuit</h4>
-      <p>Risque d'incendie et d'explosion en cas de contact entre conducteurs.</p>
-    </div>
-    <div class="danger-card">
-      <div class="ico svg-ico"><svg viewBox="0 0 24 24" fill="none"><rect x="7" y="10" width="10" height="8" rx="1" stroke="#000" stroke-width="1.5"/><circle cx="10" cy="14" r="1" fill="#000"/><circle cx="14" cy="14" r="1" fill="#000"/><path d="M17 10l-3 3" stroke="var(--bad)" stroke-width="2" stroke-linecap="round"/></svg></div>
-      <h4>Contact indirect</h4>
-      <p>Courant de fuite par défaut d'isolement sur le carter d'une machine.</p>
+    <div class="welcome-btns">
+      <a href="../docs/IRIS-ST-Risque-Electrique.pdf" target="_blank" class="btn-doc">Ouvrir le document</a>
+      <button class="btn-start" onclick="startModule()">Commencer</button>
     </div>
   </div>
 
-  <!-- LES SEUILS DU COURANT -->
-  <div class="section-title">Les seuils du courant sur le corps humain</div>
+  <!-- BARRE DE PROGRESSION -->
+  <div class="progress-wrap" id="progressWrap" style="display:none">
+    <div class="progress-label" id="progressLabel">Étape 1 / 6</div>
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="progressBar" style="width:0%"></div>
+    </div>
+  </div>
 
-  <div class="seuils">
-    <div class="seuil">
-      <div class="seuil-val seuil-1">0,5 mA</div>
-      <div class="seuil-info">
-        <h4>Seuil de perception</h4>
-        <p>Picotement, premier ressenti au contact.</p>
+  <!-- ÉTAPE 1 -->
+  <div class="step" id="step1">
+    <div class="step-num">Étape 1 / 6</div>
+    <div class="step-title">Les effets du courant sur le corps</div>
+    <div class="step-consigne">
+      Ouvre le document IRIS-ST — Page 1. Observe le schéma des effets du courant sur le corps humain.
+    </div>
+    <button class="btn-read" onclick="showQuestion(1)">J'ai lu, je réponds</button>
+    <div class="question-zone" id="qzone1">
+      <div class="qcm-question">D'après le document, à partir de quelle intensité le courant provoque-t-il une fibrillation cardiaque ?</div>
+      <div class="qcm-options">
+        <button class="qcm-option" onclick="check(1,this,0)">10 mA</button>
+        <button class="qcm-option" onclick="check(1,this,1)">30 mA</button>
+        <button class="qcm-option" onclick="check(1,this,2)">75 mA</button>
+        <button class="qcm-option" onclick="check(1,this,3)">150 mA</button>
       </div>
+      <div class="qcm-feedback" id="fb1"></div>
+      <button class="btn-next-step" id="btnNext1" onclick="goStep(2)">Étape suivante →</button>
     </div>
-    <div class="seuil">
-      <div class="seuil-val seuil-2">10 mA</div>
-      <div class="seuil-info">
-        <h4>Seuil de non-lâcher</h4>
-        <p>Contraction musculaire involontaire — impossible de lâcher le conducteur.</p>
+  </div>
+
+  <!-- ÉTAPE 2 -->
+  <div class="step" id="step2">
+    <div class="step-num">Étape 2 / 6</div>
+    <div class="step-title">Les distances de sécurité</div>
+    <div class="step-consigne">
+      Page 2 du document. Repère les distances de sécurité à respecter près des lignes électriques.
+    </div>
+    <button class="btn-read" onclick="showQuestion(2)">J'ai lu, je réponds</button>
+    <div class="question-zone" id="qzone2">
+      <div class="qcm-question">D'après le document, quelle distance minimale faut-il respecter par rapport à un réseau aérien de moins de 50 000 volts ?</div>
+      <div class="qcm-options">
+        <button class="qcm-option" onclick="check(2,this,0)">1 mètre</button>
+        <button class="qcm-option" onclick="check(2,this,1)">2 mètres</button>
+        <button class="qcm-option" onclick="check(2,this,2)">3 mètres</button>
+        <button class="qcm-option" onclick="check(2,this,3)">5 mètres</button>
       </div>
+      <div class="qcm-feedback" id="fb2"></div>
+      <button class="btn-next-step" id="btnNext2" onclick="goStep(3)">Étape suivante →</button>
     </div>
-    <div class="seuil">
-      <div class="seuil-val seuil-3">30 mA</div>
-      <div class="seuil-info">
-        <h4>Paralysie respiratoire</h4>
-        <p>Arrêt de la respiration. C'est pour cela que le différentiel est réglé à 30 mA.</p>
+  </div>
+
+  <!-- ÉTAPE 3 -->
+  <div class="step" id="step3">
+    <div class="step-num">Étape 3 / 6</div>
+    <div class="step-title">La consignation</div>
+    <div class="step-consigne">
+      Cherche dans le document la procédure de consignation (mise hors tension sécurisée).
+    </div>
+    <button class="btn-read" onclick="showQuestion(3)">J'ai lu, je réponds</button>
+    <div class="question-zone" id="qzone3">
+      <div class="qcm-question">D'après le document, quelle est la première étape de la consignation avant d'intervenir sur un circuit électrique ?</div>
+      <div class="qcm-options">
+        <button class="qcm-option" onclick="check(3,this,0)">Vérifier l'absence de tension</button>
+        <button class="qcm-option" onclick="check(3,this,1)">Séparer (couper l'alimentation)</button>
+        <button class="qcm-option" onclick="check(3,this,2)">Mettre à la terre</button>
+        <button class="qcm-option" onclick="check(3,this,3)">Poser un cadenas</button>
       </div>
+      <div class="qcm-feedback" id="fb3"></div>
+      <button class="btn-next-step" id="btnNext3" onclick="goStep(4)">Étape suivante →</button>
     </div>
-    <div class="seuil">
-      <div class="seuil-val seuil-4">75 mA</div>
-      <div class="seuil-info">
-        <h4>Fibrillation cardiaque</h4>
-        <p>Le cœur bat de façon anarchique. Seul un défibrillateur peut sauver la victime.</p>
+  </div>
+
+  <!-- ÉTAPE 4 -->
+  <div class="step" id="step4">
+    <div class="step-num">Étape 4 / 6</div>
+    <div class="step-title">Les protections</div>
+    <div class="step-consigne">
+      Dans le document, repère les équipements de protection contre le risque électrique.
+    </div>
+    <button class="btn-read" onclick="showQuestion(4)">J'ai lu, je réponds</button>
+    <div class="question-zone" id="qzone4">
+      <div class="qcm-question">D'après le document, quel dispositif de protection est obligatoire sur les chantiers pour couper automatiquement le courant en cas de fuite ?</div>
+      <div class="qcm-options">
+        <button class="qcm-option" onclick="check(4,this,0)">Un disjoncteur thermique</button>
+        <button class="qcm-option" onclick="check(4,this,1)">Un différentiel 30 mA</button>
+        <button class="qcm-option" onclick="check(4,this,2)">Un parafoudre</button>
+        <button class="qcm-option" onclick="check(4,this,3)">Une mise à la terre seule</button>
       </div>
+      <div class="qcm-feedback" id="fb4"></div>
+      <button class="btn-next-step" id="btnNext4" onclick="goStep(5)">Étape suivante →</button>
     </div>
-    <div class="seuil">
-      <div class="seuil-val seuil-5">1 A</div>
-      <div class="seuil-info">
-        <h4>Arrêt cardiaque</h4>
-        <p>Mort clinique. Le cœur s'arrête complètement.</p>
+  </div>
+
+  <!-- ÉTAPE 5 -->
+  <div class="step" id="step5">
+    <div class="step-num">Étape 5 / 6</div>
+    <div class="step-title">Les situations à risque</div>
+    <div class="step-consigne">
+      Relis le document dans son ensemble. Repère les situations décrites comme dangereuses.
+    </div>
+    <button class="btn-read" onclick="showQuestion(5)">J'ai lu, je réponds</button>
+    <div class="question-zone" id="qzone5">
+      <div class="qcm-question">D'après le document, pourquoi le contact indirect (toucher le carter métallique d'une machine) est-il dangereux ?</div>
+      <div class="qcm-options">
+        <button class="qcm-option" onclick="check(5,this,0)">Parce que le métal est chaud</button>
+        <button class="qcm-option" onclick="check(5,this,1)">Parce que le métal est coupant</button>
+        <button class="qcm-option" onclick="check(5,this,2)">Parce qu'un défaut d'isolement peut faire passer le courant dans le carter</button>
+        <button class="qcm-option" onclick="check(5,this,3)">Parce que les machines vibrent</button>
       </div>
+      <div class="qcm-feedback" id="fb5"></div>
+      <button class="btn-next-step" id="btnNext5" onclick="goStep(6)">Étape suivante →</button>
     </div>
   </div>
 
-  <div class="seuil-note">
-    <strong>Important :</strong> ces seuils varient selon la durée de contact, le trajet du courant dans le corps et l'humidité de la peau (500 Ω peau mouillée contre 5 000 Ω peau sèche). En milieu humide, le danger est 10 fois plus grand.
-  </div>
-
-  <!-- LES 5 RÈGLES D'OR -->
-  <div class="rules-section">
-    <h3>Les 5 règles d'or de la consignation</h3>
-    <ol class="rules-list">
-      <li><strong>SÉPARER</strong> — Couper l'alimentation (disjoncteur, sectionneur) <span>→ Isoler physiquement le circuit du réseau</span></li>
-      <li><strong>CONDAMNER</strong> — Verrouiller avec un cadenas de consignation <span>→ Empêcher toute remise sous tension accidentelle</span></li>
-      <li><strong>IDENTIFIER</strong> — Vérifier que c'est bien le bon circuit <span>→ Étiquetage, repérage du schéma électrique</span></li>
-      <li><strong>VÉRIFIER</strong> — Contrôler l'absence de tension avec un VAT <span>→ Vérificateur d'Absence de Tension, jamais un multimètre</span></li>
-      <li><strong>PROTÉGER</strong> — Mettre à la terre et en court-circuit si nécessaire <span>→ Éliminer toute tension résiduelle ou réalimentation</span></li>
-    </ol>
-  </div>
-
-  <!-- EN CAS D'ACCIDENT ÉLECTRIQUE -->
-  <div class="urgence-section">
-    <h3>En cas d'accident électrique</h3>
-    <div class="urgence-step">
-      <div class="urgence-num">1</div>
-      <div>
-        <h4>COUPER le courant</h4>
-        <p>Disjoncteur, arrêt d'urgence, sectionneur — couper l'alimentation avant toute chose.</p>
+  <!-- ÉTAPE 6 -->
+  <div class="step" id="step6">
+    <div class="step-num">Étape 6 / 6</div>
+    <div class="step-title">Conduite à tenir en cas d'accident</div>
+    <div class="step-consigne">
+      Cherche dans le document la conduite à tenir en cas d'accident électrique.
+    </div>
+    <button class="btn-read" onclick="showQuestion(6)">J'ai lu, je réponds</button>
+    <div class="question-zone" id="qzone6">
+      <div class="qcm-question">D'après le document, quel est le premier geste à faire face à une personne électrisée ?</div>
+      <div class="qcm-options">
+        <button class="qcm-option" onclick="check(6,this,0)">La tirer par les vêtements pour la dégager</button>
+        <button class="qcm-option" onclick="check(6,this,1)">Couper le courant avant de toucher la victime</button>
+        <button class="qcm-option" onclick="check(6,this,2)">Appeler immédiatement le 15</button>
+        <button class="qcm-option" onclick="check(6,this,3)">Lui jeter de l'eau</button>
       </div>
+      <div class="qcm-feedback" id="fb6"></div>
+      <button class="btn-next-step" id="btnNext6" onclick="showScore()">Voir mon score →</button>
     </div>
-    <div class="urgence-step">
-      <div class="urgence-num">2</div>
-      <div>
-        <h4>ALERTER les secours</h4>
-        <p>Appeler le 15 (SAMU), le 18 (pompiers) ou le 112. Préciser « accident électrique ».</p>
-      </div>
-    </div>
-    <div class="urgence-step">
-      <div class="urgence-num">3</div>
-      <div>
-        <h4>SECOURIR la victime</h4>
-        <p>PLS si inconsciente. Surveiller la respiration. Ne pas donner à boire. Couvrir la victime.</p>
-      </div>
-    </div>
-    <div class="urgence-warn">
-      NE JAMAIS toucher la victime avant d'avoir coupé le courant — tu deviendrais toi aussi victime.
-    </div>
-  </div>
-
-  <!-- ACTIVITÉS -->
-  <div class="section-title">Mets-toi en situation</div>
-
-  <!-- Q1 -->
-  <div class="activity" id="act-q1">
-    <div class="activity-num">Question 1 / 6</div>
-    <div class="qcm-question">Tu découvres un câble d'alimentation endommagé sur une machine en atelier. La machine est branchée mais éteinte. Que fais-tu ?</div>
-    <div class="qcm-options">
-      <button class="qcm-option" onclick="check('q1',this,false)">J'éteins la machine et je continue à travailler à côté</button>
-      <button class="qcm-option" onclick="check('q1',this,true)">Je ne touche pas la machine, je signale le défaut au responsable et je balise la zone</button>
-      <button class="qcm-option" onclick="check('q1',this,false)">Je débranche la prise en tirant sur le câble pour sécuriser</button>
-      <button class="qcm-option" onclick="check('q1',this,false)">Je mets du ruban isolant et je préviens à la fin de la journée</button>
-    </div>
-    <div class="qcm-feedback" id="fb-q1"></div>
-  </div>
-
-  <!-- Q2 -->
-  <div class="activity" id="act-q2">
-    <div class="activity-num">Question 2 / 6</div>
-    <div class="qcm-question">Ton tuteur te demande de changer un fusible sur un tableau électrique. Quelle est la première chose à faire ?</div>
-    <div class="qcm-options">
-      <button class="qcm-option" onclick="check('q2',this,false)">Mettre des gants en cuir et y aller</button>
-      <button class="qcm-option" onclick="check('q2',this,false)">Vérifier visuellement que le voyant est éteint</button>
-      <button class="qcm-option" onclick="check('q2',this,true)">Couper l'alimentation en amont, condamner le disjoncteur avec un cadenas, et vérifier l'absence de tension avec un VAT</button>
-      <button class="qcm-option" onclick="check('q2',this,false)">Couper le disjoncteur principal et intervenir rapidement</button>
-    </div>
-    <div class="qcm-feedback" id="fb-q2"></div>
-  </div>
-
-  <!-- Q3 -->
-  <div class="activity" id="act-q3">
-    <div class="activity-num">Question 3 / 6</div>
-    <div class="qcm-question">Un collègue utilise une rallonge électrique sur un chantier extérieur. Il pleut. Quel est le danger principal ?</div>
-    <div class="qcm-options">
-      <button class="qcm-option" onclick="check('q3',this,false)">La rallonge risque de rouiller</button>
-      <button class="qcm-option" onclick="check('q3',this,false)">Le câble peut chauffer et fondre</button>
-      <button class="qcm-option" onclick="check('q3',this,true)">L'eau est conductrice : risque d'électrocution par contact indirect si le câble ou la prise est défectueux</button>
-      <button class="qcm-option" onclick="check('q3',this,false)">La prise peut sauter à cause de l'humidité</button>
-    </div>
-    <div class="qcm-feedback" id="fb-q3"></div>
-  </div>
-
-  <!-- Q4 -->
-  <div class="activity" id="act-q4">
-    <div class="activity-num">Question 4 / 6</div>
-    <div class="qcm-question">Tu travailles à proximité d'une ligne électrique aérienne avec une échelle métallique. Quelle distance minimale dois-tu respecter ?</div>
-    <div class="qcm-options">
-      <button class="qcm-option" onclick="check('q4',this,false)">1 mètre suffit si je ne touche pas les fils</button>
-      <button class="qcm-option" onclick="check('q4',this,false)">2 mètres</button>
-      <button class="qcm-option" onclick="check('q4',this,true)">3 mètres minimum pour la basse tension (5 mètres pour la haute tension)</button>
-      <button class="qcm-option" onclick="check('q4',this,false)">Aucune distance particulière si l'échelle est en bois</button>
-    </div>
-    <div class="qcm-feedback" id="fb-q4"></div>
-  </div>
-
-  <!-- Q5 -->
-  <div class="activity" id="act-q5">
-    <div class="activity-num">Question 5 / 6</div>
-    <div class="qcm-question">Un collègue vient de couper le disjoncteur pour intervenir sur un circuit. Que doit-il faire pour empêcher quelqu'un de remettre le courant pendant son intervention ?</div>
-    <div class="qcm-options">
-      <button class="qcm-option" onclick="check('q5',this,false)">Mettre un post-it « ne pas toucher »</button>
-      <button class="qcm-option" onclick="check('q5',this,true)">Poser un cadenas de consignation sur le disjoncteur — c'est la seule protection fiable</button>
-      <button class="qcm-option" onclick="check('q5',this,false)">Prévenir oralement les collègues</button>
-      <button class="qcm-option" onclick="check('q5',this,false)">Retirer le fusible et le garder dans sa poche</button>
-    </div>
-    <div class="qcm-feedback" id="fb-q5"></div>
-  </div>
-
-  <!-- Q6 -->
-  <div class="activity" id="act-q6">
-    <div class="activity-num">Question 6 / 6</div>
-    <div class="qcm-question">Tu ressens un léger picotement en touchant le carter métallique d'une machine. Que signifie ce picotement et que fais-tu ?</div>
-    <div class="qcm-options">
-      <button class="qcm-option" onclick="check('q6',this,false)">C'est de l'électricité statique, je continue</button>
-      <button class="qcm-option" onclick="check('q6',this,false)">Je mets des gants isolants et je continue à utiliser la machine</button>
-      <button class="qcm-option" onclick="check('q6',this,true)">C'est un défaut d'isolement — courant de fuite. J'arrête la machine, je la débranche et je signale le problème immédiatement</button>
-      <button class="qcm-option" onclick="check('q6',this,false)">Je touche un tuyau métallique pour me décharger</button>
-    </div>
-    <div class="qcm-feedback" id="fb-q6"></div>
   </div>
 
   <!-- Score -->
   <div class="score-section" id="scoreSection">
-    <div class="score-text" id="scoreText">0 / 10</div>
+    <div class="score-text" id="scoreText">0 / 12</div>
     <div class="score-bar-wrap">
       <div class="score-bar" id="scoreBar" style="width:0%"></div>
     </div>
@@ -516,96 +428,127 @@ function setF(c){
   if(localStorage.getItem('a11y-dys')==='true'){document.body.classList.add('dys');document.getElementById('bDys').classList.add('on');}
   var fs=localStorage.getItem('a11y-size');
   if(fs==='f-lg'||fs==='f-xl')document.body.classList.add(fs);
-  if(localStorage.getItem('guidedMode')==='true')document.body.classList.add('guided');
 })();
 
-// QCM
-var answers={q1:null,q2:null,q3:null,q4:null,q5:null,q6:null};
-var totalQ=6;
-var attempts={};
+// Données des questions
+var TOTAL=6;
+var correctIndex=[2,2,1,1,2,1]; // index de la bonne réponse (0-based) pour chaque étape
+var feedbackOK=[
+  "Exact. 75 mA suffit à provoquer une fibrillation cardiaque. C'est pour ça que les protections sont réglées bien en dessous.",
+  "Correct. 3 mètres minimum en basse tension, 5 mètres en haute tension.",
+  "Exact. On SÉPARE d'abord (on coupe), puis on condamne, identifie, vérifie et protège.",
+  "Correct. Le différentiel 30 mA coupe le courant dès qu'il détecte une fuite — c'est la protection de base sur chantier.",
+  "Exact. Un défaut d'isolement = courant de fuite dans le carter. C'est un contact indirect, invisible mais dangereux.",
+  "Exact. On coupe le courant EN PREMIER. Toucher la victime sous tension, c'est devenir victime soi-même."
+];
+var feedbackKO=[
+  "Relis le schéma page 1. Les seuils sont indiqués en mA avec les effets correspondants.",
+  "Relis la page 2. Les distances de sécurité y sont clairement indiquées.",
+  "Relis la procédure de consignation dans le document. L'ordre des étapes est important.",
+  "Relis le document. Cherche la protection qui détecte les fuites de courant.",
+  "Relis la partie du document sur les contacts directs et indirects.",
+  "Relis le document. La première action est toujours de couper le courant."
+];
 
-var feedbacks={
-  q1:{
-    ok:'Correct. Un câble endommagé = danger même machine éteinte (la prise est sous tension). On ne touche pas, on signale, on sécurise la zone.',
-    ko:'Non. Un câble endommagé sur une machine branchée = danger immédiat. On ne touche à rien, on signale au responsable et on empêche quiconque de s\'en approcher.'
-  },
-  q2:{
-    ok:'Exact. C\'est la procédure de consignation complète. On ne se fie jamais à un voyant ou à un simple disjoncteur coupé — on condamne et on vérifie avec un VAT.',
-    ko:'Non. Avant toute intervention sur un circuit électrique, il faut appliquer les 5 règles d\'or : séparer, condamner (cadenas), identifier, vérifier (VAT), protéger.'
-  },
-  q3:{
-    ok:'Bien. L\'eau conduit le courant. Sur un chantier mouillé, la résistance de la peau chute à 500 Ω — un simple défaut d\'isolement devient mortel. C\'est pour ça que le différentiel 30 mA est obligatoire sur chantier.',
-    ko:'Non. L\'eau est conductrice. Peau mouillée = résistance de 500 Ω au lieu de 5 000 Ω. Le courant passe 10 fois mieux. Un simple défaut d\'isolement peut provoquer une électrocution.'
-  },
-  q4:{
-    ok:'Correct. 3 m minimum en BT, 5 m en HT. L\'arc électrique peut jaillir SANS contact physique. Même une échelle en bois mouillée peut conduire.',
-    ko:'Non. Distance minimale : 3 m en basse tension, 5 m en haute tension. L\'arc électrique peut traverser l\'air sur plusieurs mètres. C\'est un danger invisible.'
-  },
-  q5:{
-    ok:'Exact. Le cadenas de consignation est la SEULE garantie qu\'un collègue ne va pas remettre le courant par erreur. Un post-it tombe, un message oral s\'oublie.',
-    ko:'Non. Seul un cadenas de consignation empêche physiquement la remise sous tension. Un post-it peut tomber, un message oral peut être oublié. Il faut une sécurité physique.'
-  },
-  q6:{
-    ok:'Bon réflexe. Un picotement = courant de fuite = défaut d\'isolement. C\'est le seuil de 0,5 mA. Si ça s\'aggrave, c\'est l\'électrocution. On arrête immédiatement et on signale.',
-    ko:'Non. Un picotement au toucher d\'un carter métallique n\'est PAS de l\'électricité statique. C\'est un courant de fuite dû à un défaut d\'isolement. La machine est dangereuse, il faut l\'arrêter et signaler.'
-  }
-};
+var attempts=[];
+var scores=[];
+var answered=[];
+for(var i=0;i<TOTAL;i++){attempts.push(0);scores.push(0);answered.push(false);}
 
-function check(qId,btn,isCorrect){
-  if(answers[qId]!==null)return;
-  if(!attempts[qId])attempts[qId]=0;
-  attempts[qId]++;
+// Démarrer le module
+function startModule(){
+  document.getElementById('welcome').classList.add('hidden');
+  document.getElementById('progressWrap').style.display='block';
+  document.getElementById('step1').classList.add('active');
+  updateProgress(1);
+}
 
-  var opts=btn.parentElement.querySelectorAll('.qcm-option');
-  var fb=document.getElementById('fb-'+qId);
+// Afficher la question après "J'ai lu"
+function showQuestion(n){
+  document.getElementById('qzone'+n).classList.add('visible');
+}
+
+// Vérifier une réponse
+function check(step,btn,choiceIdx){
+  if(answered[step-1])return;
+  attempts[step-1]++;
+
+  var isCorrect=(choiceIdx===correctIndex[step-1]);
+  var fb=document.getElementById('fb'+step);
 
   if(isCorrect){
-    answers[qId]=true;
+    answered[step-1]=true;
     btn.classList.add('correct');
-    opts.forEach(function(o){o.disabled=true});
-    fb.textContent=feedbacks[qId].ok;
+    // Score : 2pts premier essai, 1pt deuxième, 0 après
+    if(attempts[step-1]===1)scores[step-1]=2;
+    else if(attempts[step-1]===2)scores[step-1]=1;
+    else scores[step-1]=0;
+    fb.textContent=feedbackOK[step-1];
     fb.className='qcm-feedback show-ok';
-    updateScore();
-  } else {
+    // Désactiver tous les boutons
+    var opts=btn.parentElement.querySelectorAll('.qcm-option');
+    for(var i=0;i<opts.length;i++)opts[i].disabled=true;
+    // Afficher bouton suivant
+    document.getElementById('btnNext'+step).classList.add('visible');
+  }else{
     btn.classList.add('incorrect');
     btn.disabled=true;
-    fb.textContent=feedbacks[qId].ko;
+    fb.textContent=feedbackKO[step-1];
     fb.className='qcm-feedback show-ko';
   }
 }
 
-function updateScore(){
-  var done=0,pts=0,max=totalQ*2;
-  for(var k in answers){
-    if(answers[k]!==null){
-      done++;
-      pts+=(attempts[k]===1?2:(attempts[k]===2?1:0));
-    }
+// Passer à l'étape suivante
+function goStep(n){
+  for(var i=1;i<=TOTAL;i++){
+    document.getElementById('step'+i).classList.remove('active');
   }
-  if(done===totalQ){
-    var sec=document.getElementById('scoreSection');
-    sec.style.display='block';
-    var s10=Math.round((pts/max)*10);
-    var pct=Math.round((pts/max)*100);
-    document.getElementById('scoreText').textContent=s10+' / 10 ('+pts+' pts sur '+max+')';
-    var bar=document.getElementById('scoreBar');
-    bar.style.width=pct+'%';
-    bar.textContent=s10+'/10';
-    if(pct<70)bar.classList.add('fail');
+  document.getElementById('step'+n).classList.add('active');
+  updateProgress(n);
+  window.scrollTo({top:document.getElementById('progressWrap').offsetTop-80,behavior:'smooth'});
+}
 
-    var msg=document.getElementById('scoreMsg');
-    if(pct>=70){
-      msg.textContent='Tu connais les bons réflexes face au risque électrique. Tu peux continuer.';
-      msg.className='score-msg pass';
-    } else {
-      msg.textContent='Relis les sections ci-dessus, notamment les seuils et les 5 règles d\'or, puis réessaie.';
-      msg.className='score-msg no-pass';
-    }
-    sec.scrollIntoView({behavior:'smooth',block:'center'});
+// Mise à jour de la barre de progression
+function updateProgress(currentStep){
+  var pct=Math.round(((currentStep-1)/TOTAL)*100);
+  document.getElementById('progressBar').style.width=pct+'%';
+  document.getElementById('progressBar').textContent=pct>8?pct+'%':'';
+  document.getElementById('progressLabel').textContent='Étape '+currentStep+' / '+TOTAL;
+}
 
-    // Marquer comme fait pour le portail
-    localStorage.setItem('electrique_done','true');
+// Afficher le score final
+function showScore(){
+  // Cacher la dernière étape
+  for(var i=1;i<=TOTAL;i++){
+    document.getElementById('step'+i).classList.remove('active');
   }
+  // Mettre la progression à 100%
+  document.getElementById('progressBar').style.width='100%';
+  document.getElementById('progressBar').textContent='100%';
+  document.getElementById('progressLabel').textContent='Terminé';
+
+  var total=0;
+  for(var i=0;i<TOTAL;i++)total+=scores[i];
+  var max=TOTAL*2; // 12 points max
+  var pct=Math.round((total/max)*100);
+
+  var sec=document.getElementById('scoreSection');
+  sec.style.display='block';
+  document.getElementById('scoreText').textContent=total+' / '+max;
+  var bar=document.getElementById('scoreBar');
+  setTimeout(function(){bar.style.width=pct+'%';bar.textContent=pct>8?pct+'%':'';},100);
+
+  var msg=document.getElementById('scoreMsg');
+  if(pct>=70){
+    bar.classList.remove('fail');
+    msg.className='score-msg pass';
+    msg.textContent='Module validé. Tu sais repérer les dangers électriques dans le document.';
+  }else{
+    bar.classList.add('fail');
+    msg.className='score-msg no-pass';
+    msg.textContent='Module non validé (seuil : 70 %). Relis le document et recommence.';
+  }
+  window.scrollTo({top:sec.offsetTop-100,behavior:'smooth'});
 }
 </script>
 </body>
