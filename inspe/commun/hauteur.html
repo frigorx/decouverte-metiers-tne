@@ -199,6 +199,13 @@ body.f-xl{font-size:20px}
 .btn-next{background:var(--turquoise)}
 .btn-next:hover{background:#1d9e9e}
 
+.page-hint{
+  background:#fff3cd;border:1px dashed #d4a843;border-radius:var(--radius-sm);
+  padding:10px 14px;margin-bottom:16px;font-size:.85em;color:#7a5d1e;line-height:1.5;
+  display:none;
+}
+body.mode-guide .page-hint{display:block}
+
 .footer{padding:16px;text-align:center;font-size:.72em;color:var(--muted);border-top:1px solid var(--line);margin-top:30px}
 
 @media(max-width:600px){
@@ -269,14 +276,15 @@ body.f-xl{font-size:20px}
     <div class="step-card">
       <div class="step-title">&Eacute;tape 1 &mdash; L'&eacute;chelle : moyen d'acc&egrave;s, pas poste de travail</div>
       <div class="step-consigne">Ouvre le document <strong>&Eacute;chelles et Escabeaux</strong>. Lis la premi&egrave;re page.</div>
+      <div class="page-hint">Document &Eacute;chelles et Escabeaux, premi&egrave;re page, r&egrave;gle fondamentale.</div>
       <button class="btn-lu" id="btnLu1" onclick="showQuestion(1)">J'ai lu, je r&eacute;ponds</button>
       <div class="question-zone" id="qzone-1">
-        <div class="qcm-question">D'apr&egrave;s le document, quelle est la r&egrave;gle principale concernant l'utilisation d'une &eacute;chelle sur un chantier ?</div>
+        <div class="qcm-question">D'apr&egrave;s le document &Eacute;chelles et Escabeaux, pour quel usage l'&eacute;chelle est-elle autoris&eacute;e sur un chantier ?</div>
         <div class="qcm-options">
-          <button class="qcm-option" onclick="check(1,this,false)">On peut travailler sur une &eacute;chelle toute la journ&eacute;e si elle est stable</button>
-          <button class="qcm-option" onclick="check(1,this,true)">L'&eacute;chelle est un moyen d'acc&egrave;s, pas un poste de travail &mdash; usage limit&eacute; aux travaux courts</button>
-          <button class="qcm-option" onclick="check(1,this,false)">Deux personnes peuvent monter en m&ecirc;me temps si elles sont l&eacute;g&egrave;res</button>
-          <button class="qcm-option" onclick="check(1,this,false)">L'angle d'inclinaison n'a pas d'importance</button>
+          <button class="qcm-option" onclick="check(1,this,false)">Comme poste de travail pour des interventions de moins d'une heure</button>
+          <button class="qcm-option" onclick="check(1,this,true)">Comme moyen d'acc&egrave;s pour des travaux de courte dur&eacute;e uniquement</button>
+          <button class="qcm-option" onclick="check(1,this,false)">Comme support fixe si elle est attach&eacute;e au mur avec des sangles</button>
+          <button class="qcm-option" onclick="check(1,this,false)">Comme &eacute;quipement polyvalent utilisable pour tout type de travail en hauteur</button>
         </div>
         <div class="qcm-feedback" id="fb-1"></div>
         <button class="btn-next-step" id="btnNext1" onclick="goStep(2)">&Eacute;tape suivante &rarr;</button>
@@ -289,14 +297,15 @@ body.f-xl{font-size:20px}
     <div class="step-card">
       <div class="step-title">&Eacute;tape 2 &mdash; V&eacute;rification avant utilisation</div>
       <div class="step-consigne">Dans le document <strong>&Eacute;chelles et Escabeaux</strong>, cherche ce qu'il faut v&eacute;rifier avant d'utiliser une &eacute;chelle.</div>
+      <div class="page-hint">Document &Eacute;chelles, cherche les points de v&eacute;rification avant usage.</div>
       <button class="btn-lu" id="btnLu2" onclick="showQuestion(2)">J'ai lu, je r&eacute;ponds</button>
       <div class="question-zone" id="qzone-2">
-        <div class="qcm-question">D'apr&egrave;s le document, que faut-il v&eacute;rifier sur une &eacute;chelle avant de l'utiliser ?</div>
+        <div class="qcm-question">D'apr&egrave;s le document, quels &eacute;l&eacute;ments doit-on v&eacute;rifier avant chaque utilisation d'une &eacute;chelle ?</div>
         <div class="qcm-options">
-          <button class="qcm-option" onclick="check(2,this,false)">Qu'elle est de la bonne couleur</button>
-          <button class="qcm-option" onclick="check(2,this,true)">Les montants, les &eacute;chelons, les patins antid&eacute;rapants et l'absence de d&eacute;formation</button>
-          <button class="qcm-option" onclick="check(2,this,false)">Qu'elle porte un autocollant de conformit&eacute; r&eacute;cent</button>
-          <button class="qcm-option" onclick="check(2,this,false)">Qu'elle a &eacute;t&eacute; utilis&eacute;e la veille sans probl&egrave;me</button>
+          <button class="qcm-option" onclick="check(2,this,false)">La date de fabrication et le num&eacute;ro de s&eacute;rie</button>
+          <button class="qcm-option" onclick="check(2,this,true)">L'&eacute;tat des montants, des &eacute;chelons et des patins antid&eacute;rapants</button>
+          <button class="qcm-option" onclick="check(2,this,false)">La conformit&eacute; du marquage CE et la fiche technique</button>
+          <button class="qcm-option" onclick="check(2,this,false)">La longueur adapt&eacute;e et le poids maximum autoris&eacute;</button>
         </div>
         <div class="qcm-feedback" id="fb-2"></div>
         <button class="btn-next-step" id="btnNext2" onclick="goStep(3)">&Eacute;tape suivante &rarr;</button>
@@ -309,14 +318,15 @@ body.f-xl{font-size:20px}
     <div class="step-card">
       <div class="step-title">&Eacute;tape 3 &mdash; L'angle d'inclinaison</div>
       <div class="step-consigne">Cherche dans le document <strong>&Eacute;chelles</strong> l'illustration ou l'indication de l'angle correct.</div>
+      <div class="page-hint">Cherche le sch&eacute;ma de l'angle d'inclinaison dans le document &Eacute;chelles.</div>
       <button class="btn-lu" id="btnLu3" onclick="showQuestion(3)">J'ai lu, je r&eacute;ponds</button>
       <div class="question-zone" id="qzone-3">
-        <div class="qcm-question">D'apr&egrave;s le document, quel est l'angle d'inclinaison correct pour une &eacute;chelle ?</div>
+        <div class="qcm-question">D'apr&egrave;s le document, quel angle d'inclinaison faut-il respecter pour poser une &eacute;chelle ?</div>
         <div class="qcm-options">
-          <button class="qcm-option" onclick="check(3,this,false)">45&deg; &mdash; bien pench&eacute;e pour &ecirc;tre stable</button>
-          <button class="qcm-option" onclick="check(3,this,true)">75&deg; &mdash; pour 4 m de hauteur, le pied est &agrave; 1 m du mur</button>
-          <button class="qcm-option" onclick="check(3,this,false)">90&deg; &mdash; verticale contre le mur</button>
-          <button class="qcm-option" onclick="check(3,this,false)">Peu importe si le sol est plat</button>
+          <button class="qcm-option" onclick="check(3,this,false)">Environ 45&deg; pour maximiser la stabilit&eacute; au sol</button>
+          <button class="qcm-option" onclick="check(3,this,true)">Environ 75&deg;, soit 1 m&egrave;tre de base pour 4 m&egrave;tres de hauteur</button>
+          <button class="qcm-option" onclick="check(3,this,false)">Environ 60&deg;, compromis entre stabilit&eacute; et encombrement</button>
+          <button class="qcm-option" onclick="check(3,this,false)">L'angle exact d&eacute;pend du type de sol et de la charge transport&eacute;e</button>
         </div>
         <div class="qcm-feedback" id="fb-3"></div>
         <button class="btn-next-step" id="btnNext3" onclick="goStep(4)">&Eacute;tape suivante &rarr;</button>
@@ -329,14 +339,15 @@ body.f-xl{font-size:20px}
     <div class="step-card">
       <div class="step-title">&Eacute;tape 4 &mdash; Le garde-corps</div>
       <div class="step-consigne">Ouvre maintenant le document <strong>&Eacute;chafaudage Fixe</strong>. Lis la partie sur les garde-corps.</div>
+      <div class="page-hint">Document &Eacute;chafaudage Fixe, partie garde-corps.</div>
       <button class="btn-lu" id="btnLu4" onclick="showQuestion(4)">J'ai lu, je r&eacute;ponds</button>
       <div class="question-zone" id="qzone-4">
-        <div class="qcm-question">D'apr&egrave;s le document, de quoi se compose un garde-corps complet sur un &eacute;chafaudage ?</div>
+        <div class="qcm-question">D'apr&egrave;s le document &Eacute;chafaudage Fixe, quels sont les trois &eacute;l&eacute;ments constitutifs d'un garde-corps r&eacute;glementaire ?</div>
         <div class="qcm-options">
-          <button class="qcm-option" onclick="check(4,this,false)">Une seule barre en haut</button>
-          <button class="qcm-option" onclick="check(4,this,true)">Une lisse haute, une lisse interm&eacute;diaire (sous-lisse) et une plinthe</button>
-          <button class="qcm-option" onclick="check(4,this,false)">Un filet de s&eacute;curit&eacute; uniquement</button>
-          <button class="qcm-option" onclick="check(4,this,false)">Une corde tendue entre deux poteaux</button>
+          <button class="qcm-option" onclick="check(4,this,false)">Deux lisses horizontales et un grillage de protection</button>
+          <button class="qcm-option" onclick="check(4,this,true)">Une lisse haute &agrave; 1 m, une lisse interm&eacute;diaire et une plinthe</button>
+          <button class="qcm-option" onclick="check(4,this,false)">Une barri&egrave;re m&eacute;tallique pleine et un filet anti-chute</button>
+          <button class="qcm-option" onclick="check(4,this,false)">Une main courante, un c&acirc;ble tendu et un treillis au sol</button>
         </div>
         <div class="qcm-feedback" id="fb-4"></div>
         <button class="btn-next-step" id="btnNext4" onclick="goStep(5)">&Eacute;tape suivante &rarr;</button>
@@ -349,14 +360,15 @@ body.f-xl{font-size:20px}
     <div class="step-card">
       <div class="step-title">&Eacute;tape 5 &mdash; Protection collective ou individuelle</div>
       <div class="step-consigne">Dans le document <strong>&Eacute;chafaudage Fixe</strong>, rep&egrave;re la diff&eacute;rence entre protection collective et individuelle.</div>
+      <div class="page-hint">Document &Eacute;chafaudage Fixe, cherche la hi&eacute;rarchie des protections.</div>
       <button class="btn-lu" id="btnLu5" onclick="showQuestion(5)">J'ai lu, je r&eacute;ponds</button>
       <div class="question-zone" id="qzone-5">
-        <div class="qcm-question">D'apr&egrave;s le document, pourquoi la protection collective (garde-corps, filets) est-elle prioritaire sur la protection individuelle (harnais) ?</div>
+        <div class="qcm-question">D'apr&egrave;s le document, dans quelle situation la protection individuelle (harnais) est-elle utilis&eacute;e ?</div>
         <div class="qcm-options">
-          <button class="qcm-option" onclick="check(5,this,false)">Parce qu'elle co&ucirc;te moins cher</button>
-          <button class="qcm-option" onclick="check(5,this,true)">Parce qu'elle prot&egrave;ge tout le monde automatiquement, sans action individuelle</button>
-          <button class="qcm-option" onclick="check(5,this,false)">Parce que le harnais est interdit sur les &eacute;chafaudages</button>
-          <button class="qcm-option" onclick="check(5,this,false)">Il n'y a pas de priorit&eacute;, c'est &eacute;quivalent</button>
+          <button class="qcm-option" onclick="check(5,this,false)">Comme alternative &agrave; la protection collective selon le choix du travailleur</button>
+          <button class="qcm-option" onclick="check(5,this,false)">Comme compl&eacute;ment syst&eacute;matique de la protection collective</button>
+          <button class="qcm-option" onclick="check(5,this,true)">Lorsque la protection collective ne peut pas &ecirc;tre mise en place</button>
+          <button class="qcm-option" onclick="check(5,this,false)">Uniquement pour les travaux d&eacute;passant 6 m&egrave;tres de hauteur</button>
         </div>
         <div class="qcm-feedback" id="fb-5"></div>
         <button class="btn-next-step" id="btnNext5" onclick="goStep(6)">&Eacute;tape suivante &rarr;</button>
@@ -369,14 +381,15 @@ body.f-xl{font-size:20px}
     <div class="step-card">
       <div class="step-title">&Eacute;tape 6 &mdash; Apr&egrave;s une chute retenue</div>
       <div class="step-consigne">Cherche dans le document <strong>&Eacute;chafaudage Fixe</strong> ou <strong>&Eacute;chelles</strong> ce qui se passe apr&egrave;s une chute retenue par un harnais.</div>
+      <div class="page-hint">Cherche dans les documents ce qui se passe apr&egrave;s une chute retenue.</div>
       <button class="btn-lu" id="btnLu6" onclick="showQuestion(6)">J'ai lu, je r&eacute;ponds</button>
       <div class="question-zone" id="qzone-6">
-        <div class="qcm-question">D'apr&egrave;s les documents, que doit-on faire d'un harnais qui a retenu une chute ?</div>
+        <div class="qcm-question">D'apr&egrave;s les documents, que doit-on faire d'un harnais antichute apr&egrave;s qu'il a retenu une chute ?</div>
         <div class="qcm-options">
-          <button class="qcm-option" onclick="check(6,this,false)">Le ranger, il a fait son travail</button>
-          <button class="qcm-option" onclick="check(6,this,false)">Le faire v&eacute;rifier puis le r&eacute;utiliser s'il est intact</button>
-          <button class="qcm-option" onclick="check(6,this,true)">Le mettre au rebut imm&eacute;diatement &mdash; il ne doit plus jamais &ecirc;tre utilis&eacute;</button>
-          <button class="qcm-option" onclick="check(6,this,false)">Le laver et v&eacute;rifier les coutures</button>
+          <button class="qcm-option" onclick="check(6,this,false)">Le faire contr&ocirc;ler par un organisme agr&eacute;&eacute; avant remise en service</button>
+          <button class="qcm-option" onclick="check(6,this,true)">Le mettre imm&eacute;diatement au rebut, m&ecirc;me s'il para&icirc;t intact</button>
+          <button class="qcm-option" onclick="check(6,this,false)">Le renvoyer au fabricant pour expertise et remplacement &eacute;ventuel</button>
+          <button class="qcm-option" onclick="check(6,this,false)">Le conserver en r&eacute;serve pour usage exceptionnel uniquement</button>
         </div>
         <div class="qcm-feedback" id="fb-6"></div>
       </div>
@@ -418,6 +431,7 @@ function setF(c){
   if(localStorage.getItem('a11y-dys')==='true'){document.body.classList.add('dys');document.getElementById('bDys').classList.add('on');}
   var fs=localStorage.getItem('a11y-size');
   if(fs==='f-lg'||fs==='f-xl')document.body.classList.add(fs);
+  if(localStorage.getItem('mode-guide')==='true')document.body.classList.add('mode-guide');
 })();
 
 // Données
@@ -426,28 +440,28 @@ var answers={}; // qId -> true quand trouvé
 var attempts={}; // qId -> nb tentatives
 var feedbacks={
   1:{
-    ok:"Exact. L'\u00e9chelle sert \u00e0 acc\u00e9der en hauteur, pas \u00e0 y travailler longtemps.",
-    ko:"Relis la premi\u00e8re page du document \u00c9chelles. La r\u00e8gle fondamentale y est clairement indiqu\u00e9e."
+    ok:"Exact. L'\u00e9chelle est un moyen d'acc\u00e8s, pas un poste de travail prolong\u00e9.",
+    ko:"Relis la premi\u00e8re page du document \u00c9chelles. La r\u00e8gle d'usage de l'\u00e9chelle y est clairement d\u00e9finie."
   },
   2:{
-    ok:"Correct. Examen visuel obligatoire avant chaque utilisation.",
-    ko:"Relis le document. Les points de v\u00e9rification y sont list\u00e9s pr\u00e9cis\u00e9ment."
+    ok:"Correct. V\u00e9rification visuelle \u00e0 chaque usage : montants, \u00e9chelons, patins, absence de d\u00e9formation.",
+    ko:"Relis le document. Les points de contr\u00f4le avant utilisation y sont list\u00e9s."
   },
   3:{
-    ok:"Exact. 75\u00b0 c'est la r\u00e8gle du 1/4 : 1 m de base pour 4 m de hauteur.",
-    ko:"Relis le document. L'angle et la r\u00e8gle du 1/4 y sont expliqu\u00e9s avec un sch\u00e9ma."
+    ok:"Exact. La r\u00e8gle du 1/4 : 75\u00b0, soit 1 m de recul pour 4 m de hauteur.",
+    ko:"Relis le document. L'angle et la r\u00e8gle de calcul y sont illustr\u00e9s."
   },
   4:{
-    ok:"Correct. Lisse + sous-lisse + plinthe = garde-corps complet. S'il manque un \u00e9l\u00e9ment, on ne monte pas.",
+    ok:"Correct. Lisse haute (1 m mini) + sous-lisse + plinthe = garde-corps complet.",
     ko:"Relis le document \u00c9chafaudage Fixe. Les \u00e9l\u00e9ments du garde-corps y sont d\u00e9taill\u00e9s."
   },
   5:{
-    ok:"Exact. La collective prot\u00e8ge tout le monde sans que chacun ait quelque chose \u00e0 faire. Le harnais est un dernier recours.",
-    ko:"Relis le document. La hi\u00e9rarchie des protections y est expliqu\u00e9e."
+    ok:"Exact. La protection individuelle est un dernier recours quand la collective est techniquement impossible.",
+    ko:"Relis le document. La hi\u00e9rarchie collective \u2192 individuelle y est expliqu\u00e9e."
   },
   6:{
-    ok:"Correct. Apr\u00e8s une chute, les fibres sont fragilis\u00e9es m\u00eame si rien n'est visible. Mise au rebut obligatoire.",
-    ko:"Cherche dans les documents. Un harnais ayant subi une chute a des contraintes invisibles."
+    ok:"Correct. Apr\u00e8s une chute retenue, les fibres sont irr\u00e9m\u00e9diablement fragilis\u00e9es. Mise au rebut imm\u00e9diate obligatoire.",
+    ko:"Relis les documents. Un harnais qui a subi une chute a des dommages invisibles."
   }
 };
 
