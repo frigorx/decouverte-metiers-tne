@@ -210,6 +210,11 @@ body.f-xl{font-size:20px}
 .page-hint{display:none;background:var(--orange-warm);border:1px dashed var(--orange);border-radius:var(--radius-sm);padding:10px 14px;margin-top:8px;font-size:.85em;color:#5a3518}
 body.guided .page-hint{display:block}
 
+.retenir{background:var(--turquoise-light);border:1px solid #b8dfe0;border-left:4px solid var(--turquoise);border-radius:var(--radius-sm);padding:14px 16px;margin-top:14px;font-size:.88em;line-height:1.6}
+.retenir strong{color:var(--turquoise);display:block;margin-bottom:6px}
+.retenir ul{margin:0;padding-left:18px}
+.retenir li{margin-bottom:4px;color:var(--text)}
+
 @media(max-width:600px){
   .theme-header h1{font-size:1.4em}
   .step{padding:16px}
@@ -288,6 +293,7 @@ body.guided .page-hint{display:block}
         <button class="qcm-option" onclick="check(1,this,3)">Fibrillation cardiaque irréversible</button>
       </div>
       <div class="qcm-feedback" id="fb1"></div>
+      <div class="retenir"><strong>Il faut retenir :</strong><ul><li>30 mA = paralysie respiratoire (seuil du différentiel)</li><li>75 mA = fibrillation cardiaque</li><li>Le courant tue à des intensités très faibles</li></ul></div>
       <button class="btn-next-step" id="btnNext1" onclick="goStep(2)">Étape suivante →</button>
     </div>
   </div>
@@ -310,6 +316,7 @@ body.guided .page-hint{display:block}
         <button class="qcm-option" onclick="check(2,this,3)">La distance dépend uniquement du matériau de l'échelle</button>
       </div>
       <div class="qcm-feedback" id="fb2"></div>
+      <div class="retenir"><strong>Il faut retenir :</strong><ul><li>3 mètres minimum près d'une ligne basse tension (&lt; 50 kV)</li><li>5 mètres minimum en haute tension</li><li>L'arc électrique peut jaillir sans contact</li></ul></div>
       <button class="btn-next-step" id="btnNext2" onclick="goStep(3)">Étape suivante →</button>
     </div>
   </div>
@@ -332,6 +339,7 @@ body.guided .page-hint{display:block}
         <button class="qcm-option" onclick="check(3,this,3)">Identifier formellement le circuit concerné</button>
       </div>
       <div class="qcm-feedback" id="fb3"></div>
+      <div class="retenir"><strong>Il faut retenir :</strong><ul><li>Ordre de consignation : Séparer → Condamner → Identifier → Vérifier (VAT) → Protéger</li><li>L'ordre est essentiel pour la sécurité</li><li>La vérification d'absence de tension (VAT) vient APRÈS la condamnation</li></ul></div>
       <button class="btn-next-step" id="btnNext3" onclick="goStep(4)">Étape suivante →</button>
     </div>
   </div>
@@ -354,6 +362,7 @@ body.guided .page-hint{display:block}
         <button class="qcm-option" onclick="check(4,this,3)">Il empêche les surtensions en cas d'orage</button>
       </div>
       <div class="qcm-feedback" id="fb4"></div>
+      <div class="retenir"><strong>Il faut retenir :</strong><ul><li>Le différentiel 30 mA est obligatoire sur les chantiers</li><li>Il coupe le courant dès qu'une fuite dangereuse est détectée</li><li>30 mA = le seuil de paralysie respiratoire</li></ul></div>
       <button class="btn-next-step" id="btnNext4" onclick="goStep(5)">Étape suivante →</button>
     </div>
   </div>
@@ -363,7 +372,7 @@ body.guided .page-hint{display:block}
     <div class="step-num">Étape 5 / 6</div>
     <div class="step-title">Les situations à risque</div>
     <div class="step-consigne">
-      Relis le document dans son ensemble. Repère les situations décrites comme dangereuses.
+      Dans le document, repère la distinction entre contact direct et contact indirect.
     </div>
     <div class="page-hint">Cherche dans le document la partie sur les types de contacts électriques.</div>
     <button class="btn-read" onclick="showQuestion(5)">J'ai lu, je réponds</button>
@@ -376,6 +385,7 @@ body.guided .page-hint{display:block}
         <button class="qcm-option" onclick="check(5,this,3)">Travailler à proximité d'une ligne aérienne sous tension</button>
       </div>
       <div class="qcm-feedback" id="fb5"></div>
+      <div class="retenir"><strong>Il faut retenir :</strong><ul><li>Contact direct = toucher un conducteur sous tension</li><li>Contact indirect = toucher une masse métallique rendue conductrice par un défaut</li><li>Les deux sont mortels</li></ul></div>
       <button class="btn-next-step" id="btnNext5" onclick="goStep(6)">Étape suivante →</button>
     </div>
   </div>
@@ -398,6 +408,7 @@ body.guided .page-hint{display:block}
         <button class="qcm-option" onclick="check(6,this,3)">Pratiquer un massage cardiaque en attendant les secours</button>
       </div>
       <div class="qcm-feedback" id="fb6"></div>
+      <div class="retenir"><strong>Il faut retenir :</strong><ul><li>Premier geste : COUPER le courant</li><li>Ne JAMAIS toucher la victime sous tension</li><li>Appeler les secours APRÈS avoir coupé</li></ul></div>
       <button class="btn-next-step" id="btnNext6" onclick="showScore()">Voir mon score →</button>
     </div>
   </div>

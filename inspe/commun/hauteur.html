@@ -217,6 +217,10 @@ body.mode-guide .page-hint{display:block}
   .doc-btns{align-items:stretch}
   .doc-btn{justify-content:center}
 }
+.retenir{background:var(--turquoise-light);border:1px solid #b8dfe0;border-left:4px solid var(--turquoise);border-radius:var(--radius-sm);padding:14px 16px;margin-top:14px;font-size:.88em;line-height:1.6}
+.retenir strong{color:var(--turquoise);display:block;margin-bottom:6px}
+.retenir ul{margin:0;padding-left:18px}
+.retenir li{margin-bottom:4px;color:var(--text)}
 </style>
 </head>
 <body>
@@ -287,6 +291,7 @@ body.mode-guide .page-hint{display:block}
           <button class="qcm-option" onclick="check(1,this,false)">Comme &eacute;quipement polyvalent utilisable pour tout type de travail en hauteur</button>
         </div>
         <div class="qcm-feedback" id="fb-1"></div>
+        <div class="retenir"><strong>Il faut retenir :</strong><ul><li>L'échelle est un moyen d'accès, pas un poste de travail</li><li>Usage limité aux travaux de courte durée</li><li>Pour un travail prolongé en hauteur → échafaudage ou plateforme</li></ul></div>
         <button class="btn-next-step" id="btnNext1" onclick="goStep(2)">&Eacute;tape suivante &rarr;</button>
       </div>
     </div>
@@ -308,6 +313,7 @@ body.mode-guide .page-hint{display:block}
           <button class="qcm-option" onclick="check(2,this,false)">La longueur adapt&eacute;e et le poids maximum autoris&eacute;</button>
         </div>
         <div class="qcm-feedback" id="fb-2"></div>
+        <div class="retenir"><strong>Il faut retenir :</strong><ul><li>Vérification visuelle obligatoire avant chaque utilisation</li><li>Contrôler : montants, échelons, patins antidérapants</li><li>Toute échelle endommagée doit être mise hors service</li></ul></div>
         <button class="btn-next-step" id="btnNext2" onclick="goStep(3)">&Eacute;tape suivante &rarr;</button>
       </div>
     </div>
@@ -329,6 +335,7 @@ body.mode-guide .page-hint{display:block}
           <button class="qcm-option" onclick="check(3,this,false)">L'angle exact d&eacute;pend du type de sol et de la charge transport&eacute;e</button>
         </div>
         <div class="qcm-feedback" id="fb-3"></div>
+        <div class="retenir"><strong>Il faut retenir :</strong><ul><li>Angle correct = 75° (règle du 1/4)</li><li>1 m de recul pour 4 m de hauteur</li><li>L'échelle doit dépasser d'au moins 1 m le point d'arrivée</li></ul></div>
         <button class="btn-next-step" id="btnNext3" onclick="goStep(4)">&Eacute;tape suivante &rarr;</button>
       </div>
     </div>
@@ -350,6 +357,7 @@ body.mode-guide .page-hint{display:block}
           <button class="qcm-option" onclick="check(4,this,false)">Une main courante, un c&acirc;ble tendu et un treillis au sol</button>
         </div>
         <div class="qcm-feedback" id="fb-4"></div>
+        <div class="retenir"><strong>Il faut retenir :</strong><ul><li>Garde-corps complet = lisse haute + sous-lisse + plinthe</li><li>S'il manque un élément, on ne monte pas</li><li>Le garde-corps protège tout le monde automatiquement</li></ul></div>
         <button class="btn-next-step" id="btnNext4" onclick="goStep(5)">&Eacute;tape suivante &rarr;</button>
       </div>
     </div>
@@ -371,6 +379,7 @@ body.mode-guide .page-hint{display:block}
           <button class="qcm-option" onclick="check(5,this,false)">Uniquement pour les travaux d&eacute;passant 6 m&egrave;tres de hauteur</button>
         </div>
         <div class="qcm-feedback" id="fb-5"></div>
+        <div class="retenir"><strong>Il faut retenir :</strong><ul><li>Protection collective d'abord (garde-corps, filets, PIRL)</li><li>Protection individuelle seulement si la collective est impossible</li><li>Le harnais est un dernier recours, pas un choix de confort</li></ul></div>
         <button class="btn-next-step" id="btnNext5" onclick="goStep(6)">&Eacute;tape suivante &rarr;</button>
       </div>
     </div>
@@ -392,6 +401,7 @@ body.mode-guide .page-hint{display:block}
           <button class="qcm-option" onclick="check(6,this,false)">Le conserver en r&eacute;serve pour usage exceptionnel uniquement</button>
         </div>
         <div class="qcm-feedback" id="fb-6"></div>
+        <div class="retenir"><strong>Il faut retenir :</strong><ul><li>Un harnais ayant retenu une chute = mise au rebut immédiate</li><li>Les fibres sont fragilisées même si rien n'est visible</li><li>Vérification visuelle avant chaque utilisation</li></ul></div>
       </div>
     </div>
   </div>

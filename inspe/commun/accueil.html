@@ -219,6 +219,11 @@ body.guided .page-hint{display:block}
 /* Masquage conditionnel */
 .hidden{display:none!important}
 
+.retenir{background:var(--turquoise-light);border:1px solid #b8dfe0;border-left:4px solid var(--turquoise);border-radius:var(--radius-sm);padding:14px 16px;margin-top:14px;font-size:.88em;line-height:1.6}
+.retenir strong{color:var(--turquoise);display:block;margin-bottom:6px}
+.retenir ul{margin:0;padding-left:18px}
+.retenir li{margin-bottom:4px;color:var(--text)}
+
 @media(max-width:600px){
   .theme-header h1{font-size:1.4em}
   .theme-header{padding:24px 18px}
@@ -305,6 +310,7 @@ body.guided .page-hint{display:block}
         <button class="qcm-option" onclick="check(1,this,0)">Lui fournir ses équipements de protection individuelle</button>
       </div>
       <div class="qcm-feedback" id="fb1"></div>
+      <div class="retenir"><strong>Il faut retenir :</strong><ul><li>Le tuteur transmet les consignes de sécurité du poste</li><li>Il est ton référent pendant toute la durée du stage</li><li>Tu peux le solliciter à tout moment en cas de doute</li></ul></div>
       <button class="btn-next-step" id="next1" onclick="goStep(2)">Étape suivante →</button>
     </div>
   </div>
@@ -325,6 +331,7 @@ body.guided .page-hint{display:block}
         <button class="qcm-option" onclick="check(2,this,0)">Affiché dans le hall d'entrée de l'entreprise</button>
       </div>
       <div class="qcm-feedback" id="fb2"></div>
+      <div class="retenir"><strong>Il faut retenir :</strong><ul><li>Le DUER recense tous les risques identifiés dans l'entreprise</li><li>Tout salarié et tout stagiaire peut le consulter</li><li>L'employeur doit te le présenter à ton arrivée</li></ul></div>
       <button class="btn-next-step" id="next2" onclick="goStep(3)">Étape suivante →</button>
     </div>
   </div>
@@ -345,6 +352,7 @@ body.guided .page-hint{display:block}
         <button class="qcm-option" onclick="check(3,this,0)">Déposer une main courante au commissariat</button>
       </div>
       <div class="qcm-feedback" id="fb3"></div>
+      <div class="retenir"><strong>Il faut retenir :</strong><ul><li>Accident = prévenir immédiatement ton employeur ou ton tuteur</li><li>L'employeur a 48h pour déclarer l'accident à la CPAM</li><li>Tu as droit à une prise en charge médicale</li></ul></div>
       <button class="btn-next-step" id="next3" onclick="goStep(4)">Étape suivante →</button>
     </div>
   </div>
@@ -365,6 +373,7 @@ body.guided .page-hint{display:block}
         <button class="qcm-option" onclick="check(4,this,0)">Ils bénéficient d'horaires aménagés avec pauses doublées</button>
       </div>
       <div class="qcm-feedback" id="fb4"></div>
+      <div class="retenir"><strong>Il faut retenir :</strong><ul><li>Les mineurs ne peuvent pas effectuer certains travaux dangereux</li><li>Ces interdictions sont réglementaires, pas négociables</li><li>Ton tuteur doit veiller au respect de ces restrictions</li></ul></div>
       <button class="btn-next-step" id="next4" onclick="goStep(5)">Étape suivante →</button>
     </div>
   </div>
@@ -385,6 +394,7 @@ body.guided .page-hint{display:block}
         <button class="qcm-option" onclick="check(5,this,0)">La remise d'un livret d'accueil avec les coordonnées du personnel</button>
       </div>
       <div class="qcm-feedback" id="fb5"></div>
+      <div class="retenir"><strong>Il faut retenir :</strong><ul><li>L'accueil sécurité porte sur les risques du poste et les consignes</li><li>Il doit avoir lieu AVANT que tu commences à travailler</li><li>C'est une obligation de l'employeur, pas une option</li></ul></div>
       <button class="btn-next-step" id="next5" onclick="goStep(6)">Étape suivante →</button>
     </div>
   </div>
@@ -393,7 +403,7 @@ body.guided .page-hint{display:block}
   <div class="step-card" id="step6">
     <div class="step-num">Étape 6 / 6</div>
     <div class="step-title">Le droit de retrait</div>
-    <div class="step-consigne">Cherche dans le document la notion de droit de retrait ou de danger grave.</div>
+    <div class="step-consigne">Dans le document, repère la partie qui parle du droit de retrait face à un danger.</div>
     <div class="page-hint">Aide : cherche « droit de retrait » ou « danger grave » dans le document.</div>
     <button class="btn-action" onclick="showQuestion(6)">J'ai lu, je réponds</button>
     <div class="question-zone" id="qzone6">
@@ -405,6 +415,7 @@ body.guided .page-hint{display:block}
         <button class="qcm-option" onclick="check(6,this,0)">Le tuteur ou le responsable est temporairement absent du site</button>
       </div>
       <div class="qcm-feedback" id="fb6"></div>
+      <div class="retenir"><strong>Il faut retenir :</strong><ul><li>Le droit de retrait concerne un danger grave et imminent</li><li>Tu n'as pas besoin de l'autorisation de ton supérieur</li><li>Tu dois informer ton employeur de ta décision</li></ul></div>
       <button class="btn-next-step" id="next6" onclick="showScore()">Voir mon score →</button>
     </div>
   </div>
