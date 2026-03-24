@@ -595,6 +595,7 @@ function showScore(){
     msg.textContent='Module validé. Tu peux passer au module suivant.';
     msg.className='score-msg pass';
     localStorage.setItem('securite_done','true');
+    try{localStorage.setItem('inerweb_commun_accueil',JSON.stringify({completed:true,score10:s10,score:pts,total:max}));}catch(e){}
   } else {
     msg.textContent='Score insuffisant. Relis le document et réessaie.';
     msg.className='score-msg no-pass';

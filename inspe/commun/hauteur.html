@@ -559,6 +559,7 @@ function checkAllDone(){
       msg.textContent='Tu connais les r\u00e8gles de s\u00e9curit\u00e9 pour le travail en hauteur. Module valid\u00e9.';
       msg.className='score-msg pass';
       try{localStorage.setItem('hauteur_done','true');}catch(e){}
+      try{localStorage.setItem('inerweb_commun_hauteur',JSON.stringify({completed:true,score10:s10,score:pts,total:max}));}catch(e){}
     } else {
       msg.textContent='Score insuffisant. Relis les documents IRIS-ST et r\u00e9essaie.';
       msg.className='score-msg no-pass';

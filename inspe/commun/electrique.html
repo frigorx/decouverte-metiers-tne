@@ -564,6 +564,7 @@ function showScore(){
     bar.classList.remove('fail');
     msg.className='score-msg pass';
     msg.textContent='Module validé. Tu sais repérer les dangers électriques dans le document.';
+    try{var s10=Math.round((total/max)*10);localStorage.setItem('inerweb_commun_electrique',JSON.stringify({completed:true,score10:s10,score:total,total:max}));}catch(e){}
   }else{
     bar.classList.add('fail');
     msg.className='score-msg no-pass';
