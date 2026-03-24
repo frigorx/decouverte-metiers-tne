@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Feuille d'évaluation — Découverte des métiers</title>
+<style>@font-face{font-family:"OpenDyslexic";font-style:normal;font-weight:400;font-display:swap;src:url(assets/OpenDyslexic-Regular.otf) format("opentype")}@font-face{font-family:"OpenDyslexic";font-style:normal;font-weight:700;font-display:swap;src:url(assets/OpenDyslexic-Bold.otf) format("opentype")}</style>
+<style>
+:root{
+  --navy:#0f2d52;--navy-mid:#1a4a6e;
+  --orange:#e8914a;--orange-hover:#d47a35;--orange-warm:#fdf6ef;--orange-glow:rgba(232,145,74,.35);
+  --turquoise:#2aafaf;--turquoise-light:#eef8f7;
+  --bg:#faf7f2;--bg-end:#f0ebe3;
+  --card:#ffffff;--text:#2c3e50;--text-strong:#0f2d52;--muted:#5a7080;
+  --line:#ece4da;
+  --ok:#27ae60;--warn:#f39c12;--bad:#e74c3c;--blue:#2980b9;--grey:#95a5a6;
+  --radius:22px;--radius-sm:14px;--radius-pill:999px;
+  --shadow:0 4px 16px rgba(15,45,82,.07),0 1px 3px rgba(232,145,74,.05);
+  --shadow-orange:0 4px 18px rgba(232,145,74,.35);
+  --font:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:var(--font);
+  background:linear-gradient(180deg,var(--bg),var(--bg-end));
+  background-attachment:fixed;
+  color:var(--text);line-height:1.65;font-size:16px;
+}
+body.dys{font-family:'OpenDyslexic',var(--font)}
+body.f-lg{font-size:18px}
+body.f-xl{font-size:20px}
+
+.topbar{
+  position:sticky;top:0;z-index:10;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 20px;
+  background:linear-gradient(135deg,var(--navy),var(--navy-mid),var(--turquoise));
+  border-bottom:4px solid var(--orange);
+  border-radius:0 0 0 40px;
+  box-shadow:0 4px 20px rgba(15,45,82,.15);
+  flex-wrap:wrap;gap:10px;
+}
+.brand{display:flex;gap:10px;align-items:center}
+.brand__mark{
+  width:44px;height:44px;border-radius:var(--radius-sm);
+  display:grid;place-items:center;
+  background:rgba(255,255,255,.95);font-size:20px;
+  box-shadow:0 3px 10px rgba(0,0,0,.1);
+}
+.brand__title{font-weight:900;font-size:14px;color:#fff;letter-spacing:.5px}
+.brand__sub{font-size:12px;color:rgba(255,255,255,.8)}
+.a11y{display:flex;gap:6px;align-items:center}
+.a11y-btn{
+  background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.25);
+  padding:5px 12px;border-radius:var(--radius-pill);cursor:pointer;
+  font-size:.8em;font-family:inherit;transition:all .2s;
+}
+.a11y-btn:hover,.a11y-btn.on{background:var(--orange);border-color:var(--orange)}
+
+.wrap{max-width:720px;margin:0 auto;padding:24px 16px 60px}
+
+.card{
+  background:var(--card);border:1px solid var(--line);
+  border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:24px;margin-bottom:18px;
+}
+.card-title{
+  font-size:1.05em;font-weight:800;color:var(--text-strong);
+  margin-bottom:14px;padding-bottom:8px;
+  border-bottom:2px solid var(--line);
+}
+
+/* ── Identité ── */
+.id-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.id-grid label{font-size:.85em;font-weight:600;color:var(--muted);display:block;margin-bottom:3px}
+.id-grid input,.id-grid select{
+  width:100%;padding:10px 12px;border:2px solid var(--line);border-radius:var(--radius-sm);
+  font:inherit;font-size:.95em;outline:none;transition:border .2s;background:var(--card);
+}
+.id-grid input:focus,.id-grid select:focus{border-color:var(--orange);box-shadow:0 0 0 3px var(--orange-glow)}
+
+/* ── Point d'arrêt ── */
+.checkpoint{
+  background:var(--orange-warm);border:1px solid var(--line);border-left:5px solid var(--orange);
+  border-radius:var(--radius-sm);padding:14px 18px;margin-top:10px;font-size:.95em;
+}
+.checkpoint strong{color:var(--orange)}
+
+/* ── Compétences ── */
+.comp-block{margin-bottom:16px;padding:16px;border:1px solid var(--line);border-radius:var(--radius-sm);background:#fafafa}
+.comp-block:last-of-type{margin-bottom:0}
+.comp-header{display:flex;align-items:center;gap:10px;margin-bottom:6px;flex-wrap:wrap}
+.comp-code{
+  display:inline-block;padding:4px 12px;border-radius:var(--radius-pill);
+  font-weight:900;font-size:.85em;color:#fff;background:var(--navy);flex-shrink:0;
+}
+.comp-title{font-weight:700;color:var(--text-strong);font-size:.95em}
+.comp-desc{font-size:.85em;color:var(--muted);margin-bottom:10px;padding-left:2px;line-height:1.5;font-style:italic}
+.comp-state{display:flex;gap:6px;flex-wrap:wrap}
+.comp-btn{
+  padding:6px 12px;border:2px solid var(--line);border-radius:var(--radius-pill);
+  background:var(--card);cursor:pointer;font:inherit;font-size:.8em;font-weight:600;
+  transition:all .2s;color:var(--text);
+}
+.comp-btn:hover{border-color:var(--muted)}
+.comp-btn.active-grey{background:var(--grey);color:#fff;border-color:var(--grey)}
+.comp-btn.active-red{background:var(--bad);color:#fff;border-color:var(--bad)}
+.comp-btn.active-orange{background:var(--warn);color:#fff;border-color:var(--warn)}
+.comp-btn.active-green{background:var(--ok);color:#fff;border-color:var(--ok)}
+.comp-btn.active-blue{background:var(--blue);color:#fff;border-color:var(--blue)}
+.comp-auto{font-size:.75em;color:var(--turquoise);font-weight:600;margin-top:6px;font-style:italic}
+
+/* ── Résultats / Note ── */
+.results-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.result-box{
+  text-align:center;padding:16px;border:1px solid var(--line);
+  border-radius:var(--radius-sm);background:#fafafa;
+}
+.result-box .val{font-size:1.8em;font-weight:900;color:var(--text-strong);line-height:1.2}
+.result-box .lbl{font-size:.8em;color:var(--muted);margin-top:2px}
+
+.state-badge{
+  display:inline-block;padding:6px 18px;border-radius:var(--radius-pill);
+  font-weight:700;font-size:.9em;color:#fff;margin-top:6px;
+}
+.state-grey{background:var(--grey)}
+.state-red{background:var(--bad)}
+.state-orange{background:var(--warn)}
+.state-green{background:var(--ok)}
+.state-blue{background:var(--blue)}
+
+.modules-detail{font-size:.85em;color:var(--muted);margin-top:10px;line-height:1.7}
+.modules-detail span{font-weight:600}
+
+/* ── Synthèse ── */
+.synth-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.synth-item{
+  padding:12px 14px;border:1px solid var(--line);border-radius:var(--radius-sm);
+  background:#fafafa;font-size:.9em;
+}
+.synth-item .synth-label{font-weight:700;color:var(--text-strong);margin-bottom:4px;font-size:.85em}
+.synth-item .synth-val{color:var(--text);line-height:1.5}
+.yn{font-weight:700}
+.yn.oui{color:var(--ok)}
+.yn.non{color:var(--bad)}
+
+/* ── Auto-évaluation ── */
+.auto-table{width:100%;border-collapse:collapse}
+.auto-table th{
+  font-size:.8em;font-weight:700;color:var(--muted);text-align:center;
+  padding:8px 6px;border-bottom:2px solid var(--line);
+}
+.auto-table th:first-child{text-align:left}
+.auto-table td{padding:10px 6px;border-bottom:1px solid var(--line);font-size:.9em;vertical-align:middle}
+.auto-table td:first-child{color:var(--text);line-height:1.4}
+.auto-table td:not(:first-child){text-align:center;width:70px}
+.auto-radio{width:18px;height:18px;cursor:pointer;accent-color:var(--orange)}
+
+/* ── Actions ── */
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+.btn{
+  padding:12px 24px;border:none;border-radius:var(--radius-pill);
+  font:inherit;font-size:.9em;font-weight:700;cursor:pointer;transition:all .2s;
+}
+.btn-primary{background:var(--turquoise);color:#fff;box-shadow:0 4px 14px rgba(42,175,175,.3)}
+.btn-primary:hover{background:#1d9e9e;transform:translateY(-1px)}
+.btn-secondary{background:var(--orange);color:#fff;box-shadow:var(--shadow-orange)}
+.btn-secondary:hover{background:var(--orange-hover)}
+.btn-outline{background:transparent;color:var(--muted);border:2px solid var(--line)}
+.btn-outline:hover{border-color:var(--orange);color:var(--orange)}
+
+.footer{
+  padding:18px 16px;text-align:center;
+  background:linear-gradient(135deg,var(--navy),var(--navy-mid));
+  border-top:3px solid var(--orange);border-radius:24px 0 0 0;margin-top:30px;
+}
+.footer__inner{color:rgba(255,255,255,.85);font-size:.75em}
+
+.notif{
+  position:fixed;top:70px;right:16px;padding:14px 18px;border-radius:var(--radius-sm);
+  color:#fff;font-weight:600;z-index:100;transform:translateX(400px);transition:all .3s;
+  max-width:340px;font-size:.9em;box-shadow:var(--shadow);
+}
+.notif.show{transform:translateX(0)}
+.notif.ok{background:var(--ok)}
+.notif.info{background:var(--navy)}
+
+.updated{font-size:.75em;color:var(--muted);text-align:right;margin-top:6px}
+
+@media print{
+  .topbar,.a11y,.actions,.btn,.notif{display:none!important}
+  body{background:#fff;font-size:12px}
+  .wrap{padding:0;max-width:100%}
+  .card{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid}
+  .comp-btn{border:1px solid #999;padding:4px 10px}
+  .auto-radio{width:14px;height:14px}
+}
+
+@media(max-width:600px){
+  .topbar{border-radius:0}
+  .id-grid{grid-template-columns:1fr}
+  .results-row{grid-template-columns:1fr}
+  .synth-grid{grid-template-columns:1fr}
+  .comp-state{gap:4px}
+  .comp-btn{padding:5px 9px;font-size:.75em}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <div class="brand__mark"><svg style="width:24px;height:24px" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4" stroke="var(--ok)" stroke-width="2.5"/></svg></div>
+    <div>
+      <div class="brand__title">LPP Jacques Raynaud · Campus Équatio</div>
+      <div class="brand__sub">2nde TNE — Feuille d'évaluation</div>
+    </div>
+  </div>
+  <div class="a11y">
+    <button class="a11y-btn" onclick="togDys()" id="bDys">Lecture facilitée</button>
+    <button class="a11y-btn" onclick="setF('normal')">A</button>
+    <button class="a11y-btn" onclick="setF('f-lg')">A+</button>
+    <button class="a11y-btn" onclick="setF('f-xl')">A++</button>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- ═══════ 1. IDENTITÉ / CONTEXTE ═══════ -->
+  <div class="card">
+    <div class="card-title">Identification</div>
+    <div class="id-grid">
+      <div>
+        <label for="prenom">Prénom</label>
+        <input type="text" id="prenom" placeholder="Ton prénom" autocomplete="off"/>
+      </div>
+      <div>
+        <label for="classe">Classe</label>
+        <input type="text" id="classe" placeholder="Ex : 2TNE" autocomplete="off"/>
+      </div>
+      <div>
+        <label for="dateSeance">Date de la séance</label>
+        <input type="date" id="dateSeance"/>
+      </div>
+      <div>
+        <label for="module">Parcours suivi</label>
+        <select id="module">
+          <option value="">— Choisir —</option>
+          <option value="froid">Froid & Climatisation</option>
+          <option value="plomberie">Plombier-Chauffagiste</option>
+          <option value="electro">Électricien · MELEC</option>
+          <option value="ciel">CIEL · Cybersécurité</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="checkpoint" id="checkpoint">
+      <strong>Point d'arrêt :</strong> <span id="checkpointText">Aucune donnée enregistrée</span>
+      <a href="#" id="resumeLink" style="display:none;margin-left:10px;color:var(--navy);font-weight:700;text-decoration:underline;font-size:.9em" onclick="return resumeWork()">Reprendre ici</a>
+    </div>
+    <div class="updated" id="lastUpdate"></div>
+  </div>
+
+  <!-- ═══════ 2. COMPÉTENCES — BLOC CENTRAL ═══════ -->
+  <div class="card">
+    <div class="card-title">Compétences évaluées</div>
+
+    <div class="comp-block" id="bloc-c1">
+      <div class="comp-header">
+        <span class="comp-code">C1</span>
+        <span class="comp-title">S'informer sur l'intervention ou sur la réalisation</span>
+      </div>
+      <div class="comp-desc">Rechercher et repérer dans le document ressource les informations utiles avant de répondre</div>
+      <div class="comp-state">
+        <button class="comp-btn" data-comp="c1" data-level="grey" onclick="setComp(this)">Non évalué</button>
+        <button class="comp-btn" data-comp="c1" data-level="red" onclick="setComp(this)">Non acquis</button>
+        <button class="comp-btn" data-comp="c1" data-level="orange" onclick="setComp(this)">En cours d'acquisition</button>
+        <button class="comp-btn" data-comp="c1" data-level="green" onclick="setComp(this)">Acquis</button>
+        <button class="comp-btn" data-comp="c1" data-level="blue" onclick="setComp(this)">Parfaitement acquis</button>
+      </div>
+      <div class="comp-auto" id="auto-c1"></div>
+    </div>
+
+    <div class="comp-block" id="bloc-c3">
+      <div class="comp-header">
+        <span class="comp-code">C3</span>
+        <span class="comp-title">Analyser et exploiter les données</span>
+      </div>
+      <div class="comp-desc">Comprendre et exploiter les informations lues pour choisir la bonne réponse ou la bonne conduite</div>
+      <div class="comp-state">
+        <button class="comp-btn" data-comp="c3" data-level="grey" onclick="setComp(this)">Non évalué</button>
+        <button class="comp-btn" data-comp="c3" data-level="red" onclick="setComp(this)">Non acquis</button>
+        <button class="comp-btn" data-comp="c3" data-level="orange" onclick="setComp(this)">En cours d'acquisition</button>
+        <button class="comp-btn" data-comp="c3" data-level="green" onclick="setComp(this)">Acquis</button>
+        <button class="comp-btn" data-comp="c3" data-level="blue" onclick="setComp(this)">Parfaitement acquis</button>
+      </div>
+      <div class="comp-auto" id="auto-c3"></div>
+    </div>
+
+    <div class="comp-block" id="bloc-c8">
+      <div class="comp-header">
+        <span class="comp-code">C8</span>
+        <span class="comp-title">Renseigner les documents</span>
+      </div>
+      <div class="comp-desc">Compléter la feuille d'évaluation, renseigner la progression, le score et le point d'arrêt</div>
+      <div class="comp-state">
+        <button class="comp-btn" data-comp="c8" data-level="grey" onclick="setComp(this)">Non évalué</button>
+        <button class="comp-btn" data-comp="c8" data-level="red" onclick="setComp(this)">Non acquis</button>
+        <button class="comp-btn" data-comp="c8" data-level="orange" onclick="setComp(this)">En cours d'acquisition</button>
+        <button class="comp-btn" data-comp="c8" data-level="green" onclick="setComp(this)">Acquis</button>
+        <button class="comp-btn" data-comp="c8" data-level="blue" onclick="setComp(this)">Parfaitement acquis</button>
+      </div>
+      <div class="comp-auto" id="auto-c8"></div>
+    </div>
+  </div>
+
+  <!-- ═══════ 3. RÉSULTATS / NOTE ═══════ -->
+  <div class="card">
+    <div class="card-title">Résultats</div>
+    <div class="results-row">
+      <div class="result-box">
+        <div class="val" id="scoreVal">— / —</div>
+        <div class="lbl">Score (points)</div>
+      </div>
+      <div class="result-box">
+        <div class="val" id="noteVal">— / 10</div>
+        <div class="lbl">Note</div>
+      </div>
+    </div>
+    <div class="results-row">
+      <div class="result-box">
+        <div class="val" id="modulesVal">— / —</div>
+        <div class="lbl">Modules validés</div>
+      </div>
+      <div class="result-box" style="display:flex;flex-direction:column;align-items:center;justify-content:center">
+        <div class="lbl" style="margin-bottom:4px">État global</div>
+        <span class="state-badge state-grey" id="stateBadge">Non évalué</span>
+      </div>
+    </div>
+    <div class="modules-detail" id="modulesDetail"></div>
+  </div>
+
+  <!-- ═══════ 4. SYNTHÈSE PÉDAGOGIQUE ═══════ -->
+  <div class="card">
+    <div class="card-title">Synthèse pédagogique</div>
+    <div class="synth-grid">
+      <div class="synth-item">
+        <div class="synth-label">Points forts</div>
+        <div class="synth-val" id="synthForce">—</div>
+      </div>
+      <div class="synth-item">
+        <div class="synth-label">Points à revoir</div>
+        <div class="synth-val" id="synthWeak">—</div>
+      </div>
+      <div class="synth-item">
+        <div class="synth-label">Reprise nécessaire</div>
+        <div class="synth-val"><span class="yn" id="synthReprise">—</span></div>
+      </div>
+      <div class="synth-item">
+        <div class="synth-label">Prêt à continuer</div>
+        <div class="synth-val"><span class="yn" id="synthContinue">—</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ 5. AUTO-ÉVALUATION ÉLÈVE ═══════ -->
+  <div class="card">
+    <div class="card-title">Auto-évaluation de l'élève</div>
+    <table class="auto-table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Pas du tout</th>
+          <th>Un peu</th>
+          <th>Oui</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>J'ai été sensibilisé aux règles de sécurité.</td>
+          <td><input type="radio" name="auto1" value="0" class="auto-radio" onchange="saveAutoEval()"/></td>
+          <td><input type="radio" name="auto1" value="1" class="auto-radio" onchange="saveAutoEval()"/></td>
+          <td><input type="radio" name="auto1" value="2" class="auto-radio" onchange="saveAutoEval()"/></td>
+        </tr>
+        <tr>
+          <td>L'exercice m'a intéressé.</td>
+          <td><input type="radio" name="auto2" value="0" class="auto-radio" onchange="saveAutoEval()"/></td>
+          <td><input type="radio" name="auto2" value="1" class="auto-radio" onchange="saveAutoEval()"/></td>
+          <td><input type="radio" name="auto2" value="2" class="auto-radio" onchange="saveAutoEval()"/></td>
+        </tr>
+        <tr>
+          <td>Je suis prêt à continuer.</td>
+          <td><input type="radio" name="auto3" value="0" class="auto-radio" onchange="saveAutoEval()"/></td>
+          <td><input type="radio" name="auto3" value="1" class="auto-radio" onchange="saveAutoEval()"/></td>
+          <td><input type="radio" name="auto3" value="2" class="auto-radio" onchange="saveAutoEval()"/></td>
+        </tr>
+        <tr>
+          <td>L'activité a éclairé mes choix pour la suite de mon parcours.</td>
+          <td><input type="radio" name="auto4" value="0" class="auto-radio" onchange="saveAutoEval()"/></td>
+          <td><input type="radio" name="auto4" value="1" class="auto-radio" onchange="saveAutoEval()"/></td>
+          <td><input type="radio" name="auto4" value="2" class="auto-radio" onchange="saveAutoEval()"/></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ═══════ 6. ACTIONS ═══════ -->
+  <div class="actions">
+    <button class="btn btn-primary" onclick="loadFromStorage()">Actualiser</button>
+    <button class="btn btn-secondary" onclick="sendByMail()">Envoyer par mail</button>
+    <button class="btn btn-outline" onclick="window.print()">Imprimer</button>
+    <a href="index.html" class="btn btn-outline" style="text-decoration:none">Retour au portail</a>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <div class="footer__inner">inerWeb · F. Henninot · LPP Jacques Raynaud · Campus Équatio</div>
+</footer>
+
+<script>
+/* ══════════════════════════════════════
+   CONFIGURATION
+   ══════════════════════════════════════ */
+
+var EVAL_KEY = 'inerweb_evaluation';
+var FILIERES = {
+  froid:     { key: 'inerweb_froid_data',     label: 'Froid & Climatisation' },
+  plomberie: { key: 'inerweb_plomberie_data', label: 'Plombier-Chauffagiste' },
+  electro:   { key: 'inerweb_electro_data',   label: 'Électricien · MELEC' },
+  ciel:      { key: 'inerweb_ciel_data',      label: 'CIEL · Cybersécurité' }
+};
+
+/* ══════════════════════════════════════
+   LOCALSTORAGE ÉVALUATION
+   ══════════════════════════════════════ */
+
+function getEval() {
+  try { return JSON.parse(localStorage.getItem(EVAL_KEY)) || {}; } catch(e) { return {}; }
+}
+function saveEval(d) {
+  d.lastUpdate = new Date().toISOString();
+  localStorage.setItem(EVAL_KEY, JSON.stringify(d));
+}
+
+/* ══════════════════════════════════════
+   CALCUL AUTOMATIQUE DES COMPÉTENCES
+   Basé sur les scores des thèmes :
+   - C1 : score du thème 1 (recherche d'info dans le document)
+   - C3 : score du thème 2 (analyse et exploitation)
+   - C8 : score du thème 3 (renseigner, compléter)
+   Seuils : 0-29% = non acquis, 30-59% = en cours,
+            60-84% = acquis, 85%+ = parfaitement acquis
+   Pas de données = non évalué
+   ══════════════════════════════════════ */
+
+function computeCompLevel(pct) {
+  if (pct === null || pct === undefined) return 'grey';
+  if (pct < 30) return 'red';
+  if (pct < 60) return 'orange';
+  if (pct < 85) return 'green';
+  return 'blue';
+}
+
+var LEVEL_LABELS = {
+  grey:   'Non évalué',
+  red:    'Non acquis',
+  orange: 'En cours d\'acquisition',
+  green:  'Acquis',
+  blue:   'Parfaitement acquis'
+};
+
+function autoComputeCompetences(fData) {
+  var mapping = { c1: 'theme1', c3: 'theme2', c8: 'theme3' };
+  var result = {};
+
+  for (var comp in mapping) {
+    var th = fData[mapping[comp]];
+    if (th && th.total > 0) {
+      var pct = (th.score / th.total) * 100;
+      result[comp] = { level: computeCompLevel(pct), pct: Math.round(pct), auto: true };
+    } else {
+      result[comp] = { level: 'grey', pct: null, auto: true };
+    }
+  }
+  return result;
+}
+
+/* ══════════════════════════════════════
+   AFFICHAGE DES COMPÉTENCES
+   ══════════════════════════════════════ */
+
+function displayComp(comp, level, isAuto, pct) {
+  // Surligner le bon bouton
+  var btns = document.querySelectorAll('.comp-btn[data-comp="' + comp + '"]');
+  btns.forEach(function(b) {
+    b.classList.remove('active-grey','active-red','active-orange','active-green','active-blue');
+    if (b.dataset.level === level) b.classList.add('active-' + level);
+  });
+  // Indication auto
+  var autoEl = document.getElementById('auto-' + comp);
+  if (autoEl) {
+    if (isAuto && pct !== null) {
+      autoEl.textContent = 'Positionné automatiquement (' + pct + '%) — modifiable par l\'enseignant';
+    } else if (isAuto) {
+      autoEl.textContent = '';
+    } else {
+      autoEl.textContent = 'Positionné manuellement par l\'enseignant';
+    }
+  }
+}
+
+/* Clic enseignant = override manuel */
+function setComp(btn) {
+  var comp = btn.dataset.comp;
+  var level = btn.dataset.level;
+
+  btn.closest('.comp-state').querySelectorAll('.comp-btn').forEach(function(b) {
+    b.classList.remove('active-grey','active-red','active-orange','active-green','active-blue');
+  });
+  btn.classList.add('active-' + level);
+
+  var ev = getEval();
+  if (!ev.competences) ev.competences = {};
+  ev.competences[comp] = { level: level, auto: false };
+  saveEval(ev);
+
+  var autoEl = document.getElementById('auto-' + comp);
+  if (autoEl) autoEl.textContent = 'Positionné manuellement par l\'enseignant';
+
+  updateSynthesis();
+  notif('Compétence ' + comp.toUpperCase() + ' : ' + LEVEL_LABELS[level], 'ok');
+}
+
+/* ══════════════════════════════════════
+   AUTO-ÉVALUATION ÉLÈVE
+   ══════════════════════════════════════ */
+
+function saveAutoEval() {
+  var ev = getEval();
+  ev.autoEval = {};
+  for (var i = 1; i <= 4; i++) {
+    var sel = document.querySelector('input[name="auto' + i + '"]:checked');
+    if (sel) ev.autoEval['q' + i] = parseInt(sel.value);
+  }
+  saveEval(ev);
+  notif('Auto-évaluation enregistrée', 'ok');
+}
+
+/* ══════════════════════════════════════
+   IDENTITÉ
+   ══════════════════════════════════════ */
+
+function saveIdentity() {
+  var ev = getEval();
+  ev.prenom = document.getElementById('prenom').value.trim();
+  ev.classe = document.getElementById('classe').value.trim();
+  ev.dateSeance = document.getElementById('dateSeance').value;
+  ev.module = document.getElementById('module').value;
+  saveEval(ev);
+}
+
+/* ══════════════════════════════════════
+   CHARGEMENT PRINCIPAL
+   ══════════════════════════════════════ */
+
+function loadFromStorage() {
+  var ev = getEval();
+
+  // Identité
+  if (ev.prenom) document.getElementById('prenom').value = ev.prenom;
+  if (ev.classe) document.getElementById('classe').value = ev.classe;
+  if (ev.dateSeance) document.getElementById('dateSeance').value = ev.dateSeance;
+  if (ev.module) document.getElementById('module').value = ev.module;
+
+  // Filière
+  var filiere = ev.module || localStorage.getItem('orientation_filiere') || '';
+  if (filiere && !ev.module) {
+    document.getElementById('module').value = filiere;
+    ev.module = filiere;
+    saveEval(ev);
+  }
+
+  if (!filiere || !FILIERES[filiere]) {
+    document.getElementById('checkpointText').textContent = 'Choisis d\'abord un parcours';
+    return;
+  }
+
+  // Données de la filière
+  var fData = {};
+  try { fData = JSON.parse(localStorage.getItem(FILIERES[filiere].key)) || {}; } catch(e) {}
+
+  var totalScore = 0, totalMax = 0, completed = 0;
+  var detailHtml = '';
+  var lastDate = null, lastTheme = '';
+
+  for (var t = 1; t <= 3; t++) {
+    var th = fData['theme' + t];
+    if (th) {
+      totalScore += (th.score || 0);
+      totalMax += (th.total || 0);
+      if (th.completed) completed++;
+      if (th.date) {
+        var d = new Date(th.date);
+        if (!lastDate || d > lastDate) { lastDate = d; lastTheme = 'Thème ' + t; }
+      }
+      var icon = th.completed ? '<span style="color:var(--ok);font-weight:700">&#10003;</span>' : '<span style="color:var(--warn)">&#9679;</span>';
+      detailHtml += icon + ' <span>Thème ' + t + '</span> : ' + (th.score10 || 0) + '/10';
+    } else {
+      detailHtml += '<span style="color:var(--grey)">&#9675; Thème ' + t + ' : non commencé</span>';
+    }
+    if (t < 3) detailHtml += '&nbsp;&nbsp;|&nbsp;&nbsp;';
+  }
+
+  // Note auto-générée
+  var note10 = 0;
+  if (totalMax > 0) {
+    note10 = Math.round((totalScore / totalMax) * 10);
+    document.getElementById('scoreVal').textContent = totalScore + ' / ' + totalMax;
+    document.getElementById('noteVal').textContent = note10 + ' / 10';
+  }
+
+  document.getElementById('modulesVal').textContent = completed + ' / 3';
+
+  // État global
+  var badge = document.getElementById('stateBadge');
+  var pct = totalMax > 0 ? (totalScore / totalMax * 100) : 0;
+  if (totalMax === 0) {
+    badge.textContent = 'Non évalué'; badge.className = 'state-badge state-grey';
+  } else if (pct < 30) {
+    badge.textContent = 'Non acquis'; badge.className = 'state-badge state-red';
+  } else if (pct < 60) {
+    badge.textContent = 'En cours d\'acquisition'; badge.className = 'state-badge state-orange';
+  } else if (pct < 85) {
+    badge.textContent = 'Acquis'; badge.className = 'state-badge state-green';
+  } else {
+    badge.textContent = 'Parfaitement acquis'; badge.className = 'state-badge state-blue';
+  }
+
+  // Point d'arrêt + lien de reprise
+  var resumeLink = document.getElementById('resumeLink');
+  if (lastTheme) {
+    var lastThemeNum = lastTheme.replace('Thème ','');
+    // Le prochain thème à faire
+    var nextTheme = completed < 3 ? (completed + 1) : parseInt(lastThemeNum);
+    var resumeUrl = filiere + '/theme' + nextTheme + '.html';
+    ev.resumeUrl = resumeUrl;
+    ev.resumeLabel = 'Thème ' + nextTheme + ' — ' + FILIERES[filiere].label;
+
+    document.getElementById('checkpointText').textContent = lastTheme + ' terminé (' + FILIERES[filiere].label + ')';
+    resumeLink.href = resumeUrl;
+    resumeLink.textContent = completed < 3 ? 'Continuer (Thème ' + nextTheme + ')' : 'Parcours terminé';
+    resumeLink.style.display = 'inline';
+  } else {
+    // Pas encore commencé — proposer le thème 1
+    var resumeUrl = filiere + '/theme1.html';
+    ev.resumeUrl = resumeUrl;
+    ev.resumeLabel = 'Thème 1 — ' + FILIERES[filiere].label;
+
+    document.getElementById('checkpointText').textContent = 'Pas encore commencé';
+    resumeLink.href = resumeUrl;
+    resumeLink.textContent = 'Commencer le Thème 1';
+    resumeLink.style.display = 'inline';
+  }
+
+  document.getElementById('modulesDetail').innerHTML = detailHtml;
+
+  if (lastDate) {
+    document.getElementById('lastUpdate').textContent = 'Dernière activité : ' + lastDate.toLocaleDateString('fr-FR') + ' à ' + lastDate.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
+  }
+
+  // Sauvegarder les résultats
+  ev.results = { score: totalScore, total: totalMax, note10: note10, completed: completed, pct: Math.round(pct) };
+  saveEval(ev);
+
+  // ── COMPÉTENCES AUTO-CALCULÉES ──
+  var autoComp = autoComputeCompetences(fData);
+  if (!ev.competences) ev.competences = {};
+
+  // Pour chaque compétence : si pas de positionnement manuel, utiliser l'auto
+  ['c1','c3','c8'].forEach(function(c) {
+    var saved = ev.competences[c];
+    if (!saved || saved.auto !== false) {
+      // Auto-calculé ou pas encore positionné
+      ev.competences[c] = autoComp[c];
+      displayComp(c, autoComp[c].level, true, autoComp[c].pct);
+    } else {
+      // Positionné manuellement par l'enseignant — on garde
+      displayComp(c, saved.level, false, null);
+    }
+  });
+  saveEval(ev);
+
+  // Restaurer auto-évaluation
+  if (ev.autoEval) {
+    for (var q in ev.autoEval) {
+      var idx = q.replace('q','');
+      var radio = document.querySelector('input[name="auto' + idx + '"][value="' + ev.autoEval[q] + '"]');
+      if (radio) radio.checked = true;
+    }
+  }
+
+  updateSynthesis();
+}
+
+/* ══════════════════════════════════════
+   REPRISE DU TRAVAIL
+   ══════════════════════════════════════ */
+
+function resumeWork() {
+  var ev = getEval();
+  if (ev.resumeUrl) {
+    window.location.href = ev.resumeUrl;
+  }
+  return false;
+}
+
+/* ══════════════════════════════════════
+   ENVOI PAR MAIL
+   Génère un mailto: avec le bilan complet
+   en texte brut dans le corps du message.
+   L'élève reçoit sa sauvegarde par mail.
+   ══════════════════════════════════════ */
+
+function sendByMail() {
+  var ev = getEval();
+  var r = ev.results || {};
+  var comp = ev.competences || {};
+
+  var prenom = ev.prenom || '?';
+  var classe = ev.classe || '?';
+  var filiere = ev.module ? (FILIERES[ev.module] ? FILIERES[ev.module].label : ev.module) : '?';
+  var date = ev.dateSeance || new Date().toLocaleDateString('fr-FR');
+
+  var body = 'FEUILLE D\'ÉVALUATION — Découverte des métiers\n';
+  body += '================================================\n\n';
+  body += 'Prénom : ' + prenom + '\n';
+  body += 'Classe : ' + classe + '\n';
+  body += 'Date : ' + date + '\n';
+  body += 'Parcours : ' + filiere + '\n';
+  if (ev.resumeLabel) body += 'Point d\'arrêt : ' + ev.resumeLabel + '\n';
+  body += '\n';
+
+  body += 'COMPÉTENCES\n';
+  body += '------------------------------------------------\n';
+  var compNames = { c1: 'C1 — S\'informer sur l\'intervention ou sur la réalisation', c3: 'C3 — Analyser et exploiter les données', c8: 'C8 — Renseigner les documents' };
+  for (var c in compNames) {
+    var lvl = comp[c] ? (LEVEL_LABELS[comp[c].level] || LEVEL_LABELS[comp[c]] || '?') : 'Non évalué';
+    body += compNames[c] + ' : ' + lvl + '\n';
+  }
+  body += '\n';
+
+  body += 'RÉSULTATS\n';
+  body += '------------------------------------------------\n';
+  body += 'Score : ' + (r.score || 0) + ' / ' + (r.total || 0) + '\n';
+  body += 'Note : ' + (r.note10 || 0) + ' / 10\n';
+  body += 'Modules validés : ' + (r.completed || 0) + ' / 3\n';
+  body += '\n';
+
+  // Auto-évaluation
+  if (ev.autoEval) {
+    var autoLabels = ['J\'ai été sensibilisé aux règles de sécurité', 'L\'exercice m\'a intéressé', 'Je suis prêt à continuer', 'L\'activité a éclairé mes choix'];
+    var autoVals = ['Pas du tout', 'Un peu', 'Oui'];
+    body += 'AUTO-ÉVALUATION\n';
+    body += '------------------------------------------------\n';
+    for (var i = 0; i < 4; i++) {
+      var val = ev.autoEval['q' + (i + 1)];
+      body += autoLabels[i] + ' : ' + (val !== undefined ? autoVals[val] : '—') + '\n';
+    }
+    body += '\n';
+  }
+
+  body += '================================================\n';
+  body += 'inerWeb · LPP Jacques Raynaud · Campus Équatio\n';
+
+  var subject = 'Mon bilan — Découverte des métiers — ' + prenom + ' ' + classe;
+  window.location.href = 'mailto:?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+}
+
+/* ══════════════════════════════════════
+   SYNTHÈSE AUTO-GÉNÉRÉE
+   ══════════════════════════════════════ */
+
+function updateSynthesis() {
+  var ev = getEval();
+  var r = ev.results || {};
+  var comp = ev.competences || {};
+  var pct = r.pct || 0;
+  var completed = r.completed || 0;
+
+  // Niveaux
+  var levels = {};
+  for (var c in comp) { levels[c] = comp[c].level || comp[c]; }
+
+  // Points forts
+  var forces = [];
+  if (levels.c1 === 'green' || levels.c1 === 'blue') forces.push('Repérage efficace des informations');
+  if (levels.c3 === 'green' || levels.c3 === 'blue') forces.push('Bonne analyse des données');
+  if (levels.c8 === 'green' || levels.c8 === 'blue') forces.push('Documents bien renseignés');
+  if (completed >= 3) forces.push('Parcours complet');
+  document.getElementById('synthForce').textContent = forces.length > 0 ? forces.join(' · ') : '—';
+
+  // Points à revoir
+  var faibles = [];
+  if (levels.c1 === 'red') faibles.push('Recherche d\'information');
+  if (levels.c3 === 'red') faibles.push('Analyse des données');
+  if (levels.c8 === 'red') faibles.push('Renseignement des documents');
+  if (pct > 0 && pct < 30) faibles.push('Score global insuffisant');
+  document.getElementById('synthWeak').textContent = faibles.length > 0 ? faibles.join(' · ') : '—';
+
+  // Reprise nécessaire
+  var nbRed = 0, nbEval = 0;
+  for (var c in levels) { if (levels[c] === 'red') nbRed++; if (levels[c] !== 'grey') nbEval++; }
+  var repriseEl = document.getElementById('synthReprise');
+  if (nbRed >= 2 || (pct > 0 && pct < 30)) {
+    repriseEl.textContent = 'Oui'; repriseEl.className = 'yn non';
+  } else if (nbEval > 0) {
+    repriseEl.textContent = 'Non'; repriseEl.className = 'yn oui';
+  } else {
+    repriseEl.textContent = '—'; repriseEl.className = 'yn';
+  }
+
+  // Prêt à continuer
+  var nbOk = 0;
+  for (var c in levels) { if (levels[c] === 'green' || levels[c] === 'blue') nbOk++; }
+  var contEl = document.getElementById('synthContinue');
+  if (nbOk >= 2 && pct >= 50) {
+    contEl.textContent = 'Oui'; contEl.className = 'yn oui';
+  } else if (nbEval > 0) {
+    contEl.textContent = 'Non'; contEl.className = 'yn non';
+  } else {
+    contEl.textContent = '—'; contEl.className = 'yn';
+  }
+}
+
+/* ══════════════════════════════════════
+   ACCESSIBILITÉ
+   ══════════════════════════════════════ */
+
+function togDys() {
+  document.body.classList.toggle('dys');
+  document.getElementById('bDys').classList.toggle('on');
+  localStorage.setItem('a11y-dys', document.body.classList.contains('dys'));
+}
+function setF(c) {
+  document.body.classList.remove('f-lg','f-xl');
+  if (c !== 'normal') document.body.classList.add(c);
+  localStorage.setItem('a11y-size', c);
+}
+function notif(msg, type) {
+  var old = document.querySelector('.notif'); if (old) old.remove();
+  var n = document.createElement('div'); n.className = 'notif ' + type; n.textContent = msg;
+  document.body.appendChild(n);
+  setTimeout(function(){ n.classList.add('show'); }, 50);
+  setTimeout(function(){ n.classList.remove('show'); setTimeout(function(){ n.remove(); }, 300); }, 2000);
+}
+
+/* ══════════════════════════════════════
+   INITIALISATION
+   ══════════════════════════════════════ */
+
+document.addEventListener('DOMContentLoaded', function() {
+  if (localStorage.getItem('a11y-dys') === 'true') {
+    document.body.classList.add('dys'); document.getElementById('bDys').classList.add('on');
+  }
+  var s = localStorage.getItem('a11y-size');
+  if (s && s !== 'normal') document.body.classList.add(s);
+
+  var ev = getEval();
+  if (!ev.dateSeance) document.getElementById('dateSeance').valueAsDate = new Date();
+
+  loadFromStorage();
+
+  ['prenom','classe','dateSeance','module'].forEach(function(id) {
+    var el = document.getElementById(id);
+    el.addEventListener('change', function() {
+      saveIdentity();
+      if (id === 'module') loadFromStorage();
+    });
+    el.addEventListener('input', saveIdentity);
+  });
+});
+</script>
+</body>
+</html>
